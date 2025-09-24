@@ -11,6 +11,4 @@ La mia idea è quella di creare una "sbobina" (come dicono quelli a medicina) de
 
 Nelle cartelle sono disponibili i file in Latex, in modo da modificarli a vostro piacimento su Overleaf o in self-hosting sul vostro pc. 
 
-All'esame scritto è possibile portare solo uno scritto come formulario, quindi vi consiglio di stampare il file PDF "bigliettino_A4_scritto_misure". 
-
 Buona lettura e buon esame a tutti 
