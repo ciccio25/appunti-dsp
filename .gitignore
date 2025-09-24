@@ -1,0 +1,10 @@
+# Escludere tutti i file ausiliari, 
+# mantenere solo i file che servono per la compilazione (cioè .tex, .pdf finale e immagini)
+*.gz 
+*.log 
+*.aux 
+*.fdb_latexmk 
+*.fls 
+*.idx 
+*.ilg 
+*.toc
