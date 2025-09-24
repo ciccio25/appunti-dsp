@@ -1,0 +1,59 @@
+\documentclass{book}
+
+\title{Appunti di Circuiti ed algoritmi per il Digital Signal Processing}
+\author{Stefano Rossini}
+
+\usepackage{bookmark}
+
+\usepackage[italian]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin={2.54cm,1.9cm}}
+
+\usepackage{hyperref}
+\usepackage{tcolorbox} %for COLORED BOXES 
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{./immagini/}}
+
+\usepackage{url}
+
+\usepackage{physics}
+
+\usepackage{amsfonts} 
+
+\usepackage{gensymb}
+
+\usepackage{textcomp}
+
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+
+\usepackage{amssymb}
+
+\usepackage{imakeidx} 
+\makeindex[columns=3, title=Alphabetical Index, intoc]
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    bookmarksnumbered=true,  % <-- numerazione nelle sezioni del PDF
+    pdftitle={Appunti DSP},
+    pdfauthor={Stefano Rossini},
+    pdfstartview=FitH
+}
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{4}
+
+\begin{document}
+
+\maketitle
+
+%\setcounter{chapter}{-1}
+\include{Introduzione}
+
+\tableofcontents 
+
+\end{document}
