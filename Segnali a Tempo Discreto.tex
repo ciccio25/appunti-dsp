@@ -1,1 +1,533 @@
 \chapter{Segnali a Tempo Discreto}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 1]{tempo_discreto.png}
+\end{figure}  
+
+\newpage 
+
+\subsection{Sequenze}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
+    Appunti | 2025-09-23 | pag 1
+}
+
+I segnali analogici sono dei segnali che hanno valori a tempo continuo ed a valori continui: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{segnale-analogico.jpg}
+\end{figure}  
+
+Invece, nei circuiti digitali, avremo a che fare con dei segnali discreti sia nel tempo che nei valori, 
+come il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{segnale-digitale.jpg}
+\end{figure}  
+
+Nella forma più generale, non si considera il segnale come segnale discreto, 
+bensì come sequenza, perchè, se si intende una sequenza come un segnale, 
+significa che associamo quella sequenza a un segnale fisico. \newline 
+
+\begin{tcolorbox}
+    È una sottigliezza quella ultima elencata, 
+    ma è quel particolare che permette di dividere il "mondo fisico" dal "mondo matematico", 
+    cioè quello del DSP.  
+\end{tcolorbox} 
+
+Un esempio di sequenza: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Digital-signal-discrete.jpg}
+\end{figure}  
+
+\newpage 
+
+\begin{tcolorbox}
+    Dal punto di vista grafico, si considera l'interpolazione del punto 
+    (cioè quella linea che collega il t-esimo punto al x[t-esimo] punto). \newline 
+
+    Nella realtà, se si considera una sequenza, 
+    si intende SOLO il punto senza interpolazione. \newline 
+
+    Quindi, come ha detto il prof a lezione, per sequenza si intende un insieme ordinato di punti. \newline 
+
+    A livello di notazione, per distinguere i segnali analogici dalle sequenze discrete si utilizzeranno le parentesi quadre [ ] piuttosto che le parentesi tonde ( ).
+\end{tcolorbox}
+
+\newpage 
+
+\subsubsection{Sequenza impulso unitario}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
+    Appunti | 2025-09-23 | pag 1
+}
+
+La sequenza elementare alla base di tutte le sequenze è la sequenza impulso unitario. \newline 
+
+Di seguito dal punto di vista grafico la sequenza impulso unitario: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Sequenza impulso unitario.png}
+\end{figure}  
+
+La sequenza $\delta [n]$ impulso unitario gode della sequenza proprietà: 
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[ n \right] 
+        = 
+        \begin{cases}
+            0 \text{ per } n \neq 0 
+            \\
+            1 \text{ per } n = 0 
+        \end{cases}
+    \end{equation}
+}
+
+cioè, scritta a parole, vale 1 per n e vale 0 per tutti gli altri valori di n. \newline 
+
+\begin{tcolorbox}
+    Se avete svolto e/o seguito l'esame di Teoria dei Segnali (o Segnali Determinati e Aleatori) con Franco Chiaraluce, 
+    la sequenza impulso unitario $\delta [n]$ NON è la Delta di Dirac $\delta (t)$, dove: 
+    
+    {
+        \Large 
+        \begin{equation}
+            \delta (t)
+            = 
+            \begin{cases}
+                0 \text{ per } t \neq 0
+                \\
+                + \infty \text{ per } t_0 = 0
+            \end{cases}
+        \end{equation}
+    }
+
+    di cui gode della sequente proprietà: 
+
+    {
+        \Large 
+        \begin{equation}
+            \int_{- \infty}^{+\infty} \delta (t) dt = 1
+        \end{equation}
+    }
+
+    n è l'indice della sequenza. 
+
+\end{tcolorbox}
+
+Questo tipo di sequenza non pone problemi di definizione e realizzabilità. \newline 
+
+\newpage 
+
+\subsubsection{Sequenza impulso unitario ritardato}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
+    Appunti | 2025-09-23 | pag 1
+}
+
+Un altro tipo di sequenza, che proviene dalla sequenza impulso unitario, 
+è la sequenza impulso unitario ritardato $\delta \left[n - n_0\right]$. \newline 
+
+Dal punto di vista matematico, la sequenza impulso unitario ritardato è la sequente: 
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[n - n_0\right] 
+        = 
+        \begin{cases}
+            0 \text{ per } n \neq n_0 \\
+            1 \text{ per } n = n_0
+        \end{cases}
+    \end{equation}
+}
+
+cioè, è la sequenza impulso unitario $\delta \left[ n \right]$ ritardato all'indice $n_0$. \newline 
+
+Se moltiplichiamo la sequenza impulso unitario $\delta \left[ n \right]$ per un coefficiente A 
+e lo ritardiamo all'indice $n_0$: 
+
+{
+    \Large 
+    \begin{equation}
+        n_0 = 3
+    \end{equation}
+}
+
+allora ottieniamo la sequente sequenza impulso ritardato: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Sequenza impulso ritardato.png}
+\end{figure}   
+
+Dal punto di vista matematico: 
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[n - 3\right] 
+        = 
+        \begin{cases}
+            0 \text{ per } n \neq n_0 \\
+            A \text{ per } n = 3
+        \end{cases}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+    Se si moltiplica la sequenza impulso unitario per un coefficiente A, 
+    non è più una sequenza impulso unitario, giusto?
+\end{tcolorbox} 
+
+Il ritardo può essere definito anche in inglese come shift o delay. \newline 
+
+Lo shift è una proprietà di traslazione di sequenze. \newline 
+
+\newpage 
+
+\subsection{Proprietà di campionamento}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 3 \\
+    Appunti | 2025-09-23 | pag 1 - 2
+}
+
+Di seguito la proprietà di campionamento. \newline 
+
+Una qualsiasi sequenza $x \left[ n \right]$ può essere espressa come somma di impulsi unitari 
+oppurtunamente ritardati e amplificati. \newline 
+
+Da un punto di vista matematico, possiamo scrivere la sequenza $x \left[ n \right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] 
+        = 
+        \sum_{k = - \infty}^{+ \infty }
+        x \left[ k \right] \cdot \delta \left[ n - k \right]
+    \end{equation}
+}
+
+Applicando la proprietà di campionamento, 
+possiamo visualizzare la sequenza $x \left[ n \right]$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Sequenza da campionare.png}
+\end{figure}   
+
+nelle sue componenti cioè come somma dei seguenti componenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Segnale campionato.png}
+\end{figure}   
+
+\begin{tcolorbox}
+    Rispetto al corso di Teoria dei Segnali, in questo caso si indica la proprietà di campionamento, 
+    che non è il teorema del campionamento: 
+    sono due cose differenti. \newline 
+    
+    Il teorema del campionamento afferma una rappresentazione, quindi una funzione biunivoca (cioè un segnale può essere visto sia nel dominio del tempo che in quello delle frequenze). \newline 
+
+    Invece, con la proprietà del campionamento, non si cambia dominio: si rimane sempre nello stesso dominio della sequenza originale (che in questo caso è quello degli indici discreti n). 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Sequenza elementari}
+
+Potremmo elencare tutti i tipi di sequenze, ma elencheremo solo quelle elemtari. \newline 
+
+\subsubsection{Gradino unitario}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 4 \\
+    Appunti | 2025-09-23 | pag 2
+}
+
+La sequenza $u \left[ n \right]$ gradino unitario ha la sequenza espressione: 
+
+{
+    \Large 
+    \begin{equation}
+        u \left[ n \right] 
+        = 
+        \begin{cases}
+            0 \text{ per } n < 0
+            \\
+            1 \text{ per } n \geq 0
+        \end{cases} 
+    \end{equation}
+}
+
+Da un punto di vista grafico, 
+possiamo visualizzare il gradino unitario $u \left[ n \right] $ come: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Gradino unitario.png}
+\end{figure}   
+
+Utilizzando la proprietà dell'impulso, 
+possiamo scrivere il gradino unitario $u \left[ n \right] $ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            u \left[ n \right] 
+            &= 
+            \sum_{k = - \infty }^{+ \infty}
+            u \left[ k \right]
+            \cdot 
+            \delta \left[ n - k \right]
+            \\
+            &=
+            \sum_{k = - \infty }^{+ \infty}
+            \delta \left[ n - k \right] 
+            \\
+            &=
+            \sum_{k = 0}^{+ \infty}
+            \delta \left[ n - k \right] 
+        \end{split}
+    \end{equation}
+}
+
+Si può applicare le seguenti semplificazione perchè: 
+
+{
+    \Large 
+    \begin{equation}
+            u \left[ k \right] = 1 \text{ } \forall k \geq 0
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Nel campo dei discreti, 
+    non esiste l'operatore matematico dell'integrale (e che quindi calcola l'area sotto la funzione); 
+    bensì si utilizzera la somma.  
+\end{tcolorbox}
+
+\newpage 
+
+Si può verificare che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        u \left[ n \right] = \sum_{k = 0}^{n} \delta \left[ k \right] 
+        \\
+        \delta \left[ n \right] = u \left[ n \right] - u \left[ n - 1 \right] 
+        \end{cases}
+    \end{equation}
+}
+
+dove $\delta \left[ n \right]$ è l'impulso unitario. \newline 
+
+\begin{tcolorbox}
+    Nel campo dei discreti, 
+    non esiste l'operatore matematico della derivata (e che quindi calcola la differenza infinitesimale tra due punti di una funzione); 
+    bensì si utilizzera la differenza tra una sequenza e la sequenza stessa shiftata / ritardata di un punto.  
+\end{tcolorbox}
+
+Da un punto di vista grafico, 
+se ci poniamo nell'indice $n = 0$, 
+l'equazione precedente possiamo visualizzarla graficamente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Impulso unitario come differenza di due gradini unitari.png}
+\end{figure}   
+
+Più in generale, 
+è possibile definire una famiglia di sequenze mediante operazioni di sommatoria e differenza finita, 
+analogamente al caso continuo. \newline 
+
+\newpage 
+
+\subsubsection{Rampa unitaria}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 5 \\
+    Appunti | 2025-09-23 | pag 2
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+    Rampa unitaria perchè la differenza tra un indice n è uguale a 1?
+\end{tcolorbox} 
+
+Possiamo definire la rampa unitaria $r \left[ n \right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            r \left[ n \right] 
+            = 
+            \sum_{k = - \infty}^{n} 
+            u \left[ k \right]
+            \\ 
+            u \left[ n \right] 
+            = 
+            r \left[ n \right]
+            - 
+            r \left[ n \right]
+        \end{cases}
+    \end{equation}
+}
+
+Confrontando la rampa unitaria $r \left[ n \right]$ con il mondo analogico, 
+avremo la seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Rampa unitaria con la differenza della rampa continua.png}
+\end{figure}   
+
+\newpage 
+
+\subsubsection{Sequenze esponenziali reali}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 6 \\
+    Appunti | 2025-09-23 | pag 2
+}
+
+Di seguito la definizione di sequenza esponenziale reale. \newline 
+
+Una sequenza $x \left[ n \right]$ esponenziale reale ha la seguente formulazione matematica: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] 
+        = 
+        A \cdot \alpha^{n} 
+        \text{ con }
+        A, \alpha \in \mathbb{R} 
+    \end{equation}
+}
+
+In base al valore di $\alpha$, 
+il segnale avrà i seguenti andamenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Sequenze esponenziali reali in base al valore di alpha.png}
+\end{figure}   
+
+\newpage 
+
+\subsubsection{Sequenze esponenziali complesse}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 7 \\
+    Appunti | 2025-09-23 | pag 2
+}
+
+Di seguito la definizione di sequenza esponenziale complessa. \newline 
+
+Una sequenza $x \left[ n \right]$ esponenziale complessa ha la seguente formulazione matematica: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] 
+        = 
+        A \cdot \alpha^{n} 
+        \text{ con }
+        A, \alpha \in \mathbb{C} 
+    \end{equation}
+}
+
+L'inviluppo della sequenza ha lo stesso andamento dell'esponenziale reale. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+ Cosa significa questa ultima frase? \newline 
+ I grafici sono gli stessi delle sequenze reali?
+\end{tcolorbox} 
+
+In base ai valori di $\alpha$, 
+avremo l'andamento l'andamento di $x \left[ n \right]$: 
+
+\begin{itemize}
+    \item $\abs{\alpha} < 1 $, allora $x \left[ n \right]$ è decrescente 
+    \item $\abs{\alpha} = 1 $, allora $x \left[ n \right]$ è costante 
+    \item $\abs{\alpha} > 1 $, allora $x \left[ n \right]$ è crescente
+\end{itemize}
+
+Possiamo definire i seguenti casi particolari delle sequenza esponanziali complesse. \newline 
+
+Definiamo l'esponenziale complesso puro $x \left[ n \right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right]
+        =
+        \abs{A} \cdot e^{\jmath \left( \omega n + \phi\right)}
+    \end{equation}
+}
+
+Definiamo il coseno reale $x \left[ n \right]$, 
+grazie alla formula di Eulero, come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        x \left[ n \right]
+        &=
+        \cos(\omega n + \phi)
+        \\
+        &=
+        \dfrac{e^{\jmath \left( \omega n + \phi\right)} + e^{-\jmath \left( \omega n + \phi\right)}}{2}
+        \end{split}
+    \end{equation}
+}
+
+Definiamo il seno reale $x \left[ n \right]$, 
+grazie alla formula di Eulero, come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        x \left[ n \right]
+        &=
+        \sin(\omega n + \phi)
+        \\
+        &=
+        \dfrac{e^{\jmath \left( \omega n + \phi\right)} - e^{-\jmath \left( \omega n + \phi\right)}}{2 \jmath}
+        \end{split}
+    \end{equation}
+
+}
+
+\newpage 
+
+\subsection{Sequenze periodiche}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 8 \\
+    Appunti | 2025-09-23 | pag 1
+}
+
+TO-DO: Continuare da pag 8 del PDF e pag 3 degli appunti 2025-09-2023. \newline 
+
+
