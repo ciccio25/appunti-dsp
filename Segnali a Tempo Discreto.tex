@@ -7,11 +7,11 @@
 
 \newpage 
 
-\subsection{Sequenze}
+\section{Sequenze}
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
-    Appunti | 2025-09-23 | pag 1
+    Appunti | 2025-09-24 | pag 3
 }
 
 I segnali analogici sono dei segnali che hanno valori a tempo continuo ed a valori continui: 
@@ -66,7 +66,7 @@ Un esempio di sequenza:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
-    Appunti | 2025-09-23 | pag 1
+    Appunti | 2025-09-24 | pag 3
 }
 
 La sequenza elementare alla base di tutte le sequenze è la sequenza impulso unitario. \newline 
@@ -133,7 +133,7 @@ Questo tipo di sequenza non pone problemi di definizione e realizzabilità. \new
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
-    Appunti | 2025-09-23 | pag 1
+    Appunti | 2025-09-24 | pag 3
 }
 
 Un altro tipo di sequenza, che proviene dalla sequenza impulso unitario, 
@@ -201,7 +201,7 @@ Lo shift è una proprietà di traslazione di sequenze. \newline
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 3 \\
-    Appunti | 2025-09-23 | pag 1 - 2
+    Appunti | 2025-09-24 | pag 2
 }
 
 Di seguito la proprietà di campionamento. \newline 
@@ -256,7 +256,7 @@ Potremmo elencare tutti i tipi di sequenze, ma elencheremo solo quelle elemtari.
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 4 \\
-    Appunti | 2025-09-23 | pag 2
+    Appunti | 2025-09-24 | pag 2
 }
 
 La sequenza $u \left[ n \right]$ gradino unitario ha la sequenza espressione: 
@@ -364,7 +364,7 @@ analogamente al caso continuo. \newline
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 5 \\
-    Appunti | 2025-09-23 | pag 2
+    Appunti | 2025-09-24 | pag 2
 }
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
@@ -405,7 +405,7 @@ avremo la seguente figura:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 6 \\
-    Appunti | 2025-09-23 | pag 2
+    Appunti | 2025-09-24 | pag 2
 }
 
 Di seguito la definizione di sequenza esponenziale reale. \newline 
@@ -437,7 +437,7 @@ il segnale avrà i seguenti andamenti:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 7 \\
-    Appunti | 2025-09-23 | pag 2
+    Appunti | 2025-09-24 | pag 4
 }
 
 Di seguito la definizione di sequenza esponenziale complessa. \newline 
@@ -525,9 +525,167 @@ grazie alla formula di Eulero, come:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 8 \\
-    Appunti | 2025-09-23 | pag 1
+    Appunti | 2025-09-24 | pag 4
 }
 
-TO-DO: Continuare da pag 8 del PDF e pag 3 degli appunti 2025-09-2023. \newline 
+Per sequenze periodiche si intendono delle sequenze $x \left[ n \right]$ che hanno la sequente proprietà: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] 
+        = 
+        x \left[ n + N\right] 
+    \end{equation}
+}
+
+dove N è un numero intero che indica il periodo. \newline 
+
+Un tipo di sequenza periodica è l'esponenziale complesso puro: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \left( \omega n + \phi\right)}
+    \end{equation}
+}
+
+in cui: 
+
+\begin{itemize}
+    \item $\omega$ è la pulsazione, che si misura in $\dfrac{rad}{s}$ 
+    \item $f = \dfrac{\omega}{2 \pi}$ è la frequenza, che si misura in Hz 
+    \item $\phi$ è la fase iniziale nel periodo
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+ Ma non abbiamo appena detto che nel mondo delle sequenze non esistono le unità di misura del mondo fisico? \newline 
+
+ Perchè ci sono le unità di misura della frequenza, pulsazione e fase?
+\end{tcolorbox} 
+
+
+\newpage 
+
+\subsubsection{Proprietà dell'esponenziale complesso puro}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 8 - 9\\
+    Appunti | 2025-09-24 | pag 4
+}
+
+L'esponenziale complesso puro $e^{\jmath \left( \omega n + \phi\right)}$ gode delle seguenti proprietà. \newline 
+
+\textbf{$1^{\circ}$ proprietà: } \newline 
+
+Una sequenza con pulsazione $\omega_0$ ed una con $\omega_0 + 2 \pi$ sono identiche perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        A \cdot e^{\jmath \left( \omega_0 n + 2 \pi n \phi\right)}
+        = 
+        A \cdot e^{\jmath \left( \omega_0 n + \phi\right)} \cdot e^{\jmath 2 \pi n} 
+    \end{equation}
+}
+
+dove lo spettro è periodico con periodo $2 \pi$. \newline 
+
+Si considerano equivalentemente: 
+
+{
+    \Large 
+    \begin{equation}
+        0 \leq \omega \leq 2 \pi 
+        \text{ oppure }
+        - \pi \leq \omega \leq + \pi
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        0 \leq f \leq 1 
+        \text{ oppure }
+        -0.5 \leq f \leq +0.5
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Non ho capito queste due ultime equivalenze. Perchè?
+\end{tcolorbox} 
+
+\textbf{$2^{\circ}$ proprietà: } \newline 
+
+Le "alte" frequenze sono intorno a $\pm \pi$, le "basse" frequenze into allo 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare il disegno delle alte e basse frequenze
+\end{tcolorbox} 
+
+Essedo la funzione periodica si può scrivere la sequenza proprietà: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \left[ \left( 2 \pi - \omega_0\right) n + \phi\right]}
+        = 
+        e^{\jmath 2 \pi n} \cdot e^{\jmath \left( - \omega_0 n + \phi\right)}
+    \end{equation}
+}
+
+\textbf{$3^{\circ}$ proprietà: } \newline 
+
+\begin{tcolorbox}
+    Questa è la proprietà più importante dell'esponeziale complesso !!!
+\end{tcolorbox}
+
+NON TUTTI gli esponenziali complessi sono periodici. \newline 
+
+Deve esistere un N per cui: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \left[ \omega_0 \left( n + N\right) + \phi\right]}
+        = 
+        e^{\jmath \left(\omega_0 n + \phi\right)}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega_0 N
+        = 
+        2 \pi k
+    \end{equation}
+}
+
+Se N esiste, allora la sequenza esponenziale complesso puro sarà periodico nel periodo N. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Il valore di k lo scegliamo noi affinchè possa valore l'equazione di uguaglianza?
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Sistemi discreti}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 10\\
+    Appunti | 2025-09-24 | pag 4
+}
+
+Dalle sequenze discrete passiamo ora ai sistemi discreti: di seguito la definizione di distemi discreti. \newline 
+
+Si dice sistema discreto un qualunque operatore (algoritmo o circuito) 
+che trasforma la sequenza di ingesso $x \left[ n\right]$ in quella di uscita $y \left[ n\right]$. \newline 
+
+Di seguito uno schema di un sistema discreto (con delle note): 
+
+
 
 
