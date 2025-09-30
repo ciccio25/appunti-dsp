@@ -763,11 +763,496 @@ questo ultimo è un sistema con memoria perchè la somma è con i valori precede
 \subsection{Sistemi lineari e stazionari}
 
 \footnote{ 
-    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 11 - 12\\
-    Appunti | 2025-09-24 | pag 4 - 5
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 11\\
+    Appunti | 2025-09-30 | pag 1
 }
 
-TO-DO: Continuare da pag 11, appunti 2025-09-24 perchè tanto verrà ripreso nella lezione di oggi 2025-09-30. \newline 
+Un tipo di sistemi molto interessanti ai nostri studi (perchè sono i più semplici da studiare) 
+sono i sistemi discreti lineari e stazionari. \newline 
 
-TO-DO: Scrivere le correzioni chieste a lezione oggi 2025-09-30. \newline 
+Di seguito una spiegazione più approfondita della proprietà. \newline 
+
+\newpage 
+
+\subsubsection{Sistema discreto lineare}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 11\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+Un operatore (o in questo caso sistema) $T \{ \}$ è lineare \textbf{se e solo se} vale il principio di sovrapposizione degli effetti. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        y_1 \left[ n \right]
+        = 
+        T \{ x_1 \left[ n\right]\}
+        \\
+        y_2 \left[ n \right]
+        = 
+        T \{ x_2 \left[ n\right]\}
+        \end{cases}        
+        \to 
+        a \cdot y_1 \left[ n\right]
+        + 
+        b \cdot y_2 \left[ n\right]
+        = 
+        T 
+        \{ 
+        a \cdot y_1 \left[ n\right]
+        + 
+        b \cdot y_2 \left[ n\right]
+        \}
+    \end{equation}
+}
+
+dove a, b sono delle costanti. \newline 
+
+In altri termini, se vale il principio di sovrapposizione degli effetti (che è una proprietà dei sistemi lineari), 
+allora possiamo considerare l'uscita del sistema discreto lineare come combinazione lineare degli ingressi. \newline 
+
+\newpage 
+
+\subsubsection{Sistema discreto stazionario}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 12\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+Un operatore (o in questo caso sistema) $T \{ \}$ è stazionario (cioè a tempo-invariante) \textbf{se e solo se} 
+la trasformazione che opera non dipende dall'istante di applicazione. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        T \{ x \left[ n \right]\}
+        \\
+        &\downarrow
+        \\
+        y \left[ n - n_0\right]
+        &= 
+        T \{ x \left[ n - n_0\right]\}
+        \text{ }
+        \forall n_0, x \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+dove $n_0$ è un indice di ritardo e $x \left[ n\right]$ è una sequenza di ingresso all'operatore $T \{ \}$. \newline 
+
+\newpage 
+
+\subsection{Sistemi causali e stabili}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 13\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+Un tipo di sistemi molto interessanti ai nostri studi (perchè sono i più semplici da studiare) 
+sono i sistemi discreti causali e stabili. \newline 
+
+Di seguito una spiegazione più approfondita della proprietà. \newline 
+
+\begin{tcolorbox}
+La causalità e la stabilità sono proprietà già studiate e approfondite nello scorso corso di elettronica. \newline 
+
+Adesso, in questo corso di DSP, affronteremo queste proprietà nel mondo dei sistemi discreti. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Sistemi discreti causali}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 13\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+\begin{tcolorbox}
+La causalità è una proprietà molto importante dei sistemi discreti, 
+perchè, in base alla sequenza di ingresso, 
+l'andamento del sistema varierà di conseguenza  
+\end{tcolorbox}
+
+Un operatore (o in questo caso sistema) $T \{ \}$ è causale se 
+la sua uscita all'istante $n_0$ dipende solo dagli ingressi con indice: 
+
+{
+    \Large 
+    \begin{equation}
+        k \leq n_0
+    \end{equation}
+}
+
+In formule, se: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            y_1 \left[ n\right]
+            = 
+            T \{ x_1 \left[ n\right]\}
+            \\
+            y_2 \left[ n\right]
+            = 
+            T \{ x_2 \left[ n\right]\}
+        \end{cases}
+    \end{equation}
+}
+
+allora: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x_1 \left[ n\right] 
+            &= 
+            x_2 \left[ n\right]
+            \\
+            &\downarrow
+            \\
+            y_1 \left[ n\right] 
+            &= 
+            y_2 \left[ n\right] 
+            \text{ }
+            \forall n_0, x_1 \left[ n\right], x_2 \left[ n\right], n \leq n_0
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+  L'indice k e l'indice n indicata nella formula sono gli stessi? (Penso di sì)
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare il disegno dell'andamento di una sequenza dall'indice k 
+\end{tcolorbox} 
+
+Un esempio di un di sistema causale è la differenza in indietro: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        x \left[n\right]
+        - 
+        x \left[n - 1\right]
+    \end{equation}
+}
+
+Invece, un sistema non causale è la differenza in avanti come il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        x \left[n + 1\right]
+        - 
+        x \left[n \right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare il disegno dell'andamento di differenza in avanti e una differenza in indietro 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Sistemi discreti stabili BIBO}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 14\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+L'operatore $T \{ \}$ si dice stabile BIBO (cioè Bounded Input Bounded Output) 
+se, ad un ingresso \textbf{limitato}, corrisponde un'uscita \textbf{limitata}. \newline 
+
+In formule, se: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n \right]
+        = 
+        T \{ x \left[ n\right]\}
+    \end{equation}
+}
+
+allora: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \abs{x \left[ n\right]} 
+            \leq
+            &B_x 
+            < 
+            + \infty
+            \\
+            &\downarrow
+            \\
+            \abs{y \left[ n\right]} 
+            \leq
+            &B_y 
+            < 
+            + \infty
+            \text{ }
+            \forall n, x \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+dove $B_x$ e $B_y$ sono dei limiti superiori rispettivamente dell'ingresso e dell'uscita, 
+i quali non tendono ad infinito. \newline 
+
+\begin{tcolorbox}
+
+Per adesso, l'opposto della stabilità, cioè l'instabilità del sistema, non è un problema. \newline 
+
+Verrà approndito in seguito, perchè non è detto che sia un problema: 
+come tutte le cose in ingegneria, dipende.
+\end{tcolorbox}
+
+\newpage 
+
+\section{Risposta impulsiva in un sistema LTI}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 15\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+Per sistema LTI (cioè Linear Time-Invariant) si intende 
+un sistema lineare a tempo invariante, cioè un sistema lineare che non varia le sue caratteristiche nel tempo. \newline 
+
+
+Di seguito la definizione di risposta impulsiva. \newline 
+
+Se $T \{ \}$ è un operatore LTI, 
+allora è completamente caratterizzato dalla sua risposta all'\textbf{imuplso unitario}. \newline 
+
+In formule, sia: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n \right] 
+        = 
+        T \{ \delta \left[ n \right] \}
+    \end{equation}
+}
+
+dove $\delta \left[ n \right]$ è l'impulso unitario, 
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right]
+            &= 
+            T \{ x \left[ n\right]\}
+            \\
+            &= 
+            T 
+            \left\{ 
+                \sum_{k = - \infty}^{+ \infty}
+                x \left[ k\right]
+                \cdot 
+                \delta \left[ n - k\right]
+            \right\}
+        \end{split}
+    \end{equation}
+}
+
+Per linearità, 
+posso portare l'operatore $T \{ \}$ dentro alla sommatoria, quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right]
+            &= 
+            T 
+            \left\{ 
+                \sum_{k = - \infty}^{+ \infty}
+                x \left[ k\right]
+                \cdot 
+                \delta \left[ n - k\right]
+            \right\}
+            \\
+            &=    
+            \sum_{k = - \infty}^{+ \infty}
+                x \left[ k\right]
+                \cdot
+                T 
+            \left\{  
+                \delta \left[ n - k\right]
+            \right\}
+            \\
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            x \left[ k\right]
+            \cdot 
+            h \left[ n - k \right]
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+
+Possiamo svolgere questa semplificazione con $T \{ \}$ anche se non sappiamo nel dettaglio come è fatto l'operatore: 
+l'unica cosa che sappiamo è la relazione tra $T \{ \}$ e l'ingresso $x \left[ n\right]$, 
+che in questo caso è $\delta \left[ n\right]$, cioè l'impulso unitario.
+    
+\end{tcolorbox}
+
+Quindi, possiamo esprimere l'uscita $y \left[ n\right]$ del sistema LTI, dato come ingresso un impulso unitario, 
+con questa formula: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ n - k \right]
+        \\
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ n - k\right]
+        \cdot 
+        h \left[ k \right]
+        \end{split}
+    \end{equation}
+}
+
+In questo caso, l'uscita $y \left[ n\right]$ prende il nome di prodotto di convoluzione. \newline 
+
+\newpage 
+
+\begin{tcolorbox}
+Nel caso "analogico", la sommatoria sarebbe l'integrale di convoluzione, 
+che nel corso di Teoria dei segnali con il mitico Chiaraluce, sarebbe: 
+
+{
+    \Large
+    \begin{equation}
+        \begin{split}
+        y(t)
+        &= 
+        \int_{- \infty}^{+ \infty}
+        f(\tau)
+        \cdot 
+        g(t - \tau) d\tau 
+        \\
+        &=
+        \int_{- \infty}^{+ \infty}
+        f(t - \tau)
+        \cdot 
+        g(t) d\tau 
+        \end{split}
+    \end{equation} 
+}
+
+Per approfondire nel mondo analogico: \\
+\url{https://it.wikipedia.org/wiki/Convoluzione}
+\end{tcolorbox}
+
+Il prodotto di convoluzione significa che, sapendo che il sistema è LTI, cioè è indipendente dal tempo, 
+basta solo sapere la risposta impulsiva $h \left[ n\right]$ per conoscere tutto il sistema $T \{ \}$. \newline 
+
+Graficamente parlando, dato un sistema LTI: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Operatore T discreto.png}
+\end{figure}  
+
+e dato questo tipo di ingresso, cioè l'impulso unitario $\delta \left[ n \right]$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Sequenza impulso unitario.png}
+\end{figure}  
+
+che poi deve essere ritardato per ogni indice di k, 
+è possibile ricavare la risposta impulsiva del sistema LTI. \newline 
+
+\newpage 
+
+\subsection{Prodotto di convoluzione e le sue proprietà}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 15 - 16\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+Il seguente prodotto di convoluzione: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ n - k \right]
+        \\
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ n - k\right]
+        \cdot 
+        h \left[ k \right]
+        \end{split}
+    \end{equation}
+}
+
+può essere anche scritto con la seguente notazione: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        x \left[ n\right]
+        *
+        h \left[ n\right]
+        \\
+        &= 
+        h \left[ n\right]
+        *
+        x \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+TO-DO: continuare da pag 16 del PDF 1 - Segnali e sistemi a tempo discreto e pag 1 degli appunti presi il 2025-09-30. \newline 
+
+
 
