@@ -133,7 +133,8 @@ Questo tipo di sequenza non pone problemi di definizione e realizzabilità. \new
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 2 \\
-    Appunti | 2025-09-24 | pag 3
+    Appunti | 2025-09-24 | pag 3 \\ 
+    Latex | 2025-09-30 Mattino | pag 9
 }
 
 Un altro tipo di sequenza, che proviene dalla sequenza impulso unitario, 
@@ -186,10 +187,8 @@ Dal punto di vista matematico:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-    Se si moltiplica la sequenza impulso unitario per un coefficiente A, 
-    non è più una sequenza impulso unitario, giusto?
-\end{tcolorbox} 
+Quest'ultima formula ci dice che, se la sequenza impulso unitario viene moltiplicata per un coefficiente moltiplicativo A, 
+la sequenza impulso unitario rimane tale se $A = 1$, altrimenti è una sequenza impulso. \newline 
 
 Il ritardo può essere definito anche in inglese come shift o delay. \newline 
 
@@ -364,12 +363,9 @@ analogamente al caso continuo. \newline
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 5 \\
-    Appunti | 2025-09-24 | pag 2
+    Appunti | 2025-09-24 | pag 2 \\ 
+    Latex | 2025-09-30 Mattino | pag 13
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-    Rampa unitaria perchè la differenza tra un indice n è uguale a 1?
-\end{tcolorbox} 
 
 Possiamo definire la rampa unitaria $r \left[ n \right]$ come: 
 
@@ -386,7 +382,7 @@ Possiamo definire la rampa unitaria $r \left[ n \right]$ come:
             = 
             r \left[ n \right]
             - 
-            r \left[ n \right]
+            r \left[ n - 1\right]
         \end{cases}
     \end{equation}
 }
@@ -398,6 +394,18 @@ avremo la seguente figura:
     \centering
     \includegraphics[scale = 0.5]{Rampa unitaria con la differenza della rampa continua.png}
 \end{figure}   
+
+La rampa unitaria $r \left[ n \right]$ viene definita unitaria perchè, per qualsiasi valore n scelto, 
+la differenza (cioè la "derivata" tra un indice ed un altro) è sempre unitaria. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        u \left[ n \right] = 1 \text{ } \forall n
+    \end{equation}
+}
 
 \newpage 
 
@@ -437,7 +445,8 @@ il segnale avrà i seguenti andamenti:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 7 \\
-    Appunti | 2025-09-24 | pag 4
+    Appunti | 2025-09-24 | pag 4 \\
+    Latex | 2025-09-30 Mattino | pag 15
 }
 
 Di seguito la definizione di sequenza esponenziale complessa. \newline 
@@ -457,10 +466,14 @@ Una sequenza $x \left[ n \right]$ esponenziale complessa ha la seguente formulaz
 
 L'inviluppo della sequenza ha lo stesso andamento dell'esponenziale reale. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
- Cosa significa questa ultima frase? \newline 
- I grafici sono gli stessi delle sequenze reali?
-\end{tcolorbox} 
+\begin{tcolorbox}
+Per inviluppo si intende "l'integrale" della sequenza. \newline 
+
+Avendo a che fare con una sequenza sinusoidale (perchè si considerano $A$ e $\alpha$ complessi), 
+allora avremo una sequenza sinusoidale, il cui andamento tende alle figure del sottocapitolo delle "Sequenze esponenziali reali". \newline 
+
+Inoltre, essendo una sequenza complessa, e quindi sinusoidale, dovrà essere studiata sia per il modulo che per la fase. 
+\end{tcolorbox}
 
 In base ai valori di $\alpha$, 
 avremo l'andamento l'andamento di $x \left[ n \right]$: 
@@ -525,7 +538,8 @@ grazie alla formula di Eulero, come:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 8 \\
-    Appunti | 2025-09-24 | pag 4
+    Appunti | 2025-09-24 | pag 4 \\ 
+    Latex | 2025-09-30 Mattino | pag 16
 }
 
 Per sequenze periodiche si intendono delle sequenze $x \left[ n \right]$ che hanno la sequente proprietà: 
@@ -553,17 +567,16 @@ Un tipo di sequenza periodica è l'esponenziale complesso puro:
 in cui: 
 
 \begin{itemize}
-    \item $\omega$ è la pulsazione, che si misura in $\dfrac{rad}{s}$ 
-    \item $f = \dfrac{\omega}{2 \pi}$ è la frequenza, che si misura in Hz 
+    \item $\omega$ è la pulsazione, la cui relazione con il mondo fisico si misura in $\dfrac{rad}{s}$ 
+    \item $f = \dfrac{\omega}{2 \pi}$ è la frequenza, la cui relazione con il mondo fisico si misura in Hz 
     \item $\phi$ è la fase iniziale nel periodo
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
- Ma non abbiamo appena detto che nel mondo delle sequenze non esistono le unità di misura del mondo fisico? \newline 
+\begin{tcolorbox}
+    Essendo nel mondo del DSP, quindi delle sequenze e non dei segnali, le sequenze stesse non hanno una grandezza fisica. \newline 
 
- Perchè ci sono le unità di misura della frequenza, pulsazione e fase?
-\end{tcolorbox} 
-
+    Qui sono solo riportate le relazioni dei coefficienti astratti con il mondo reale.
+\end{tcolorbox}
 
 \newpage 
 
@@ -571,7 +584,8 @@ in cui:
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 8 - 9\\
-    Appunti | 2025-09-24 | pag 4
+    Appunti | 2025-09-24 | pag 4 \\ 
+    Latex | 2025-09-30 Mattino | pag 17
 }
 
 L'esponenziale complesso puro $e^{\jmath \left( \omega n + \phi\right)}$ gode delle seguenti proprietà. \newline 
@@ -611,9 +625,8 @@ Si considerano equivalentemente:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Non ho capito queste due ultime equivalenze. Perchè?
-\end{tcolorbox} 
+perchè, grazie alla simmetricità dovuta alla periodicità, 
+si può studiare mezzo periodo della sequenza. \newline 
 
 \textbf{$2^{\circ}$ proprietà: } \newline 
 
@@ -666,9 +679,10 @@ dove:
 
 Se N esiste, allora la sequenza esponenziale complesso puro sarà periodico nel periodo N. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Il valore di k lo scegliamo noi affinchè possa valore l'equazione di uguaglianza?
-\end{tcolorbox} 
+\begin{tcolorbox}
+    In altre parole, se vogliamo una sequenza esponenziale complessa periodica,  
+    i valori di N e di k dipendono tutti da $\omega_0$ e devono rispettare l'uguaglianza scritta qui sopra
+\end{tcolorbox}
 
 \newpage 
 
@@ -754,4 +768,6 @@ questo ultimo è un sistema con memoria perchè la somma è con i valori precede
 }
 
 TO-DO: Continuare da pag 11, appunti 2025-09-24 perchè tanto verrà ripreso nella lezione di oggi 2025-09-30. \newline 
+
+TO-DO: Scrivere le correzioni chieste a lezione oggi 2025-09-30. \newline 
 
