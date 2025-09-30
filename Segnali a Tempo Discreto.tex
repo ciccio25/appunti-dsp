@@ -686,6 +686,72 @@ che trasforma la sequenza di ingesso $x \left[ n\right]$ in quella di uscita $y 
 
 Di seguito uno schema di un sistema discreto (con delle note): 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Sistema discreto.png}
+\end{figure}   
 
+Di seguito degli esempi di sistemi discreti in cui si confrontano l'ingresso $x \left[ n \right]$ e l'uscita $y \left[ n\right]$ 
+rispetto al sistema discreto con un solo un ingresso e una uscita. \newline 
 
+Un esempio di sistema discreto che implemente un ritardo ideale (che cioè trasla la sequenza nel tempo): 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        x \left[ n - 2\right]
+    \end{equation}
+}
+
+Da un punto di vista grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Ritardo ideale con n = 2.png}
+\end{figure}
+
+Un esempio di sistema discreto che implemente un reverse: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        x \left[ -n\right]
+    \end{equation}
+}
+
+Da un punto di vista grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Reverse sistema discreto.png}
+\end{figure}
+
+Un esempio di sistema discreto che implementa un accumulatore: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n \right]
+        = 
+        \sum_{k = - \infty}^{n} x \left[ k \right]
+    \end{equation}
+}
+
+In particolare, 
+questo ultimo è un sistema con memoria perchè la somma è con i valori precedenti. \newline 
+
+\newpage 
+
+\subsection{Sistemi lineari e stazionari}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 11 - 12\\
+    Appunti | 2025-09-24 | pag 4 - 5
+}
+
+TO-DO: Continuare da pag 11, appunti 2025-09-24 perchè tanto verrà ripreso nella lezione di oggi 2025-09-30. \newline 
 
