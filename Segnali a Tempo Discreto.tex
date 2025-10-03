@@ -1252,7 +1252,714 @@ può essere anche scritto con la seguente notazione:
     \end{equation}
 }
 
-TO-DO: continuare da pag 16 del PDF 1 - Segnali e sistemi a tempo discreto e pag 1 degli appunti presi il 2025-09-30. \newline 
+Di seguito le proprietà del prodotto di convoluzione. \newline 
 
+\textbf{Proprietà commutativa} \newline 
 
+Data una sequenza di ingresso $x \left[ n\right]$ e una risposta impulsiva $h \left[ n\right]$ di un sistema discreto LTI, 
+allora possiamo applicare la proprietà commutativa nel prodotto di convoluzione, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        *
+        x \left[ n\right]
+        =
+        x \left[ n\right]
+        *
+        h \left[ n\right] 
+    \end{equation}
+}
+
+\textbf{Proprietà distributiva} \newline 
+
+Date due sequenze di ingresso $x_1 \left[ n\right]$, $x_2 \left[ n\right]$ e una risposta impulsiva $h \left[ n\right]$ di un sistema discreto LTI, 
+allora possiamo applicare la proprietà distributiva nel prodotto di convoluzione, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        *
+        \left( 
+            x_1 \left[ n\right] 
+            +
+            x_2 \left[ n\right]
+        \right)
+        = 
+        h \left[ n\right]
+        *
+        x_1 \left[ n\right]
+        +
+        h \left[ n\right]
+        *
+        x_2 \left[ n\right]
+    \end{equation}
+} 
+
+\textbf{Proprietà di linearità} \newline 
+
+Date due sequenze di ingresso $x_1 \left[ n\right]$, $x_2 \left[ n\right]$ con i rispettivi coefficienti moltiplicativi a, b e una risposta impulsiva $h \left[ n\right]$ di un sistema discreto LTI, 
+allora possiamo applicare la proprietà di linearità nel prodotto di convoluzione, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        *
+        \left( 
+            a 
+            \cdot
+            x_1 \left[ n\right] 
+            +
+            b 
+            \cdot
+            x_2 \left[ n\right]
+        \right)
+        = 
+        a 
+        \cdot 
+        \left( 
+        h \left[ n\right]
+        *
+        x_1 \left[ n\right]
+        \right)
+        +
+        b 
+        \cdot 
+        \left(
+        h \left[ n\right]
+        *
+        x_2 \left[ n\right]
+        \right)
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Come calcolare la risposta impulsiva in un sistema LTI}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 17\\
+    Appunti | 2025-09-30 | pag 1
+}
+
+La risposta di un sistema può essere calcolata in due metodi. \newline 
+
+Il primo metodo è attraverso la sovrapposizione delle risposte del sistema a ciascun impulso $x \left[ k\right]$, 
+ciascuno con posizione k, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        T \left\{ \delta \left[ n - k\right]\right\}
+    \end{equation}
+}
+
+dove $T \left\{ \delta \left[ n - k\right]\right\}$ è la risposta del sistema discreto LTI all'impulso unitario ritardato dell'indice k. \newline 
+
+\begin{tcolorbox}
+    Il problema più grosso di questa equazione è la sommatoria con indice k che va da $- \infty$ a $+ \infty$, 
+    cioè infinite sommatorie. \newline 
+
+    Inoltre, per lo stesso problema, si dovrebbero fare infiniti ritardi del gradino unitario $\delta \left[ n\right]$. 
+\end{tcolorbox}
+
+Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\right]$ e dei campioni della sequenza $h \left[ k\right]$ rovesciata e spostata di n, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ - \left( k - n\right)\right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+  $T \left\{ \delta \left[ n - k\right]\right\}$ e $h \left[ - \left( k - n\right)\right]$ intendono la stessa cosa, cioè la risposta impulsiva al sistema discreto LTI, 
+  soltanto che uno è shiftato per l'indice k e uno per l'indice n, giusto?
+\end{tcolorbox}
+
+\begin{tcolorbox}
+    Rispetto all'equazione precedente, questa volta il ritardo della risposta impulsiva $h \left[ - (k)\right]$ viene fatta per l'indice n e non per l'indice k. \newline 
+
+    Inoltre, il ribaldamento (o rovesciamento) di $h \left[ (k - n)\right]$ viene fatta grazie al segno negativo davanti a (k - n). \newline 
+
+    A lezione, per spiegare in modo grafico cosa è la convolutione, il prof ci ha fatto vedere questi due video: 
+
+    \begin{itemize}
+        \item \url{https://it.wikipedia.org/wiki/Convoluzione#/media/File:Convolution_of_box_signal_with_itself2.gif} 
+        \item \url{https://it.wikipedia.org/wiki/Convoluzione#/media/File:Convolution_of_spiky_function_with_box2.gif}
+    \end{itemize}
+
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Risposta impulsiva in un sistema causale e stabile BIBO}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 18\\
+    Appunti | 2025-09-30 | pag 2
+}
+
+Se il sistema è causale, cioè ha la seguente risposta impulsiva: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] = 0 \text{ } \forall n < 0
+    \end{equation}
+}
+
+allora, la risposta al sistema impulsivo $y [n]$ diventa: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        T \left\{ \delta \left[ n - k\right]\right\}
+        \\
+        &=  
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[n - k\right]
+        \\
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        h \left[ k\right]
+        \cdot 
+        x \left[n - k\right]
+        \\
+        &\downarrow
+        \\
+        y \left[ n\right]
+        &= 
+        \sum_{k = 0}^{+ \infty}
+        h \left[ k\right]
+        \cdot 
+        x \left[n - k\right]
+    \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Tra il secondo ed il terzo passaggio si è svolta questa uguaglianza: 
+
+    {
+        \Large 
+        \begin{equation}
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[n - k\right]
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        h \left[ k\right]
+        \cdot 
+        x \left[n - k\right]    
+        \end{equation}
+    }
+
+    grazie alla proprietà commutativa del prodotto di convoluzione. 
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+  I passaggi algebrici e le considerazioni sono giuste?
+\end{tcolorbox}
+
+Da un punto di vista grafico, possiamo visualizzare, come esempio, 
+una risposta di un sistema causale $y \left[ n\right]$ come: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sequenza causale di esempio.png}
+\end{figure}  
+
+Come possiamo notare dal grafico, per $k < 0$, la sequenza causale è nulla. \newline 
+
+Inoltre, sapendo che nei sistemi causali: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] = 0 \text{ } \forall n < 0
+    \end{equation}
+}
+
+possiamo far diventare un sistema non causale a causale se aspettiamo sufficentemente indici in modo che si possa fare la convoluzione dall'indice $k = 0$. \newline 
+
+Invece, per sistemi stabili BIBO (cioè Bounded Input Bounded Output), 
+in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            \abs{x \left[ n\right]} 
+            \leq
+            B_x 
+            < 
+            + \infty
+            \\
+            \abs{y \left[ n\right]} 
+            \leq
+            B_y 
+            < 
+            + \infty
+        \end{cases}
+        \text{ }
+        \forall n, x \left[ n\right]
+    \end{equation}
+}
+
+allora, la risposta impulsiva in un sistema BIBO vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{y \left[ n\right]}
+        \leq 
+        \sum_{k = - \infty}^{+ \infty}
+        \abs{h \left[ k\right]}
+        \cdot 
+        \abs{x \left[ n - k\right]}
+        \leq 
+        B_x 
+        \cdot 
+        \sum_{k = - \infty }^{+ \infty}
+        \abs{h \left[ k\right]}
+    \end{equation}
+}
+
+Affinchè ci sia stabilità per qualasiasi sequenza di ingresso $x \left[ n\right]$, 
+basta che: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = - \infty }^{+ \infty}
+        \abs{h \left[ k\right]}
+        < 
+        + \infty
+    \end{equation}
+}
+
+cioè, in altri termini, diremmo che la risposta impulsiva converge; 
+questo ci permette di affermare che la stabilità del sistema LTI la si può osservare anche dalla sua risposta impulsiva. \newline 
+
+Grazie alle osservazioni svolte per i sistemi causali ed i sistemi stabili BIBO, 
+possiamo dire che la risposta impulsiva $h \left[ k\right]$ (o $h \left[ n\right]$ dipende sempre dall'indice di riferimento), 
+caratterizza completamente un sistema LTI discreto. \newline 
+
+\newpage 
+
+\section{Suddivisione dei sistemi LTI}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 19 - 20\\
+    Appunti | 2025-09-30 | pag 2
+}
+
+I sistemi LTI si possono dividere in due tipi: 
+
+\begin{itemize}
+    \item FIR (cioè Finite Impulse Response) 
+    \item IIR (cioè Infinite Impulse Response)
+\end{itemize}
+
+I sistemi FIR, come dice il nome, sono sistemi in cui la risposta impulsiva $h \left[ n\right]$ 
+ha durata limitata e che quindi non si estende da $- \infty$ a $+ \infty$. \newline 
+
+Se consideriamo la finestra compresa tra gli indici $n_1$ e $n_2$, 
+possiamo visualizzare un esempio di risposta impulsiva $h \left[ n\right]$ FIR (con le note prese a lezione): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Esempio risposta impulsiva FIR.png}
+\end{figure}  
+
+Possiamo affermare che, un sistema LTI è FIR se: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        \neq  
+        0 
+        \text{ solo per }
+        n_1 \leq n \leq n_2
+    \end{equation}
+}
+
+Il sistemi LTI FIR saranno sempre stabile se: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{h \left[ n\right]} 
+        < 
+        + \infty
+        \text{ }
+        \forall 
+        n
+    \end{equation}
+}
+
+\newpage 
+
+Invece i sistemi IIR sono sistemi in cui la risposta impulsiva ha durata illimitata (e quest'ultimo dettaglio può essere un pro ed un contro: lo vedremo meglio nei prossimi capitoli). \newline 
+
+Quindi, rispetto al caso precedente dei FIR, la finestra non sarà limitata compresa tra due indici $n_1$ e $n_2$, 
+bensì la finestra sarà tra $- \infty$ e $+ \infty$. \newline 
+
+Un esempio di risposta impulsiva IIR: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Esempio riposta impulsiva IIR.png}
+\end{figure}  
+
+dove i puntini a destra e a sinistra della figura indicano che si estendono da $- \infty$ a $+ \infty$. \newline 
+
+La stabilità del sistema LTI IIR sarà garantita solo se: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = - \infty}^{+ \infty}
+        \abs{h \left[ k\right]}
+        <  
+        + \infty
+    \end{equation}
+}
+
+Quindi, per garantire la stabilità del sistema LTI non bisogna che la sua risposta impulsiva debba avere una finestra finita, 
+l'importante che la sua risposta impulsiva converga ad un valore che non sia infinito. \newline 
+
+\newpage 
+
+\subsection{Esempio numerico di stabilità di un sistema IIR }
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 21\\
+    Appunti | 2025-09-30 | pag 2
+}
+
+Ad esempio, data la formulazione matematica di una risposta impulsiva: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        a^{n} \cdot u \left[ n\right]
+    \end{equation}
+}
+
+dove $u \left[ n\right]$ è un impulso unitario e a è un coefficiente, 
+possiamo affermare che, se: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        h \left[ n\right]
+        = 
+        a^{n} \cdot u \left[ n\right]
+        \\
+        \abs{a} < 1
+        \end{cases}
+    \end{equation}
+}
+
+allora il sistema IIR è stabile perchè la risposta impulsiva converge. \newline 
+
+Un esempio grafico di $h \left[ n\right]$ con $a = 0.5$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Esempio IIR stabile.png}
+\end{figure}  
+
+Invece se: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        h \left[ n\right]
+        = 
+        a^{n} \cdot u \left[ n\right]
+        \\
+        \abs{a} \geq 1
+        \end{cases}
+    \end{equation}
+}
+
+allora il sistema IIR è instabile perchè la risposta impulsiva non converge e tende a infinito. \newline 
+
+Un esempio grafico di $h \left[ n\right]$ con $a = 1.5$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Esempio FIR stabile.png}
+\end{figure}  
+
+\newpage 
+
+\subsection{Analisi di esempi di sistemi LTI }
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 22 - 23\\
+    Appunti | 2025-09-30 | pag 2
+}
+
+Di seguito un elenco di sisemi discreti LTI, come si distinguono per la loro risposta impulsiva $h \left[ n\right]$e se sono FIR o IIR. \newline 
+
+\textbf{Sistema identità} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right] &= x \left[ n \right]
+            \\
+            &\downarrow
+            \\
+            h \left[ n \right] &= \delta \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+quindi, il sistema identià è un sistema FIR stabile, causale e stabile. \newline 
+
+\textbf{Ritardo di M campioni} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right] &= x \left[ n - M\right]
+            \\
+            &\downarrow
+            \\
+            h \left[ n \right] &= \delta \left[ n - M\right]
+        \end{split}
+    \end{equation}
+}
+
+Il sistema è FIR e stabile, ma la causalità dipende dai valori di M. \newline 
+
+Se $M > 0$, il sistema è causale. \newline  
+
+Se $M < 0$, il sistema è non causala. \newline 
+
+\textbf{Differenza in avanti} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right] &= x \left[ n + 1\right] - x \left[ n \right]
+            \\
+            &\downarrow
+            \\
+            h \left[ n \right] &= \delta \left[ n + 1\right] - \delta \left[ n \right]
+        \end{split}
+    \end{equation}
+}
+
+In questo caso, il sistema è FIR, non causale e stabile. \newline 
+
+\textbf{Differenza all'indietro} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right] &= x \left[ n\right] - x \left[ n - 1 \right]
+            \\
+            &\downarrow
+            \\
+            h \left[ n \right] &= \delta \left[ n \right] - \delta \left[ n - 1\right]
+        \end{split}
+    \end{equation}
+}
+
+In questo caso, il sistema è FIR, causale e stabile. \newline 
+
+\newpage 
+
+\textbf{Accumulatore} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{k = - \infty}^{n}
+        x \left[ k\right]
+       \\
+       &\downarrow
+       \\
+       h \left[ n\right]
+       &= 
+        \sum_{k = - \infty}^{n} 
+        \delta \left[ k\right]
+        = 
+        u \left[ n\right]
+    \end{split}
+    \end{equation}
+}
+
+dove $u \left[ n\right]$ è un gradino. \newline 
+
+Il sistema è IIR, causale ma non stabile. \newline 
+
+\textbf{Accumulatore ritardato} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{k = - \infty}^{n}
+        x \left[ k - M\right]
+       \\
+       &\downarrow
+       \\
+       h \left[ n\right]
+       &= 
+        \sum_{k = - \infty}^{n} 
+        \delta \left[ k - M \right]
+        = 
+        u \left[ n - M\right]
+    \end{split}
+    \end{equation}
+}
+
+dove $u \left[ n\right]$ è un gradino ed M è un indice di ritardo. \newline 
+
+Il sistema è IIR, non stabile, ma la causalità dipende dal ritardo M. \newline 
+
+Se $M > 0$, il sistema è causale (cioè è in ritardo). \newline  
+
+Se $M < 0$, il sistema è non causala (cioè è in anticipo). \newline 
+
+\newpage 
+
+\section{Connessioni dei sistemi LTI}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 24\\
+    Appunti | 2025-09-30 | pag 2 
+}
+
+Come abbiamo visto ad eletttecnica, anche in DSP possiamo conntettere i "blocchetti". \newline 
+
+Nel caso del DSP, non ci sono rami che sono bidirezionali, bensì unidirezionali. \newline 
+
+Di seguito l'elenco delle connessioni di sistemi discreti LTI. \newline 
+
+\textbf{Cascata / Serie} \newline
+
+Dati due sistemi discreti LTI, possiamo collegarli in cascata (o serie) come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistemi LTI in cascata.png}
+\end{figure}  
+
+in cui: 
+
+\begin{itemize}
+    \item $h_1 \left[ n\right]$ e $h_2 \left[ n\right]$ sono risposte impulsive dei due sistemi discreti LTI 
+    \item $x \left[ n\right]$ è la seguenza di ingresso 
+    \item $z \left[ n\right]$ è la risposta in uscita al primo sistema LTI 
+    \item $y \left[n \right]$ è la risposta in uscita da tutti e due i sistemi LTI
+\end{itemize}
+
+Allora possiamo scrivere le seguenti relazioni: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            z \left[ n\right] = h_1 \left[ n\right] * x \left[ n\right] 
+            \\
+            y \left[ n\right] = h_2 \left[ n\right] * z \left[ n\right] 
+        \end{cases}
+        \to 
+        y \left[ n\right]
+        = 
+        \left( 
+            h_1 \left[ n\right]
+            * 
+            h_2 \left[ n\right]
+        \right)
+        * 
+        x \left[ n\right]
+    \end{equation}
+}
+
+L'espressione della sequenza in uscita $y \left[ n\right]$ esprime che 
+$y \left[ n\right]$ è combinazione lineare delle risposte impulsive $h_1 \left[ n\right]$ e $h_2 \left[n\right]$: 
+per questo motivo, volendo, possiamo spostare l'ordine dei due sistemi e l'uscita sarebbe la stessa. \newline 
+
+Questo "scambio" non si può svolgere in sistemi discreti non lineari, 
+in cui l'ordine dei blocchi è fondamentale. \newline 
+
+\textbf{Parallelo} \newline
+
+Dati due sistemi discreti LTI, possiamo collegarli in parallelo come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistemi LTI in parallelo.png}
+\end{figure}  
+
+Scrivendo le relazioni matematiche: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right]
+            &= 
+            x \left[  n \right] * h_1 \left[ n\right]
+            +
+            x \left[  n \right] * h_2 \left[ n\right] 
+            \\
+            &= 
+            \left( h_1 \left[ n\right] + h_2 \left[ n\right]\right)
+            *
+            x \left[  n \right]
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+\textbf{Sistema inverso} \newline 
+
+TO-DO: Continuare da pag 24 del PDF 1 -Segnali e sistemi a tempo discreto e pag 2 degli appunti 2025-09-30. \newline 
 
