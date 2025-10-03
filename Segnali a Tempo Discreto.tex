@@ -1,4 +1,4 @@
-\chapter{Segnali a Tempo Discreto}
+\chapter{Segnali e circuiti a tempo discreto}
 
 \begin{figure}[h]
     \centering
@@ -1961,5 +1961,168 @@ Scrivendo le relazioni matematiche:
 
 \textbf{Sistema inverso} \newline 
 
-TO-DO: Continuare da pag 24 del PDF 1 -Segnali e sistemi a tempo discreto e pag 2 degli appunti 2025-09-30. \newline 
+Dato un sistema LTI con una risposta impulsiva $h \left[ n\right]$ e mettendo in cascata il suo inverso $h^{'} \left[ n\right]$ come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistema inverso.png}
+\end{figure}  
+
+risulta che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right]
+            &= 
+            \left( 
+                h \left[ n\right]
+                * 
+                h^{'} \left[ n\right]
+            \right)
+            * 
+            x \left[ n\right]
+            \\
+            &= 
+            x \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+ovvero che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            h \left[ n\right]
+            * 
+            h^{'} \left[ n\right]
+            &= 
+            \delta \left[ n\right]
+            \\
+            &\downarrow
+            \\
+            h^{'} \left[ n\right] 
+            &\text{ è il sistema inverso di } h \left[ n\right] 
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Questo tipo di modellazione è molto utile, ad esempio, nei sistemi di telecomunicazione, 
+    dove si vuole modellare il canale con disturbo con una risposta impulsiva $h \left[n\right]$. \newline 
+
+    Il ricevitore calcola l'inverso di $h \left[ n\right]$, in modo da ricevere il messaggio originale inviato dal mittente, 
+    cioè: 
+
+    {
+        \Large 
+        \begin{equation}
+            y \left[ n \right] \approx x \left[ n\right]
+        \end{equation}
+    }
+
+    Ho messo il segno $\approx$ perchè, dal corso di telecomunicazioni, sappiamo bene che è difficile quantificare a propri le caratteristiche dei disturbi in un canale, 
+    quindi il massimo che si può fare è dare una rappresentazione semplificata e lineare di esso. 
+\end{tcolorbox}
+
+\newpage 
+
+\section{Sistemi LTI descritti da equazioni alle differenze}
+
+\footnote{ 
+    Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 25 - 26\\
+    Appunti | 2025-09-30 | pag 2 - 3
+}
+\begin{tcolorbox}
+Questi tipi di sistemi vanno memorizzati a memoria !!!    
+\end{tcolorbox}
+
+Una sottoclasse di sistemi LTI di importanza pratica, 
+può essere descritta da equazioni alle differenze, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = 0}^{N}
+        a_k \cdot y [n - k]
+        =
+        \sum_{k = 0}^{M}
+        b_k \cdot x [n - k] 
+    \end{equation}
+} 
+
+con $a_k$ e $b_k$ costanti reali. \newline 
+
+In altre parole, si può dire che i sistemi LTI descritti da equazioni alle differenze 
+sono quesi sistemi in cui la combinazione lineare in uscita è uguale alla combinazione lineare in ingresso. \newline 
+
+Tre osservazioni in merito a questo tipo di sistema: 
+
+\begin{itemize}
+    \item le sommme sono finite e non infinite come nel caso del prodotto di convoluzione, perchè gli andici vanno da $k = 0$ a N (per l'uscita) ed a M (per l'ingresso)
+    \item non è necessario conoscere la risposta impulsiva del sistema 
+    \item è facilmente computabile da un calcolatore
+\end{itemize}
+
+
+Un caso particolare di sistema discreto LTI descritto da equazioni alle differenze è il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        \sum_{k = 0}^{M}
+        b_k 
+        \cdot 
+        x \left[ n - k\right]
+    \end{equation}
+}
+
+in cui la risposta impulsiva è finita e causale e la condizione sufficiente affinchè il sistema sia FIR è che $N = 0$. \newline 
+
+Tutte le equazioni alle differenze finite, lineari ed a coefficienti costanti possono essere realizzate a partire dai seguenti componenti di base: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.33]{Collegamenti sistemi LTI equazioni alle differenze.png}
+\end{figure}  
+
+\begin{tcolorbox}
+Ovunque c'è ritardo, c'è memoria: dipende se la memoria è finita o infinta (cioè FIR e IIR).     
+\end{tcolorbox}
+
+\newpage 
+
+Un esempio di sistema LTI descritto da equazioni alle differenze è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        -
+        y \left[ n - 1\right]
+        = 
+        3 \cdot x \left[ n \right]
+        + 
+        x \left[ n - 2\right] 
+    \end{equation}
+} 
+
+che, utilizzando i componenti di base precedentemente elencati, possiamo rappresentare in questa maniera: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Grafico esempio LTI equazioni alle differenze.png}
+\end{figure}  
+
+dove con D, nella figura, si intende il ritardo $n_0$. \newline 
+
+\newpage 
+
+
+
 
