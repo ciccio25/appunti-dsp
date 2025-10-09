@@ -877,7 +877,8 @@ Adesso, in questo corso di DSP, affronteremo queste proprietà nel mondo dei sis
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 13\\
-    Appunti | 2025-09-30 | pag 1
+    Appunti | 2025-09-30 | pag 1 \\
+    Latex | 2025-10-03 Pomeriggio | pag 23
 }
 
 \begin{tcolorbox}
@@ -892,7 +893,7 @@ la sua uscita all'istante $n_0$ dipende solo dagli ingressi con indice:
 {
     \Large 
     \begin{equation}
-        k \leq n_0
+        n \leq n_0
     \end{equation}
 }
 
@@ -933,10 +934,6 @@ allora:
         \end{split}
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-  L'indice k e l'indice n indicata nella formula sono gli stessi? (Penso di sì)
-\end{tcolorbox}
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare il disegno dell'andamento di una sequenza dall'indice k 
@@ -1342,7 +1339,8 @@ allora possiamo applicare la proprietà di linearità nel prodotto di convoluzio
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 17\\
-    Appunti | 2025-09-30 | pag 1
+    Appunti | 2025-09-30 | pag 1 \\ 
+       Latex | 2025-10-03 Pomeriggio | pag 28
 }
 
 La risposta di un sistema può essere calcolata in due metodi. \newline 
@@ -1371,24 +1369,33 @@ dove $T \left\{ \delta \left[ n - k\right]\right\}$ è la risposta del sistema d
     Inoltre, per lo stesso problema, si dovrebbero fare infiniti ritardi del gradino unitario $\delta \left[ n\right]$. 
 \end{tcolorbox}
 
-Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\right]$ e dei campioni della sequenza $h \left[ k\right]$ rovesciata e spostata di n, cioè: 
+Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\right]$ e dei campioni della sequenza $h \left[ k\right]$ rovesciata e spostata di n, cioè (facendo i passaggi step-by-step): 
 
 {
     \Large 
     \begin{equation}
+        \begin{split}
         y \left[ n\right]
-        = 
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ n - k\right]
+        \\
+        &= 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ - k + n\right]
+        \\
+        &=
         \sum_{k = - \infty}^{+ \infty}
         x \left[ k\right]
         \cdot 
         h \left[ - \left( k - n\right)\right]
+        \end{split}
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-  $T \left\{ \delta \left[ n - k\right]\right\}$ e $h \left[ - \left( k - n\right)\right]$ intendono la stessa cosa, cioè la risposta impulsiva al sistema discreto LTI, 
-  soltanto che uno è shiftato per l'indice k e uno per l'indice n, giusto?
-\end{tcolorbox}
 
 \begin{tcolorbox}
     Rispetto all'equazione precedente, questa volta il ritardo della risposta impulsiva $h \left[ - (k)\right]$ viene fatta per l'indice n e non per l'indice k. \newline 
@@ -1410,7 +1417,8 @@ Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 18\\
-    Appunti | 2025-09-30 | pag 2
+    Appunti | 2025-09-30 | pag 2 \\ 
+    Latex | 2025-10-03 Pomeriggio | pag 29
 }
 
 Se il sistema è causale, cioè ha la seguente risposta impulsiva: 
@@ -1480,10 +1488,6 @@ allora, la risposta al sistema impulsivo $y [n]$ diventa:
     grazie alla proprietà commutativa del prodotto di convoluzione. 
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-  I passaggi algebrici e le considerazioni sono giuste?
-\end{tcolorbox}
-
 Da un punto di vista grafico, possiamo visualizzare, come esempio, 
 una risposta di un sistema causale $y \left[ n\right]$ come: 
 
@@ -1493,6 +1497,8 @@ una risposta di un sistema causale $y \left[ n\right]$ come:
 \end{figure}  
 
 Come possiamo notare dal grafico, per $k < 0$, la sequenza causale è nulla. \newline 
+
+\newpage 
 
 Inoltre, sapendo che nei sistemi causali: 
 
