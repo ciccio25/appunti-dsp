@@ -541,5 +541,238 @@ TO-DO: Spiegazione codice Esempio 2.1, 2.2, 2.3, 2.4
     Appunti mancanti | 2025-10-07 
 }
 
+È possibile realizzare programmi ad-hoc tramite il linguaggio di programmazione Matlab. \newline 
+
+Il linguaggio Matlab, oltre alle semplificazioni assegnazioni di variabili e ad operatori matematici, comprende anche "statements" più evoluti come: 
+
+\begin{itemize}
+    \item if, elseif, else, eseguono  delle operazione se le condizioni sono vere \url{https://it.mathworks.com/help/matlab/ref/if.html} 
+    \item switch, case, otherwise, eseguono uno tra i gruppi di operazioni \url{https://it.mathworks.com/help/matlab/ref/switch.html} 
+    \item for, foor-loop che si ripete un numero di volte prefissato \url{https://it.mathworks.com/help/matlab/ref/for.html} 
+    \item while, while-loop che si ripete se la condizione rimane vera \url{https://it.mathworks.com/help/matlab/ref/while.html} 
+    \item break, termina un'esecuzione di un while-loop o di un for-loop \url{https://it.mathworks.com/help/matlab/ref/break.html}
+\end{itemize}
+
+Esisono due possbilità per programmare in Matlab: 
+
+\begin{itemize}
+    \item script 
+    \item funzioni 
+\end{itemize} 
+
+\newpage 
+
+\subsection{Script file}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 19 - 20\\
+    Appunti mancanti | 2025-10-07 
+}
+
+Lo il file script è un file che continene una sequenza di comandi Matlab, generalmente con estensione .m. \newline 
+
+È bene non assegnare a nessun script il nome delle funzioni predefinite o il nome di una variabile usata. \newline 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.5
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Funzioni}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 21\\
+    Appunti mancanti | 2025-10-07 
+}
+
+Una funzione si crea come uno script: ha estensione .m, deve avere lo stesso nome della funzione, 
+ma, a differenza dello script, può restituire dei risultati i cui parametri avvengono per valore. \newline 
+
+Il passaggio per valore implica che le variabili definite all'interno della funziona hanno visibilità locale e non possono essere riferite dalla shell. \newline 
+
+\begin{tcolorbox}
+    I concetti di visibilità locale e globale sono dei concetti molto importanti nella programmazione. \newline 
+
+    Per approfondire: \url{https://it.wikipedia.org/wiki/Visibilit%C3%A0_(programmazione)} \newline 
+
+    Per quanto riguarda il passaggio del valore in una funzione, lo si ha anche in altri linguaggi di programmazione, come ad esempio il C e il C++. \newline 
+
+    Per approfondire la differenza tra passaggio per valore e passaggio per riferimento: 
+    
+    \begin{itemize}
+        \item Passaggio per valore \\ \url{https://www.ibm.com/docs/it/i/7.5.0?topic=calls-pass-by-value}
+        \item Passaggio per riferimento \\ \url{https://www.ibm.com/docs/it/i/7.5.0?topic=calls-pass-by-reference}
+    \end{itemize}
+    
+\end{tcolorbox}
+
+In Matlab esiste un tipo di variabile interessante chiamata come "Persisten variable", 
+che sono variabili locale che sono viste come globali solamente dalla funzione dove sono state definite. \newline 
+
+\begin{tcolorbox}
+    Nella documentazione di persistent sono dipsonibili degli esempi più dettagliati per approfondire il tema: 
+    \url{https://it.mathworks.com/help/matlab/ref/persistent.html}
+\end{tcolorbox}
+
+\newpage 
+
+\section{Convoluzione di due sequenze}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 22\\
+    Appunti mancanti | 2025-10-07 
+}
+
+Come studiato dal capitolo precedente, sappiamo bene che 
+la convoluzione tra la sequenza discreta di ingresso ad un sistema discreto LTI $x \left[ n\right]$ e la risposta impulsiva $h \left[ n\right]$, 
+è definita come: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        x \left[ k\right]
+        \cdot 
+        h \left[ n - k\right]
+    \end{equation}
+}
+
+In Matlab esiste una funzione pre-implementata per il calcolo della convoluzione tra due sequenze ed è la seguente: 
+
+{
+    \Large 
+    \begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+y = conv(x, h)
+\end{lstlisting}
+}
+
+Ma, come si legge bene dalla documentazione di conv \url{https://it.mathworks.com/help/matlab/ref/conv.html}, 
+essa produce un vettore y di lunghezza pari a: 
+
+{
+    \Large 
+    \begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+length(x) + length(h) - 1
+\end{lstlisting}
+} 
+
+mentre noi vorremmo che la lunghezza del vettore y sia: 
+
+{
+    \Large 
+    \begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+length(x) + length(h) 
+\end{lstlisting}
+} 
+
+Per questo motivo che, in questo corso, useremo la funzione my\_conv.m .\newline 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.3 my\_conv.m
+\end{tcolorbox} 
+
+Come studiato nel capitolo precedente \ref{subsec: Proprietà di campionamento} \nameref{subsec: Proprietà di campionamento} 
+una qualsiasi sequenza $x \left[ n \right]$ può essere espressa come somma di impulsi unitari 
+opportunamente ritardati e amplificati. \newline 
+
+Da un punto di vista matematico, possiamo scrivere la sequenza $x \left[ n \right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] 
+        = 
+        \sum_{k = - \infty}^{+ \infty }
+        x \left[ k \right] \cdot \delta \left[ n - k \right]
+    \end{equation}
+}
+
+dove la sequenza di impulsi unitari $\delta \left[ n\right]$ prende il nome di Delta di Kronocker. \newline 
 
 
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+È giusto dire che la sequenza di impulsi unitari $\delta \left[ n\right]$ prende il nome di Delta di Kronocker? \newline 
+\end{tcolorbox}
+
+\label{Domanda 1}
+
+La proprietà di campionamento delle sequenze discrete appena descritta, permette di assegnare uno specifico significato operativo all'operazione di convoluzione. \newline 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.4 
+\end{tcolorbox}
+
+
+Tale significato operativo può essere analogamente essere messo in luce considerando la convoluzione come una operazione matriciale. \newline 
+
+L'operazione di convoluzione tra due sequenze può essere vista come il prodotto matriciale tra una delle due sequenze e la matrice di convoluzione, opportunamente costruita a partire dalla sequenza rimanente. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Eh?
+\end{tcolorbox}
+
+\label{Domanda 2}
+
+La matrice di convoluzione $\left[ H\right]$ è una matrice di Toepliz rettangolare di dimensione N * p dove: 
+
+\begin{itemize}
+    \item N è la lunghezza del prodotto di convoluzione 
+    \item p è la lunghezza della sequenza x che non genera la matrice 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Possiamo dire che una matrice di Toepliz utile per la proprietà di campionamento nei sistemi discreti è ottenuta utilizzando la Delta di Kronocher, che appunto alla fine compone una matrice identità? 
+\end{tcolorbox}
+
+\label{Domanda 3} 
+
+\begin{tcolorbox}
+Per apprfondire cosa è una matrice di Toepliz e la Delta di Kronocher: 
+
+\begin{itemize}
+    \item \url{https://it.wikipedia.org/wiki/Matrice_di_Toeplitz} 
+    \item \url{https://it.wikipedia.org/wiki/Delta_di_Kronecker}
+\end{itemize}
+
+\end{tcolorbox}
+
+La matrice è ottenuta shiftatndo nel tempo la sequenza base h su ogni colonna. \newline 
+
+Per esempio: 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare un esempio di una convoluzione tra due sequenze utilizzando la matrice di Toeplitz  
+\end{tcolorbox} 
+
+Questa interpretazione è molto utile ai fini computazionali. \newline 
+
+Il comando Matlab da utilizzare per generare la matrice di convoluzione è convmtx. \newline 
+
+
+\begin{tcolorbox}
+    Dalla documentazione di convmtx \url{https://it.mathworks.com/help/signal/ref/convmtx.html} \newline 
+
+    "Computing a convolution using conv when the signals are vectors is generally more efficient than using convmtx. For multichannel signals, convmtx might be more efficient."
+\end{tcolorbox} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+convmtx ha lo stesso problema del comando conv in Matlab, cioè della sua grandezza che non rispecchia quella ideale come noi la intendiamo nel corso? \newline 
+
+\end{tcolorbox}
+
+\label{Domanda 4} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: TO-DO: Spiegazione codice Esempio 2.5, 2.6, 2.7 
+\end{tcolorbox} 
+
+\newpage 
