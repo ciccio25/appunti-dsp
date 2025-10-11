@@ -29,6 +29,11 @@ come il seguente:
     \includegraphics[scale = 0.5]{segnale-digitale.jpg}
 \end{figure}  
 
+\begin{tcolorbox}
+La figura qui presente è sbagliata perchè è un segnale a tempo continuo ed a valori discreti, 
+ma è utilizzata solo per distiguere la differenza tra segnale analogico e discreto.      
+\end{tcolorbox}
+
 Nella forma più generale, non si considera il segnale come segnale discreto, 
 bensì come sequenza, perchè, se si intende una sequenza come un segnale, 
 significa che associamo quella sequenza a un segnale fisico. \newline 
@@ -43,7 +48,7 @@ Un esempio di sequenza:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.25]{Digital-signal-discrete.jpg}
+    \includegraphics[scale = 0.2]{Digital-signal-discrete.jpg}
 \end{figure}  
 
 \newpage 
@@ -121,7 +126,7 @@ cioè, scritta a parole, vale 1 per n e vale 0 per tutti gli altri valori di n. 
         \end{equation}
     }
 
-    n è l'indice della sequenza. 
+    Nel caso dell'impulso unitario $\delta \left[ n\right]$, n è l'indice della sequenza dove $\delta \left[ n\right] = 1$. 
 
 \end{tcolorbox}
 
@@ -181,14 +186,15 @@ Dal punto di vista matematico:
         \delta \left[n - 3\right] 
         = 
         \begin{cases}
-            0 \text{ per } n \neq n_0 \\
+            0 \text{ per } n \neq 3 \\
             A \text{ per } n = 3
         \end{cases}
     \end{equation}
 }
 
 Quest'ultima formula ci dice che, se la sequenza impulso unitario viene moltiplicata per un coefficiente moltiplicativo A, 
-la sequenza impulso unitario rimane tale se $A = 1$, altrimenti è una sequenza impulso. \newline 
+avremo una sequenza impulso; 
+altrimenti la sequenza impulso unitario rimane tale se $A = 1$. \newline 
 
 Il ritardo può essere definito anche in inglese come shift o delay. \newline 
 
@@ -249,7 +255,7 @@ nelle sue componenti cioè come somma dei seguenti componenti:
 
 \subsection{Sequenza elementari}
 
-Potremmo elencare tutti i tipi di sequenze, ma elencheremo solo quelle elemtari. \newline 
+Potremmo elencare tutti i tipi di sequenze, ma elencheremo solo quelle elementari. \newline 
 
 \subsubsection{Gradino unitario}
 
@@ -306,6 +312,8 @@ possiamo scrivere il gradino unitario $u \left[ n \right] $ come:
     \end{equation}
 }
 
+Quindi, la sommatoria non inizia più da $k = - \infty$, bensì da $k = 0$. \newline 
+
 Si può applicare le seguenti semplificazione perchè: 
 
 {
@@ -317,7 +325,7 @@ Si può applicare le seguenti semplificazione perchè:
 
 \begin{tcolorbox}
     Nel campo dei discreti, 
-    non esiste l'operatore matematico dell'integrale (e che quindi calcola l'area sotto la funzione); 
+    non esiste l'operatore matematico dell'integrale (che calcola l'area sotto la funzione): 
     bensì si utilizzerà la somma.  
 \end{tcolorbox}
 
@@ -340,7 +348,7 @@ dove $\delta \left[ n \right]$ è l'impulso unitario. \newline
 
 \begin{tcolorbox}
     Nel campo dei discreti, 
-    non esiste l'operatore matematico della derivata (e che quindi calcola la differenza infinitesimale tra due punti di una funzione); 
+    non esiste l'operatore matematico della derivata (che quindi calcola la differenza infinitesimale tra due punti di una funzione):  
     bensì si utilizzerà la differenza tra una sequenza e la stessa sequenza  shiftata / ritardata di un punto.  
 \end{tcolorbox}
 
@@ -630,7 +638,7 @@ si può studiare mezzo periodo della sequenza. \newline
 
 \textbf{$2^{\circ}$ proprietà: } \newline 
 
-Le "alte" frequenze sono intorno a $\pm \pi$, le "basse" frequenze intorno allo 
+Le "alte" frequenze sono intorno a $\pm \pi$, le "basse" frequenze intorno allo $[\pm \pi, \pm 2 \pi]$. \newline 
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare il disegno delle alte e basse frequenze
@@ -866,7 +874,7 @@ sono i sistemi discreti causali e stabili. \newline
 Di seguito una spiegazione più approfondita della proprietà. \newline 
 
 \begin{tcolorbox}
-La causalità e la stabilità sono proprietà già studiate e approfondite nello scorso corso di elettronica. \newline 
+La causalità e la stabilità sono proprietà già studiate e approfondite nello scorso corso di elettrotecnica. \newline 
 
 Adesso, in questo corso di DSP, affronteremo queste proprietà nel mondo dei sistemi discreti. 
 \end{tcolorbox}
@@ -1400,7 +1408,7 @@ Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\
 \begin{tcolorbox}
     Rispetto all'equazione precedente, questa volta il ritardo della risposta impulsiva $h \left[ - (k)\right]$ viene fatta per l'indice n e non per l'indice k. \newline 
 
-    Inoltre, il ribaltamento (o rovesciamento) di $h \left[ (k - n)\right]$ viene fatta grazie al segno negativo davanti a (k - n). \newline 
+    Inoltre, il ribaltamento (o rovesciamento) di $h \left[ k - n\right]$ viene fatta grazie al segno negativo davanti a (k - n). \newline 
 
     A lezione, per spiegare in modo grafico cosa è la convoluzione, il prof ci ha fatto vedere questi due video: 
 
@@ -1430,7 +1438,7 @@ Se il sistema è causale, cioè ha la seguente risposta impulsiva:
     \end{equation}
 }
 
-allora, la risposta al sistema impulsivo $y [n]$ diventa: 
+allora, la risposta impulsiva al sistema, cioè $y [n]$, diventa: 
 
 {
     \Large 
@@ -1614,7 +1622,7 @@ Possiamo affermare che, un sistema LTI è FIR se:
     \end{equation}
 }
 
-Il sistemi LTI FIR saranno sempre stabile se: 
+Il sistemi LTI FIR saranno sempre stabili se: 
 
 {
     \Large 
@@ -1642,7 +1650,7 @@ Un esempio di risposta impulsiva IIR:
     \includegraphics[scale = 0.3]{Esempio riposta impulsiva IIR.png}
 \end{figure}  
 
-dove i puntini a destra e a sinistra della figura indicano che si estendono da $- \infty$ a $+ \infty$. \newline 
+dove i puntini a destra e a sinistra della figura indicano che $h \left[ n\right]$ si estende da $- \infty$ a $+ \infty$. \newline 
 
 La stabilità del sistema LTI IIR sarà garantita solo se: 
 
@@ -1863,7 +1871,7 @@ Il sistema è IIR, causale ma non stabile. \newline
     \end{equation}
 }
 
-dove $u \left[ n\right]$ è un gradino ed M è un indice di ritardo. \newline 
+dove $u \left[ n\right]$ è un gradino e M è un indice di ritardo. \newline 
 
 Il sistema è IIR, non stabile, ma la causalità dipende dal ritardo M. \newline 
 
@@ -1888,7 +1896,7 @@ Di seguito l'elenco delle connessioni di sistemi discreti LTI. \newline
 
 \textbf{Cascata / Serie} \newline
 
-Dati due sistemi discreti LTI, possiamo collegarli in cascata (o serie) come in figura: 
+Dati due sistemi discreti LTI, possiamo collegarli in cascata (o in serie) come in figura: 
 
 \begin{figure}[h]
     \centering
@@ -1898,7 +1906,7 @@ Dati due sistemi discreti LTI, possiamo collegarli in cascata (o serie) come in 
 in cui: 
 
 \begin{itemize}
-    \item $h_1 \left[ n\right]$ e $h_2 \left[ n\right]$ sono risposte impulsive dei due sistemi discreti LTI 
+    \item $h_1 \left[ n\right]$ e $h_2 \left[ n\right]$ sono le risposte impulsive dei due sistemi discreti LTI 
     \item $x \left[ n\right]$ è la sequenza di ingresso 
     \item $z \left[ n\right]$ è la risposta in uscita al primo sistema LTI 
     \item $y \left[n \right]$ è la risposta in uscita da tutti e due i sistemi LTI
@@ -2030,7 +2038,7 @@ ovvero che:
         \end{equation}
     }
 
-    Ho messo il segno $\approx$ perchè, dal corso di telecomunicazioni, sappiamo bene che è difficile quantificare a propri le caratteristiche dei disturbi in un canale, 
+    Ho messo il segno $\approx$ perchè, dal corso di telecomunicazioni, sappiamo bene che è difficile quantificare a priori le caratteristiche dei disturbi in un canale, 
     quindi il massimo che si può fare è dare una rappresentazione semplificata e lineare di esso. 
 \end{tcolorbox}
 
@@ -2063,7 +2071,7 @@ può essere descritta da equazioni alle differenze, cioè:
 con $a_k$ e $b_k$ costanti reali. \newline 
 
 In altre parole, si può dire che i sistemi LTI descritti da equazioni alle differenze 
-sono questi sistemi in cui la combinazione lineare in uscita è uguale alla combinazione lineare in ingresso. \newline 
+sono quei sistemi in cui la combinazione lineare in uscita è uguale alla combinazione lineare in ingresso. \newline 
 
 Tre osservazioni in merito a questo tipo di sistema: 
 
