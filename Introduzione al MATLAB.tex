@@ -1,0 +1,545 @@
+\chapter{Introduzione al MATLAB}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.1]{Matlab_Logo.png}
+\end{figure}  
+
+\newpage 
+
+\section{Matlab ed i suoi utilizzi}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 2 - 3\\
+    Appunti | 2025-09-30 | pag 3 - 5
+}
+
+\begin{tcolorbox}
+    Il corso di DSP non è un corso di Matlab, ma useremo il programma MATLAB per imparare dei concetti relativo al DSP. \newline 
+
+    Essendo studenti della mitica UNIVPM e se non avete mai scaricato MATLAB, 
+    potete seguire la seguente guida \url{https://www.ict.univpm.it/node/236}. \newline 
+
+    Visto che ci possono essere alcune differenze nell'uso dei comandi (cioè lo stesso comando tra una versione e l'altra può cambiare lievemente funzione), 
+    in questo anno accademico 2025/2026, 
+    il professore sta utilizzando la versione di MATLAB 2022b, invece nell'aula CESMI, cioè l'aula in cui si svolgerà l'esame, 
+    è installata la versione 2023b. \newline 
+
+    Il mio consiglio è quello di installare tutte e due le versioni con i due toolbox che serviranno all'esame, che sono: 
+    
+    \begin{itemize}
+        \item Signal Processing Toolbox, link della relativa documentazione \url{https://it.mathworks.com/help/signal/index.html}
+        \item DSP System Toolbox, link della relativa documentazione \url{https://it.mathworks.com/help/dsp/index.html}  
+    \end{itemize}
+    
+    Vi consiglio di scaricare ADESSO le versioni di Matlab che vi servono perchè a Maggio 2025 c'è stato un attacco informatico che ha disattivato tutti i servizi di Mathworks \\ 
+    \url{https://it.mathworks.com/company/trust-center/may-2025-ransomware-incident.html} \newline 
+    
+    Non voglio che, nel mentre che vi state preparando per l'esame, stiate con l'ansia che questo attacco possa capitare di nuovo e non potervi esercitare con questo programma. \newline 
+
+    Se non avete mai programmato in vita vostra (non siamo nati tutti imparati, sennò non saremmo andati all'università), 
+    la documentazione è quel file (ma generalmente è un sito) in cui potete approfondire meglio quello specifico argomento. \newline 
+
+    Inoltre, Matlab mette a disposizione anche dei video come il seguente sia nel proprio sito web \\ 
+    \url{https://it.mathworks.com/videos/introduction-to-signal-processing-apps-in-matlab-1580188288390.html}, 
+    che nel suo canale su Youtube \url{https://www.youtube.com/@MATLAB/featured}. \newline 
+
+    Se siete alle prime armi, o anche per un semplice ripasso in compagnia, vi consiglio il seguente video (in cui utilizza Matlab 2020b ma le basi, come scritto precedentemente, più o meno sono le stesse): \newline 
+
+    MATLAB Crash Course for Beginners by freeCodeCamp.org \\ 
+    \url{https://www.youtube.com/watch?v=7f50sQYjNRA} \newline 
+
+    Negli appunti cercherò anche, se possibile, di spiegare il codice passo passo (anche perchè all'esame ci verrà richiesto di scrivere uno script Matlab). \newline 
+
+    Ora basta con le doverose introduzioni, proseguiamo. 
+\end{tcolorbox}
+
+Matlab è un ambiente di sviluppo per algoritmi orientato all'elaborazione di matrici. \newline 
+
+È è un linguaggio ad "alte" prestazioni per problemi computazionali. \newline 
+
+Matlab è diposibile su diverse piattaforme, MacOS, Linux, Windows (e anche sul cloud) e, ogni anno, 
+vengono rilasciate due versioni: nella prima metà dell'anno esce la versione a e nella seconda metà dell'anno esce la versione b. \newline 
+
+Generalmente è consigliato il Matlab per una prototipazione di un progetto e non da utilizzarlo per un progetto finale perchè è un linguaggio molto lento, 
+cioè per svolgere una istruzione ci mette tanto tempo e tante risorse (consiglio il Matlab per persone che devono sostituire il termosifone con il proprio pc in cameretta d'inverno): 
+generalmente vengono utilizzati, successivamente, altri linguaggi più efficienti per finalizzare il progetto, come ad esempio il C/C++. \newline 
+
+Oltre al Matlab si possono installare dei Toolbox, che sono dei programmi accessori al Matlab (un po' come delle espansioni nei giochi da tavola, ma in questo caso per Matlab). \newline 
+
+Di seguito i Toolbox utili per il corso di DSP: 
+
+    \begin{itemize}
+        \item Signal Processing Toolbox \url{https://it.mathworks.com/products/signal.html}
+        \item DSP System Toolbox \url{https://it.mathworks.com/products/dsp-system.html}  
+    \end{itemize}
+
+\newpage 
+
+\section{Il sistema Matlab, l'IDE ed i Data Types}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 6 - 9\\
+    Appunti | 2025-10-01 | pag 1 
+}
+
+Il sistema Matlab offre diverse possibilità di funzioni, ma noi ci concentreremo sulle principali. \newline 
+
+Di seguito uno screenshoot all'interno di Matlab, con delle note: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Schermata Matlab.png}
+\end{figure} 
+
+La command history è la finestra in cui potrete visualizzare i comandi più recenti. \newline  
+
+Il workspace è la finestra in cui vengono memorizzati i dati più recenti. \newline 
+
+La set path è quella dialog box dove indica la directory (cioè la cartella) in cui si trova il Matlab. \newline 
+
+La command window è quella finestra dell'IDE per eseguire i comandi di Matlab. \newline 
+
+Di seguito alcuni comandi più utilizzati, con gli usi più frequenti e con il link della documentazione: 
+
+\begin{itemize}
+    \item save, per salvare un elemento da Matlab su un file esterno \\ \url{https://it.mathworks.com/help/matlab/ref/save.html} 
+    \item load, per caricare un file esterno come elemento su Matlab \\ \url{https://it.mathworks.com/help/matlab/ref/load.html} 
+    \item help, per visualizzare come può essere utilizzato un comando \\ \url{https://it.mathworks.com/help/matlab/ref/help.html} 
+    \item clear, per cancellare delle variabili dal workspace \\ \url{https://it.mathworks.com/help/matlab/ref/clear.html} 
+    \item whos, per avere delle informazioni dettagliati su un file \\ \url{https://it.mathworks.com/help/matlab/ref/whos.html} 
+    \item pwd, per indicare la cartella in cui ci si trova \\ \url{https://it.mathworks.com/help/matlab/ref/pwd.html}  
+    \item cd, per cambiare cartella \\ \url{https://it.mathworks.com/help/matlab/ref/cd.html} 
+    \item dir, per elencare i file presenti nella cartella \\ \url{https://it.mathworks.com/help/matlab/ref/dir.html}
+\end{itemize}
+
+\begin{tcolorbox}
+    Scrivo che generalmente quel tipo di comando viene utilizzato in questa maniera perchè, 
+    se leggete la documentazione, lo stesso comando, in base alla versione ed ai parametri che inserite, 
+    comporta ad esiti differenti. \newline 
+
+    Durante l'esame scritto non potrete andare su internet per cercare di scivere il proprio script: 
+    ecco perchè il comando help e la documentazione interna saranno i vostri alleati. \newline 
+
+    Se possibile, imparate già da adesso a leggerla ed a capirla, in modo che all'esame non perdiate del tempo, sarà solo un veloce ripasso leggere la documentazione.  
+\end{tcolorbox} 
+
+In Matlab i dati possono essere di diversi tipi. \newline 
+
+Di seguito elenco i principali: 
+
+\begin{itemize}
+    \item Array multidimensionali classici, cioè scalari, vettori, matrici (come quelli che hai studiato nel corso di Algebra Lineare) 
+    \item Array di celle, cioè array multidimensionali i cui elementi sono copie di altri array (un po' come le matrioske russe russe) 
+    \item Caratteri, cioè degli array ottenuti scrivendo il testo tra apici 
+    \item Strutture, cioè array multidimensionali accessibili attraverso desgnatori di campo  
+\end{itemize}
+
+
+\begin{tcolorbox}
+    Per array si intende, dall'inglese, vettore. \newline 
+
+    In questo corso, verrà utilizzato principalmente gli array multidimensionali e gli array di celle. \newline 
+
+    Altro particolare di Matlab è che è un "linguaggio di programmazione" case-sensitive, cioè un linguaggio in cui le lettere maiuscole e minuscole distinguono due tipi di elementi. \newline 
+
+    Ad esempio: pippo e Pippo sono due variabili in Matlab differenti. \newline 
+
+    Inoltre, nel Matlab, gli indici partono da 1 e non da 0, come ad esempio nel C
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Operazioni su matrici e vettori}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 10 - 13\\
+    Appunti | 2025-10-01 | pag 1 - 3 
+}
+
+Matlab è un linguaggio di programmazione orientato ai vettori e alle matrici, quindi vediamo un po' di codici di esempi per generarli. \newline 
+
+\begin{tcolorbox}
+Se volete approfondire le operazioni che si possono fare con le matrici su Matlab \url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
+\end{tcolorbox}
+
+\textbf{Generazione di matrici} \newline 
+
+Di seguito una generazione di una matrice M nella command window: \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Matrice M codice.png}
+\end{figure} 
+
+\begin{tcolorbox}
+In base a come abbiamo scritto il comando, 
+la variabile M è una matrice 3x3, cioè 3 righe e 3 colonne. \newline 
+
+Per generare il vettore M bisogna inserire i valori all'interno delle parentesi quadre, cioè $[]$. \newline 
+
+Il punto e virgola (;) permette di scrivere la riga successiva.     
+\end{tcolorbox} 
+
+\textbf{Estrazione di una sottomatrice} \newline 
+
+Di seguito l'estrazione di una sotto-matrice da command window in cui è dipsonibile la matrice M nel workspace: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Sotto-matrice Matlab comando.png}
+\end{figure} 
+
+\begin{tcolorbox}
+    Con quel comando indicato nella command window, 
+    si intende che si vuole prendere la sottomatrice di M che va dalla prima riga alla seconda riga e dalla seconda colonna alla terza colonna. \newline 
+    
+    In questo caso, si utilizzano i due punti (:) per dire da quale riga/colonna si vuole partire a sinistra dei due punti, a quella riga/colonna indicato a destra dei due punti.  
+\end{tcolorbox} 
+
+\newpage 
+
+\textbf{Operatore colon ":"} \newline 
+
+Di seguito un esempio dell'operatore colon ":" usato frequentemente nei comandi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Vettore con operatore colon.png}
+\end{figure} 
+
+\begin{tcolorbox}
+    L'operatore colon ":" è molto utile perchè piuttosto che scivere: 
+    
+    \begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+a = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1]
+
+    \end{lstlisting}
+
+    Il comando: 
+    \begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+a = [0: 0.1 : 1]
+
+    \end{lstlisting}
+    è molto più rapido e agevole. \newline 
+
+    In altre parole il comando esprime di creare un vettore che parte dal valore iniziale 0 fino al valore finale 1 a passo di 0.1. \newline 
+
+    Il passo può essere anche negativo. 
+\end{tcolorbox} 
+
+\textbf{Funzioni matriciali} \newline 
+
+\begin{tcolorbox}
+Se volete approfondire le operazioni che si possono fare con le matrici su Matlab \url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
+\end{tcolorbox} 
+
+Esistono molte funzioni matriciali già implementate in Matlab. \newline 
+
+Ad esempio, il comando: 
+
+\begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+M_trasposta = M'  
+\end{lstlisting}
+
+implementa la funzione matriciale: 
+
+{
+    \Large 
+    \begin{equation}
+        M_{trasposta} = M^{T}
+    \end{equation}
+}
+
+dove M è una matrice e con T si intende la sua trasposta. \newline 
+
+\begin{tcolorbox}
+    Se non ti ricordi cosa significa fare la matrice trasposta: \newline 
+
+    Matrice Trasposta by Wikipedia \\ 
+    \url{https://it.wikipedia.org/wiki/Matrice_trasposta}
+\end{tcolorbox} 
+
+Il comando sum in esempio: 
+
+\begin{lstlisting}[
+frame=single,
+numbers=left,
+style=Matlab-Pyglike]
+vect = [1 0 -1 2 1 4 2]; 
+somma_elementi_vettore = sum(vect)
+\end{lstlisting}
+
+in questo esempio, somma tutti gli elementi contenuti nel vettore vect, cioè implementa la seguente funzione matematica: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+    vect = 1 + 0 -1 +2 +1 +4 + 2        
+        \end{split}
+    \end{equation}
+}
+
+Il comando diag in esempio: 
+
+\begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+diag(M)  
+\end{lstlisting}
+
+calcola elenca gli elementi di una diagonale di una matrice. \newline 
+
+\begin{tcolorbox}
+    Per apprfondire il comando diag: \url{https://it.mathworks.com/help/matlab/ref/diag.html} \newline 
+
+    Se non ti ricordi cosa significa la diagonale di una matrice: \newline 
+
+    Matrice diagonale by Wikipedia \\  
+    \url{https://it.wikipedia.org/wiki/Matrice_diagonale}
+\end{tcolorbox}
+
+Il comando eig in esempio: 
+
+\begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+eig(M)  
+\end{lstlisting}
+
+calcola gli autovalori della matrice M. \newline 
+
+\begin{tcolorbox}
+
+    Per approfondire il comando eig: \url{https://it.mathworks.com/help/matlab/ref/eig.html}\newline 
+
+    Se non ti ricordi cosa significa la diagonale di una matrice: \newline 
+
+   Eigenvectors and eigenvalues | Chapter 14, Essence of linear algebra by 3Blue1Brown \\ 
+   \url{https://youtu.be/PFDu9oVAE-g?si=wJ0_hB40hehyk4Qq}
+\end{tcolorbox} 
+
+Il comando per il vettore M2: 
+
+\begin{lstlisting}[
+frame=single,
+numbers=left,
+style=Matlab-Pyglike]
+b = [5 5 5]; 
+M2 = [M; b]
+\end{lstlisting}
+
+permettono di concatenare due o più matrici (in questo caso la matrice M2 è concatenata alla matrice M e alla matrice b). \newline 
+
+\begin{tcolorbox}
+    Per visualizzare un esempio di concatenazione di matrici: \newline 
+
+    Matrix Concatenation in MATLAB by thesalmonification \\ 
+    \url{https://youtu.be/TAIetkMXmLs?si=Qf_-3bJuiA75J65_}
+\end{tcolorbox}
+
+Oltre alle funzioni matriciali, è possibile definire delle matrici multidimensionali, 
+i quali vengono trattate come strutture bidimensionali. \newline 
+
+Ad esempio i seguenti comandi: 
+
+\begin{lstlisting}[
+frame=single,
+numbers=left,
+style=Matlab-Pyglike]
+A = randn(2, 3, 2); 
+A(:, :, 1)
+\end{lstlisting}
+
+permettono di creare una matrice multidimensionale con dimensione 2x3x2 con valori causuali. \newline 
+
+\begin{tcolorbox}
+   Per approfondire gli array multidimensionali: \url{https://it.mathworks.com/help/matlab/math/multidimensional-arrays.html}
+\end{tcolorbox}
+
+\newpage 
+
+\newpage 
+
+Oltre a questo, è possibile svolgere delle operazioni matriciali come le seguenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Operazioni matriciali Matlab.png}
+\end{figure} 
+
+Inoltre, utilizzando il punto prima dell'operatore, 
+si può effettuare una operazione elemento per elemento (cioè element-wise) tra i vettori e matrici coinvolti. \newline 
+
+\begin{tcolorbox}
+    Un approfondimento su questo argomento: \url{https://it.mathworks.com/help/matlab/matlab_prog/array-vs-matrix-operations.html}
+\end{tcolorbox}
+
+Di seguito un esempio di comandi utilizzati comunemente su Matlab: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.55]{Comandi matlab utili.png}
+\end{figure} 
+
+
+Come scritto nei capitoli precedenti, il tempo nel DSP non esiste perchè siamo nell'ambito dei vettori. \newline 
+
+Generalmente assoceremo il tempo in base a dove si trova nel vettore il valore (cioè l'indice del vettore sarà per noi l'istante temporale). \newline 
+
+I numeri complessi esistono in Matlab: la parte immaginaria viene indicata o con la variabile i o con la variabile j. \newline 
+
+Ad esempio se abbiamo il numero: 
+
+{
+    \Large 
+    \begin{equation}
+        \overrightarrow{A} = 3 + 3 \jmath
+    \end{equation}
+}
+
+in Matlab lo possiamo scrivere come: 
+
+\begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+A = 3 + 3i
+\end{lstlisting}
+
+oppure: 
+
+\begin{lstlisting}[
+    frame=single,
+    style=Matlab-Pyglike]
+A = 3 + 3j
+\end{lstlisting}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.1 
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Plotting}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 14 - 15\\
+    Appunti | 2025-10-01 | pag 3
+}
+
+In Matlab, ci sono diversi modi di graficare i vettori i vettori, che sono: 
+
+\begin{itemize}
+    \item plot, in cui vengono interpolati (cioè collegati) i punti in "modo" continuo \url{https://it.mathworks.com/help/matlab/ref/plot.html} 
+    \item stem, in cui viene data una rappresentazione ad impulsi \url{https://it.mathworks.com/help/matlab/ref/stem.html}
+    \item bar, in cui viene data una rappresentazione con i diagrammi a barre \url{https://it.mathworks.com/help/matlab/ref/bar.html} 
+\end{itemize}
+
+\begin{tcolorbox}
+    Se vuoi sapere tutti i modi per graficare un vettore: \url{https://it.mathworks.com/help/matlab/creating_plots/types-of-matlab-plots.html}
+\end{tcolorbox}
+
+Se si invoca un solo vettore, esso verrà graficato rispetto all'indice. \newline 
+
+Ad esempio dato il vettore con valori causuali A: 
+
+\begin{lstlisting}[
+frame=single,
+numbers=left,
+style=Matlab-Pyglike]
+A = randn(1, 10); 
+plot(A)
+\end{lstlisting}
+
+avremo il seguente caso: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{plot di esempio con un vettore.png}
+\end{figure} 
+
+dove, nell'asse delle x o chiamato anche l'asse delle ascisse, viene utilizzato l'indice del vettore. \newline 
+
+\newpage 
+
+Se invece si invocano due vettori, il primo è utilizzato nell'asse delle x, cioè nell'asse delle ascisse, ed il secondo per l'asse y, cioè quello delle ordinate. \newline 
+
+Ad esempio, dati i seguenti vettori A e B in cui B ha valori causuali: 
+
+\begin{lstlisting}[
+frame=single,
+numbers=left,
+style=Matlab-Pyglike]
+A = [0: 0.1 : 1]
+B = randn(1, 10); 
+plot(A, B)
+\end{lstlisting}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{plot di esempio con due vettori.png}
+\end{figure} 
+
+Quindi, in questo caso ad esempio, il vettore A può essere utilizzato per indicare "il tempo", 
+invece il vettore B per indicare i valori istantanei della velocità di un maratoneta. \newline 
+
+Di default, Matlab dirige l'output dei comandi grafici sulla finestra figure più recente (ad esempio su Windows si apre un'altra finestra oltre a quella dell'IDE di Matlab chiamata, ad esempio, Figure 1). \newline 
+
+I seguenti comandi sono utili per gestire più figure in Matlab: 
+
+\begin{itemize}
+    \item figure, crea una nuova finestra "figure" e vi dirige l'output 
+    \item figure(N), dirige l'output sulla finesra N 
+    \item hold on, abilità la sovrapposizione dei grafici sull'ultima figure attivata 
+    \item hold off, disabilita la sovrapposizione 
+    \item sublot(r, c, i), suddivide la finestra in una matrice di sottografici di r righe, c colonne e direzione l'output sul sottografico i-esimo (contando per righe)
+\end{itemize}
+
+\begin{tcolorbox}
+    Per approfondire i comandi figure, hold, subplot: 
+
+    \begin{itemize}
+        \item figure \url{https://it.mathworks.com/help/matlab/ref/figure.html} 
+        \item hold \url{https://it.mathworks.com/help/matlab/ref/hold.html} 
+        \item subplot \url{https://it.mathworks.com/help/matlab/ref/subplot.html}
+    \end{itemize} 
+
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.2 
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Esercizi di esempio}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 16 - 17\\
+    Appunti | 2025-10-01 | pag 3
+}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegazione codice Esempio 2.1, 2.2, 2.3, 2.4 
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Matlab Programming}
+
+\footnote{ 
+    Slide del prof | 2 - Introduzione al MATLAB | pag 18\\
+    Appunti mancanti | 2025-10-07 
+}
+
+
+
