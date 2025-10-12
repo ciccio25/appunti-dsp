@@ -15,7 +15,7 @@
 }
 
 \begin{tcolorbox}
-    Il corso di DSP non è un corso di Matlab, ma useremo il programma MATLAB per imparare dei concetti relativo al DSP. \newline 
+    Il corso di DSP non è un corso di Matlab, ma useremo il programma MATLAB per imparare dei concetti relativi al DSP. \newline 
 
     Essendo studenti della mitica UNIVPM e se non avete mai scaricato MATLAB, 
     potete seguire la seguente guida \url{https://www.ict.univpm.it/node/236}. \newline 
@@ -32,7 +32,7 @@
         \item DSP System Toolbox, link della relativa documentazione \url{https://it.mathworks.com/help/dsp/index.html}  
     \end{itemize}
     
-    Vi consiglio di scaricare ADESSO le versioni di Matlab che vi servono perchè a Maggio 2025 c'è stato un attacco informatico che ha disattivato tutti i servizi di Mathworks \\ 
+    Vi consiglio di scaricare ADESSO le versioni di Matlab che vi servono perchè a Maggio 2025 c'è stato un attacco informatico che ha disattivato tutti i servizi di Mathworks per un mese intero\\ 
     \url{https://it.mathworks.com/company/trust-center/may-2025-ransomware-incident.html} \newline 
     
     Non voglio che, nel mentre che vi state preparando per l'esame, stiate con l'ansia che questo attacco possa capitare di nuovo e non potervi esercitare con questo programma. \newline 
@@ -56,9 +56,9 @@
 
 Matlab è un ambiente di sviluppo per algoritmi orientato all'elaborazione di matrici. \newline 
 
-È è un linguaggio ad "alte" prestazioni per problemi computazionali. \newline 
+È un linguaggio ad "alte" prestazioni per problemi computazionali. \newline 
 
-Matlab è diposibile su diverse piattaforme, MacOS, Linux, Windows (e anche sul cloud) e, ogni anno, 
+Matlab è disponibile su diverse piattaforme, MacOS, Linux, Windows (e anche sul cloud) e, ogni anno, 
 vengono rilasciate due versioni: nella prima metà dell'anno esce la versione a e nella seconda metà dell'anno esce la versione b. \newline 
 
 Generalmente è consigliato il Matlab per una prototipazione di un progetto e non da utilizzarlo per un progetto finale perchè è un linguaggio molto lento, 
@@ -85,7 +85,7 @@ Di seguito i Toolbox utili per il corso di DSP:
 
 Il sistema Matlab offre diverse possibilità di funzioni, ma noi ci concentreremo sulle principali. \newline 
 
-Di seguito uno screenshoot all'interno di Matlab, con delle note: 
+Di seguito uno screenshot all'interno di Matlab, con delle note: 
 
 \begin{figure}[h]
     \centering
@@ -100,14 +100,14 @@ La set path è quella dialog box dove indica la directory (cioè la cartella) in
 
 La command window è quella finestra dell'IDE per eseguire i comandi di Matlab. \newline 
 
-Di seguito alcuni comandi più utilizzati, con gli usi più frequenti e con il link della documentazione: 
+Di seguito alcuni comandi più utilizzati, con gli usi più frequenti e con il link alla documentazione: 
 
 \begin{itemize}
     \item save, per salvare un elemento da Matlab su un file esterno \\ \url{https://it.mathworks.com/help/matlab/ref/save.html} 
     \item load, per caricare un file esterno come elemento su Matlab \\ \url{https://it.mathworks.com/help/matlab/ref/load.html} 
     \item help, per visualizzare come può essere utilizzato un comando \\ \url{https://it.mathworks.com/help/matlab/ref/help.html} 
     \item clear, per cancellare delle variabili dal workspace \\ \url{https://it.mathworks.com/help/matlab/ref/clear.html} 
-    \item whos, per avere delle informazioni dettagliati su un file \\ \url{https://it.mathworks.com/help/matlab/ref/whos.html} 
+    \item whos, per avere delle informazioni dettagliate su un file \\ \url{https://it.mathworks.com/help/matlab/ref/whos.html} 
     \item pwd, per indicare la cartella in cui ci si trova \\ \url{https://it.mathworks.com/help/matlab/ref/pwd.html}  
     \item cd, per cambiare cartella \\ \url{https://it.mathworks.com/help/matlab/ref/cd.html} 
     \item dir, per elencare i file presenti nella cartella \\ \url{https://it.mathworks.com/help/matlab/ref/dir.html}
@@ -118,10 +118,10 @@ Di seguito alcuni comandi più utilizzati, con gli usi più frequenti e con il l
     se leggete la documentazione, lo stesso comando, in base alla versione ed ai parametri che inserite, 
     comporta ad esiti differenti. \newline 
 
-    Durante l'esame scritto non potrete andare su internet per cercare di scivere il proprio script: 
+    Durante l'esame scritto non potrete andare su internet per cercare di scrivere il proprio script: 
     ecco perchè il comando help e la documentazione interna saranno i vostri alleati. \newline 
 
-    Se possibile, imparate già da adesso a leggerla ed a capirla, in modo che all'esame non perdiate del tempo, sarà solo un veloce ripasso leggere la documentazione.  
+    Se possibile, imparate già da adesso a leggerla ed a capirla, in modo che all'esame non perdiate del tempo: sarà solo un veloce ripasso leggere la documentazione.  
 \end{tcolorbox} 
 
 In Matlab i dati possono essere di diversi tipi. \newline 
@@ -130,16 +130,16 @@ Di seguito elenco i principali:
 
 \begin{itemize}
     \item Array multidimensionali classici, cioè scalari, vettori, matrici (come quelli che hai studiato nel corso di Algebra Lineare) 
-    \item Array di celle, cioè array multidimensionali i cui elementi sono copie di altri array (un po' come le matrioske russe russe) 
+    \item Array di celle, cioè array multidimensionali i cui elementi sono copie di altri array (un po' come le matrioske russe) 
     \item Caratteri, cioè degli array ottenuti scrivendo il testo tra apici 
-    \item Strutture, cioè array multidimensionali accessibili attraverso desgnatori di campo  
+    \item Strutture, cioè array multidimensionali accessibili attraverso designatori di campo  
 \end{itemize}
 
 
 \begin{tcolorbox}
     Per array si intende, dall'inglese, vettore. \newline 
 
-    In questo corso, verrà utilizzato principalmente gli array multidimensionali e gli array di celle. \newline 
+    In questo corso, verranno utilizzati principalmente gli array multidimensionali e gli array di celle. \newline 
 
     Altro particolare di Matlab è che è un "linguaggio di programmazione" case-sensitive, cioè un linguaggio in cui le lettere maiuscole e minuscole distinguono due tipi di elementi. \newline 
 
@@ -160,7 +160,8 @@ Di seguito elenco i principali:
 Matlab è un linguaggio di programmazione orientato ai vettori e alle matrici, quindi vediamo un po' di codici di esempi per generarli. \newline 
 
 \begin{tcolorbox}
-Se volete approfondire le operazioni che si possono fare con le matrici su Matlab \url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
+Se volete approfondire le operazioni che si possono fare con le matrici su Matlab\\  
+\url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
 \end{tcolorbox}
 
 \textbf{Generazione di matrici} \newline 
@@ -183,7 +184,7 @@ Il punto e virgola (;) permette di scrivere la riga successiva.
 
 \textbf{Estrazione di una sottomatrice} \newline 
 
-Di seguito l'estrazione di una sotto-matrice da command window in cui è dipsonibile la matrice M nel workspace: 
+Di seguito l'estrazione di una sotto-matrice da command window in cui è disponibile la matrice M nel workspace: 
 
 \begin{figure}[h]
     \centering
@@ -209,7 +210,7 @@ Di seguito un esempio dell'operatore colon ":" usato frequentemente nei comandi:
 \end{figure} 
 
 \begin{tcolorbox}
-    L'operatore colon ":" è molto utile perchè piuttosto che scivere: 
+    L'operatore colon ":" è molto utile perchè piuttosto che scrivere: 
     
     \begin{lstlisting}[
     frame=single,
@@ -235,7 +236,8 @@ a = [0: 0.1 : 1]
 \textbf{Funzioni matriciali} \newline 
 
 \begin{tcolorbox}
-Se volete approfondire le operazioni che si possono fare con le matrici su Matlab \url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
+Se volete approfondire le operazioni che si possono fare con le matrici su Matlab \\ 
+\url{https://it.mathworks.com/help/matlab/math/matrices-in-the-matlab-environment.html}    
 \end{tcolorbox} 
 
 Esistono molte funzioni matriciali già implementate in Matlab. \newline 
@@ -276,7 +278,7 @@ vect = [1 0 -1 2 1 4 2];
 somma_elementi_vettore = sum(vect)
 \end{lstlisting}
 
-in questo esempio, somma tutti gli elementi contenuti nel vettore vect, cioè implementa la seguente funzione matematica: 
+somma tutti gli elementi contenuti nel vettore vect, cioè implementa la seguente funzione matematica: 
 
 {
     \Large 
@@ -358,7 +360,7 @@ A = randn(2, 3, 2);
 A(:, :, 1)
 \end{lstlisting}
 
-permettono di creare una matrice multidimensionale con dimensione 2x3x2 con valori causuali. \newline 
+permettono di creare una matrice multidimensionale con dimensione 2x3x2 con valori casuali. \newline 
 
 \begin{tcolorbox}
    Per approfondire gli array multidimensionali: \url{https://it.mathworks.com/help/matlab/math/multidimensional-arrays.html}
@@ -448,7 +450,7 @@ In Matlab, ci sono diversi modi di graficare i vettori i vettori, che sono:
 
 Se si invoca un solo vettore, esso verrà graficato rispetto all'indice. \newline 
 
-Ad esempio dato il vettore con valori causuali A: 
+Ad esempio dato il vettore con valori casuali A: 
 
 \begin{lstlisting}[
 frame=single,
@@ -471,7 +473,7 @@ dove, nell'asse delle x o chiamato anche l'asse delle ascisse, viene utilizzato 
 
 Se invece si invocano due vettori, il primo è utilizzato nell'asse delle x, cioè nell'asse delle ascisse, ed il secondo per l'asse y, cioè quello delle ordinate. \newline 
 
-Ad esempio, dati i seguenti vettori A e B in cui B ha valori causuali: 
+Ad esempio, dati i seguenti vettori A e B in cui B ha valori casuali: 
 
 \begin{lstlisting}[
 frame=single,
@@ -497,8 +499,8 @@ I seguenti comandi sono utili per gestire più figure in Matlab:
 
 \begin{itemize}
     \item figure, crea una nuova finestra "figure" e vi dirige l'output 
-    \item figure(N), dirige l'output sulla finesra N 
-    \item hold on, abilità la sovrapposizione dei grafici sull'ultima figure attivata 
+    \item figure(N), dirige l'output sulla finestra N 
+    \item hold on, abilita la sovrapposizione dei grafici sull'ultima figure attivata 
     \item hold off, disabilita la sovrapposizione 
     \item sublot(r, c, i), suddivide la finestra in una matrice di sottografici di r righe, c colonne e direzione l'output sul sottografico i-esimo (contando per righe)
 \end{itemize}
@@ -553,7 +555,7 @@ Il linguaggio Matlab, oltre alle semplificazioni assegnazioni di variabili e ad 
     \item break, termina un'esecuzione di un while-loop o di un for-loop \url{https://it.mathworks.com/help/matlab/ref/break.html}
 \end{itemize}
 
-Esisono due possbilità per programmare in Matlab: 
+Esistono due possibilità per programmare in Matlab: 
 
 \begin{itemize}
     \item script 
@@ -569,7 +571,7 @@ Esisono due possbilità per programmare in Matlab:
     Appunti mancanti | 2025-10-07 
 }
 
-Lo il file script è un file che continene una sequenza di comandi Matlab, generalmente con estensione .m. \newline 
+Il file script è un file che contiene una sequenza di comandi Matlab, generalmente con estensione .m. \newline 
 
 È bene non assegnare a nessun script il nome delle funzioni predefinite o il nome di una variabile usata. \newline 
 
@@ -607,11 +609,11 @@ Il passaggio per valore implica che le variabili definite all'interno della funz
     
 \end{tcolorbox}
 
-In Matlab esiste un tipo di variabile interessante chiamata come "Persisten variable", 
+In Matlab esiste un tipo di variabile interessante chiamata come "Persistent variable", 
 che sono variabili locale che sono viste come globali solamente dalla funzione dove sono state definite. \newline 
 
 \begin{tcolorbox}
-    Nella documentazione di persistent sono dipsonibili degli esempi più dettagliati per approfondire il tema: 
+    Nella documentazione di persistent sono disponibili degli esempi più dettagliati per approfondire il tema: 
     \url{https://it.mathworks.com/help/matlab/ref/persistent.html}
 \end{tcolorbox}
 
@@ -736,7 +738,7 @@ Possiamo dire che una matrice di Toepliz utile per la proprietà di campionament
 \label{Domanda 3} 
 
 \begin{tcolorbox}
-Per apprfondire cosa è una matrice di Toepliz e la Delta di Kronocher: 
+Per approfondire cosa è una matrice di Toepliz e la Delta di Kronocher: 
 
 \begin{itemize}
     \item \url{https://it.wikipedia.org/wiki/Matrice_di_Toeplitz} 
