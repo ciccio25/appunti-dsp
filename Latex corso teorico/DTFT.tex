@@ -1,0 +1,869 @@
+\chapter{DTFT}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.115]{Discrete Time Fourier Transform (DTFT) explained visually 2-22 screenshot.png}
+\end{figure}  
+
+\newpage 
+
+\section{Risposta in frequenza dei sistemi LTI}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 2 - 4\\
+    Appunti mancanti | 2025-10-07 
+}
+
+Dato: 
+
+\begin{itemize}
+    \item un sistema LTI (Linear Time-Invariant, cioè un sistema lineare che non cambia le sue caratteristiche nel tempo) 
+    \item una sequenza di ingresso $x \left[ n\right]$ una sinusoide complessa (in particolare un'esponenziale complesso puro) di pulsazione $\omega$, quindi $e^{\jmath \omega n}$ 
+\end{itemize}
+
+allora, l'uscita del sistema LTI sarà ancora una sinusoide complessa di pulsazione $\omega$. \newline 
+
+Dal punto di vista visuale avremo il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Risposta sinusoidale di un sistema LTI.png}
+\end{figure}  
+
+\newpage 
+
+\begin{tcolorbox}
+    Per avere un ripasso al volo perchè anche nel DSP, come anche a Teoria dei Segnali e nel corso di Controlli Automatici si fanno molto uso degli esponenziali, 
+    vi lascio questo video: \newline 
+
+    The Physics of Euler's Formula | Laplace Transform Prelude by 3Blue1Brown \\
+    \url{https://www.youtube.com/watch?v=-j8PzkZ70Lg&t=111s} \newline 
+
+    In breve, si utilizza il piano dei complessi come il seguente: \newline 
+
+    \includegraphics[scale = 0.15]{The Physics of Euler's Formula _ Laplace Transform Prelude 5-36 screenshot.png}
+    
+    per rappresentare delle sinusoidi nel tempo: \newline
+
+    \includegraphics[scale = 0.5]{sinusoide nel tempo.jpeg}
+    
+    Dal corso di Teoria dei segnali, sappiamo che la pulsazione $\omega$ vale: 
+
+    {
+        \Large 
+        \begin{equation}
+            \omega = 2 \pi f
+        \end{equation}
+    }
+
+    dove f è la frequenza. \newline 
+
+    La frequenza f, nel piano dei complessi, indica quanti "giri" fa intorno al cerchio unitario al secondo. 
+\end{tcolorbox}
+
+Di seguito la dimostrazione formale dell'uscita: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right] 
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ k\right]
+            \cdot 
+            e^{\jmath \omega \left( n - k\right)}
+            \\
+            &=
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ k\right]
+            \cdot 
+            e^{\jmath \omega n}
+            \cdot 
+            e^{-\jmath \omega k}
+            \\
+            &=
+            \left\{
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ k\right]
+            \cdot 
+            e^{-\jmath \omega k}
+            \right\}
+            \cdot 
+            e^{\jmath \omega n}
+            \\
+            &= 
+            H\left( e^{\jmath \omega}\right)
+            \cdot 
+            e^{\jmath \omega n}
+        \end{split}
+    \end{equation}
+}
+
+Il termine: 
+
+{
+    \Large 
+    \begin{equation}
+        H\left( e^{\jmath \omega}\right)
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        h \left[ k\right]
+        \cdot 
+        e^{-\jmath \omega k}    
+    \end{equation}
+} 
+
+prende il nome di risposta in frequenza, la quale è periodica in $2 \pi$. \newline 
+
+Quindi, la riposta in frequenza $H\left( e^{\jmath \omega}\right)$ è una funzione complessa (perchè la si può rappresentare nel piano dei complessi) 
+che dipende dalla pulsazione $\omega$. \newline 
+
+In partciolare la risposta in frequenza $H\left( e^{\jmath \omega}\right)$, siccome la si può rappresentare sul piano dei complessi il quale ha a sua volta è formato da un asse reale e da un asse immaginario, 
+si può dividere in: 
+
+\begin{itemize}
+    \item Riposta in ampiezza (in inglese prende il nome di "Magnitude") e lo si denota con il seguente simbolo $\abs{H\left( e^{\jmath \omega}\right)}$ 
+    \item Risposta in fase e lo si denota con il seguente simbolo $\sphericalangle H\left( e^{\jmath \omega}\right)$
+\end{itemize}
+
+\begin{tcolorbox}
+    Nel piano dei fasori, ampiezza e fase sono rappresentati in questa maniera: \newline 
+
+    \includegraphics[scale = 0.5]{complex plane magnitude and phase.png}
+\end{tcolorbox}
+
+\newpage 
+
+\section{Trasformata di Fourier di Segnali Discreti}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 5\\
+    Appunti mancanti | 2025-10-07 
+} 
+
+Come studiato nel corso di Teoria dei segnali, 
+un segnale analogico sia nel tempo f(t) che nel tempo t, 
+lo possiamo rapprentare anche nel dominio di Fourier con la seguente formula: 
+
+{
+    \Large 
+    \begin{equation}
+        F\left( \jmath \omega \right) 
+        = 
+        \int_{- \infty}^{+ \infty}
+        f(t) \cdot e^{- \jmath \omega t} 
+        dt 
+    \end{equation}
+} 
+
+invece, la formula inversa, cioè l'anti-trasformata di Fourier, 
+cioè quella formula che riporta il segnale $F \left(\jmath \omega\right)$ dal dominio di Fourier al dominio nel tempo t è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        f \left( t\right) 
+        = 
+        \dfrac{1}{2 \pi}
+        \int_{- \infty}^{+ \infty}
+        F \left(\jmath \omega \right) \cdot e^{\jmath \omega t} 
+        d\omega
+    \end{equation}
+}
+
+Invece, nel dominio dei discreti avremo che la seguente formula: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left( e^{\jmath \omega}\right)
+        = 
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        e^{- \jmath \omega n}
+    \end{equation}
+}
+
+invece la formula inversa è: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \dfrac{1}{2 \pi} 
+        \int_{- \pi}^{+ \pi}
+        X \left(e^{\jmath \omega}\right)
+        \cdot 
+        e^{\jmath \omega n}
+    \end{equation}
+}
+
+$X \left(e^{\jmath \omega}\right)$ è periodica in $2 \pi$. \newline 
+
+Come la risposta in frequenza dei sistemi LTI, 
+possiamo rappresentare $X \left(e^{\jmath \omega}\right)$ come: 
+
+\begin{itemize}
+    \item $\abs{X \left(e^{\jmath \omega}\right)}$ che è lo spettro di ampiezza di $x \left[ n\right]$ 
+    \item $\sphericalangle X \left(e^{\jmath \omega}\right)$ che è lo spettro di fase di $x \left[ n\right]$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Queste formule si intende che i valori delle ampiezze del segnale nel tempo sono discretizzate? \newline 
+
+Perchè c'è un'integrale nella formula invecersa? Cioè è un problema che si estenda tutto da $- \infty$ a $+ \infty$ ? \newline 
+
+Queste sono le formule per la DTFT? \newline 
+
+Nella DTFT (cioè Discrete-Time Fourier Transform) significa solo che il tempo è discretizzato mentre i valori nelle ampiezze sono continue? 
+\end{tcolorbox}
+
+\label{Domanda 5} 
+
+\newpage 
+
+\subsection{Esistenza della trasformata}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 6\\
+    Appunti mancanti | 2025-10-07 
+}
+
+Come nel caso continuo studiato a Teoria dei Segnali, 
+non tutte le seguenze $x \left[ n\right]$ sono trasformarbili nel dominio di Fourier. \newline 
+
+Di seguito alcune condizioni per cui $x \left[ n\right]$ è trasformarbile in Fourier. \newline 
+
+\textbf{Condizione di esistenza numero 1} \newline 
+
+Se una sequenza $x \left[ n\right]$ è assolutamente sommabile, 
+allora la sua trasformata di Fourier $X \left( e^{\jmath \omega }\right)$ esiste ed è funzione continua di $\omega$. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{x \left[ n\right]} 
+        < 
+        + \infty
+        \to 
+        \text{ convergenza uniforme}
+    \end{equation}
+} 
+
+che è una condizione sufficiente. \newline 
+
+\begin{tcolorbox}
+    Se non ti ricordi dall'esame di Analisi Matematica 1 cosa significa che una serie ha una convergenza uniforme: \newline 
+
+    Convergenza uniforme by Wikipedia \\
+    \url{https://it.wikipedia.org/wiki/Successione_di_funzioni#Convergenza_uniforme} 
+\end{tcolorbox} 
+
+\textbf{Condizione di esistenza numero 2} \newline 
+
+Se una sequenza $x \left[ n\right]$ è quadraticamente sommabile, 
+allora la sua trasformata di Fourier $X \left( e^{\jmath \omega }\right)$ esiste ed è funzione discontinua di $\omega$. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{x \left[ n\right]}^{2} 
+        < 
+        + \infty
+        \to 
+        \text{ convergenza non uniforme}
+    \end{equation}
+} 
+
+che è una condizione sufficiente. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Funzione discontinua in $\omega$ significa che ci sono la funzione avrà delle tratti continui e dei tranni non continui?
+\end{tcolorbox}
+
+\label{Domanda 6} 
+
+\textbf{Condizione di esistenza numero 3} \newline 
+
+Se la sequenza $x \left[ n\right]$ non è ne assolutamente o quadraticamente sommabile, 
+allora $X \left( e^{\jmath \omega}\right)$ può esistere in casi particolari, come ad esempio: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        x \left[ n \right]  
+        &= 
+        e^{\jmath \omega_0 n} 
+        \text{ } 
+        -\infty < n < + \infty
+        \\
+        &\updownarrow
+        \\
+        X \left( e^{\jmath \omega}\right)
+        &=
+        \sum_{k = - \infty}^{+ \infty}
+        2 \pi \delta \left( \omega - \omega_0 + 2 \pi k\right)  
+        \end{split}
+    \end{equation}
+}
+
+dove, nella formula, $\delta$ indica un impulso unitario continuo (Dirac). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Cosa è dal punto di vista grafico l'impulso unitario continuo di Dirac?
+\end{tcolorbox}
+
+\label{Domanda 7} 
+
+\newpage 
+
+\section{Sistem LTI e Trasformata di Fourier}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 7 - 8\\
+    Appunti mancanti | 2025-10-07 
+} 
+
+La risposta in frequenza del sistema LTI è la trasformata di Fourier della risposta impulsiva: 
+
+{
+    \Large 
+    \begin{equation}
+        H\left( e^{\jmath \omega}\right)
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        h \left[ k\right]
+        \cdot 
+        e^{-\jmath \omega k}    
+    \end{equation}
+} 
+
+La relazione tra ingresso ed uscita in frequenza del sistema LTI è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left( e^{\jmath \omega}\right) 
+        = 
+        H \left( e^{\jmath \omega}\right) 
+        \cdot 
+        X \left( e^{\jmath \omega}\right) 
+    \end{equation}
+}
+
+(che è la stessa della del caso continuo della trasformata di Fourier). \newline 
+
+\newpage 
+
+\subsection{Proprietà della trasformata di Fourier}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 9 - 10\\
+    Appunti mancanti | 2025-10-07 
+} 
+
+Come nel caso continuo, anche nel caso discreto si applicano le proprietà della trasformata di Fourier. \newline 
+
+Di seguito le proprietà principali. \newline 
+
+\textbf{Linearità} \newline
+
+Date: 
+
+\begin{itemize}
+    \item due sequenze di ingresso $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ 
+    \item le rispettive rappresentazione in Fourier $X_1 \left(e^{\jmath \omega}\right)$ e $X_2 \left(e^{\jmath \omega}\right)$ 
+    \item a e b come coefficienti moltiplicativi  
+\end{itemize}
+
+possiamo esprimere la proprietà di linearità: 
+
+{
+    \Large 
+    \begin{equation}
+        a \cdot x_1 \left[ n\right]
+        + 
+        b \cdot x_1 \left[ n\right]
+        \leftrightarrow
+        a \cdot X_1 \left(e^{\jmath \omega}\right) 
+        +
+        b \cdot X_1 \left(e^{\jmath \omega}\right)  
+    \end{equation}
+}
+
+\textbf{Traslazione} \newline 
+
+Se consideriamo $n_0$ un coefficiente di ritardo, 
+possiamo esprimere la seguente proprietà di traslazione: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n - n_0\right]
+        \leftrightarrow 
+        X \left(e^{\jmath \omega}\right) \cdot e^{- \jmath \omega n_0}
+    \end{equation}
+}
+
+Se invece consideriamo la pulsazione fondamentale $\omega_0$ , 
+allora possiamo esprimere la seguente proprietà di traslazione in frequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] \cdot e^{\jmath \omega_0 n}
+        \leftrightarrow 
+        X \left(e^{\jmath \left(\omega - \omega_0\right)}\right)
+    \end{equation}
+}
+
+\textbf{Rovesciamento nel tempo} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ -n\right]
+        \leftrightarrow
+        X \left(e^{- \jmath \omega}\right)
+    \end{equation}
+}
+
+oppure 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ -n\right]
+        \leftrightarrow
+        X^{*} \left(e^{\jmath \omega}\right) 
+        \text{ se }
+        x \left[ n\right] \in \mathbb{R}
+    \end{equation}
+}
+
+dove con $X^{*} \left(e^{\jmath \omega}\right)$ si indica il coniugato di $X \left(e^{- \jmath \omega}\right)$. \newline 
+
+\textbf{Convoluzione} \newline 
+
+Sapendo che, la formula di convoluzione è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        * 
+        y \left[ n\right] 
+        = 
+        \sum_{k = -\infty}^{+ \infty}
+        x \left[ k\right] \cdot y \left[ n - k\right]
+    \end{equation}
+}
+
+allora, possiamo scrivere che nel dominio di Fourier vale la seguente proprietà di convoluzione: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        * 
+        y \left[ n\right] 
+        = 
+        X \left( e^{\jmath \omega}\right) 
+        \cdot 
+        Y \left( e^{\jmath \omega}\right)  
+    \end{equation}
+}
+
+\newpage 
+
+\textbf{Modulazione} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        \cdot 
+        y \left[ n\right] 
+        = 
+        \dfrac{1}{2 \pi} 
+        \int_{-\pi}^{+ \pi}
+        X \left( e^{\jmath \theta}\right)
+        \cdot 
+        Y \left( e^{\jmath \left( \omega - \theta\right)}\right)
+        d\theta
+    \end{equation}
+}
+
+Grazie agli estremi dell'integrale $-\pi$ e $+\pi$, 
+sappiamo che, nel dominio di $\omega$, 
+la proprietà di modulazione esprime che si sta facendo una convoluzione periodica. \newline 
+
+\textbf{Teorema di Parseval} \newline 
+
+Il Teorema di Parseval esprime che se: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = -\infty}^{+ \infty} 
+        \abs{x \left[ n\right]}^{2}
+        = 
+        \dfrac{1}{2 \pi} 
+        \int_{-\pi}^{+ \pi} 
+        \abs{X \left( e^{\jmath \omega}\right)}^{2}
+        d\omega
+    \end{equation}
+}
+
+dove $\abs{X \left( e^{\jmath \omega}\right)}^{2}$ è lo spettro di densità di energia della sequenza, 
+allora vale la seguente operazione: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        y^{*} \left[n \right]
+        = 
+        \dfrac{1}{2 \pi}
+        \int_{- \pi}^{+ \pi}
+        X \left(e^{\jmath \omega}\right)
+        \cdot 
+        Y^{*} \left(e^{\jmath \omega}\right) 
+        d\omega
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Siccome l'energia è qualcosa di fisico, formalmente non possiamo scrivere che $\abs{X \left( e^{\jmath \omega}\right)}^{2}$ è lo spettro di energia o no? 
+\end{tcolorbox}
+
+\label{Domanda 8} 
+
+\newpage 
+
+\subsection{Simmetria della trasformata di Fourier}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 11\\
+    Appunti | 2025-10-08 | pag 1 
+} 
+
+Come nel caso continuo, anche nella trasformata di Fourier nel tempo discreto valgono le seguenti proprietà: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x^{*} \left[ n \right]
+            &\leftrightarrow 
+            X^{*} \left( e^{-\jmath \omega}\right)
+            \\
+            x^{*} \left[ -n \right]
+            &\leftrightarrow 
+            X^{*} \left( e^{\jmath \omega}\right)
+        \end{split}
+    \end{equation}
+}
+
+con le quali si dimostra che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        \mathbb{R} \left\{ x \left[ n\right]\right\} 
+        \leftrightarrow 
+        X_e \left( e^{\jmath \omega}\right)
+        \\
+        x_e \left[ n\right] 
+        \leftrightarrow 
+        \mathbb{R} \left\{ X \left( e^{\jmath \omega}\right)\right\}
+        \end{cases}
+    \end{equation}
+}
+
+e: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        \jmath \mathcal{J} \left\{ x \left[ n\right]\right\} 
+        \leftrightarrow 
+        X_o \left( e^{\jmath \omega}\right)
+        \\
+        x_o \left[ n\right] 
+        \leftrightarrow 
+        \jmath \mathcal{J} \left\{ X \left( e^{\jmath \omega}\right)\right\}
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega }\right)
+        = 
+        X_e \left(e^{\jmath \omega}\right)
+        +
+        X_o \left(e^{\jmath \omega}\right) 
+    \end{equation}
+}
+
+che a sua volte, grazie alle formule di Eulero, possiamo scrivere le componenti: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        X_e \left(e^{\jmath \omega}\right)
+        =
+        \dfrac{X \left(e^{\jmath \omega}\right) + X^{*} \left(e^{-\jmath \omega}\right)}{2}  
+        \\
+        X_o \left(e^{\jmath \omega}\right)
+        =
+        \dfrac{X \left(e^{\jmath \omega}\right) - X^{*} \left(e^{-\jmath \omega}\right)}{2}    
+        \end{cases}
+    \end{equation}
+}
+
+Per sequenze $x \left[ n\right]$ reali: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+Cosa si intende per sequenze reali? Cioè che non hanno una componente nel piano immaginario dei fasori? \newline 
+
+Non ho capito a parole cosa ho scritto precedentemente nelle formule 
+
+\end{tcolorbox}
+
+\label{Domanda 9} 
+
+{
+    \Large 
+    \begin{equation}
+        X \left( e^{\jmath \omega}\right)
+        = 
+        X^{*} \left( e^{-\jmath \omega}\right)
+    \end{equation}
+}
+
+e che quindi dimostra la simmetria congiunta. \newline 
+
+Siccome $X \left( e^{\jmath \omega}\right)$ è simmetrica, possiamo scrivere che: 
+
+\begin{itemize}
+    \item $\mathbb{R} \left\{ X \left( e^{\jmath \omega}\right)\right\}$ e $\abs{X \left( e^{\jmath \omega}\right)}$ sono funzioni pari 
+    \item $\mathcal{J} \left\{ X \left( e^{\jmath \omega}\right)\right\}$ e $\sphericalangle X \left( e^{\jmath \omega}\right)$ sono funzioni dispari
+\end{itemize}
+
+\newpage 
+
+\begin{tcolorbox}
+    Ricordo al volo cosa significa avere una funzione pari e dispari dal punto di vista grafico: 
+    \includegraphics[scale = 0.3]{funzione pari e dispari.png}
+\end{tcolorbox} 
+
+Inoltre, grazie alla simmetria che godono le sequenze reali, 
+possiamo solo analizzare la trasformata solo nel metà intervallo, 
+quindi piuttosto che analizzare la trasformata in: 
+
+{
+    \Large 
+    \begin{equation}
+        -\pi \leq \omega \leq + \pi
+    \end{equation}
+}
+
+possiamo analizzarla nell'intervallo: 
+
+{
+    \Large 
+    \begin{equation}
+        0 \leq \omega \leq +\pi
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Alcune trasformate di Fourier}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 12\\
+    Appunti | 2025-10-08 | pag 1 
+} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare le foto dei grafici su Matlab e poi metterle in questa subsection 
+\end{tcolorbox} 
+
+
+Di seguito un elenco delle trasformate di Fourier a tempo discreto che andremo ad utilizzare spesso durante il corso. \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \delta \left[n\right] 
+        \leftrightarrow 
+        1
+    \end{equation}
+}
+
+cioè la trasformata di Fourier di una serie di impulsi unitari nel dominio n 
+è uguale a un impulso unitario nel dominio di Fourier. \newline 
+
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \delta \left[ n - n_0\right]
+        \leftrightarrow 
+        e^{-\jmath \omega n_0}
+    \end{equation}
+}
+
+cioè la trasformata di Fourier di una serie di impulsi unitari ritardati di $n_0$ nel dominio n 
+è uguale ad un coseno ritardato di $n_0$ nel dominio di Fourier. \newline 
+
+{
+    \Large 
+    \begin{equation}
+        1
+        \leftrightarrow
+        \sum_{k = -\infty}^{+ \infty}
+        2 \pi 
+        \delta \left( \omega + 2 \pi k\right)
+    \end{equation}
+}
+
+dove, con questa notazione, si vuole intendere che un impulso unitario nel dominio n significa in Fourier 
+una sommatoria di Delta di Dirac $\delta$ ogni $\omega + 2 \pi k$: in altre parole $\delta \left( \omega + 2 \pi k\right)$ è un treno di impulsi il cui valore tende a $+ \infty$ nelle ampiezze. \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        e^{\jmath \omega_0 n}
+        \leftrightarrow 
+        \sum_{k = -\infty}^{+ \infty}
+        2 \pi 
+        \delta \left( \omega - \omega_0 + 2 \pi k\right)
+    \end{equation}
+}
+
+dove, con questa notazione, si vuole intende che una serie di sinuoidi a pulsazione fondamentale di $\omega_0$ nel dominio n è uguale a 
+una sommatoria di Delta di Dirac $\delta$ ogni $\omega -\omega_0 + 2 \pi k$: in altre parole $\delta \left( \omega - \omega_0 + 2 \pi k\right)$ è un treno di impulsi il cui valore tende a $+ \infty$ nelle ampiezze. \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \dfrac{\sin \left[ \omega_c n\right]}{\pi n}
+        \leftrightarrow 
+        \begin{cases}
+            1 \text{ per } \abs{\abs{\omega} < \omega_c} 
+            \\
+            0 \text{ per } \abs{\omega_c < \abs{\omega} \leq \pi }
+        \end{cases}
+    \end{equation}
+}
+
+cioè, la trasformata del sinc discreto nel dominio n è una finestra nel dominio di Fourier. \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            1 \text{ per } 0 \leq n \leq M 
+            \\
+            0 \text{ altrove}
+        \end{cases} 
+        \leftrightarrow
+        \dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}
+        e^{\frac{- \jmath \omega M}{2} }
+    \end{equation}
+}
+
+cioè un gradino (che è una sequenza causale) nel dominio n è uguale a "quasi" un sinc discreto $\dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}$ 
+ritardato di $e^{\frac{- \jmath \omega M}{2} }$. \newline 
+
+Ultima funzione, ma non per meno importanza: 
+
+{
+    \Large 
+    \begin{equation}
+    \sum_{n = - \infty}^{+\infty}
+    a^{n} \cdot u\left[ n\right] \text{ con } \left( \abs{a < 1}\right)
+    \leftrightarrow 
+    \dfrac{1}{1 - a \cdot e^{- \jmath \omega}}         
+    \end{equation}
+}
+
+cioè un esponenziale $a^n$ moltiplicato per un gradino $u \left[ n\right]$ nel dominio n 
+è uguale a una funzione razionale reale. \newline 
+
+\begin{tcolorbox}
+    Le funioni razionali reali le abbiamo viste ad Elettrotecnica quando si discuteva della trasformata di Laplace. \newline 
+
+    Per un breve ripasso della trasformata di Laplace: \newline 
+
+    But what is a Laplace Transform? by 3Blue1Brown \\
+    \url{https://www.youtube.com/watch?v=j0wJBEZdwLs&t=452s}
+
+\end{tcolorbox}
+
+\newpage 
+
+\section{Filtri ideali}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 15 - 18\\
+    Appunti | 2025-10-08 | pag 1 - 2
+} 
+
+\label{TO:DO}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Scrivere dagli appunti
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Trasformata di Fourier in Matlab}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 13 - 14\\
+    Appunti | 2025-10-08 | pag 3 
+} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: TO-DO: Spiegazione codice Esempio 3.1, 3.2 
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Filtri passa basso ideale}
+
+\footnote{ 
+    Slide del prof | 3 - DTFT | pag 19\\
+    Appunti | 2025-10-08 | pag 2 - 3
+} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Scrivere dagli appunti
+\end{tcolorbox} 
