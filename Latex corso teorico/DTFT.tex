@@ -58,7 +58,7 @@ Dal punto di vista visuale avremo il seguente schema:
 
     dove f è la frequenza. \newline 
 
-    La frequenza f, nel piano dei complessi, indica quanti "giri" fa intorno al cerchio unitario al secondo. 
+    La frequenza f, nel piano dei complessi, indica quanti "giri" fa il vettore intorno al cerchio unitario al secondo. 
 \end{tcolorbox}
 
 Di seguito la dimostrazione formale dell'uscita: 
@@ -114,12 +114,12 @@ Il termine:
     \end{equation}
 } 
 
-prende il nome di risposta in frequenza, la quale è periodica in $2 \pi$. \newline 
+prende il nome di risposta in frequenza, la quale è periodica ogni multiplo di $2 \pi$. \newline 
 
 Quindi, la riposta in frequenza $H\left( e^{\jmath \omega}\right)$ è una funzione complessa (perchè la si può rappresentare nel piano dei complessi) 
 che dipende dalla pulsazione $\omega$. \newline 
 
-In particolare la risposta in frequenza $H\left( e^{\jmath \omega}\right)$, siccome la si può rappresentare sul piano dei complessi il quale ha a sua volta è formato da un asse reale e da un asse immaginario, 
+In particolare la risposta in frequenza $H\left( e^{\jmath \omega}\right)$, siccome la si può rappresentare sul piano dei complessi il quale a sua volta è formato da un asse reale e da un asse immaginario, 
 si può dividere in: 
 
 \begin{itemize}
@@ -144,8 +144,8 @@ si può dividere in:
 } 
 
 Come studiato nel corso di Teoria dei segnali, 
-un segnale analogico sia nel tempo f(t) che nel tempo t, 
-lo possiamo rappresentare anche nel dominio di Fourier con la seguente formula: 
+un segnale analogico è continuo sia nelle ampiezze f(t) che nel tempo t, 
+è possibile rappresentarlo anche nel dominio di Fourier con la seguente formula: 
 
 {
     \Large 
@@ -158,8 +158,11 @@ lo possiamo rappresentare anche nel dominio di Fourier con la seguente formula:
     \end{equation}
 } 
 
-invece, la formula inversa, cioè l'anti-trasformata di Fourier, 
-cioè quella formula che riporta il segnale $F \left(\jmath \omega\right)$ dal dominio di Fourier al dominio nel tempo t è la seguente: 
+che prende il nome di Trasformata di Fourier. \newline 
+
+La formula inversa, cioè l'anti-trasformata di Fourier, 
+che è quella formula che riporta il segnale $F \left(\jmath \omega\right)$ dal dominio di Fourier al dominio nel tempo t, 
+è la seguente: 
 
 {
     \Large 
@@ -187,7 +190,9 @@ Invece, nel dominio dei discreti avremo che la seguente formula:
     \end{equation}
 }
 
-invece la formula inversa è: 
+che prende di DTFT (cioè Discrete-Time Fourier Transform). \newline 
+
+Invece la formula inversa della DTFT (la anti-DTFT) è la seguente: 
 
 {
     \Large 
@@ -208,7 +213,7 @@ come dice il nome stesso, nella DTFT (cioè Discrete-Time Fourier Transform)
 il tempo è discretizzato mentre i valori nelle ampiezze sono continui. 
 \end{tcolorbox}
 
-$X \left(e^{\jmath \omega}\right)$ è periodica in $2 \pi$. \newline 
+$X \left(e^{\jmath \omega}\right)$ è periodica ogni multiplo di $2 \pi$. \newline 
 
 Come la risposta in frequenza dei sistemi LTI, 
 possiamo rappresentare $X \left(e^{\jmath \omega}\right)$ come: 
@@ -283,7 +288,7 @@ In formule:
 che è una condizione sufficiente. \newline 
 
 \begin{tcolorbox}
-Per funzione discontinua in $\omega$ significa che la funzione avrà delle tratti continui e dei tranni non continui. \newline 
+Per funzione discontinua in $\omega$ significa che la funzione avrà dei tratti continui e dei tranni non continui. \newline 
 
 Ma, in questo corso, sarà più utile la prima condizione di esistenza che la seconda. 
 \end{tcolorbox}
@@ -777,6 +782,8 @@ una sommatoria di Delta di Dirac $\delta$ ogni $\omega -\omega_0 + 2 \pi k$: in 
 
 cioè, la trasformata del sinc discreto nel dominio n è una finestra nel dominio di Fourier. \newline 
 
+\newpage 
+
 {
     \Large 
     \begin{equation}
@@ -791,7 +798,7 @@ cioè, la trasformata del sinc discreto nel dominio n è una finestra nel domini
     \end{equation}
 }
 
-cioè un gradino (che è una sequenza causale) nel dominio n è uguale a "quasi" un sinc discreto $\dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}$ 
+cioè un gradino (che è una sequenza causale) nel dominio n è "quasi" uguale ad un sinc discreto $\dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}$ 
 ritardato di $e^{\frac{- \jmath \omega M}{2} }$. \newline 
 
 Ultima funzione, ma non per meno importanza: 
@@ -868,7 +875,7 @@ La risposta in frequenza di un filtro passa basso $H_{lp} $ ha la seguente funzi
 
 dove $\omega_c$ è la pulsazione di taglio. \newline 
 
-Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è la seguente: 
+Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -899,7 +906,7 @@ La risposta in frequenza di un filtro passa alto $H_{hp} $ ha la seguente funzio
 
 dove $\omega_c$ è la pulsazione di taglio. \newline 
 
-Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa alto è la seguente: 
+Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa alto è il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -907,11 +914,11 @@ Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa alto è 
 \end{figure}  
 
 Come si nota dallo spettro (colorato di blu in figura), 
-lo spettro di un filtro passa-basso è periodico (si ripete) ogni $k \pi$. \newline
+lo spettro di un filtro passa-alto è periodico (si ripete) ogni $k \pi$. \newline
 
 \textbf{Filtro passa banda (Band Pass Filter)} \newline 
 
-La risposta in frequenza di un filtro passa alto $H_{bp} $ ha la seguente funzione: 
+La risposta in frequenza di un passa banda alto $H_{bp} $ ha la seguente funzione: 
 
 {
     \Large 
@@ -928,7 +935,7 @@ La risposta in frequenza di un filtro passa alto $H_{bp} $ ha la seguente funzio
 
 dove $\omega_a$ e $\omega_b$ sono le pulsazioni che il filtro permette di far passare. \newline 
 
-Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è la seguente: 
+Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -941,7 +948,7 @@ lo spettro di un filtro passa-banda è periodico (si ripete) ogni $k \pi$. \newl
 \newpage 
 \textbf{Elimina banda (Stop band Filter)} \newline 
 
-La risposta in frequenza di un filtro passa alto $H_{bs} $ ha la seguente funzione: 
+La risposta in frequenza di un filtro elimina banda $H_{bs} $ ha la seguente funzione: 
 
 {
     \Large 
@@ -956,9 +963,9 @@ La risposta in frequenza di un filtro passa alto $H_{bs} $ ha la seguente funzio
     \end{equation}
 }
 
-dove $\omega_a$ e $\omega_b$ sono le pulsazioni che il filtro permette di far passare. \newline 
+dove $\omega_a$ e $\omega_b$ sono le pulsazioni che il filtro non permette di far passare. \newline 
 
-Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è la seguente: 
+Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -966,7 +973,7 @@ Da un punto di vista grafico, lo spettro in $\omega$ di un filtro passa basso è
 \end{figure}  
 
 Come si nota dallo spettro (colorato di blu in figura), 
-lo spettro di un filtro passa-banda è periodico (si ripete) ogni $k \pi$. \newline
+lo spettro di un filtro elimina-banda è periodico (si ripete) ogni $k \pi$. \newline
 
 \newpage 
 
@@ -1052,7 +1059,7 @@ Ma, ponendo che:
 sappiamo che per un M sufficientemente alto, avremo che il sinc discreto nel dominio n tende a una finestra nel dominio delle frequenze. \newline 
 
 In particolare, la funzione appena scritta esprime che esiste una convergenza in senso quadratico tra 
-la differenza tra un filtro passa-basso ideale nel dominio di omega e la trasformata di un sinc discreto per M che tende ad infinito: questo fenomeno prende il nome di fenomeno di Gibbs. \newline 
+la differenza tra un filtro passa-basso ideale nel dominio di $\omega$ e la trasformata di un sinc discreto per M che tende ad infinito: questo fenomeno prende il nome di fenomeno di Gibbs. \newline 
 
 \newpage 
 
