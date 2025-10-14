@@ -139,7 +139,8 @@ si può dividere in:
 
 \footnote{ 
     Slide del prof | 3 - DTFT | pag 5\\
-    Appunti mancanti | 2025-10-07 
+    Appunti mancanti | 2025-10-07 \\ 
+    Latex | 2025-10-13 Sera | pag 65
 } 
 
 Come studiato nel corso di Teoria dei segnali, 
@@ -201,6 +202,12 @@ invece la formula inversa è:
     \end{equation}
 }
 
+\begin{tcolorbox}
+Nella formula dell'anti-trasformata della DTFT compare un integrale perchè, 
+come dice il nome stesso, nella DTFT (cioè Discrete-Time Fourier Transform) 
+il tempo è discretizzato mentre i valori nelle ampiezze sono continui. 
+\end{tcolorbox}
+
 $X \left(e^{\jmath \omega}\right)$ è periodica in $2 \pi$. \newline 
 
 Come la risposta in frequenza dei sistemi LTI, 
@@ -211,25 +218,14 @@ possiamo rappresentare $X \left(e^{\jmath \omega}\right)$ come:
     \item $\sphericalangle X \left(e^{\jmath \omega}\right)$ che è lo spettro di fase di $x \left[ n\right]$
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Queste formule si intende che i valori delle ampiezze del segnale nel tempo sono discretizzate? \newline 
-
-Perchè c'è un'integrale nella formula invecersa? Cioè è un problema che si estenda tutto da $- \infty$ a $+ \infty$ ? \newline 
-
-Queste sono le formule per la DTFT? \newline 
-
-Nella DTFT (cioè Discrete-Time Fourier Transform) significa solo che il tempo è discretizzato mentre i valori nelle ampiezze sono continue? 
-\end{tcolorbox}
-
-\label{Domanda 5} 
-
 \newpage 
 
 \subsection{Esistenza della trasformata}
 
 \footnote{ 
     Slide del prof | 3 - DTFT | pag 6\\
-    Appunti mancanti | 2025-10-07 
+    Appunti mancanti | 2025-10-07 \\ 
+    Latex | 2025-10-13 Sera | pag 66 - 67
 }
 
 Come nel caso continuo studiato a Teoria dei Segnali, 
@@ -286,11 +282,13 @@ In formule:
 
 che è una condizione sufficiente. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Funzione discontinua in $\omega$ significa che ci sono la funzione avrà delle tratti continui e dei tranni non continui?
+\begin{tcolorbox}
+Per funzione discontinua in $\omega$ significa che la funzione avrà delle tratti continui e dei tranni non continui. \newline 
+
+Ma, in questo corso, sarà più utile la prima condizione di esistenza che la seconda. 
 \end{tcolorbox}
 
-\label{Domanda 6} 
+\newpage 
 
 \textbf{Condizione di esistenza numero 3} \newline 
 
@@ -319,12 +317,10 @@ allora $X \left( e^{\jmath \omega}\right)$ può esistere in casi particolari, co
 
 dove, nella formula, $\delta$ indica un impulso unitario continuo (Dirac). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Cosa è dal punto di vista grafico l'impulso unitario continuo di Dirac?
+\begin{tcolorbox}
+$\delta \left( \omega - \omega_0 + 2 \pi k\right) $ indica una distribuzione. 
 \end{tcolorbox}
-
-\label{Domanda 7} 
-
+ 
 \newpage 
 
 \section{Sistem LTI e Trasformata di Fourier}
@@ -369,7 +365,8 @@ La relazione tra ingresso ed uscita in frequenza del sistema LTI è la seguente:
 
 \footnote{ 
     Slide del prof | 3 - DTFT | pag 9 - 10\\
-    Appunti mancanti | 2025-10-07 
+    Appunti mancanti | 2025-10-07 \\ 
+    Latex | 2025-10-13 Sera | pag 70
 } 
 
 Come nel caso continuo, anche nel caso discreto si applicano le proprietà della trasformata di Fourier. \newline 
@@ -545,11 +542,12 @@ allora vale la seguente operazione:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Siccome l'energia è qualcosa di fisico, formalmente non possiamo scrivere che $\abs{X \left( e^{\jmath \omega}\right)}^{2}$ è lo spettro di energia o no? 
-\end{tcolorbox}
+\begin{tcolorbox}
+Siccome l'energia è qualcosa di fisico, 
+formalmente non possiamo scrivere che $\abs{X \left( e^{\jmath \omega}\right)}^{2}$ è lo spettro di energia. \newline 
 
-\label{Domanda 8} 
+Ma, per noi, $\abs{X \left( e^{\jmath \omega}\right)}^{2}$ è lo spettro di energia perchè ci viene garantito dal Teorema di Parseval.
+\end{tcolorbox}
 
 \newpage 
 
@@ -557,7 +555,8 @@ Siccome l'energia è qualcosa di fisico, formalmente non possiamo scrivere che $
 
 \footnote{ 
     Slide del prof | 3 - DTFT | pag 11\\
-    Appunti | 2025-10-08 | pag 1 
+    Appunti | 2025-10-08 | pag 1 \\ 
+    Latex | 2025-10-13 Sera | pag 71
 } 
 
 Come nel caso continuo, anche nella trasformata di Fourier nel tempo discreto valgono le seguenti proprietà: 
@@ -642,15 +641,6 @@ che a sua volte, grazie alle formule di Eulero, possiamo scrivere le componenti:
 }
 
 Per sequenze $x \left[ n\right]$ reali: 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Cosa si intende per sequenze reali? Cioè che non hanno una componente nel piano immaginario dei fasori? \newline 
-
-Non ho capito a parole cosa ho scritto precedentemente nelle formule 
-
-\end{tcolorbox}
-
-\label{Domanda 9} 
 
 {
     \Large 

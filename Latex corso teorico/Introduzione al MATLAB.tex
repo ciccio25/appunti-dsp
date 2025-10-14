@@ -623,7 +623,8 @@ che sono variabili locale che sono viste come globali solamente dalla funzione d
 
 \footnote{ 
     Slide del prof | 2 - Introduzione al MATLAB | pag 22\\
-    Appunti mancanti | 2025-10-07 
+    Appunti mancanti | 2025-10-07 \\ 
+    Latex | 2025-10-13 Sera | pag 59 - 60
 }
 
 Come studiato dal capitolo precedente, sappiamo bene che 
@@ -698,14 +699,7 @@ Da un punto di vista matematico, possiamo scrivere la sequenza $x \left[ n \righ
     \end{equation}
 }
 
-dove la sequenza di impulsi unitari $\delta \left[ n\right]$ prende il nome di Delta di Kronocker. \newline 
-
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-È giusto dire che la sequenza di impulsi unitari $\delta \left[ n\right]$ prende il nome di Delta di Kronocker? \newline 
-\end{tcolorbox}
-
-\label{Domanda 1}
+dove il singolo impulso unitari $\delta \left[ n\right]$ prende il nome di Delta di Kronocker. \newline 
 
 La proprietà di campionamento delle sequenze discrete appena descritta, permette di assegnare uno specifico significato operativo all'operazione di convoluzione. \newline 
 
@@ -718,12 +712,6 @@ Tale significato operativo può essere analogamente essere messo in luce conside
 
 L'operazione di convoluzione tra due sequenze può essere vista come il prodotto matriciale tra una delle due sequenze e la matrice di convoluzione, opportunamente costruita a partire dalla sequenza rimanente. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Eh?
-\end{tcolorbox}
-
-\label{Domanda 2}
-
 La matrice di convoluzione $\left[ H\right]$ è una matrice di Toepliz rettangolare di dimensione N * p dove: 
 
 \begin{itemize}
@@ -731,13 +719,14 @@ La matrice di convoluzione $\left[ H\right]$ è una matrice di Toepliz rettangol
     \item p è la lunghezza della sequenza x che non genera la matrice 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-Possiamo dire che una matrice di Toepliz utile per la proprietà di campionamento nei sistemi discreti è ottenuta utilizzando la Delta di Kronocher, che appunto alla fine compone una matrice identità? 
-\end{tcolorbox}
-
-\label{Domanda 3} 
-
 \begin{tcolorbox}
+
+Possiamo dire che una matrice di Toepliz utile per la proprietà di campionamento nei sistemi discreti 
+è ottenuta utilizzando la Delta di Kronocher, 
+che appunto alla fine compone una matrice identità. \newline 
+
+Ma, non è detto che la matrice di Toepliz debba per forza essere simmetrica (approfondiremo meglio alla magistrale). \newline 
+
 Per approfondire cosa è una matrice di Toepliz e la Delta di Kronocher: 
 
 \begin{itemize}
@@ -763,15 +752,13 @@ Il comando Matlab da utilizzare per generare la matrice di convoluzione è convm
 \begin{tcolorbox}
     Dalla documentazione di convmtx \url{https://it.mathworks.com/help/signal/ref/convmtx.html} \newline 
 
-    "Computing a convolution using conv when the signals are vectors is generally more efficient than using convmtx. For multichannel signals, convmtx might be more efficient."
+    "Computing a convolution using conv when the signals are vectors is generally more efficient than using convmtx. For multichannel signals, convmtx might be more efficient." \newline 
+
+    convmtx ha lo stesso problema del comando conv in Matlab, 
+    cioè della sua grandezza che non rispecchia quella ideale come noi la intendiamo nel corso: 
+    ecco perchè dovremo costrutire la nostra my\_convmtx.m 
+
 \end{tcolorbox} 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
-convmtx ha lo stesso problema del comando conv in Matlab, cioè della sua grandezza che non rispecchia quella ideale come noi la intendiamo nel corso? \newline 
-
-\end{tcolorbox}
-
-\label{Domanda 4} 
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: TO-DO: Spiegazione codice Esempio 2.5, 2.6, 2.7 
