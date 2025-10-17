@@ -186,6 +186,8 @@ dove $\Omega_s$ prende il nome di pulsazione di campionamento perchè:
 
 dove, a sua volta, T è il periodo di campionamento. \newline 
 
+\newpage 
+
 Allora possiamo scrivere che, facendo tutti i passaggi e le dovute sostituzioni: 
 
 {
@@ -254,5 +256,173 @@ Riassumendo:
     Appunti| 2025-10-14 | pag 1
 }
 
+Ricordando che, per il campionamento abbiamo questo schema: 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Sistema campionamento ideale.png}
+\end{figure}  
 
+analizziamo in Fourier i vari segnali indicati in figura nello spettro. \newline 
+
+Se consideriamo $x_c \left( t\right)$ segnale analogico da campionare, 
+abbiamo che, in Fourier, avrà il sequente spettro (di esempio): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Spettro in pulsazioni di un segnale analogico di esempio.png}
+\end{figure}  
+
+Come si nota dalla figura, lo spettro di $X_c \left(\jmath \Omega\right)$ si estende nell'intervallo delle pulsazioni $\left[ - \Omega_N, + \Omega\right]$. \newline 
+
+Se la pulsazione di campionamento $\Omega_s$ è oppurtunamente scelta, 
+lo spettro in Fourier del segnale campionato $x_s \left(t\right)$, cioè $X_s \left(\jmath \Omega\right)$, 
+avrà il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Esempio dello spettro di un segnale campionato.png}
+\end{figure}  
+
+dove in blu è indicato l'andamento di $X_s \left(\jmath \Omega\right)$. \newline 
+
+Una osservazione che possimo svolgere sullo spettro del segnale campionato $X_s \left(\jmath \Omega\right)$ 
+è che lo spettro del segnale si ripete. \newline  
+
+\newpage 
+
+Questo avviene perchè la discretizzazione nel tempo del segnale, come si può notare nella seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Esempio segnale campionato.png}
+\end{figure}  
+
+crea replicità in frequenza. \newline 
+
+\begin{tcolorbox}
+    Invece nel corso di Teoria di Segnali avevamo visto il contrario: se il segnale è periodico nel tempo, allora avremo discretizzazione nello spettro, 
+    ma, come ben sappiamo, grazie alle proprietà tra Fourier e il tempo, se vale un principio in un dominio vale anche nell'altro e viceversa.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Inserire seconda figura (quella con su scritta Aliasing) e scriverci le osservazioni 
+\end{tcolorbox} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
+Il commento nella slide: \newline 
+
+"Questa modulazione provoca aliasing che deve essere cancellato opportunamente" \newline 
+
+è riferito alla seconda figura partendo dall'alto della slide? \newline 
+
+In quella figura, si è considerato un segnale sotto-campionato, ecco perchè esiste aliasing?
+\end{tcolorbox} 
+
+Ritornando alla figura dello spettro di $X_s \left( \jmath \Omega \right)$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Esempio dello spettro di un segnale campionato.png}
+\end{figure}  
+
+Considerando una finestra rettangolare (indicata in figura in colore rosso) nell'intervallo 
+$\left[ - \Omega_N, + \Omega_N\right]$, 
+possiamo riottenere lo spettro del segnale originale, proprio come si vede nella seguente figura:   
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Spettro del segnale ricostruito esempio.png}
+\end{figure}  
+
+dove, lo spettro di $X_R \left(\jmath \Omega\right)$ è uguale allo spettro del segnale originale $X_c \left(\jmath \Omega\right)$. \newline 
+
+\newpage 
+
+\section{Teorema di Nyquist}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 5\\
+    Appunti| 2025-10-14 | pag 1
+}
+
+\begin{tcolorbox}
+    Come studiato nei corsi precedenti, anche in questo corso, è molto utile il Teorema di Nyquist. 
+\end{tcolorbox} 
+
+Nelle pagine precedenti, si è potuto ricostruire il segnale originale da quello campionato perchè il campionamrnto ha soddisfatto il Teorema di Nyquist. \newline 
+
+Di seguito il teorema di Nyquist. \newline 
+
+Se il segnale da campionare $x_c \left(t\right)$ è limitato in banda, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        X_c \left(\jmath \Omega\right) = 0 \text{ per } \abs{\Omega} > \Omega_N
+    \end{equation}
+}
+
+allora $x_c \left(t\right)$ è univocamente rappresentato dai suoi campioni: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[n \right]
+        = 
+        x_c \left(n \cdot T\right) 
+        \text{ per }
+        n = 0, \pm 1, \pm 2, \dots
+    \end{equation}
+}
+
+se risulta: 
+
+{
+    \Large 
+    \begin{equation}
+        \Omega_s = \dfrac{2 \pi}{T} 
+        > 
+        2 \Omega_N
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item T è il periodo di campionamento 
+    \item $\Omega_s$ è la pulsazione di campionamento 
+\end{itemize} 
+
+$\Omega_N$ prende il nome di pulsazione di Nyquist. \newline 
+
+$\blacksquare $ \newline 
+
+Le grandezze di nostro interesse per questo corso sono le seguenti: 
+
+\begin{itemize}
+    \item $f_{s}$ è la frequenza di campionamento di Nyquist, che vale: 
+    {
+        \Large 
+        \begin{equation}
+            f_s = \dfrac{\Omega_s}{2 \pi}
+        \end{equation}
+    }
+    \item $f_{Ny}$, cioè la frequenza di Nyquist, che vale: 
+    {
+        \Large 
+        \begin{equation}
+            f_{Ny} = \dfrac{\dfrac{\Omega_s}{2}}{2 \pi}
+        \end{equation}
+    }
+    
+\end{itemize} 
+
+\newpage 
+
+\section{Relazione tra spettri continui e discreti}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 6\\
+    Appunti| 2025-10-14 | pag 1
+}
