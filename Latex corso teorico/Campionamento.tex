@@ -13,3 +13,246 @@
     Slide del prof | 4 - Campionamento | pag 2\\
     Appunti| 2025-10-14 | pag 1
 }
+
+Per campionamento si intende quel processo che, ad ogni periodo di campionamento T detto periodo di campionamento, 
+si rivela che valore ha il segnale analogico in quegli istanti. \newline 
+
+Il reciproco di T periodo di campionamento è chiamato $F_s$ frequenza di campionamento. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        F_s = \dfrac{1}{T}
+    \end{equation}
+}
+
+Da un punto di vista del sistema, nel campionamento avremo questo sistema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Sistema campionamento ideale.png}
+\end{figure}  
+
+dove, visualizzando la figura da sinistra verso destra, avremo: 
+
+\begin{itemize}
+    \item $x_c \left(t\right)$ è il segnale analogico da campionare (e che quindi ha valori continui sia nell'asse delle ampiezze che nel tempo) 
+    \item $s \left(t\right)$ è una sequenza di impulsi di Dirac continuo 
+    \item $x_s \left(t\right)$ è il segnale campionato
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
+Quale è la relazione tra $x_s \left( t\right)$ e $x \left[ n\right]$ ? \newline 
+
+È $x_s \left( t\right)$ o $x \left[ n\right]$ il segnale quantizzato? \newline 
+
+Il convertitore è un sistema LTI che fa la convoluzione tra chi? \newline 
+
+(Vedi anche grafico dell'andamento dei segnali dentro la slide)
+\end{tcolorbox}
+
+Analizzando la sequenza $s \left(t\right)$ avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        s \left( t\right) 
+        = 
+        \sum_{n = - \infty}^{+ \infty} 
+        \delta \left(t - n \cdot T\right)
+    \end{equation}
+} 
+
+dove $\delta \left(t - n \cdot T\right)$ è una delta di Dirac di impulso continuo che si ripete ogni multiplo di periodo T. \newline 
+
+Allora possiamo scrivere: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x_s \left(t\right) 
+            &= 
+            x_c \left(t\right)  \cdot s \left(t\right) 
+            \\
+            &=  
+            x_c \left(t\right)  
+            \cdot 
+            \sum_{n = - \infty}^{+ \infty} 
+            \delta \left(t - n \cdot T\right) 
+        \end{split}
+    \end{equation}
+}
+
+Grazie alla proprietà dell'impulso, 
+possiamo portare il segnale analogico $x_c \left(t\right)$ dentro la sommatoria, quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x_s \left(t\right) 
+            &= 
+            x_c \left(t\right)  
+            \cdot 
+            \sum_{n = - \infty}^{+ \infty} 
+            \delta \left(t - n \cdot T\right)  
+            \\
+            &\downarrow
+            \\
+            x_s \left(t\right) 
+            &= 
+            \sum_{n = - \infty}^{+ \infty} 
+            x_c \left(n \cdot T\right)  
+            \cdot 
+            \delta \left(t - n \cdot T\right)  
+        \end{split}
+    \end{equation}
+}
+
+Visualizzando l'andamento del segnale, avremo il seguente caso: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Da segnale analogico a segnale campionato.png}
+\end{figure}  
+
+\newpage 
+
+\subsection{Campionamento: analisi in frequenza}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 3\\
+    Appunti| 2025-10-14 | pag 1
+}
+
+Per le proprietà della trasformata di Fourier continua, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        F \left[ x_c \left(t\right) \cdot s \left(t\right)\right] 
+        = 
+        \dfrac{1}{2 \pi} 
+        X_c \left(\jmath \Omega \right) * S \left(\jmath \Omega \right)
+    \end{equation}
+}
+
+cioè il prodotto tra $x_c \left(t\right)$ e $s \left(t\right)$ nel tempo è la convoluzione in frequenza di $X_c \left(\jmath \Omega \right)$ e $S \left(\jmath \Omega \right)$, 
+che sono, rispettivamente, le trasformate di Fourier dei segnali $x_c \left(t\right)$ e $s \left(t\right)$. \newline 
+
+Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (non periodica). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2} 
+Non ho capito l'ultima frase \newline 
+
+"Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (non periodica)"
+
+\end{tcolorbox}
+
+Poichè risulta: 
+
+{
+    \Large 
+    \begin{equation}
+        F \left[ s \left(t\right)\right]
+        = 
+        \dfrac{2 \pi}{T}
+        \sum_{k = -\infty}^{+ \infty} 
+        \delta\left(\Omega - k \Omega_s\right)
+    \end{equation}
+} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3} 
+La trasformata di una Delta di Dirac nel tempo non era uno spettro piatto in frequenza? \newline 
+
+Perchè abbiamo scritto che la trasformata di Fourier di una Delta di Dirac equispaziati nel tempo è a sua volta una sequenza di Delta di Dirac nel tempo? \newline 
+
+Perchè nel campionamento il tempo è discretizzato e non continuo? 
+\end{tcolorbox}
+
+dove $\Omega_s$ prende il nome di pulsazione di campionamento perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        \Omega_s 
+        = 
+        \dfrac{2 \pi}{T}
+    \end{equation}
+}
+
+dove, a sua volta, T è il periodo di campionamento. \newline 
+
+Allora possiamo scrivere che, facendo tutti i passaggi e le dovute sostituzioni: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        F \left[ x_c \left(t\right) \cdot s \left(t\right)\right] 
+        &= 
+        F \left[ x_s \left( t\right)\right] 
+        \\
+        &= 
+        X_s \left(\jmath \Omega\right) 
+        \\
+        &= 
+        \dfrac{1}{2 \pi} 
+        X_c \left(\jmath \Omega \right) * S \left(\jmath \Omega \right) 
+        \\
+        &=
+        \dfrac{1}{2 \pi} 
+        X_c \left(\jmath \Omega \right) 
+        * 
+        \left[
+        \dfrac{2 \pi}{T}
+        \sum_{k = -\infty}^{+ \infty} 
+        \delta\left(\Omega - k \Omega_s\right)
+        \right]
+        \\
+        &= 
+        \dfrac{1}{T}
+        X_c \left(\jmath \Omega \right) 
+        *
+        \sum_{k = -\infty}^{+ \infty} 
+        \delta\left(\Omega - k \Omega_s\right) 
+        \\
+        &= 
+        \dfrac{1}{T}
+        \sum_{k = -\infty}^{+ \infty} 
+        X_c \left(\jmath \Omega - k \jmath \Omega_s\right) 
+        \end{split}
+    \end{equation}
+} 
+
+dove la convoluzione della trasformata di Fourier di $x_c \left( t\right)$, cioè $X_c \left(j \Omega\right)$, 
+e la sequenza di Delte di Dirac equispaziate in frequenza di multipli della frequenza di campionamento $\Omega_s$ 
+è uguale allo spettro di $X_c (\jmath)$ equispaziato ogni multiplo di $\jmath \Omega_s$. \newline 
+
+Riassumendo: 
+
+{
+    \Large 
+    \begin{equation}
+    X_s \left(\jmath \Omega\right)  
+    =    
+    \dfrac{1}{T}
+    \sum_{k = -\infty}^{+ \infty} 
+    X_c \left(\jmath \Omega - k \jmath \Omega_s\right)
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Campionamento e ricostruzione}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 4\\
+    Appunti| 2025-10-14 | pag 1
+}
+
+
+
