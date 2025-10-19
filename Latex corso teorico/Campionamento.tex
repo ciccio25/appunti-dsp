@@ -339,7 +339,7 @@ dove, lo spettro di $X_R \left(\jmath \Omega\right)$ è uguale allo spettro del 
 
 \newpage 
 
-\section{Teorema di Nyquist}
+\section{Teorema di Nyquist} \label{sec: Teorema di Nyquist}
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 5\\
@@ -425,4 +425,538 @@ Le grandezze di nostro interesse per questo corso sono le seguenti:
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 6\\
     Appunti| 2025-10-14 | pag 1
+}   
+
+Consideriamo dal punto di vista matematico la relazione tra 
+un segnale a spettro continuo $x_s \left(t\right)$ 
+e il segnale a spettro discreto $x \left[ n\right]$. \newline 
+
+Sapendo che nel dominio del tempo t, il segnale campionato $x_s \left(t\right)$ la possiamo scrivere come: 
+
+{
+    \Large 
+    \begin{equation}
+        x_s \left(t\right) 
+        = 
+        \sum_{n = - \infty}^{+ \infty}
+        x_c \left(n T\right) \cdot \delta \left( t - nT\right)
+    \end{equation}
+} 
+
+Allora la sua trasformata di Fourier è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        x_s \left(t\right) 
+        &= 
+        \sum_{n = - \infty}^{+ \infty}
+        x_c \left(n T\right) \cdot \delta \left( t - nT\right)
+        \\
+        &\updownarrow
+        \\
+        X_s \left(\jmath \Omega\right)
+        &= 
+        \sum_{n = -\infty}^{+ \infty}
+        x_c \left(n T\right)
+        \cdot 
+        e^{-\jmath \Omega T n}
+        \end{split}
+    \end{equation}
+}
+
+Ma sapendo che il segnale discreto $x \left[ n\right]$ in Fourier è: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega}\right) 
+        = 
+        \sum_{n = -\infty}^{+ \infty}
+        x \left[n\right] \cdot e^{- \jmath \omega n}
+    \end{equation}
+}
+
+Allora possiamo dire che sia il segnale campionato $x_s \left(t\right)$ che il segnale campionato a tempo discreto $x \left[ n\right]$ sono uguali se: 
+
+{
+    \Large 
+    \begin{equation}
+        X_s \left(\jmath \Omega\right) = X \left(e^{\jmath \omega}\right)
+        \text{ se }
+        \omega = \Omega T
+    \end{equation}
+}
+
+Scritta in parole, se lo spettro continuo del segnale campionato $X_s \left(\jmath \Omega\right)$ viene valutato ogni $\Omega T$, 
+allora lo spettro continuo $X_s \left(\jmath \Omega\right)$ e lo spettro del segnale a tempo discreto $X \left(e^{\jmath \omega}\right)$ sono uguali. \newline 
+
+In particolare: 
+
+{
+    \Large 
+    \begin{equation}
+        X_s \left(\jmath \Omega \right)
+        = 
+        \left. 
+        X \left(e^{\jmath \omega}\right)
+        \right|_{\omega = \Omega T} 
+        = 
+        \dfrac{1}{T}
+        \sum_{k = -\infty}^{+ \infty}
+        X_c \left(\jmath \Omega - \jmath \dfrac{2 \pi k}{T}\right)
+    \end{equation}
+}
+
+\newpage 
+
+Grazie a queste relazioni, possiamo visualizzare queste immagini di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Esempio di spettri continui e discreti dello stesso segnale.png}
+\end{figure}  
+
+Notiamo che gli spettri dei segnali (le due figure a destra) sono identitici: 
+ciò che cambia è solo l'asse delle ascisse che al posto di avere le pulsazione in $\Omega$ avremo le pulsazioni in $\omega$. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
+Leggi ultima frase scritta. \newline 
+
+Quindi come chiamamo $\omega$, pulsazione nel dominio discreto? 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Ricostruzione del segnale analogico}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 7 - 8\\
+    Appunti| 2025-10-14 | pag 1
+}   
+
+Ricordando che, per il campionamento abbiamo questo schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistema campionamento ideale.png}
+\end{figure}  
+
+e lo spettro dei segnali: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Esempio di spettri continui e discreti dello stesso segnale.png}
+\end{figure}  
+
+allora possiamo scrivere che il segnale a $x \left[ n\right]$ ha il seguente andamento: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        x_s \left(t\right)
+        = 
+        \sum_{n = -\infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        \delta \left(t - nT\right)
+    \end{equation}
+}
+
+Se non c'è aliasing (cioè si rispetta il \ref{sec: Teorema di Nyquist} \nameref{sec: Teorema di Nyquist}), 
+allora si può ricostruire il segnale continuo $x_r \left(t\right)$ mediante un filtro passa-basso continuo ideale con la seguente funzione di trasferimento $H_r \left(\jmath \Omega\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        H_r \left(\jmath \Omega\right) 
+        = 
+        \begin{cases}
+            T \text{ per } \abs{\Omega } < \dfrac{\Omega_s}{2} 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item T è il guadagno del filtro (e non il periodo del segnale)
+    \item $\Omega_s$ è la pulsazione di taglio, chiamata anche pulsazione di cutoff
+\end{itemize}
+
+Da un punto di vista grafico, $H_r \left(\jmath \right)$ avrà questo andamento nello spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro interpolatore in frequenza.png}
+\end{figure}  
+
+Questo filtro prende il nome di filtro interpolatore, cioè il filtro interpolatore è una finestra in frequenza. \newline 
+
+Sapendo che la trasformata di un filtro continuo in frequenza è un sinc continuo, 
+allora avremo che nel tempo il filtro interpolatore avrà questo andamento: 
+
+{
+    \Large 
+    \begin{equation}
+        h_r \left(t\right)
+        = 
+        \dfrac{\sin \left(\dfrac{\Omega_s}{2} t\right)}{\dfrac{\Omega_s}{2} t}
+    \end{equation}
+}
+
+che, dal punto di vista grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro interpolatore nel tempo.png}
+\end{figure}  
+
+Essendo un sinc continuo, si estende nel tempo nell'intervallo $\left[ - \infty, + \infty\right]$. \newline 
+
+Grazie alle proprietà della trasformata di Fourier e della convoluzione abbiamo che, 
+il segnale ricostruito ideale $x_r \left(t\right)$ è il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        x_r \left(t\right) 
+        = 
+        \sum_{n = -\infty}^{+ \infty} 
+        x \left[  n \right]
+        \dfrac{\sin \left( \dfrac{\pi \left(t - nT\right)}{T}\right)}{\dfrac{\pi \left(t - nT\right)}{T}}
+    \end{equation}
+}
+
+$x_r \left(t\right)$ avrà questo andamento: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Segnale ricostruito dal filtro interpolatore.png}
+\end{figure}  
+
+dove, in figura: 
+
+\begin{itemize}
+    \item in blu è segnato l'anamento del segnale di $x_r \left(t\right)$
+    \item in rosso è segnato l'andamento dei sinc del filtro interpolatore centrati in multipli di T (nella formula di $x_r \left(t\right)$ si noti il nT)
+\end{itemize}
+
+Dopo tutte queste considerazioni, possiamo dire che, se si svolge un campionamento ideale, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        x_r \left(t\right)
+        = 
+        x_c \left(t\right)
+    \end{equation}
+}
+
+cioè il segnale ricostruito $x_r \left(t\right)$ è uguale al segnale campionato $x_c \left(t \right)$. \newline  
+
+Ciò può avvenire se non si ha aliasing, cioè: 
+
+\begin{itemize}
+    \item se il campionamento e il filtro interpolatore passano per i punti originali 
+    \item se non c'è ambiguità 
+\end{itemize}
+
+\newpage 
+
+\section{Riepilogo: campionamento e ricostruzione ideali} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 9 - 10\\
+    Appunti| 2025-10-14 | pag 2
+}
+
+Di seguito le formule riassuntive per un campionamento ideale. \newline 
+
+Se consideriamo un campionamento ideale: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Campionamento ideale schema a blocchi.png}
+\end{figure}  
+
+dove: 
+
+\begin{itemize}
+    \item $x_c \left(t\right)$ è il segnale analogico da campionare 
+    \item $x \left[ n\right]$ è il segnale campionato
+\end{itemize}
+
+Sapendo che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[n\right] = x_c \left(n T\right)
+    \end{equation}
+}
+
+cioè il segnale campionato $x \left[n\right]$ è uguale al segnale analogico $x_c (t)$ 
+se viene campionato ogni periodo T, cioè a n multipli di T. \newline 
+
+Allora, 
+se consideriamo $X \left(e^{\jmath \omega}\right)$ la trasformata di Fourier del segnale campionato $x \left[n\right]$ 
+e e $X \left(\jmath \Omega\right)$ la trasformata di Fourier del segnale analogico da campionare $x_c (t)$, 
+avremo che la loro relazione è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega}\right) 
+        = 
+        \dfrac{1}{T} 
+        \sum_{k = -\infty}^{+ \infty}
+        X_c \left(\jmath \dfrac{\omega}{T} - \jmath \dfrac{2 \pi k}{T}\right)
+    \end{equation}
+}
+
+Se non c'è aliasing, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        X_c \left(\jmath \Omega\right) = 0 
+        \text{ per }
+        \abs{\Omega} > \Omega_N 
+        \text{ e }
+        \Omega_N < \dfrac{\Omega_s}{2}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\Omega$ sono le pulsazioni nello spettro continuo 
+    \item $\Omega_N$ è la pulsazione di Nyquist 
+    \item $\Omega_s$ è la pulsazione di campionamento
+\end{itemize}
+
+Allora, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x \left[n \right] &= x_c \left(n T\right)
+            \\
+            &\updownarrow
+            \\
+            X \left(e^{\jmath \omega}\right)
+            &= 
+            \dfrac{1}{T}
+            X_c \left(\dfrac{\jmath \omega}{T}\right)
+            \text{ per }
+            \abs{\omega} < \pi, k = 0
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Tencicamente nello spettro di $X \left(e^{\jmath \omega}\right)$ ci dovrebbero essere le replice di $X_c \left(\dfrac{\jmath \omega}{T}\right)$, 
+    ma, dal punto di vista informativo, è inutile indicare le replice dello spettro: ecco perchè ci poniamo nell'intervallo $\abs{\omega} < \pi$
+\end{tcolorbox}
+
+\newpage 
+
+Invece per quanto riguarda la ricostruzione del segnale originale: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Interpolatore ideale schema.png }
+\end{figure}  
+
+dove: 
+
+\begin{itemize}
+    \item $x \left[ n\right]$ è il segnale campionato 
+    \item $x_r \left(t\right)$ è il segnato ricostruito 
+\end{itemize} 
+
+Se non c'è aliasing, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        x_r \left(t\right)
+        = 
+        x_c \left(t\right)
+    \end{equation}
+}
+
+in cui, dal punto di vista matematico, $x_r \left(t\right)$ ha questo andamento: 
+
+{
+    \Large 
+    \begin{equation}
+        x_r \left(t\right) 
+        = 
+        \sum_{n = -\infty}^{+ \infty} 
+        x \left[  n \right]
+        \dfrac{\sin \left( \dfrac{\pi \left(t - nT\right)}{T}\right)}{\dfrac{\pi \left(t - nT\right)}{T}}
+    \end{equation}
+} 
+
+che in frequenza sarà: 
+
+{
+    \Large 
+    \begin{equation}
+        X_r \left(\jmath \Omega\right)
+        = 
+        \begin{cases}
+            T \cdot X \left(e^{\jmath \Omega T}\right)
+            \text{ per }
+            \abs{\Omega} < \dfrac{\Omega_s}{2}
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item T moltiplicato per $X \left(e^{\jmath \Omega T}\right)$ indica il guadagno (o la perdita) del filtro interpolatore 
+    \item $\Omega_s$ è la pulsazione di cutoff del filtro 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
+    La lettera T nella formula $T \cdot X \left(e^{\jmath \Omega T}\right)$ intendono due cose differenti?
+\end{tcolorbox} 
+
+\newpage 
+
+\section{Elaborazione segnali analogici con sistemi discreti} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 11 - 12\\
+    Appunti| 2025-10-14 | pag 2
+}
+
+Se consideriamo tutti i "blocchi" necessari per elaborare segnali analogici con un sistema discreto, 
+possiamo considerare i seguenti schemi a blocchi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Sistema a blocchi dell'elaborazione di un segnale analogico con sistema discreto.png}
+\end{figure}  
+
+dove: 
+
+\begin{itemize}
+    \item $x_c \left(t\right)$ e $y_r \left(t\right)$ sono segnali analogici (cioè grandezze fisiche tangibili come ad esempio una pressione di un tubo d'acqua, una tensione, una corrente, ecc...) 
+    \item $x \left[n \right]$, $h \left[n \right]$, $y \left[n \right]$ sono delle sequenze (cioè sequenze che sono comprensibili ad un micro-controllore e/o ad un sistema digitale e che si trovano nel mondo "astratto" del DSP) 
+\end{itemize}
+
+\begin{tcolorbox}
+    L'enorme vantaggio che si ha con questo tipo di schema a blocchi è che l'elaborazione del segnali analogici viene fatto in digitale con un software. \newline 
+
+    Questa è una classica pipeline in quasi tutti i sistemi digitali moderni. \newline 
+
+    Ad esempio, la Apple piuttosto che cambiare i filtri all'interno delle AirPods pro, 
+    esegue un aggiornamento del software che permette di cambiare l'elaborazione dei segnali fisici, 
+    come la cancellazione del rumore. \newline 
+
+    Lo stesso esempio, nel mondo analogico, sarebbe stato diverso: Apple, per migliorare il prodotto, dovrebbe manualmente e fisicamente prendere le Airpods Pro di tutti i clienti, cambiargli fisicamente il filtro della cancellazione del rumore e poi spedirlo ai clienti di nuovo. \newline 
+
+    Ecco perchè è molto più vantaggioso eseguire una elaborazione dei segnali analogici con sistemi discreti. \newline 
+
+    Oppure, nel caso moderno, anche nelle macchine ciò accade, con gli aggiornamenti chiamati "over-the-air", come viene spiegato in questo video: \newline 
+
+    What is an automotive over-the-air update? by Autovista \\
+    \url{https://youtu.be/18NCdr9_fuA?si=jBNFzJnGcIm1sZsy}
+\end{tcolorbox}
+
+Analizzando in frequenza questi blocchi, 
+avremo che il campionatore (se non c'è aliasing) avrò il seguente andamento: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega}\right) = \dfrac{1}{T} X_c \left(\dfrac{\jmath \omega}{T}\right)
+        \text{ per } \abs{\omega} < \pi
+    \end{equation}
+
+}
+
+dove i valori della pulsazione $\omega$ e del periodo $T$ sono scelti opportunamente secondo il teorema del campionamento. \newline 
+
+Il sistema LTI (Linear Time Invariant) ha il seguente andamento in frequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left(e^{\jmath \omega}\right)
+        =
+        H \left(e^{\jmath \omega}\right) \cdot X \left(e^{\jmath \omega}\right)
+        \text{ per } \abs{\omega} < \pi
+    \end{equation}
+}
+
+Invece il ricostruttore (indicato in figura come Interpolatore T) ha il seguente andamento in frequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        Y_r \left(\jmath \Omega\right) 
+        = 
+        \begin{cases}
+            T \cdot Y \left(e^{\jmath \Omega T}\right)
+            \text{ per }
+            \abs{\Omega} < \dfrac{\Omega_s}{2} 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+Se invece consideriamo tutti i tre blocchi come un unico blocco, 
+possiamo scrivere che in frequenza l'uscita del blocco avrà il seguente andamento: 
+
+{
+    \Large 
+    \begin{equation}
+        Y_r \left(\jmath \Omega\right) 
+        = 
+        \begin{cases}
+            H \left(e^{\jmath \Omega T}\right) \cdot X_c \left(\jmath \Omega\right)
+            \text{ per }
+            \abs{\Omega} < \dfrac{\Omega_s}{2} 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $H \left(e^{\jmath \Omega T}\right)$ è la risposta impulsiva di tutti i tre blocchi messi insieme nel dominio dei discreti in frequenza 
+    \item $X_c \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico iniziale $x_c \left(t\right)$
+\end{itemize}
+
+Se si considera un unico blocco di elaborazione, si può accettare aliasing se elimato da $H \left(e^{\jmath \omega}\right)$. \newline 
+
+Quindi, se consideriamo la situazione ideale, 
+fare i calcoli in frequenza è uguale che farli nel tempo e viceversa perchè è garantito dal teorema di Fourier e dal teorema del campionamento ideale, grazie al concetto di trasformata in cui il segnale è reversibile. \newline 
+
+Invece, la pipeline reale sarà ben diversa. \newline 
+
+\newpage 
+
+\subsection{Conversione A/D reale} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 13\\
+    Appunti| 2025-10-14 | pag 2
 }
