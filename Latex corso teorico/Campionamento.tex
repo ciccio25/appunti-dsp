@@ -1274,3 +1274,211 @@ dove:
     Appunti| 2025-10-14 | pag 3
 } 
 
+Considerando la pipeline della conversione digitale-analogico reale (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Conversione digitale analogico reale.png}
+\end{figure}   
+
+Generalmente il blocco D/A converter e lo zero-oder hold vengono messe insieme ed 
+il filtro interpolatore viene anche chiamato filtro anti-imaging (in figura "Anti-imaging filter") 
+perchè toglie le repliche del segnale $x_{DA} \left(t\right)$. \newline 
+
+Il convertitore D/A converte un codice binario (generalmente complemento a 2, offset binary sign magnitude) 
+in una grandezza analogica (tensione o corrente) di valore massimo $X_M$. \newline 
+
+Il convertitore digitale-analogico incorpora (o richiede) uno zero-oder hold per produrre i gradini (ma generalmente, come scritto precedentemente, è incorporato). \newline 
+
+Dal punto di vista matematico, avremo che il segnale analogico dalla sequenza digitale $x_{DA} \left(t\right)$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+            x_{DA} \left(t\right)
+            = 
+            \sum_{n = -\infty}^{+ \infty}
+            \hat{x} \left[ n\right] \cdot h_o \left(t - nT\right)
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item T è il periodo del zero-oder hold (che è un filtro)
+    \item $\hat{x} \left[ n\right]$ è la sequenza campionata dal convertirore analogico digitale reale 
+\end{itemize}
+
+Ricordando che: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x} \left[ n\right] = x \left[n\right] + e \left[ n\right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $x \left[n \right]$ è il segnale quantizzato idealmente 
+    \item $e \left[ n\right]$ è l'errore che lo calcoliamo statisticamente
+\end{itemize}
+
+\newpage 
+
+Allora, possiamo riscrivere il segnale convertito da digitale ad analogico $x_{DA} \left(t\right)$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x_{DA} \left(t\right)
+            &= 
+            \sum_{n = -\infty}^{+ \infty}
+            \hat{x} \left[ n\right] \cdot h_o \left(t - nT\right) 
+            \\
+            &\downarrow
+            \\
+            x_{DA} \left(t\right)
+            &= 
+            \sum_{n = -\infty}^{+ \infty}
+            \left( x \left[n\right] + e \left[ n\right]\right) \cdot h_o \left(t - nT\right) 
+            \\
+            &= 
+            \sum_{n = -\infty}^{+ \infty}
+            x \left[n\right] \cdot h_o \left(t - nT\right)
+            + 
+            \sum_{n = -\infty}^{+ \infty}
+            e \left[ n\right] \cdot h_o \left(t - nT\right)  
+            \\
+            &= 
+            x_o \left(t\right) + e_o \left(t\right)         
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $x_o \left(t\right)$ è il contributo del segnale analogico (cioè il contributo buono) 
+    \item $e_o \left(t\right)$ è il contributo dell'errore (cioè il contributo cattivo)
+\end{itemize}
+
+Quindi, dopo tutto il processo di conversione, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{DA} \left(t\right)
+        = 
+        x_o \left(t\right) + e_o \left(t\right)
+    \end{equation}
+}
+
+cioè, il segnale convertito analogico dal digitale $x_{DA} \left(t\right)$ è combinazione lineare del segnale 
+$x_o \left(t\right)$ e $e_o \left(t\right)$. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 8}
+Come si chiamano $x_o \left(t\right)$ e $e_o \left(t\right)$ ?
+\end{tcolorbox} 
+
+\newpage 
+
+\subsubsection{Filtro Anti-imaging} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 18\\
+    Appunti| 2025-10-14 | pag 3
+} 
+
+Si può compensare l'effetto in frequenza dello zero-order hold con il filtro anti-imaging: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Filtro anti imaging ideale e reale.png}
+\end{figure}   
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 9}
+Quale è il problema dello zero-order hold in frequenza? Cosa bisgna compensare in frequenza? 
+\end{tcolorbox} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Continuare di copiare le considerazioni dopo aver capito cosa fanno le formule nella pagine
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Conversione A/D e D/A reale} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 19\\
+    Appunti| 2025-10-14 | pag 3 - 4
+} 
+
+Considerando tutta la pipeline A/D e D/A reale e l'effetto complessivo, 
+possiamo raffigurarlo come: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Effetto complessivo coversione AD e DA.png}
+\end{figure}   
+
+dove: 
+
+\begin{itemize}
+    \item $x_c \left(t\right)$ è il segnale analogico inziale della pipeline 
+    \item $y_a \left(t\right)$ è il segnale analogico in uscita dalla pipeline 
+    \item il zero-order hold del convertitore analogico-digitale non da contributo in frequenza nel sistema complessivo
+\end{itemize}
+
+Allora, analizzando in Fourier, possiamo scrivere che lo spettro del segnale analogico in uscita è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        Y_a \left(\jmath \Omega\right)
+        = 
+        X_c \left(\jmath \Omega\right)
+        \cdot 
+        \left[ 
+            H_{aa} \left(\jmath \Omega \right)
+            \cdot 
+            H \left(e^{\jmath \Omega T}\right)
+            \cdot 
+            H_o \left(\jmath \Omega \right)
+            \cdot 
+            H^{\sim}_r \left(\jmath \Omega\right)
+        \right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $Y_a \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in uscita della pipeline, cioè $y_a \left(t\right)$
+    \item $X_c \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in ingresso della pipeline
+    \item $H_aa \left(\jmath\right)$ è la trasfomata di Fourier della risposta impulsiva del filtro anti-imaging nel Sample \& Hold 
+    \item $H \left(e^{\jmath \Omega T}\right)$ è la trasformata di Fourier del Sample \& Hold 
+    \item $H_o \left(\jmath \Omega\right)$ è la trasformata di Fourier della risposta impulsiva del zero-order hold all'interno del convertitore D/A reale 
+    \item $H^{\sim}_r \left(\jmath \Omega\right)$ è la trasformata di Fourier del filtro anti-imaging dentro al convertirore D/A reale 
+\end{itemize}
+
+$x_c \left(t\right)$ viene variato da tutti i blocchi della seguente pipeline. \newline 
+
+Il sistema LTI discreto può compensare l'effetto degli altri sistemi analogico. \newline 
+
+A questi segnali, va sommato il rumore di quantizzazione. \newline 
+
+\begin{tcolorbox}
+    In questo corso, per distorsione si intende che il filtro e/o il sistema modifica lo spettro in modo non lineare (e che quindi vengono sommate delle frequenze in più rispetto al segnale prima del filtro). \newline 
+
+    Invece, per modifica dello spettro si intende che il filtro e/o il sistema modifica lo spettro in modo lineare (e che quindi vengono tolte delle frequenze rispetto al segnale prima del filtro perchè abbiamo a che fare con "sistemi LTI tristi"). \newline 
+    
+    Il sistema LTI, per essere utile, non deve togliere le componenti in frequenze dove è contenuta l'informazione (sennò non è più possibile recuperarla)
+\end{tcolorbox}
+
+\newpage 
+
+
+
