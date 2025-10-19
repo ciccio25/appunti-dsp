@@ -959,4 +959,318 @@ Invece, la pipeline reale sarà ben diversa. \newline
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 13\\
     Appunti| 2025-10-14 | pag 2
+} 
+
+Considerando la pipeline ideale: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistema a blocchi dell'elaborazione di un segnale analogico con sistema discreto.png}
+\end{figure}  
+
+ora passeremo alla pipeline A/D reale. \newline 
+
+Partiamo dallo stadio iniziale, cioè il campionamento. \newline
+
+Il campionamento ideale è il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Campionamento ideale schema a blocchi.png}
+\end{figure}  
+
+Invece, adesso dobbiamo considerare la conversione da analogico a digitale reale. \newline 
+
+Di seguito la pipeline della conversione A/D reale (con delle note nei vari stadi): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{ADC pipeline reale.png}
+\end{figure}  
+
+La limitatezza in banda è un requisito fondamentale per la elaborazione del segnale $x_a (t)$. \newline 
+
+Partendo da sinistra, 
+il segnale da campionare $x_c \left( t\right)$ passa al filtro anti-aliasing (in figura ed in inglese "Antialiasing filter"). \newline 
+
+\newpage 
+
+Idealmente il filtro anti-aliasing $H_{aa} \left(\jmath \Omega\right)$ ha il seguente spettro: 
+
+{
+    \Large 
+    \begin{equation}
+        H_{aa} \left(\jmath \Omega\right) 
+        = 
+        \begin{cases}
+            1 \text{ per } \abs{\Omega} < \dfrac{\Omega_s}{2} 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
 }
+
+come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Filtro interpolatore in frequenza.png}
+\end{figure}  
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la figura sopra scrvendo 1 al posto di T e $H_{aa} \left(\jmath \Omega\right)$ al posto di $H_{r} \left(\jmath \Omega\right)$
+\end{tcolorbox} 
+
+Invece $H_{aa} \left(\jmath \Omega\right)$ reale, ha il seguente andamento (considerando solo le pulsazioni $\Omega$ positive): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro anti-aliasing reale.png}
+\end{figure}  
+
+Quindi il filtro anti-aliasing reale $H_{aa} \left(\jmath \Omega\right)$ non è una finestra rettangolare 
+(cioè la banda di transizione non è ripida come la finestra rettangolare). \newline 
+
+\newpage 
+
+\subsection{Sample \& Hold}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 14\\
+    Appunti| 2025-10-14 | pag 2 - 3
+} 
+
+Dopo il filtro Antialiasing $H_{aa} \left(\jmath \Omega\right)$, come si vede nello schema:  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{ADC pipeline reale.png}
+\end{figure}   
+
+il segnale $x_a \left(t\right)$ passa al Sample \& Hold. \newline 
+
+Il Sample \& Hold è quel circuito che mantiene costante il valore campionato per un tempo T. \newline 
+
+Di seguito un confronto tra due segnali: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Segnale che passa in un Sample and Hold.png}
+\end{figure}   
+
+dove: 
+
+\begin{itemize}
+    \item in blu è il segnale prima del Sample \& Hold, cioè $x_a (t)$ 
+    \item in rosso è il segnale dopo il Sample \& Hold, cioè $x_o (t)$ 
+\end{itemize}
+
+Dal punto di vista circuitale avremo il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Sample and Hold circuito.png}
+\end{figure}   
+
+dove, dal punto di vista analitico, nel tempo avremo che il segnale dopo il S\&H è il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        x_0 \left(t\right)
+        = 
+        h_0 \left(t\right)
+        * 
+        \sum_{n = -\infty}^{+\infty}
+        x_a \left(n T\right) \cdot \delta \left(t - nT\right)
+    \end{equation}
+}
+
+cioè il zero-order hold svolge una convoluzione tra la risposta impulsiva del filtro $h_0 \left(t\right)$ e il segnale $x_a \left(t\right)$ campionato ogni periodo T. \newline 
+
+\newpage 
+
+La risposta impulsiva del zero-order hold nel tempo è la seguente (considerando solo il tempo positivo): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Risposta impulsiva zero order hold.png}
+\end{figure}   
+
+cioè una finestra rettangolare nel tempo. \newline 
+
+Come sappiamo bene (è la tremiliardesima volta che lo scrivo), 
+la trasformata di Fourier di una finestra rettangolare è un sinc. \newline 
+
+Quindi, il zero-order hold $h_o \left(t\right)$ in frequenza è il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        H_o \left(\jmath \Omega\right)
+        = 
+        \dfrac{2 \sin \left( \dfrac{\Omega T}{2}\right)}{\Omega}
+        e^{\frac{-\jmath \Omega T}{2}}
+    \end{equation}
+}
+
+Se consideriamo sia lo spettro dei moduli e delle fasi di $H_o \left(\jmath \Omega\right)$ è il segeunte (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Zero order hold in frequenza.png}
+\end{figure}   
+
+Questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione di cut-off $\dfrac{\Omega_s}{2}$, 
+il filtro zero-oder hold diminuisce il segnale di 4 dB, che è circa metà del segnale iniziale. \newline 
+
+\begin{tcolorbox}
+    Questo corso di DSP non si occupa su come è fatto fisicamente il Sample \& Hold, per noi il S\&H sarà un unico blocco. \newline 
+    
+    Ci penserà la prof.ssa Susanna Spinsante al corso di Misure Elettroniche
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Conversione A/D}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 15\\
+    Appunti| 2025-10-14 | pag 3
+} 
+
+Il convertitore A/D è quel blocco che converte una grandezza analogica (generalmente una tensione) costante all'igresso in un numero digitale (che è facilmente interpretabile ed elaborabile da un sistema digitale). \newline 
+
+L'operazione richiede un certo tempo di conversione che deve essere inferiore al periodo di campionamento T. \newline 
+
+\begin{tcolorbox}
+Come studiato nel corso di Telecomunicazioni digitali, 
+esistono diversi tipi di conversione analogico-digitale: adesso consideriamo la conversione analogico-digitale più semplice.      
+\end{tcolorbox} 
+
+Considerando in uscita dal convertitore A/D un codice digitale complemento a 2 sing-magnitude offset binary, allora avremo il seguente grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{Conversione AD a gradini.png}
+\end{figure}   
+
+Se il periodo di campionamento $\Delta$ tende a zero ed i valori dei codici sono infiniti, 
+avremo la linea tratteggiata blu in figura. \newline 
+
+Questa osservazione è importante perchè, nella conversione reale analogico-digitale, il periodo di campionamento è diverso da zero ed i valori dei codici sono finiti. \newline 
+
+Nel dettaglio, in realtà la conversione analogico-digitale associa un'insieme di valori analogici compresi nell'intervallo del convertitore e lo associa al valore dell'intervallo stesso. \newline 
+
+\begin{tcolorbox}
+    Se vuoi avere un approfondimento sul concetto e le implicazioni che esistono tra virgola fissa e virgola mobile: \newline
+     
+    \url{https://infodoc.altervista.org/esercizi-risolti-conversioni-binario-ottale-esadecimale-con-spiegazione/numeri-reali-rappresentazione-in-virgola-fissa-e-in-virgola-mobile/}
+\end{tcolorbox}
+
+\newpage 
+
+Dal punto di vista grafico, per ogni intervallo, con il criterio della distanza minima e la virgola fissa, avremo che: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.15]{Associazione analogico digitale con distanza minima.png}
+\end{figure}   
+
+Quindi, la conversione analogico-digitale introduce un errore perchè, una volta che si fa una conversione analogico digitale, non si può ritornare al valore iniziale analogico. \newline 
+
+\newpage 
+
+\subsubsection{Errore di quantizzazionne}
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 16\\
+    Appunti| 2025-10-14 | pag 3
+} 
+
+\begin{tcolorbox}
+    Il corso di Misure elettroniche andrà nel dettaglio sul concetto di errore, 
+    ma se vuoi avere un assaggio del concetto di errore, puoi vedere questo video: \newline 
+
+    Quantization Error, SNR of Sinusoidal \& SNR of Non-Sinusoidal Signals by Engineering Funda \\
+    \url{https://www.youtube.com/watch?v=aVV_GXHTr9M}
+\end{tcolorbox}
+
+Se consideriamo il segnale $\hat{x} \left[ n\right]$ dopo la conversione analogico digitale: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x} \left[  n\right] = x \left[n \right] + e \left[n \right]
+        \text{ con }
+        -\frac{\Delta}{2} < e \left[ n\right] < + \frac{\Delta}{2} 
+    \end{equation}
+    
+}
+
+dove: 
+
+\begin{itemize}
+    \item $x \left[n \right]$ è il segnale quantizzato idealmente 
+    \item $e \left[ n\right]$ è l'errore che lo calcoliamo statisticamente
+\end{itemize}
+
+Quindi il segnale campionato reale $\hat{x} \left[n\right]$ possiamo vedere come combinazione lineare tra il segnale quantizzato ideale e il rumore discreto. \newline 
+
+\begin{tcolorbox}
+    In questo corso di DSP, andremo a considerare la sequenza campionata reale $\hat{x} \left[ n\right]$ uguale a quella campionata ideale $x \left[n\right]$ senza l'errore di quantizzazione $e \left[n\right]$, 
+    ma ricordiamoci che  $\hat{x} \left[ n\right]$ e $x \left[n\right]$ non sono la stessa cosa. \newline 
+
+    Tutte le considerazioni seguenti sull'errore di quantizzazione non sono necessari in questo corso. 
+\end{tcolorbox}
+
+Come studiato nel corso di Telecomunicazioni digitali, per ipotesi l'errore di quantizzazione $e \left[ n\right]$ è modellato come rumore bianco stazionario, 
+incorrelato con $x \left[ n\right]$ e con probabilità uniforme nell'intervallo dato. \newline 
+
+Per un converitotore A/D a B+1 bit, facendo i passi step-by-step e sfruttando le proprietà dei logaritmi: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            SNR 
+            &= 
+            \left.
+            \dfrac{\text{potenza segnale}}{\text{potenza rumore}}
+            \right|_{dB} 
+            \\
+            &= 
+            6.02B + 10.8 - 10 \log_{10} \left( \dfrac{X^{2}_m}{\sigma^{2}_x}\right)
+            \\
+            &= 
+            6.02B + 10.8 - 10 \log_{10} \left( \dfrac{X_m}{\sigma_x}\right)^{2}
+            \\
+            &= 
+            6.02B + 10.8 - 2 \cdot 10 \log_{10} \left( \dfrac{X_m}{\sigma_x}\right)
+            \\
+            &= 
+            6.02B + 10.8 - 20 \log_{10} \left( \dfrac{X_m}{\sigma_x}\right) 
+        \end{split}
+    \end{equation}
+} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
+È $20 \log_{10} \left( \dfrac{X_m}{\sigma_x}\right)$ giusto, quindi log in base 10?   
+\end{tcolorbox} 
+
+dove: 
+
+\begin{itemize}
+    \item $X_m$ è il valore massimo all'ingresso 
+    \item $\sigma^{2}_x$ è la potenza del segnale
+\end{itemize}
+
+\newpage 
+
+\subsection{Conversione D/A reale} 
+
+\footnote{ 
+    Slide del prof | 4 - Campionamento | pag 17\\
+    Appunti| 2025-10-14 | pag 3
+} 
+
