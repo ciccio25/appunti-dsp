@@ -468,3 +468,273 @@ Data la seguente sequenza:
 
 Allora possiamo formulare la trasformata-z bilatera di $x \left[ n\right]$ come: 
 
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X \left( z\right)
+            = 
+            \sum_{n = -\infty}^{+ \infty}
+            x \left[ n\right] \cdot z^{-n}
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+Siccome la sequenza $x \left[ n\right]$ si estende solo da $n \in \left[ - \infty, - 1\right]$, 
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X \left( z\right)
+            &= 
+            \sum_{n = -\infty}^{+ \infty}
+            x \left[ n\right] \cdot z^{-n}
+            \\
+            &\downarrow
+            \\
+            X \left( z\right)
+            &= 
+            \sum_{n = -\infty}^{- 1}
+            \left( - \alpha^{n}\right) \cdot z^{-n}
+            \\
+            &= 
+            -
+            \sum_{n = 1}^{+ \infty}
+            \left(  \dfrac{z}{\alpha}\right)^{n}
+            \\
+            &= 
+            -
+            \left(  \dfrac{z}{\alpha}\right)
+            \cdot
+            \sum_{n = 0}^{+ \infty}
+            \left(  \dfrac{z}{\alpha}\right)^{n}
+            \\
+            &= 
+            \dfrac{- \left(  \dfrac{z}{\alpha}\right) \cdot 1}{1 - \left(  \dfrac{z}{\alpha}\right)}
+            \\
+            &= 
+            \dfrac{1}{1 - \alpha \cdot z^{-1}}
+        \end{split}
+    \end{equation}
+}
+
+Cioè la serie è come l'esercizio 1, ma in questo caso converge se: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{z} < \abs{\alpha}
+    \end{equation}
+}
+
+Nel piano z, possiamo vedere $X \left(z\right)$ in questa maniera: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.5]{Esercizio 2 calcolo della convergenza trasformata z.png}
+\end{figure} 
+
+dove, in figura, in tratteggiato è la stessa regione di convergenza dell'esercizio 1 ma in senso opposo. \newline 
+
+\newpage 
+
+\section{Alcune trasformate-z notevoli} \label{sec: Alcune trasformate-z notevoli}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 6 \\
+    Appunti| 2025-10-15 | pag 2
+}
+
+Come nelle altre trasformate, come la DTFT, anche nella trasformata-z ci sono delle trasformate notevoli (cioè che ogni volta non dobbiamo calcolarci). \newline 
+
+Di seguito le principali, dove a sinistra indicheremo nel dominio delle sequenze n, invece a destra nel dominio z delle trasformate-z. \newline 
+
+La trasformata-z di un impulso $\delta \left[ n\right]$ nel dominio n, è uguale a 1 nel dominio z, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[ n\right]
+        \leftrightarrow 
+        1
+    \end{equation}
+}
+ 
+in cui la regione di convergenza (cioè la ROC) è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ 1\right\} = \forall z
+    \end{equation}
+}
+
+La trasformata-z di un gradino $u \left[ n\right]$ nel dominio n, è uguale alla seguente funzione razionale nel dominio z: 
+
+{
+    \Large 
+    \begin{equation}
+        u \left[ n\right] 
+        = 
+        \dfrac{1}{1 - z^{-1}}
+    \end{equation}
+}
+
+dove la radice del polinomio è uguale a 1, quindi la sua ROC è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ \dfrac{1}{1 - z^{-1}} \right\} = \abs{z} > 1
+    \end{equation}
+}
+
+La trasformata-z di un gradino ribaltato $- u \left[ - n - 1\right]$ nel dominio n, è uguale alla seguente funzione razionale nel dominio z: 
+
+{
+    \Large 
+    \begin{equation}
+        - u \left[ - n - 1\right] 
+        = 
+        \dfrac{1}{1 - z^{-1}}
+    \end{equation}
+}
+
+dove la radice del polinomio è uguale a 1, quindi la sua ROC è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ \dfrac{1}{1 - z^{-1}} \right\} = \abs{z} < 1
+    \end{equation}
+}
+
+cioè è la stessa del gradino $u \left[ n\right]$ ma in verso opposto. \newline 
+
+La trasformata-z di una retta moltiplicata per un esponenziale moltiplicato a sua volta per un gradino, 
+cioè $n \cdot \alpha^{n} \cdot  u \left[ n\right]$ nel dominio n, è uguale alla seguente funzione razionale nel dominio z: 
+
+{
+    \Large 
+    \begin{equation}
+        n \cdot \alpha^{n} \cdot  u \left[ n\right]
+        = 
+        \dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}
+    \end{equation}
+}
+
+dove la radice del polinomio è uguale a $\alpha$, quindi la sua ROC è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ \dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}} \right\} 
+        = 
+        \abs{z} > \abs{\alpha}
+    \end{equation}
+}
+
+\newpage 
+
+La trasformata-z di una retta negativa moltiplicata per un esponenziale moltiplicato a sua volta per un gradino ribaltato e ritardato di 1, 
+cioè $- n \cdot \alpha^{n} \cdot  u \left[ -n -1 \right]$ nel dominio n, è uguale alla seguente funzione razionale nel dominio z: 
+
+{
+    \Large 
+    \begin{equation}
+        -n \cdot \alpha^{n} \cdot  u \left[ -n - 1\right]
+        = 
+        \dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}
+    \end{equation}
+}
+
+dove la radice del polinomio è uguale a $\alpha$, quindi la sua ROC è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ \dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}} \right\} 
+        = 
+        \abs{z} < \abs{\alpha}
+    \end{equation}
+}
+
+
+cioè è la stessa del gradino $n \cdot \alpha^{n} \cdot  u \left[ n\right]$ ma in verso opposto. \newline 
+
+Dopo l'elenco di alcune trasformate notevoli, possiamo svolgere alcune osservazioni. \newline 
+
+Per avere corrispondenza biunivoa tra sequenze e trasformata occorre specificar la regione di convergenza (cioè la ROC). \newline 
+
+Prendendo per esempio la funzine razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
+se indichiamo come ROC $\abs{z} < \abs{\alpha}$, avremo, nel dominio n, la sequenza $-n \cdot \alpha^{n} \cdot  u \left[ -n - 1\right]$. \newline 
+
+Se abbiamo la stessa funzione razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
+ma in questo caso indichiamo come ROC $\abs{z} > \abs{\alpha}$, avremo, nel dominio n, la sequenza $n \cdot \alpha^{n} \cdot  u \left[ n\right]$. \newline 
+
+Inoltre, un'altra osservazione è che le trasformate di nostro interesse in questo corso di DSP sono, in genere, 
+funzioni razionali della variabile z o della variabile $z^{-1}$. \newline  
+
+\newpage 
+
+\subsection{Trafsormazione inversa}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 10 \\
+    Appunti| 2025-10-15 | pag 2
+}
+
+Come tutte le trasformate, una volta che si sono svolti i conti in un dominio, in questo caso quello delle z, 
+si vuole ritornare nel dominio delle sequenze n. \newline 
+
+Come specificato nelle osservazioni riguardo le trasformate notevoli, 
+specificando la ROC, c'è corrispondenza biunivoca tra $x \left[ n\right]$ nel dominio n e la sua trasformata-z $X \left( z\right)$. \newline 
+
+Esistono principalmente tre metodi per svolgere la trasformazione inversa: 
+
+\begin{itemize}
+    \item metodo per ispezione 
+    \item metodo per espansione in serie 
+    \item espansione in fratti semplici
+\end{itemize} 
+
+Adesso specifichiamo come si svolgono i vari metodi. \newline 
+
+Nel metodo per ispezione si utilizzano le tabelle sequenza-trasformata all'inverso 
+(vedi \ref{sec: Alcune trasformate-z notevoli} \nameref{sec: Alcune trasformate-z notevoli} pag \pageref{sec: Alcune trasformate-z notevoli} ) \newline 
+
+Ad esempio: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(z\right)
+        =
+        \dfrac{5}{\alpha z^{-1}} 
+    \end{equation}
+}
+
+in cui la ROC è: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{z} > \abs{\alpha}
+    \end{equation}
+}
+
+allora, sapendo la ROC e $X \left( z\right)$ possiamo ritornare nel dominio n delle sequenze, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        5 \alpha^{n} u \left[ n\right]
+    \end{equation}
+}
+
