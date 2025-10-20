@@ -13,3 +13,458 @@
     Slide del prof | 5 - Trasformata Z | pag 2\\
     Appunti| 2025-10-15 | pag 1
 }
+
+\begin{tcolorbox}
+    Se vuoi sapere in breve cosa è la trasformata Z, ti lascio questo Youtube Short di Brainlink: \newline 
+
+     La trasformata Z in meno di un minuto! \#matematica \#ingegneria by Brainlink\\
+    \url{https://youtube.com/shorts/6nIIco6OXf8?si=WAR3CFyNb4un3xg2} \newline 
+
+    Se invece vuoi un maggiore approfondimento di cosa è una trasformata Z, ti lascio questo video: \newline 
+    
+    La Trasformata Z: Definizione proprietà esempi numerici. Segnali discreti by YouSciences by GIUX \\
+    \url{https://youtu.be/IDvYw9X0DzE?si=lmpye9MnX8WPw0Bk}
+\end{tcolorbox}
+
+La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove il tempo non è più continuo, bensì il tempo è discreto. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 10}
+Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, ci servirà per studiare il transitorio della funzione? 
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+    In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se: 
+
+    {
+        \Large 
+        \begin{equation}
+            F(s) 
+            = 
+            \lim_{t \to +\infty} 
+            \int_{0}^{t}
+            f(\tau) \cdot e^{-s \tau}
+            d\tau
+        \end{equation}
+    }
+
+    dove: 
+
+    {
+        \Large 
+        \begin{equation}
+            s = \sigma + \jmath \omega
+        \end{equation}
+    }
+
+    In particolare, noi abbiamo studiato nel corso di Elettrotecnica la trasformata di Laplace unilatera, 
+    cioè in cui l'integrale della trasformata parte dal tempo $t = 0$ e tende a $+ \infty$, proprio perchè i sistemi reali (condensatore, induttore, resistore, ecc...) 
+    sono componenti causali. \newline 
+    
+    Invece, nella forma più generale, possiamo definire la trasformata di Laplace bilatera come: 
+
+    {
+        \Large 
+        \begin{equation}
+            F(s) 
+            = 
+            \int_{- \infty}^{+\infty}
+            f(\tau) \cdot e^{-s \tau}
+            d\tau
+        \end{equation}
+    }
+
+    e quindi dove l'integrale viene svolto nell'intervallo $\left[ - \infty, + \infty\right]$. \newline 
+
+    Utilizzando la trasformata di Laplace bilatera, si possono studiare anche sistema non causali. \newline 
+
+    Se vuoi un piccolo ripasso della trasformata di Laplace: 
+
+    \begin{itemize}
+        \item Trasformata di Laplace - Wikipedia\\ \url{https://it.wikipedia.org/wiki/Trasformata_di_Laplace} 
+        \item But what is a Laplace Transform? by 3Blue1Brown\\ \url{https://youtu.be/j0wJBEZdwLs?si=ZzA0q2zRbt_2Nfrc}
+    \end{itemize}
+\end{tcolorbox}
+
+\newpage 
+
+Come nella trasformata di Laplace, possiamo definire due tipi di trasformate-Z. \newline 
+
+La trasformata-z bilatera ha la seguente forma: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(z\right)
+        = 
+        Z \left\{ 
+            x \left[ n\right]
+        \right\}
+        = 
+        \sum_{n = -\infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        z^{-n}
+    \end{equation}
+}
+
+dove $x \left[ n\right]$ è una sequenza a tempo discreto. \newline 
+
+Notiamo che la trasformata-z è bilatera perchè la sommatoria è svolta per $n \in \left[ - \infty, + \infty\right]$. \newline 
+
+\begin{tcolorbox}
+    La z in $X\left(z\right)$ non è una variabile discreta, bensì è continua perchè ci troviamo nel piano complesso. 
+\end{tcolorbox}
+
+Oltre alla trasformata-z bilatera, è possibile definire la trasformata-z monolatera come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(z\right)
+        = 
+        Z \left\{ 
+            x \left[ n\right]
+        \right\}
+        = 
+        \sum_{n = 0}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        z^{-n}
+    \end{equation}
+}
+
+Notiamo che la trasformata-z è unilatera perchè la sommatoria è svolta per n che parte da 0 e finisce a $+\infty$. \newline 
+
+\begin{tcolorbox}
+    La trasfomata-z unilatera è la trasformata che ci interessa di più a fini ingegneristici perchè, per la maggior parte dei casi, 
+    avremo a che fare con segnali e sistemi causali, e che quindi partono dall'indice $n = 0$. 
+\end{tcolorbox}
+
+Possiamo svolgere le seguenti osservazioni: 
+
+\begin{itemize}
+    \item il piano Z in cui si svolge la trasformata Z è un piano complesso (e quindi con un asse della parte reale ed immaginaria) 
+    \item la trasformata-z bilatera e unilatera coincidono se le sequenze sono causali, cioè: 
+    {
+        \Large 
+        \begin{equation}
+     x \left[ n\right] = 0 \forall n < 0        
+        \end{equation}
+    }
+    
+    \item la trasformata bilatera coincide con la DTFT per: 
+    {
+        \Large 
+        \begin{equation}
+     z = e^{\jmath \omega}       
+        \end{equation}
+    } 
+    se questa esiste (vedi \ref{subsec: Esistenza della trasformata} \nameref{subsec: Esistenza della trasformata} a pag \pageref{subsec: Esistenza della trasformata}) 
+    \item Entrambe sono operatori lineari, cioè :
+    
+    {
+        \Large 
+        \begin{equation}
+       Z \left\{a x_1 \left[ n\right] + b x_2 \left[ n\right]\right\} 
+       = 
+       a Z \left\{ x_1 \left[ n\right]\right\} + b Z \left\{ x_2 \left[ n\right]\right\}     
+        \end{equation}
+    } 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 11}
+Entrambe chi, le due trasformate-z bilatera e monolatera? 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Regione di convergenza - ROC}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 3\\
+    Appunti| 2025-10-15 | pag 1
+}
+
+In generale la serie $X \left(z \right)$ converge \textbf{solo} per certi valori di z. \newline 
+
+Se poniamo z come: 
+
+{
+    \Large 
+    \begin{equation}
+        z = \abs{z} \cdot e^{\jmath \omega}
+    \end{equation}
+} 
+
+allora la trasformata-z bilatera sarà uguale a (facendo le sostituzioni): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left(z\right)
+        = 
+        Z \left\{ 
+            x \left[ n\right]
+        \right\}
+        &= 
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        z^{-n}
+        \\
+        &\downarrow
+        \\
+        X \left(z\right)
+        &=
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        \left(
+            \abs{z} \cdot e^{\jmath \omega}
+        \right)^{-n}
+        \\
+        &=
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        \abs{z}^{-n} 
+        \cdot 
+        e^{-\jmath \omega n}
+        \end{split}
+    \end{equation}
+}
+
+La trasformata-z bilatera $X \left(z\right)$ converge se: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{
+        x \left[ n\right]
+        \cdot 
+        \abs{z}^{-n}
+        }
+        < 
+        + \infty
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 12}
+Non andiamo a vedere la convergenza di $\sum_{n = - \infty}^{+ \infty} x \left[ n\right] e^{-\jmath \omega n}$ perchè è sinusoidale?  
+\end{tcolorbox} 
+
+cioè, detta in parole, la sommatoria converge se è assolutamente sommabile (vedi il modulo per indicare il valore assoluto tra $ x \left[ n\right]\cdot \abs{z}^{-n}$). \newline 
+
+\newpage 
+
+Possiamo svolgere delle interessanti osservazioni in merito alla regione di convergenza (chiamata anche ROC, dall'inglese Region of Convergence) nella trasformata-z: 
+
+\begin{itemize}
+    \item la trasformata-z può essere applicata ad una classe di sequenze più ampie rispetto alla trasformata di Fourier per le sequenze a tempo discreto (cioè la DTFT)
+    \item se la trasformata-z converge per un valore: 
+    {
+        \Large 
+        \begin{equation}
+            z_0 = \abs{z_0} \cdot e^{\jmath \omega_0}
+        \end{equation}
+    }
+    allora la trasformata-z converge in tutti i punti della circonferenza di raggio $\abs{z_0}$ e centro dell'origine, come si vede bene in figura: 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{convergenza per una ROC.png}
+    \end{figure} 
+    \item calcolare la trasformata di Fourier a tempo discreto (cioè la DTFT) equivale a valutare la trasformata Z sul cerchio unitario 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 13}
+"calcolare la trasformata di Fourier a tempo discreto (cioè la DTFT) equivale a valutare la trasformata Z sul cerchio unitario " perchè la DTFT si basa sugli impulsi unitari?
+\end{tcolorbox} 
+
+\newpage 
+
+\subsubsection{Esempi di calcolo della trasformata z}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 4 - 5\\
+    Appunti| 2025-10-15 | pag 2
+}
+
+Le seguenti formule sono assai utili: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = 0}^{+ \infty}
+        \alpha^{-n}
+        = 
+        \dfrac{1}{1 - \alpha^{-1}}
+        \text{ per } \abs{\alpha} < 1
+    \end{equation}
+}
+
+cioè una serie geometria da $n = 0$ a $n = + \infty$ tende a quel termine. \newline 
+
+\begin{tcolorbox}
+    La serie geometrica l'avevamo viste anche ad Analisi Matematica 1: \newline 
+
+    Serie geometrica - Wikipedia \url{https://it.wikipedia.org/wiki/Serie_geometrica}
+\end{tcolorbox}
+
+Invece se è una geometrica finita, cioè per una sommatoria con $n \in \left[ n_1, n_2\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = n_1}^{n_2}
+        \alpha^{-n}
+        = 
+        \dfrac{\alpha^{- n_1} - \alpha^{- \left( n_1 + 1\right)} }{1 - \alpha^{-1}}
+    \end{equation}
+}
+
+allora possiamo continuare con gli esercizi di esempio. \newline 
+
+\begin{tcolorbox}
+Tutti i calcoli che svolgo in queste pagine, ve le potete risparmiare, non sono necessarie per l'esame: serve solo a capire come ci si arriva alle formule indicate nelle slides. \newline 
+
+Considerato solo l'inizio e la fine di ogni esercizio.
+\end{tcolorbox}
+
+\newpage 
+
+\textbf{Esercizio 1} \newline 
+
+Se consideriamo la successione $x \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \alpha^{n} \cdot u \left[ n\right]
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $\alpha^{n}$ è un esponenziale 
+    \item $u \left[ n\right]$ è un gradino
+\end{itemize}
+
+allora, possiamo definire la trasformata-z bilatera di $x \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(z\right) 
+        = 
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right] \cdot z^{- n} 
+    \end{equation}
+}
+
+Siccome $u \left[ n\right]$ è un gradino, cioè una sequenza causale, 
+allora possiamo definire la trasformata-z della sequenza $x \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left(z\right) 
+        &= 
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right] \cdot z^{- n}
+        \\
+        &\downarrow
+        \\
+        X \left(z\right) 
+        &= 
+        \sum_{n = 0}^{+ \infty}
+        x \left[ n\right] \cdot z^{- n}     
+        \end{split}
+    \end{equation}
+}
+
+cioè, la trasformata-z da bilatera diventa unilatera a causa della sequenza causale e la sommatoria parte da $n = 0$ e non da $n = - \infty$. \newline 
+
+Continuando con la sommatoria (step-by-step): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left(z\right) 
+        &= 
+        \sum_{n = 0}^{+ \infty}
+        x \left[ n\right] \cdot z^{- n}     
+        \\
+        &= 
+        \sum_{n = 0}^{+ \infty}
+        \alpha^{n} \cdot z^{- n} 
+        \\
+        &= 
+        \sum_{n = 0}^{+ \infty}
+        \left( \alpha \cdot z^{-1}\right)^{n}
+        \\
+        &= 
+        \dfrac{1}{1 - \alpha \cdot z^{-1}}
+        \end{split}
+    \end{equation}
+}
+
+$\dfrac{1}{1 - \alpha \cdot z^{-1}}$ è una funzione razionale reale. \newline 
+
+\begin{tcolorbox}
+    Un piccolo ripasso al volo di cosa è una funzione razionale reale: \newline 
+
+    Funzione razione - Wikipedia \url{https://it.wikipedia.org/wiki/Funzione_razionale}
+\end{tcolorbox}
+
+Siccome la radice del polinomio è uguale ad $\alpha$, 
+allora $X \left(z\right)$ sarà discontinua in quel punto. \newline 
+
+\begin{tcolorbox}
+    Un ripasso di cosa si intende per radice di un polinomio: \newline 
+    
+    \url{https://www.andreaminini.org/matematica/algebra/zeri-di-un-polinomio}
+\end{tcolorbox}
+
+Quindi, $X \left( z\right)$ converge se: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{z} > \abs{\alpha}
+    \end{equation}
+}
+
+Nel piano z, possiamo vedere $X \left(z\right)$ in questa maniera: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.5]{Esercizio 1 calcolo della convergenza trasformata z.png}
+\end{figure} 
+
+dove in tratteggiato sono tutti i punti nel piano dove può convergere $X \left(z\right)$ se $\abs{z} > \abs{\alpha}$. \newline 
+
+\textbf{Esercizio 2} \newline 
+
+Data la seguente sequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] = - \alpha^{n} \cdot u \left[ - n - 1\right]
+    \end{equation}
+}
+
+\begin{itemize}
+    \item $\alpha^{n}$ è un esponenziale 
+    \item $u \left[ - n - 1\right]$ è un gradino ribaltato, shiftato di -1 quindi non causale perchè per $n = 0$ avremo $u \left[- 1\right]$ cioè un valore precedente rispetto all'istante iniziale di osservazione, che appunto è $n = 0$ 
+\end{itemize}
+
+Allora possiamo formulare la trasformata-z bilatera di $x \left[ n\right]$ come: 
+
