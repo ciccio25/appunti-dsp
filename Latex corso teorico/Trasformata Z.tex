@@ -738,3 +738,256 @@ allora, sapendo la ROC e $X \left( z\right)$ possiamo ritornare nel dominio n de
     \end{equation}
 }
 
+Nel metodo per espansione in serie, invece, ci si riporta ad una espressione come serie di potenze in $z^{-1}$, i coefficienti sono i valori delle sequenze \newline 
+
+Un esempio pratico: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.5]{Metodo per espansione in serie trasformata z.png}
+\end{figure} 
+
+\newpage 
+
+Invece, nel metodo ad espensansione in fratti semplici, se $X \left(z\right)$ è una funzione razionale, 
+si può utilizzare lo stesso approccio utilizzato in Laplace, cioè quello di espandere $X \left(z\right)$ in fratti semplici e poi fare la trasformazione inversa dei singoli componenti con le tabelle 
+(vedi \ref{sec: Alcune trasformate-z notevoli} \nameref{sec: Alcune trasformate-z notevoli} pag \pageref{sec: Alcune trasformate-z notevoli} ). \newline 
+
+\begin{tcolorbox}
+    Per avere un ripasso al volo di quello che facevamo ad Elettrotecnica per l'antitrasformata di Laplace: \newline 
+
+    \url{https://www.youmath.it/forum/analisi-complessa/21072-scomposizione-in-fratti-semplici-e-antitrasformata-di-laplace.html}
+\end{tcolorbox}
+
+\newpage 
+
+\section{Proprietà della ROC}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 7  - 8\\
+    Appunti| 2025-10-15 | pag 2
+}
+
+Come detto precedentemente, nella ROC la trasformata è una funzione analitca (tutte le discontinuità fuori o al bordo della ROC). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 14}
+Cosa si intende per "(tutte le discontinuità fuori o al bordo della ROC)" quando si parla di una funzione analitica?
+\end{tcolorbox} 
+
+Per sequenze di durata finita come la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = n_1}^{n_2}
+        x \left[ n\right] \cdot z^{-n}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{n_1}, \abs{n_2} < + \infty
+    \end{equation}
+}
+
+la ROC è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC = \forall z 
+    \end{equation}
+}
+
+in particolare da verificare per i punti $z = 0$ e $z = +\infty$. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 15}
+Perchè bisogna verificare la ROC per i punti $z = 0$ e $z = +\infty$?
+\end{tcolorbox} 
+
+Per sequenze monolatere destre come la seguente:
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = n_1}^{+ \infty}
+        x \left[ n\right] \cdot z^{-n}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        n_1 > - \infty
+    \end{equation}
+}
+
+la ROC è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC = \forall z: \abs{z} > \abs{z_0}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+Dal punto di vista ingegneristico, avremo a che fare la maggior parte delle volte con questo tipo di sequenze, 
+cioè le sequenze monolatere destre perchè sono sequenze causali, a differenza delle sequenze monolatere sinistre, 
+dove le sequenze non sono causali.     
+\end{tcolorbox}
+
+\newpage 
+
+Per sequenze monolatere sinistre come la seguente:
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{n_2}
+        x \left[ n\right] \cdot z^{-n}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        n_2 < + \infty
+    \end{equation}
+}
+
+la ROC è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC = \forall z: \abs{z} < \abs{z_0}
+    \end{equation}
+}
+
+Invece per sequenze (bilatere) generiche, se esiste una ROC avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC = \forall z: \abs{z_1}< \abs{z} < \abs{z_2}
+    \end{equation}
+}
+
+cioè la ROC è una regione anulare. \newline 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare dei disegni delle ROC in questi quattro tipi di sequenze
+\end{tcolorbox} 
+
+La ROC è una regione connessa. \newline 
+
+La trasformata di Fourier a tempo discreto (cioè la DTFT) converge assolutamente se e solo se la ROC contiene il cerchio unitario. \newline 
+
+Da un punto di vista grafico, avremo che: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.4]{ROC in una DTFT.png}
+\end{figure} 
+
+\newpage 
+
+\section{Funzioni razionali in Z}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 9\\
+    Appunti| 2025-10-15 | pag 2
+}
+
+Considerando una funzione razionale in z: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left( z\right)
+        = 
+        \dfrac{N \left(z\right)}{D \left(z\right)}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $N \left(z\right)$ è il polinomio z numeratore di $X \left( z\right)$ 
+    \item $D \left(z\right)$ è il polinomio z denominatore di $X \left( z\right)$ 
+\end{itemize}
+
+Spesso si preferisce la forma (equivalente) in $z^{-1}$. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 16}
+Come cambia la funzione razionale $X \left( z\right)$ in $z^{-1}$? \newline 
+
+Il numeratore $N \left(z\right)$ diventa il denominatore e viceversa?  
+\end{tcolorbox} 
+
+Si chiamano zeri di $X \left(z\right)$ tutti quei valori per cui $X \left( z\right) \to 0$. \newline 
+
+Si chiamano poli di $X \left(z\right)$ tutti quei valori per cui $X \left( z\right) \to + \infty$. \newline 
+
+I poli sono: 
+
+\begin{itemize}
+    \item le radici del polinomio $D \left( z\right)$ 
+    \item se necessario anche $z = \infty$ è un polo
+\end{itemize}
+
+I poli solo le uniche discontinuità della funzione razionale $X \left(z\right)$. \newline 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Reimparare come rifare il luogo della radici e imparare come fare il luogo delle radici nel dominio z
+\end{tcolorbox} 
+
+Di seguito un esempio di una funzione di trasferimento $X \left(z\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X \left( z\right)
+            &= 
+            \dfrac{1 - 2 z^{-1}}{\left(1 - 3 z^{-1}\right) \left(1 + z^{-1}\right)}
+            \\
+            &= 
+            \dfrac{z \left(z -2\right)}{ \left( z - 3\right) \left(z + 1\right)}
+        \end{split}
+    \end{equation}
+}
+
+allora possiamo graficare $X \left(z\right)$ nel dominio z come: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.3]{ROC di esempio in una funzione razionale.png}
+\end{figure} 
+
+\newpage 
+
+Data $X \left(z\right)$ e visualizzando dal piano del dominio z, è possibile definire tre ROC: 
+
+\begin{itemize}
+    \item $\abs{z} < 1$ (dove avremo a che fare con una sequenza bilatera non-causale)
+    \item $1 < \abs{z} < 3$
+    \item $\abs{z} > 3$ (dove avremo a che fare con una sequenza bilatera causale)
+\end{itemize}
+
+\newpage 
+
+\section{Proprietà della trasformata-z}
+
+\footnote{ 
+    Slide del prof | 5 - Trasformata Z | pag 11 - 13\\
+    Appunti| 2025-10-15 | pag 3
+}
