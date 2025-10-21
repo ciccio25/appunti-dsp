@@ -990,4 +990,296 @@ Data $X \left(z\right)$ e visualizzando dal piano del dominio z, è possibile de
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 11 - 13\\
     Appunti| 2025-10-15 | pag 3
+} 
+
+\begin{tcolorbox}
+    Le proprietà della trasformata-z sono simili a quelle della trasformata di Laplace. \newline 
+
+    Le proprietà della trasformata-z non verranno richieste all'esame, ma saranno molto utili dal punto di vista pratico e per capire la relazione con la trasformata di Laplace.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare le foto di cosa succede per ogni proprietà che non ci sto capendo nulla senza qualche grafico di esempio.
+\end{tcolorbox} 
+
+Come ogni trasformata, anche la trasformata-z rispecchia delle proprietà. \newline 
+
+\textbf{Lineartità} \newline 
+
+Date: 
+
+\begin{itemize}
+    \item due sequenze nel dominio n $x_1$ e $x_2$ e le rispettive trasformate-z, quindi $X_1 \left(z\right)$ e $X_2 \left(z\right)$ 
+    \item due coefficienti a e b 
+\end{itemize}
+
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        a \cdot x_1 \left[ n\right]
+        + 
+        b \cdot x_2 \left[ n\right]
+        \leftrightarrow 
+        a \cdot X_1 \left( z\right)
+        + 
+        b \cdot X_2 \left( z\right)
+    \end{equation}
 }
+
+in cui la ROC dell'unione tra i due è: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ 
+        a \cdot X_1 \left( z\right)
+        + 
+        b \cdot X_2 \left( z\right)
+        \right\}
+        = 
+        ROC \left( X_1\right) 
+        \cap
+        ROC \left( X_1\right) \text{ come minimo} 
+    \end{equation}
+}
+
+\textbf{Traslazione nel tempo} \newline 
+
+Data: 
+
+\begin{itemize}
+    \item una sequenza nel dominio n $x \left[ n\right]$ e la sua trasformata-z $X \left(z\right)$
+    \item un coefficiente di ritardo $n_0$ nel dominio n
+\end{itemize}
+
+allora possiamo esprimere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n - n_0\right] 
+        \leftrightarrow
+        z^{- n_0} X \left( z\right)
+    \end{equation}
+}
+
+in cui la ROC vale: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ z^{- n_0} X \left( z\right) \right\}
+        = 
+        ROC \left( X \right) 
+        \text{ eccetto per } z = 0 \text{ oppure } z = + \infty
+    \end{equation}
+} 
+
+\textbf{Derivazione in Z} \newline 
+
+Data una sequenza $x \left[ n\right]$ e la sua trasformata-z $X \left(z\right)$, 
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        n \cdot x \left[ n\right]
+        \leftrightarrow 
+        - z \cdot \dfrac{\partial X \left( z\right)}{\partial z}
+    \end{equation}
+}
+
+in cui la ROC vale: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ z^{- n_0} X \left( z\right) \right\}
+        = 
+        ROC \left( X \right) 
+        \text{ eccetto per } z = 0 \text{ oppure } z = + \infty
+    \end{equation}
+} 
+
+\begin{tcolorbox}
+    Possiamo notare che la ROC, se si applica una traslazione nel tempo o una derivazione in z, 
+    non cambiano. 
+\end{tcolorbox}
+
+\textbf{Moltilplicazione per una sequenza esponenziale} \newline 
+
+Data: 
+
+\begin{itemize}
+    \item una sequenza nel dominio n $x \left[ n\right]$ e la sua trasformata-z $X \left( z\right)$ 
+    \item un coefficiente moltiplicativo del tipo $z_0$
+\end{itemize}
+
+possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        z_0^{n} \cdot x \left[ n\right]
+        \leftrightarrow 
+        X \left( \dfrac{z}{z_0}\right)
+        \text{ dove } z_0 \text{ costante}
+    \end{equation}
+}
+
+in cui la ROC vale: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ X \left( \dfrac{z}{z_0}\right) \right\}
+        = 
+        \abs{z_0} \cdot ROC \left( X\right) \text{ scalato}
+    \end{equation}
+}
+
+Se $d_k$ è un polo di $X \left(z\right)$, allora $z_0 d_k$ è un polo di $X \left( \dfrac{z}{z_0}\right)$. \newline 
+
+Per questo motivo, possiamo scrivere le sequenti proprietà: 
+
+\begin{itemize}
+    \item Se $z_0 \in \mathbb{R}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ si muovono radialmente 
+    \item Se $z_0 = e^{\jmath \omega_0}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ ruotano di $\omega_0$ (traslazione in frequenza della DTFT) 
+    \item Se $z_0 \in \mathbb{C}$ allora si eseguono tutti e due gli effetti contemporaneamente in $X \left( \dfrac{z}{z_0}\right)$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 17}
+Cosa si intende per "traslazione in frequenza della DTFT" ? \newline 
+
+Inoltre i poli e gli zeri si muovono in senso orario o anti-orario?
+\end{tcolorbox} 
+
+\textbf{Coniugazione complessa} \newline 
+
+Data una sequenza $x \left[ n\right]$ nel dominio n e la sua trasformata-z $X \left(z\right)$, 
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x^{*} \left[ n\right]
+        \leftrightarrow 
+        X^{*} \left(z^{*}\right)
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ X^{*} \right\}
+        = 
+        ROC \left( X \right) 
+    \end{equation}
+} 
+
+\newpage 
+
+\textbf{Rovesciamento nel tempo} \newline
+
+Data una sequenza nel dominio n $x \left[ n\right]$ e la sua trasformata-z $X \left( z\right)$, 
+possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ - n\right]
+        \leftrightarrow 
+        X \left( \dfrac{1}{z}\right)
+    \end{equation}
+}
+
+dove la ROC vale: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ X \left( \dfrac{1}{z}\right) \right\} 
+        = 
+        \dfrac{1}{ROC \left(X\right)}
+    \end{equation}
+}
+
+infatti una sequenza a destra, a causa del rovesciamente nel tempo, diventa sinistra e viceversa. \newline 
+
+\textbf{Convoluzione di sequenze} \newline
+
+\begin{tcolorbox}
+    Questa è la proprietà più importante della trasformata-z 
+\end{tcolorbox}
+
+Date due sequenze nel dominio n $x \left[ n\right]$ e $y \left[ n\right]$ e le rispettive trasformate-z, 
+cioè $X \left( z\right)$ e $Y \left( z\right)$, allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] * y \left[ n\right]
+        \leftrightarrow 
+        X \left(z \right) \cdot Y \left( z\right)
+    \end{equation}
+}
+
+cioè la convoluzione tra $x \left[ n\right]$ e $y \left[ n\right]$ nel dominio n è uguale al prodotto delle rispettive trasformate-z nel dominio z. \newline 
+
+Inoltre: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ X \left(z \right) \cdot Y \left( z\right) \right\} 
+        \text{ contiene }
+        ROC \left(X\right) \cap ROC \left( Y\right)
+    \end{equation}
+}
+
+\textbf{Valore iniziale e valore finale} \newline 
+
+Data una sequenza $x \left[  n \right]$ nel dominio n causale dove: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] 
+        = 
+        0 
+        \text{ } 
+        \forall n < 0
+    \end{equation}
+}
+
+e sapendo che la trasformata-z di $x \left[ n\right]$ è $X \left(z \right) $, 
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ 0\right]
+        = 
+        \lim_{z \to + \infty} X \left(z\right)
+    \end{equation}
+}
+
+e 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ + \infty \right]
+        = 
+        \lim_{z \to 1^{\pm}} \left( z - 1\right) \cdot X \left(z\right)
+    \end{equation}
+}
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 18}
+Il limite è 1 a destra o a sinistra? Secondo me a sinistra
+\end{tcolorbox} 
