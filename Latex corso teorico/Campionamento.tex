@@ -11,7 +11,8 @@
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 2\\
-    Appunti| 2025-10-14 | pag 1
+    Appunti| 2025-10-14 | pag 1 \\ 
+    Latex | 2025-10-21 Mattino | pag 84 
 }
 
 Per campionamento si intende quel processo che, ad ogni periodo di campionamento T detto periodo di campionamento, 
@@ -43,14 +44,16 @@ dove, visualizzando la figura da sinistra verso destra, avremo:
     \item $x_s \left(t\right)$ è il segnale campionato
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
-Quale è la relazione tra $x_s \left( t\right)$ e $x \left[ n\right]$ ? \newline 
+\begin{tcolorbox}
+Il blocco "converitore" nella figura non è un sistema LTI: 
+è un sistema logico che associa ad ogni n periodo T periodo un valore n della sequenza $x \left[ n\right]$, quindi: 
 
-È $x_s \left( t\right)$ o $x \left[ n\right]$ il segnale quantizzato? \newline 
-
-Il convertitore è un sistema LTI che fa la convoluzione tra chi? \newline 
-
-(Vedi anche grafico dell'andamento dei segnali dentro la slide)
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] = x_C \left(n T\right)
+    \end{equation}
+}
 \end{tcolorbox}
 
 Analizzando la sequenza $s \left(t\right)$ avremo che: 
@@ -125,7 +128,8 @@ Visualizzando l'andamento del segnale, avremo il seguente caso:
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 3\\
-    Appunti| 2025-10-14 | pag 1
+    Appunti| 2025-10-14 | pag 1 \\ 
+    Latex | 2025-10-21 Mattino | pag 84 
 }
 
 Per le proprietà della trasformata di Fourier continua, possiamo scrivere che: 
@@ -143,14 +147,7 @@ Per le proprietà della trasformata di Fourier continua, possiamo scrivere che:
 cioè il prodotto tra $x_c \left(t\right)$ e $s \left(t\right)$ nel tempo è la convoluzione in frequenza di $X_c \left(\jmath \Omega \right)$ e $S \left(\jmath \Omega \right)$, 
 che sono, rispettivamente, le trasformate di Fourier dei segnali $x_c \left(t\right)$ e $s \left(t\right)$. \newline 
 
-Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (non periodica). \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2} 
-Non ho capito l'ultima frase \newline 
-
-"Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (non periodica)"
-
-\end{tcolorbox}
+Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (perchè lo spettro del segnale $X_c \left(\jmath \Omega \right)$ non è periodica). \newline 
 
 Poichè risulta: 
 
@@ -165,15 +162,10 @@ Poichè risulta:
     \end{equation}
 } 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3} 
-La trasformata di una Delta di Dirac nel tempo non era uno spettro piatto in frequenza? \newline 
+dove: 
 
-Perchè abbiamo scritto che la trasformata di Fourier di una Delta di Dirac equispaziati nel tempo è a sua volta una sequenza di Delta di Dirac nel tempo? \newline 
-
-Perchè nel campionamento il tempo è discretizzato e non continuo? 
-\end{tcolorbox}
-
-dove $\Omega_s$ prende il nome di pulsazione di campionamento perchè: 
+\begin{itemize}
+    \item $\Omega_s$ prende il nome di pulsazione di campionamento perchè: 
 
 {
     \Large 
@@ -184,7 +176,9 @@ dove $\Omega_s$ prende il nome di pulsazione di campionamento perchè:
     \end{equation}
 }
 
-dove, a sua volta, T è il periodo di campionamento. \newline 
+\item T è il periodo di campionamento 
+\item $\delta\left(\Omega - k \Omega_s\right)$ indica una serie di impulsi shiftati perchè, nella DTFT, un impulso nel tempo equivale ad un impulso nel dominio $\jmath \Omega$
+\end{itemize}
 
 \newpage 
 
@@ -253,7 +247,8 @@ Riassumendo:
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 4\\
-    Appunti| 2025-10-14 | pag 1
+    Appunti| 2025-10-14 | pag 1 \\ 
+    Latex | 2025-10-21 Mattino | pag 87 
 }
 
 Ricordando che, per il campionamento abbiamo questo schema: 
@@ -309,15 +304,8 @@ crea replicità in frequenza. \newline
 TO-DO: Inserire seconda figura (quella con su scritta Aliasing) e scriverci le osservazioni 
 \end{tcolorbox} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
-Il commento nella slide: \newline 
-
-"Questa modulazione provoca aliasing che deve essere cancellato opportunamente" \newline 
-
-è riferito alla seconda figura partendo dall'alto della slide? \newline 
-
-In quella figura, si è considerato un segnale sotto-campionato, ecco perchè esiste aliasing?
-\end{tcolorbox} 
+Questa modulazione provoca aliasing che deve essere cancellato opportunamente perchè è stata sotto-campionata, 
+cioè è stato campionato ad una pulsazione minore di quella di Nyquist. \newline 
 
 Ritornando alla figura dello spettro di $X_s \left( \jmath \Omega \right)$: 
 
@@ -424,7 +412,8 @@ Le grandezze di nostro interesse per questo corso sono le seguenti:
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 6\\
-    Appunti| 2025-10-14 | pag 1
+    Appunti| 2025-10-14 | pag 1 \\
+    Latex | 2025-10-21 Mattino | pag 90 
 }   
 
 Consideriamo dal punto di vista matematico la relazione tra 
@@ -519,13 +508,8 @@ Grazie a queste relazioni, possiamo visualizzare queste immagini di esempio:
 \end{figure}  
 
 Notiamo che gli spettri dei segnali (le due figure a destra) sono identitici: 
-ciò che cambia è solo l'asse delle ascisse che al posto di avere le pulsazione in $\Omega$ avremo le pulsazioni in $\omega$. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
-Leggi ultima frase scritta. \newline 
-
-Quindi come chiamamo $\omega$, pulsazione nel dominio discreto? 
-\end{tcolorbox} 
+ciò che cambia è solo l'asse delle ascisse che al posto di avere le pulsazione in $\Omega$ avremo le pulsazioni in $\omega$ 
+(perchè con $\omega$ indicheremo le pulsazioni nel dominio discreto, a differenza di $\Omega$ che indica le pulsazioni nel dominio continuo). \newline 
 
 \newpage 
 
@@ -673,7 +657,8 @@ Ciò può avvenire se non si ha aliasing, cioè:
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 9 - 10\\
-    Appunti| 2025-10-14 | pag 2
+    Appunti| 2025-10-14 | pag 2 \\ 
+    Latex | 2025-10-21 Mattino | pag 95
 }
 
 Di seguito le formule riassuntive per un campionamento ideale. \newline 
@@ -826,13 +811,9 @@ che in frequenza sarà:
 dove: 
 
 \begin{itemize}
-    \item T moltiplicato per $X \left(e^{\jmath \Omega T}\right)$ indica il guadagno (o la perdita) del filtro interpolatore 
+    \item T moltiplicato per $X \left(e^{\jmath \Omega T}\right)$ indica il guadagno (o la perdita) del filtro interpolatore (è solo un caso che la trasformata di Fourier di un sinc è il quadagno del filtro, che è proprio T periodo) 
     \item $\Omega_s$ è la pulsazione di cutoff del filtro 
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
-    La lettera T nella formula $T \cdot X \left(e^{\jmath \Omega T}\right)$ intendono due cose differenti?
-\end{tcolorbox} 
 
 \newpage 
 
@@ -1185,7 +1166,8 @@ Quindi, la conversione analogico-digitale introduce un errore perchè, una volta
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 16\\
-    Appunti| 2025-10-14 | pag 3
+    Appunti| 2025-10-14 | pag 3 \\ 
+    Latex | 2025-10-21 Mattino | pag 104
 } 
 
 \begin{tcolorbox}
@@ -1253,10 +1235,6 @@ Per un converitotore A/D a B+1 bit, facendo i passi step-by-step e sfruttando le
         \end{split}
     \end{equation}
 } 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
-È $20 \log_{10} \left( \dfrac{X_m}{\sigma_x}\right)$ giusto, quindi log in base 10?   
-\end{tcolorbox} 
 
 dove: 
 
@@ -1379,7 +1357,7 @@ Quindi, dopo tutto il processo di conversione, possiamo scrivere che:
 cioè, il segnale convertito analogico dal digitale $x_{DA} \left(t\right)$ è combinazione lineare del segnale 
 $x_o \left(t\right)$ e $e_o \left(t\right)$. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 8}
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
 Come si chiamano $x_o \left(t\right)$ e $e_o \left(t\right)$ ?
 \end{tcolorbox} 
 
@@ -1389,8 +1367,18 @@ Come si chiamano $x_o \left(t\right)$ e $e_o \left(t\right)$ ?
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 18\\
-    Appunti| 2025-10-14 | pag 3
+    Appunti| 2025-10-14 | pag 3 \\ 
+    Latex | 2025-10-21 Mattino | pag 108
 } 
+
+Ricordando che: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Conversione digitale analogico reale.png}
+\end{figure}    
+
+e sapendo che il zero order-hold modifica lo spettro di $\hat{x} \left[ n\right]$ allora è necessario che venga compensata questa modifica. \newline 
 
 Si può compensare l'effetto in frequenza dello zero-order hold con il filtro anti-imaging: 
 
@@ -1398,10 +1386,6 @@ Si può compensare l'effetto in frequenza dello zero-order hold con il filtro an
     \centering
     \includegraphics[scale = 0.3]{Filtro anti imaging ideale e reale.png}
 \end{figure}   
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 9}
-Quale è il problema dello zero-order hold in frequenza? Cosa bisgna compensare in frequenza? 
-\end{tcolorbox} 
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Continuare di copiare le considerazioni dopo aver capito cosa fanno le formule nella pagine

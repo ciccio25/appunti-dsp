@@ -11,7 +11,8 @@
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 2\\
-    Appunti| 2025-10-15 | pag 1
+    Appunti| 2025-10-15 | pag 1 \\ 
+    Latex | 2025-10-21 Mattino | pag 112 - 113
 }
 
 \begin{tcolorbox}
@@ -28,11 +29,11 @@
 
 La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove il tempo non è più continuo, bensì il tempo è discreto. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 10}
-Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, ci servirà per studiare il transitorio della funzione? 
-\end{tcolorbox} 
-
 \begin{tcolorbox}
+    Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, 
+    si può utilizzarla per studiare il transitorio della sequenza, come avevamo fatto in Laplace ad Elettronica, 
+    ma, nel corso di DSP, la trasformata-z ci servarà solo per rappresentare la sequenza, senza studiare il transitorio. \newline  
+
     In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se: 
 
     {
@@ -160,7 +161,7 @@ Possiamo svolgere le seguenti osservazioni:
         \end{equation}
     } 
     se questa esiste (vedi \ref{subsec: Esistenza della trasformata} \nameref{subsec: Esistenza della trasformata} a pag \pageref{subsec: Esistenza della trasformata}) 
-    \item Entrambe sono operatori lineari, cioè :
+    \item sia la trasformata-z bilatera che quella monolatera sono operatori lineari, cioè :
     
     {
         \Large 
@@ -172,17 +173,14 @@ Possiamo svolgere le seguenti osservazioni:
     } 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 11}
-Entrambe chi, le due trasformate-z bilatera e monolatera? 
-\end{tcolorbox} 
-
 \newpage 
 
 \subsection{Regione di convergenza - ROC}
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 3\\
-    Appunti| 2025-10-15 | pag 1
+    Appunti| 2025-10-15 | pag 1 \\ 
+    Latex | 2025-10-21 Mattino | pag 114 - 115
 }
 
 In generale la serie $X \left(z \right)$ converge \textbf{solo} per certi valori di z. \newline 
@@ -251,11 +249,9 @@ La trasformata-z bilatera $X \left(z\right)$ converge se:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 12}
-Non andiamo a vedere la convergenza di $\sum_{n = - \infty}^{+ \infty} x \left[ n\right] e^{-\jmath \omega n}$ perchè è sinusoidale?  
-\end{tcolorbox} 
+che è una condizione sufficiente. \newline 
 
-cioè, detta in parole, la sommatoria converge se è assolutamente sommabile (vedi il modulo per indicare il valore assoluto tra $ x \left[ n\right]\cdot \abs{z}^{-n}$). \newline 
+Cioè, detta in parole, la sommatoria converge se è assolutamente sommabile (vedi il modulo per indicare il valore assoluto tra $ x \left[ n\right]\cdot \abs{z}^{-n}$). \newline 
 
 \newpage 
 
@@ -275,12 +271,8 @@ Possiamo svolgere delle interessanti osservazioni in merito alla regione di conv
     \centering
     \includegraphics[scale = 0.4]{convergenza per una ROC.png}
     \end{figure} 
-    \item calcolare la trasformata di Fourier a tempo discreto (cioè la DTFT) equivale a valutare la trasformata Z sul cerchio unitario 
+    \item calcolare la trasformata di Fourier a tempo discreto (cioè la DTFT) equivale a valutare la trasformata Z sul cerchio unitario perchè il modulo di $e^{\jmath \omega_0}$ è proprio uguale a 1, che è il raggio del cerchio unitario della trasformata-z 
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 13}
-"calcolare la trasformata di Fourier a tempo discreto (cioè la DTFT) equivale a valutare la trasformata Z sul cerchio unitario " perchè la DTFT si basa sugli impulsi unitari?
-\end{tcolorbox} 
 
 \newpage 
 
@@ -765,14 +757,11 @@ si può utilizzare lo stesso approccio utilizzato in Laplace, cioè quello di es
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 7  - 8\\
-    Appunti| 2025-10-15 | pag 2
-}
+    Appunti| 2025-10-15 | pag 2 \\ 
+    Latex | 2025-10-21 Mattino | pag 124
+} 
 
-Come detto precedentemente, nella ROC la trasformata è una funzione analitca (tutte le discontinuità fuori o al bordo della ROC). \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 14}
-Cosa si intende per "(tutte le discontinuità fuori o al bordo della ROC)" quando si parla di una funzione analitica?
-\end{tcolorbox} 
+Come detto precedentemente, nella ROC la trasformata è una funzione analitca (cioè è una funzione continua tranne nelle discontinuità fuori o al bordo della ROC). \newline 
 
 Per sequenze di durata finita come la seguente: 
 
@@ -804,9 +793,9 @@ la ROC è la seguente:
 
 in particolare da verificare per i punti $z = 0$ e $z = +\infty$. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 15}
-Perchè bisogna verificare la ROC per i punti $z = 0$ e $z = +\infty$?
-\end{tcolorbox} 
+\begin{tcolorbox}
+    Ingegneristicamente parlando, non ci interessa verificare per i punti $z = 0$ e $z = +\infty$ : è solo un avvezzo matematico. 
+\end{tcolorbox}
 
 Per sequenze monolatere destre come la seguente:
 
@@ -904,7 +893,8 @@ Da un punto di vista grafico, avremo che:
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 9\\
-    Appunti| 2025-10-15 | pag 2
+    Appunti| 2025-10-15 | pag 2 \\ 
+    Latex | 2025-10-21 Mattino | pag 126
 }
 
 Considerando una funzione razionale in z: 
@@ -925,13 +915,7 @@ dove:
     \item $D \left(z\right)$ è il polinomio z denominatore di $X \left( z\right)$ 
 \end{itemize}
 
-Spesso si preferisce la forma (equivalente) in $z^{-1}$. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 16}
-Come cambia la funzione razionale $X \left( z\right)$ in $z^{-1}$? \newline 
-
-Il numeratore $N \left(z\right)$ diventa il denominatore e viceversa?  
-\end{tcolorbox} 
+Spesso si preferisce la forma (equivalente) in $z^{-1}$ perchè è più comodo. \newline 
 
 Si chiamano zeri di $X \left(z\right)$ tutti quei valori per cui $X \left( z\right) \to 0$. \newline 
 
@@ -966,6 +950,10 @@ Di seguito un esempio di una funzione di trasferimento $X \left(z\right)$:
     \end{equation}
 }
 
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Fare passo passo come ci si arriva da una funzione scritta in z a $z^{-1}$ come esempio
+\end{tcolorbox} 
+
 allora possiamo graficare $X \left(z\right)$ nel dominio z come: 
 
 \begin{figure}[h]
@@ -989,7 +977,8 @@ Data $X \left(z\right)$ e visualizzando dal piano del dominio z, è possibile de
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 11 - 13\\
-    Appunti| 2025-10-15 | pag 3
+    Appunti| 2025-10-15 | pag 3 \\ 
+    Latex | 2025-10-21 Mattino | pag 129 - 130
 } 
 
 \begin{tcolorbox}
@@ -1148,15 +1137,9 @@ Per questo motivo, possiamo scrivere le sequenti proprietà:
 
 \begin{itemize}
     \item Se $z_0 \in \mathbb{R}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ si muovono radialmente 
-    \item Se $z_0 = e^{\jmath \omega_0}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ ruotano di $\omega_0$ (traslazione in frequenza della DTFT) 
+    \item Se $z_0 = e^{\jmath \omega_0}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ ruotano di $\omega_0$ ( vedi traslazione in frequenza della DTFT in \ref{subsubsec: Proprietà della trasformata di Fourier} \nameref{subsubsec: Proprietà della trasformata di Fourier} pag \pageref{subsubsec: Proprietà della trasformata di Fourier}) dove ruotonano in senso orario se $\omega_0$ è positivo, in senso anti-orario se $\omega_0$ è negativo
     \item Se $z_0 \in \mathbb{C}$ allora si eseguono tutti e due gli effetti contemporaneamente in $X \left( \dfrac{z}{z_0}\right)$
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 17}
-Cosa si intende per "traslazione in frequenza della DTFT" ? \newline 
-
-Inoltre i poli e gli zeri si muovono in senso orario o anti-orario?
-\end{tcolorbox} 
 
 \textbf{Coniugazione complessa} \newline 
 
@@ -1277,11 +1260,8 @@ e
     \begin{equation}
         x \left[ + \infty \right]
         = 
-        \lim_{z \to 1^{\pm}} \left( z - 1\right) \cdot X \left(z\right)
+        \lim_{z \to 1^{+}} \left( z - 1\right) \cdot X \left(z\right)
     \end{equation}
 }
 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 18}
-Il limite è 1 a destra o a sinistra? Secondo me a sinistra
-\end{tcolorbox} 
