@@ -45,7 +45,7 @@ dove, visualizzando la figura da sinistra verso destra, avremo:
 \end{itemize}
 
 \begin{tcolorbox}
-Il blocco "converitore" nella figura non è un sistema LTI: 
+Il blocco "convertitore" nella figura non è un sistema LTI: 
 è un sistema logico che associa ad ogni n periodo T periodo un valore n della sequenza $x \left[ n\right]$, quindi: 
 
 {
@@ -261,7 +261,7 @@ Ricordando che, per il campionamento abbiamo questo schema:
 analizziamo in Fourier i vari segnali indicati in figura nello spettro. \newline 
 
 Se consideriamo $x_c \left( t\right)$ segnale analogico da campionare, 
-abbiamo che, in Fourier, avrà il sequente spettro (di esempio): 
+abbiamo che, in Fourier, avrà il seguente spettro (di esempio): 
 
 \begin{figure}[h]
     \centering
@@ -270,7 +270,7 @@ abbiamo che, in Fourier, avrà il sequente spettro (di esempio):
 
 Come si nota dalla figura, lo spettro di $X_c \left(\jmath \Omega\right)$ si estende nell'intervallo delle pulsazioni $\left[ - \Omega_N, + \Omega\right]$. \newline 
 
-Se la pulsazione di campionamento $\Omega_s$ è oppurtunamente scelta, 
+Se la pulsazione di campionamento $\Omega_s$ è opportunamente scelta, 
 lo spettro in Fourier del segnale campionato $x_s \left(t\right)$, cioè $X_s \left(\jmath \Omega\right)$, 
 avrà il seguente spettro: 
 
@@ -281,7 +281,7 @@ avrà il seguente spettro:
 
 dove in blu è indicato l'andamento di $X_s \left(\jmath \Omega\right)$. \newline 
 
-Una osservazione che possimo svolgere sullo spettro del segnale campionato $X_s \left(\jmath \Omega\right)$ 
+Una osservazione che possiamo svolgere sullo spettro del segnale campionato $X_s \left(\jmath \Omega\right)$ 
 è che lo spettro del segnale si ripete. \newline  
 
 \newpage 
@@ -338,7 +338,7 @@ dove, lo spettro di $X_R \left(\jmath \Omega\right)$ è uguale allo spettro del 
     Come studiato nei corsi precedenti, anche in questo corso, è molto utile il Teorema di Nyquist. 
 \end{tcolorbox} 
 
-Nelle pagine precedenti, si è potuto ricostruire il segnale originale da quello campionato perchè il campionamrnto ha soddisfatto il Teorema di Nyquist. \newline 
+Nelle pagine precedenti, si è potuto ricostruire il segnale originale da quello campionato perchè il campionamento ha soddisfatto il Teorema di Nyquist. \newline 
 
 Di seguito il teorema di Nyquist. \newline 
 
@@ -507,7 +507,7 @@ Grazie a queste relazioni, possiamo visualizzare queste immagini di esempio:
     \includegraphics[scale = 0.4]{Esempio di spettri continui e discreti dello stesso segnale.png}
 \end{figure}  
 
-Notiamo che gli spettri dei segnali (le due figure a destra) sono identitici: 
+Notiamo che gli spettri dei segnali (le due figure a destra) sono identici: 
 ciò che cambia è solo l'asse delle ascisse che al posto di avere le pulsazione in $\Omega$ avremo le pulsazioni in $\omega$ 
 (perchè con $\omega$ indicheremo le pulsazioni nel dominio discreto, a differenza di $\Omega$ che indica le pulsazioni nel dominio continuo). \newline 
 
@@ -627,7 +627,7 @@ $x_r \left(t\right)$ avrà questo andamento:
 dove, in figura: 
 
 \begin{itemize}
-    \item in blu è segnato l'anamento del segnale di $x_r \left(t\right)$
+    \item in blu è segnato l'andamento del segnale di $x_r \left(t\right)$
     \item in rosso è segnato l'andamento dei sinc del filtro interpolatore centrati in multipli di T (nella formula di $x_r \left(t\right)$ si noti il nT)
 \end{itemize}
 
@@ -747,8 +747,8 @@ Allora, possiamo scrivere che:
 }
 
 \begin{tcolorbox}
-    Tencicamente nello spettro di $X \left(e^{\jmath \omega}\right)$ ci dovrebbero essere le replice di $X_c \left(\dfrac{\jmath \omega}{T}\right)$, 
-    ma, dal punto di vista informativo, è inutile indicare le replice dello spettro: ecco perchè ci poniamo nell'intervallo $\abs{\omega} < \pi$
+    Tecnicamente nello spettro di $X \left(e^{\jmath \omega}\right)$ ci dovrebbero essere le repliche di $X_c \left(\dfrac{\jmath \omega}{T}\right)$, 
+    ma, dal punto di vista informativo, è inutile indicare le repliche dello spettro: ecco perchè ci poniamo nell'intervallo $\abs{\omega} < \pi$
 \end{tcolorbox}
 
 \newpage 
@@ -811,7 +811,7 @@ che in frequenza sarà:
 dove: 
 
 \begin{itemize}
-    \item T moltiplicato per $X \left(e^{\jmath \Omega T}\right)$ indica il guadagno (o la perdita) del filtro interpolatore (è solo un caso che la trasformata di Fourier di un sinc è il quadagno del filtro, che è proprio T periodo) 
+    \item T moltiplicato per $X \left(e^{\jmath \Omega T}\right)$ indica il guadagno (o la perdita) del filtro interpolatore (è solo un caso che la trasformata di Fourier di un sinc è il guadagno del filtro, che è proprio T periodo) 
     \item $\Omega_s$ è la pulsazione di cutoff del filtro 
 \end{itemize}
 
@@ -926,7 +926,7 @@ dove:
     \item $X_c \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico iniziale $x_c \left(t\right)$
 \end{itemize}
 
-Se si considera un unico blocco di elaborazione, si può accettare aliasing se elimato da $H \left(e^{\jmath \omega}\right)$. \newline 
+Se si considera un unico blocco di elaborazione, si può accettare aliasing se eliminato da $H \left(e^{\jmath \omega}\right)$. \newline 
 
 Quindi, se consideriamo la situazione ideale, 
 fare i calcoli in frequenza è uguale che farli nel tempo e viceversa perchè è garantito dal teorema di Fourier e dal teorema del campionamento ideale, grazie al concetto di trasformata in cui il segnale è reversibile. \newline 
@@ -999,7 +999,7 @@ come in figura:
 \end{figure}  
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
-TO-DO: Modificare la figura sopra scrvendo 1 al posto di T e $H_{aa} \left(\jmath \Omega\right)$ al posto di $H_{r} \left(\jmath \Omega\right)$
+TO-DO: Modificare la figura sopra scrivendo 1 al posto di T e $H_{aa} \left(\jmath \Omega\right)$ al posto di $H_{r} \left(\jmath \Omega\right)$
 \end{tcolorbox} 
 
 Invece $H_{aa} \left(\jmath \Omega\right)$ reale, ha il seguente andamento (considerando solo le pulsazioni $\Omega$ positive): 
@@ -1095,7 +1095,7 @@ Quindi, il zero-order hold $h_o \left(t\right)$ in frequenza è il seguente:
     \end{equation}
 }
 
-Se consideriamo sia lo spettro dei moduli e delle fasi di $H_o \left(\jmath \Omega\right)$ è il segeunte (con note): 
+Se consideriamo sia lo spettro dei moduli e delle fasi di $H_o \left(\jmath \Omega\right)$ è il seguente (con note): 
 
 \begin{figure}[h]
     \centering
@@ -1162,7 +1162,7 @@ Quindi, la conversione analogico-digitale introduce un errore perchè, una volta
 
 \newpage 
 
-\subsubsection{Errore di quantizzazionne}
+\subsubsection{Errore di quantizzazione}
 
 \footnote{ 
     Slide del prof | 4 - Campionamento | pag 16\\
@@ -1209,7 +1209,7 @@ Quindi il segnale campionato reale $\hat{x} \left[n\right]$ possiamo vedere come
 Come studiato nel corso di Telecomunicazioni digitali, per ipotesi l'errore di quantizzazione $e \left[ n\right]$ è modellato come rumore bianco stazionario, 
 incorrelato con $x \left[ n\right]$ e con probabilità uniforme nell'intervallo dato. \newline 
 
-Per un converitotore A/D a B+1 bit, facendo i passi step-by-step e sfruttando le proprietà dei logaritmi: 
+Per un convertitore A/D a B+1 bit, facendo i passi step-by-step e sfruttando le proprietà dei logaritmi: 
 
 {
     \Large 
@@ -1284,7 +1284,7 @@ dove:
 
 \begin{itemize}
     \item T è il periodo del zero-oder hold (che è un filtro)
-    \item $\hat{x} \left[ n\right]$ è la sequenza campionata dal convertirore analogico digitale reale 
+    \item $\hat{x} \left[ n\right]$ è la sequenza campionata dal convertitore analogico digitale reale 
 \end{itemize}
 
 Ricordando che: 
@@ -1411,7 +1411,7 @@ possiamo raffigurarlo come:
 dove: 
 
 \begin{itemize}
-    \item $x_c \left(t\right)$ è il segnale analogico inziale della pipeline 
+    \item $x_c \left(t\right)$ è il segnale analogico iniziale della pipeline 
     \item $y_a \left(t\right)$ è il segnale analogico in uscita dalla pipeline 
     \item il zero-order hold del convertitore analogico-digitale non da contributo in frequenza nel sistema complessivo
 \end{itemize}
@@ -1442,10 +1442,10 @@ dove:
 \begin{itemize}
     \item $Y_a \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in uscita della pipeline, cioè $y_a \left(t\right)$
     \item $X_c \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in ingresso della pipeline
-    \item $H_aa \left(\jmath\right)$ è la trasfomata di Fourier della risposta impulsiva del filtro anti-imaging nel Sample \& Hold 
+    \item $H_aa \left(\jmath\right)$ è la trasformata di Fourier della risposta impulsiva del filtro anti-imaging nel Sample \& Hold 
     \item $H \left(e^{\jmath \Omega T}\right)$ è la trasformata di Fourier del Sample \& Hold 
     \item $H_o \left(\jmath \Omega\right)$ è la trasformata di Fourier della risposta impulsiva del zero-order hold all'interno del convertitore D/A reale 
-    \item $H^{\sim}_r \left(\jmath \Omega\right)$ è la trasformata di Fourier del filtro anti-imaging dentro al convertirore D/A reale 
+    \item $H^{\sim}_r \left(\jmath \Omega\right)$ è la trasformata di Fourier del filtro anti-imaging dentro al convertitore D/A reale 
 \end{itemize}
 
 $x_c \left(t\right)$ viene variato da tutti i blocchi della seguente pipeline. \newline 
