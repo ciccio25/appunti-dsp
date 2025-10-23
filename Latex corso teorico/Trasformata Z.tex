@@ -32,7 +32,7 @@ La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove 
 \begin{tcolorbox}
     Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, 
     si può utilizzarla per studiare il transitorio della sequenza, come avevamo fatto in Laplace ad Elettronica, 
-    ma, nel corso di DSP, la trasformata-z ci servarà solo per rappresentare la sequenza, senza studiare il transitorio. \newline  
+    ma, nel corso di DSP, la trasformata-z ci servirà solo per rappresentare la sequenza, senza studiare il transitorio. \newline  
 
     In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se: 
 
@@ -530,7 +530,7 @@ Nel piano z, possiamo vedere $X \left(z\right)$ in questa maniera:
 \includegraphics[scale = 0.5]{Esercizio 2 calcolo della convergenza trasformata z.png}
 \end{figure} 
 
-dove, in figura, in tratteggiato è la stessa regione di convergenza dell'esercizio 1 ma in senso opposo. \newline 
+dove, in figura, in tratteggiato è la stessa regione di convergenza dell'esercizio 1 ma in senso opposto. \newline 
 
 \newpage 
 
@@ -660,9 +660,9 @@ cioè è la stessa del gradino $n \cdot \alpha^{n} \cdot  u \left[ n\right]$ ma 
 
 Dopo l'elenco di alcune trasformate notevoli, possiamo svolgere alcune osservazioni. \newline 
 
-Per avere corrispondenza biunivoa tra sequenze e trasformata occorre specificar la regione di convergenza (cioè la ROC). \newline 
+Per avere corrispondenza biunivoca tra sequenze e trasformata occorre specificar la regione di convergenza (cioè la ROC). \newline 
 
-Prendendo per esempio la funzine razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
+Prendendo per esempio la funzione razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
 se indichiamo come ROC $\abs{z} < \abs{\alpha}$, avremo, nel dominio n, la sequenza $-n \cdot \alpha^{n} \cdot  u \left[ -n - 1\right]$. \newline 
 
 Se abbiamo la stessa funzione razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
@@ -673,7 +673,7 @@ funzioni razionali della variabile z o della variabile $z^{-1}$. \newline
 
 \newpage 
 
-\subsection{Trafsormazione inversa}
+\subsection{Trasformazione inversa}
 
 \footnote{ 
     Slide del prof | 5 - Trasformata Z | pag 10 \\
@@ -741,7 +741,7 @@ Un esempio pratico:
 
 \newpage 
 
-Invece, nel metodo ad espensansione in fratti semplici, se $X \left(z\right)$ è una funzione razionale, 
+Invece, nel metodo ad espansione in fratti semplici, se $X \left(z\right)$ è una funzione razionale, 
 si può utilizzare lo stesso approccio utilizzato in Laplace, cioè quello di espandere $X \left(z\right)$ in fratti semplici e poi fare la trasformazione inversa dei singoli componenti con le tabelle 
 (vedi \ref{sec: Alcune trasformate-z notevoli} \nameref{sec: Alcune trasformate-z notevoli} pag \pageref{sec: Alcune trasformate-z notevoli} ). \newline 
 
@@ -761,7 +761,7 @@ si può utilizzare lo stesso approccio utilizzato in Laplace, cioè quello di es
     Latex | 2025-10-21 Mattino | pag 124
 } 
 
-Come detto precedentemente, nella ROC la trasformata è una funzione analitca (cioè è una funzione continua tranne nelle discontinuità fuori o al bordo della ROC). \newline 
+Come detto precedentemente, nella ROC la trasformata è una funzione analitica (cioè è una funzione continua tranne nelle discontinuità fuori o al bordo della ROC). \newline 
 
 Per sequenze di durata finita come la seguente: 
 
@@ -995,7 +995,7 @@ Screenshootare gli esempi delle slide del video \url{https://www.youtube.com/wat
 
 Come ogni trasformata, anche la trasformata-z rispecchia delle proprietà. \newline 
 
-\textbf{Lineartità} \newline 
+\textbf{Linearità} \newline 
 
 Date: 
 
@@ -1099,7 +1099,7 @@ in cui la ROC vale:
     non cambiano. 
 \end{tcolorbox}
 
-\textbf{Moltilplicazione per una sequenza esponenziale} \newline 
+\textbf{Moltiplicazione per una sequenza esponenziale} \newline 
 
 Data: 
 
@@ -1137,7 +1137,7 @@ Per questo motivo, possiamo scrivere le sequenti proprietà:
 
 \begin{itemize}
     \item Se $z_0 \in \mathbb{R}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ si muovono radialmente 
-    \item Se $z_0 = e^{\jmath \omega_0}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ ruotano di $\omega_0$ ( vedi traslazione in frequenza della DTFT in \ref{subsubsec: Proprietà della trasformata di Fourier} \nameref{subsubsec: Proprietà della trasformata di Fourier} pag \pageref{subsubsec: Proprietà della trasformata di Fourier}) dove ruotonano in senso orario se $\omega_0$ è positivo, in senso anti-orario se $\omega_0$ è negativo
+    \item Se $z_0 = e^{\jmath \omega_0}$ allora i poli e zeri di $X \left( z\right)$ in $X \left( \dfrac{z}{z_0}\right)$ ruotano di $\omega_0$ ( vedi traslazione in frequenza della DTFT in \ref{subsubsec: Proprietà della trasformata di Fourier} \nameref{subsubsec: Proprietà della trasformata di Fourier} pag \pageref{subsubsec: Proprietà della trasformata di Fourier}) dove ruotano in senso orario se $\omega_0$ è positivo, in senso anti-orario se $\omega_0$ è negativo
     \item Se $z_0 \in \mathbb{C}$ allora si eseguono tutti e due gli effetti contemporaneamente in $X \left( \dfrac{z}{z_0}\right)$
 \end{itemize}
 
@@ -1193,7 +1193,7 @@ dove la ROC vale:
     \end{equation}
 }
 
-infatti una sequenza a destra, a causa del rovesciamente nel tempo, diventa sinistra e viceversa. \newline 
+infatti una sequenza a destra, a causa del rovesciamento nel tempo, diventa sinistra e viceversa. \newline 
 
 \textbf{Convoluzione di sequenze} \newline
 
