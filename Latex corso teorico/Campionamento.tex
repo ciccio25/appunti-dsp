@@ -15,7 +15,7 @@
     Latex | 2025-10-21 Mattino | pag 84 
 }
 
-Per campionamento si intende quel processo che, ad ogni periodo di campionamento T detto periodo di campionamento, 
+Per campionamento si intende quel processo che, ad ogni periodo T detto periodo di campionamento, 
 si rivela che valore ha il segnale analogico in quegli istanti. \newline 
 
 Il reciproco di T periodo di campionamento è chiamato $F_s$ frequenza di campionamento. \newline 
@@ -29,7 +29,7 @@ In formule:
     \end{equation}
 }
 
-Da un punto di vista del sistema, nel campionamento avremo questo sistema: 
+Da un punto di vista del sistema, nel campionamento avremo questo processo: 
 
 \begin{figure}[h]
     \centering
@@ -147,7 +147,7 @@ Per le proprietà della trasformata di Fourier continua, possiamo scrivere che:
 cioè il prodotto tra $x_c \left(t\right)$ e $s \left(t\right)$ nel tempo è la convoluzione in frequenza di $X_c \left(\jmath \Omega \right)$ e $S \left(\jmath \Omega \right)$, 
 che sono, rispettivamente, le trasformate di Fourier dei segnali $x_c \left(t\right)$ e $s \left(t\right)$. \newline 
 
-Si noti che le trasformate sono a tempo continuo e dipendente dalla frequenza continua (perchè lo spettro del segnale $X_c \left(\jmath \Omega \right)$ non è periodica). \newline 
+Si noti che le trasformate sono a tempo continuo e dipendenti dalla frequenza continua (perchè lo spettro del segnale $X_c \left(\jmath \Omega \right)$ non è periodico). \newline 
 
 Poichè risulta: 
 
@@ -226,7 +226,7 @@ Allora possiamo scrivere che, facendo tutti i passaggi e le dovute sostituzioni:
 
 dove la convoluzione della trasformata di Fourier di $x_c \left( t\right)$, cioè $X_c \left(j \Omega\right)$, 
 e la sequenza di Delte di Dirac equispaziate in frequenza di multipli della frequenza di campionamento $\Omega_s$ 
-è uguale allo spettro di $X_c (\jmath)$ equispaziato ogni multiplo di $\jmath \Omega_s$. \newline 
+è uguale allo spettro di $X_c (\jmath \Omega)$ equispaziato ogni multiplo di $\jmath \Omega_s$. \newline 
 
 Riassumendo: 
 
@@ -268,7 +268,7 @@ abbiamo che, in Fourier, avrà il seguente spettro (di esempio):
     \includegraphics[scale = 0.3]{Spettro in pulsazioni di un segnale analogico di esempio.png}
 \end{figure}  
 
-Come si nota dalla figura, lo spettro di $X_c \left(\jmath \Omega\right)$ si estende nell'intervallo delle pulsazioni $\left[ - \Omega_N, + \Omega\right]$. \newline 
+Come si nota dalla figura, lo spettro di $X_c \left(\jmath \Omega\right)$ si estende nell'intervallo delle pulsazioni $\left[ - \Omega_N, + \Omega_N\right]$. \newline 
 
 Se la pulsazione di campionamento $\Omega_s$ è opportunamente scelta, 
 lo spettro in Fourier del segnale campionato $x_s \left(t\right)$, cioè $X_s \left(\jmath \Omega\right)$, 
@@ -467,7 +467,7 @@ Ma sapendo che il segnale discreto $x \left[ n\right]$ in Fourier è:
     \end{equation}
 }
 
-Allora possiamo dire che sia il segnale campionato $x_s \left(t\right)$ che il segnale campionato a tempo discreto $x \left[ n\right]$ sono uguali se: 
+Allora possiamo dire che sia il segnale campionato $x_s \left(t\right)$ e il segnale campionato a tempo discreto $x \left[ n\right]$ sono uguali se: 
 
 {
     \Large 
@@ -508,7 +508,7 @@ Grazie a queste relazioni, possiamo visualizzare queste immagini di esempio:
 \end{figure}  
 
 Notiamo che gli spettri dei segnali (le due figure a destra) sono identici: 
-ciò che cambia è solo l'asse delle ascisse che al posto di avere le pulsazione in $\Omega$ avremo le pulsazioni in $\omega$ 
+ciò che cambia è solo l'asse delle ascisse che, al posto di avere le pulsazione in $\Omega$, avremo le pulsazioni in $\omega$ 
 (perchè con $\omega$ indicheremo le pulsazioni nel dominio discreto, a differenza di $\Omega$ che indica le pulsazioni nel dominio continuo). \newline 
 
 \newpage 
@@ -534,7 +534,7 @@ e lo spettro dei segnali:
     \includegraphics[scale = 0.25]{Esempio di spettri continui e discreti dello stesso segnale.png}
 \end{figure}  
 
-allora possiamo scrivere che il segnale a $x \left[ n\right]$ ha il seguente andamento: 
+allora possiamo scrivere che il segnale $x \left[ n\right]$ ha il seguente andamento: 
 
 {
     \Large 
@@ -580,7 +580,7 @@ Da un punto di vista grafico, $H_r \left(\jmath \right)$ avrà questo andamento 
     \includegraphics[scale = 0.4]{Filtro interpolatore in frequenza.png}
 \end{figure}  
 
-Questo filtro prende il nome di filtro interpolatore, cioè il filtro interpolatore è una finestra in frequenza. \newline 
+Questo filtro prende il nome di filtro interpolatore, che è una finestra in frequenza. \newline 
 
 Sapendo che la trasformata di un filtro continuo in frequenza è un sinc continuo, 
 allora avremo che nel tempo il filtro interpolatore avrà questo andamento: 
@@ -617,6 +617,10 @@ il segnale ricostruito ideale $x_r \left(t\right)$ è il seguente:
     \end{equation}
 }
 
+\begin{tcolorbox}
+Questa sommatoria può essere vista anche come convoluzione nel tempo.    
+\end{tcolorbox}
+
 $x_r \left(t\right)$ avrà questo andamento: 
 
 \begin{figure}[h]
@@ -631,6 +635,8 @@ dove, in figura:
     \item in rosso è segnato l'andamento dei sinc del filtro interpolatore centrati in multipli di T (nella formula di $x_r \left(t\right)$ si noti il nT)
 \end{itemize}
 
+\newpage 
+
 Dopo tutte queste considerazioni, possiamo dire che, se si svolge un campionamento ideale, avremo che: 
 
 {
@@ -644,7 +650,7 @@ Dopo tutte queste considerazioni, possiamo dire che, se si svolge un campionamen
 
 cioè il segnale ricostruito $x_r \left(t\right)$ è uguale al segnale campionato $x_c \left(t \right)$. \newline  
 
-Ciò può avvenire se non si ha aliasing, cioè: 
+Ciò può avvenire se non si ha aliasing, in particolare se: 
 
 \begin{itemize}
     \item se il campionamento e il filtro interpolatore passano per i punti originali 
@@ -840,7 +846,7 @@ dove:
 \end{itemize}
 
 \begin{tcolorbox}
-    L'enorme vantaggio che si ha con questo tipo di schema a blocchi è che l'elaborazione del segnali analogici viene fatto in digitale con un software. \newline 
+    L'enorme vantaggio che si ha con questo tipo di schema a blocchi è che l'elaborazione dei segnali analogici viene fatto in digitale con un software. \newline 
 
     Questa è una classica pipeline in quasi tutti i sistemi digitali moderni. \newline 
 
@@ -859,7 +865,7 @@ dove:
 \end{tcolorbox}
 
 Analizzando in frequenza questi blocchi, 
-avremo che il campionatore (se non c'è aliasing) avrò il seguente andamento: 
+avremo che il campionatore (se non c'è aliasing) avrà il seguente andamento: 
 
 {
     \Large 
@@ -883,6 +889,8 @@ Il sistema LTI (Linear Time Invariant) ha il seguente andamento in frequenza:
         \text{ per } \abs{\omega} < \pi
     \end{equation}
 }
+
+\newpage 
 
 Invece il ricostruttore (indicato in figura come Interpolatore T) ha il seguente andamento in frequenza: 
 
@@ -969,7 +977,7 @@ Di seguito la pipeline della conversione A/D reale (con delle note nei vari stad
     \includegraphics[scale = 0.3]{ADC pipeline reale.png}
 \end{figure}  
 
-La limitatezza in banda è un requisito fondamentale per la elaborazione del segnale $x_a (t)$. \newline 
+La limitatezza in banda è un requisito fondamentale per l'elaborazione del segnale $x_a (t)$. \newline 
 
 Partendo da sinistra, 
 il segnale da campionare $x_c \left( t\right)$ passa al filtro anti-aliasing (in figura ed in inglese "Antialiasing filter"). \newline 
@@ -1046,7 +1054,7 @@ dove:
     \item in rosso è il segnale dopo il Sample \& Hold, cioè $x_o (t)$ 
 \end{itemize}
 
-Dal punto di vista circuitale avremo il seguente schema: 
+Dal punto di vista "circuitale" avremo il seguente schema: 
 
 \begin{figure}[h]
     \centering
@@ -1080,8 +1088,7 @@ La risposta impulsiva del zero-order hold nel tempo è la seguente (considerando
 
 cioè una finestra rettangolare nel tempo. \newline 
 
-Come sappiamo bene (è la tremiliardesima volta che lo scrivo), 
-la trasformata di Fourier di una finestra rettangolare è un sinc. \newline 
+Come sappiamo bene, la trasformata di Fourier di una finestra rettangolare è un sinc. \newline 
 
 Quindi, il zero-order hold $h_o \left(t\right)$ in frequenza è il seguente: 
 
@@ -1102,8 +1109,8 @@ Se consideriamo sia lo spettro dei moduli e delle fasi di $H_o \left(\jmath \Ome
     \includegraphics[scale = 0.5]{Zero order hold in frequenza.png}
 \end{figure}   
 
-Questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione di cut-off $\dfrac{\Omega_s}{2}$, 
-il filtro zero-oder hold diminuisce il segnale di 4 dB, che è circa metà del segnale iniziale. \newline 
+questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione di cut-off $\dfrac{\Omega_s}{2}$, 
+il filtro zero-oder hold diminuisce il segnale di ingresso di 4 dB, che è circa la metà del segnale iniziale. \newline 
 
 \begin{tcolorbox}
     Questo corso di DSP non si occupa su come è fatto fisicamente il Sample \& Hold, per noi il S\&H sarà un unico blocco. \newline 
@@ -1197,7 +1204,7 @@ dove:
     \item $e \left[ n\right]$ è l'errore che lo calcoliamo statisticamente
 \end{itemize}
 
-Quindi il segnale campionato reale $\hat{x} \left[n\right]$ possiamo vedere come combinazione lineare tra il segnale quantizzato ideale e il rumore discreto. \newline 
+Quindi il segnale campionato reale $\hat{x} \left[n\right]$ possiamo vederlo come combinazione lineare tra il segnale quantizzato ideale e il rumore discreto. \newline 
 
 \begin{tcolorbox}
     In questo corso di DSP, andremo a considerare la sequenza campionata reale $\hat{x} \left[ n\right]$ uguale a quella campionata ideale $x \left[n\right]$ senza l'errore di quantizzazione $e \left[n\right]$, 
@@ -1206,7 +1213,7 @@ Quindi il segnale campionato reale $\hat{x} \left[n\right]$ possiamo vedere come
     Tutte le considerazioni seguenti sull'errore di quantizzazione non sono necessari in questo corso. 
 \end{tcolorbox}
 
-Come studiato nel corso di Telecomunicazioni digitali, per ipotesi l'errore di quantizzazione $e \left[ n\right]$ è modellato come rumore bianco stazionario, 
+Come studiato nel corso di Telecomunicazioni digitali, per ipotesi, l'errore di quantizzazione $e \left[ n\right]$ è modellato come rumore bianco stazionario, 
 incorrelato con $x \left[ n\right]$ e con probabilità uniforme nell'intervallo dato. \newline 
 
 Per un convertitore A/D a B+1 bit, facendo i passi step-by-step e sfruttando le proprietà dei logaritmi: 
@@ -1259,7 +1266,7 @@ Considerando la pipeline della conversione digitale-analogico reale (con note):
     \includegraphics[scale = 0.3]{Conversione digitale analogico reale.png}
 \end{figure}   
 
-Generalmente il blocco D/A converter e lo zero-oder hold vengono messe insieme ed 
+Generalmente il blocco D/A Converter (Convertitore da Digitale ad Analogico) e lo zero-oder hold vengono messi insieme ed 
 il filtro interpolatore viene anche chiamato filtro anti-imaging (in figura "Anti-imaging filter") 
 perchè toglie le repliche del segnale $x_{DA} \left(t\right)$. \newline 
 
@@ -1378,7 +1385,7 @@ Ricordando che:
     \includegraphics[scale = 0.3]{Conversione digitale analogico reale.png}
 \end{figure}    
 
-e sapendo che il zero order-hold modifica lo spettro di $\hat{x} \left[ n\right]$ allora è necessario che venga compensata questa modifica. \newline 
+e sapendo che il zero order-hold modifica lo spettro di $\hat{x} \left[ n\right]$, allora è necessario che la modifica dello spettro $\hat{x} \left[ n\right]$ venga compensata. \newline 
 
 Si può compensare l'effetto in frequenza dello zero-order hold con il filtro anti-imaging: 
 
@@ -1401,7 +1408,7 @@ TO-DO: Continuare di copiare le considerazioni dopo aver capito cosa fanno le fo
 } 
 
 Considerando tutta la pipeline A/D e D/A reale e l'effetto complessivo, 
-possiamo raffigurarlo come: 
+possiamo raffigurare il processo di conversioni con questa figura: 
 
 \begin{figure}[h]
     \centering
@@ -1442,7 +1449,7 @@ dove:
 \begin{itemize}
     \item $Y_a \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in uscita della pipeline, cioè $y_a \left(t\right)$
     \item $X_c \left(\jmath \Omega\right)$ è la trasformata di Fourier del segnale analogico in ingresso della pipeline
-    \item $H_aa \left(\jmath\right)$ è la trasformata di Fourier della risposta impulsiva del filtro anti-imaging nel Sample \& Hold 
+    \item $H_{aa} \left(\jmath \Omega\right)$ è la trasformata di Fourier della risposta impulsiva del filtro anti-imaging nel Sample \& Hold 
     \item $H \left(e^{\jmath \Omega T}\right)$ è la trasformata di Fourier del Sample \& Hold 
     \item $H_o \left(\jmath \Omega\right)$ è la trasformata di Fourier della risposta impulsiva del zero-order hold all'interno del convertitore D/A reale 
     \item $H^{\sim}_r \left(\jmath \Omega\right)$ è la trasformata di Fourier del filtro anti-imaging dentro al convertitore D/A reale 
@@ -1450,7 +1457,7 @@ dove:
 
 $x_c \left(t\right)$ viene variato da tutti i blocchi della seguente pipeline. \newline 
 
-Il sistema LTI discreto può compensare l'effetto degli altri sistemi analogico. \newline 
+Il sistema LTI discreto può compensare l'effetto degli altri sistemi analogici. \newline 
 
 A questi segnali, va sommato il rumore di quantizzazione. \newline 
 
@@ -1459,7 +1466,7 @@ A questi segnali, va sommato il rumore di quantizzazione. \newline
 
     Invece, per modifica dello spettro si intende che il filtro e/o il sistema modifica lo spettro in modo lineare (e che quindi vengono tolte delle frequenze rispetto al segnale prima del filtro perchè abbiamo a che fare con "sistemi LTI tristi"). \newline 
     
-    Il sistema LTI, per essere utile, non deve togliere le componenti in frequenze dove è contenuta l'informazione (sennò non è più possibile recuperarla)
+    Il sistema LTI, per essere utile, non deve togliere le componenti in frequenze dove è contenuta l'informazione (sennò non è più possibile recuperare l'informazione stessa)
 \end{tcolorbox}
 
 \newpage 
