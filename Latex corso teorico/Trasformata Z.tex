@@ -27,12 +27,12 @@
     \url{https://youtu.be/IDvYw9X0DzE?si=lmpye9MnX8WPw0Bk}
 \end{tcolorbox}
 
-La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove il tempo non è più continuo, bensì il tempo è discreto. \newline 
+La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove il tempo non è più continuo, bensì è discreto. \newline 
 
 \begin{tcolorbox}
     Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, 
     si può utilizzarla per studiare il transitorio della sequenza, come avevamo fatto in Laplace ad Elettronica, 
-    ma, nel corso di DSP, la trasformata-z ci servirà solo per rappresentare la sequenza, senza studiare il transitorio. \newline  
+    ma, nel corso di DSP, la trasformata-z ci servirà solo per rappresentare la sequenza nel dominio z, senza studiare il transitorio. \newline  
 
     In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se: 
 
@@ -58,7 +58,7 @@ La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove 
     }
 
     In particolare, noi abbiamo studiato nel corso di Elettrotecnica la trasformata di Laplace unilatera, 
-    cioè in cui l'integrale della trasformata parte dal tempo $t = 0$ e tende a $+ \infty$, proprio perchè i sistemi reali (condensatore, induttore, resistore, ecc...) 
+    cioè in cui l'integrale della trasformata parte dal tempo $t = 0$ e tende a $+ \infty$, proprio perchè i sistemi reali (condensatori, induttori, resistori, ecc...) 
     sono componenti causali. \newline 
     
     Invece, nella forma più generale, possiamo definire la trasformata di Laplace bilatera come: 
@@ -138,7 +138,7 @@ Notiamo che la trasformata-z è unilatera perchè la sommatoria è svolta per n 
 
 \begin{tcolorbox}
     La trasfomata-z unilatera è la trasformata che ci interessa di più a fini ingegneristici perchè, per la maggior parte dei casi, 
-    avremo a che fare con segnali e sistemi causali, e che quindi partono dall'indice $n = 0$. 
+    avremo a che fare con segnali e sistemi causali "real time", e che quindi partono dall'indice $n = 0$. 
 \end{tcolorbox}
 
 Possiamo svolgere le seguenti osservazioni: 
@@ -149,7 +149,7 @@ Possiamo svolgere le seguenti osservazioni:
     {
         \Large 
         \begin{equation}
-     x \left[ n\right] = 0 \forall n < 0        
+     x \left[ n\right] = 0 \quad \forall n < 0        
         \end{equation}
     }
     
@@ -266,7 +266,7 @@ Possiamo svolgere delle interessanti osservazioni in merito alla regione di conv
             z_0 = \abs{z_0} \cdot e^{\jmath \omega_0}
         \end{equation}
     }
-    allora la trasformata-z converge in tutti i punti della circonferenza di raggio $\abs{z_0}$ e centro dell'origine, come si vede bene in figura: 
+    allora la trasformata-z converge in tutti i punti della circonferenza di raggio $\abs{z_0}$ e con centro l'origine, come si vede bene in figura: 
     \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.4]{convergenza per una ROC.png}
@@ -321,7 +321,7 @@ allora possiamo continuare con gli esercizi di esempio. \newline
 \begin{tcolorbox}
 Tutti i calcoli che svolgo in queste pagine, ve le potete risparmiare, non sono necessarie per l'esame: serve solo a capire come ci si arriva alle formule indicate nelle slides. \newline 
 
-Considerato solo l'inizio e la fine di ogni esercizio.
+Considerate solo l'inizio e la fine di ogni esercizio.
 \end{tcolorbox}
 
 \newpage 
@@ -660,7 +660,7 @@ cioè è la stessa del gradino $n \cdot \alpha^{n} \cdot  u \left[ n\right]$ ma 
 
 Dopo l'elenco di alcune trasformate notevoli, possiamo svolgere alcune osservazioni. \newline 
 
-Per avere corrispondenza biunivoca tra sequenze e trasformata occorre specificar la regione di convergenza (cioè la ROC). \newline 
+Per avere corrispondenza biunivoca tra sequenze e trasformata occorre specificare la regione di convergenza (cioè la ROC). \newline 
 
 Prendendo per esempio la funzione razionale $\dfrac{\alpha z^{-1}}{\left( 1 - \alpha z^{-1}\right)^{2}}$, 
 se indichiamo come ROC $\abs{z} < \abs{\alpha}$, avremo, nel dominio n, la sequenza $-n \cdot \alpha^{n} \cdot  u \left[ -n - 1\right]$. \newline 
@@ -794,7 +794,7 @@ la ROC è la seguente:
 in particolare da verificare per i punti $z = 0$ e $z = +\infty$. \newline 
 
 \begin{tcolorbox}
-    Ingegneristicamente parlando, non ci interessa verificare per i punti $z = 0$ e $z = +\infty$ : è solo un avvezzo matematico. 
+    Ingegneristicamente parlando, non ci interessa verificare la ROC per i punti $z = 0$ e $z = +\infty$ : è solo un avvezzo matematico. 
 \end{tcolorbox}
 
 Per sequenze monolatere destre come la seguente:
@@ -828,7 +828,7 @@ la ROC è la seguente:
 \begin{tcolorbox}
 Dal punto di vista ingegneristico, avremo a che fare la maggior parte delle volte con questo tipo di sequenze, 
 cioè le sequenze monolatere destre perchè sono sequenze causali, a differenza delle sequenze monolatere sinistre, 
-dove le sequenze non sono causali.     
+dove le sequenze non sono causali, chiamate anche sequenza "non real-time", perchè l'elaborazione "è all'indietro" nel tempo.     
 \end{tcolorbox}
 
 \newpage 
@@ -1068,6 +1068,8 @@ in cui la ROC vale:
     \end{equation}
 } 
 
+\newpage 
+
 \textbf{Derivazione in Z} \newline 
 
 Data una sequenza $x \left[ n\right]$ e la sua trasformata-z $X \left(z\right)$, 
@@ -1096,7 +1098,7 @@ in cui la ROC vale:
 
 \begin{tcolorbox}
     Possiamo notare che la ROC, se si applica una traslazione nel tempo o una derivazione in z, 
-    non cambiano. 
+    non cambia. 
 \end{tcolorbox}
 
 \textbf{Moltiplicazione per una sequenza esponenziale} \newline 
