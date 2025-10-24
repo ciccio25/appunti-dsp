@@ -1,0 +1,343 @@
+\chapter{Funzione di Rete}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Esempio di un circuito con una funzione di rete.png}
+\end{figure}  
+
+\newpage 
+
+\section{Funzioni di Rete}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 2\\
+    Appunti | 2025-10-15 | pag 3  
+}
+
+\begin{tcolorbox}
+    Come il caso delle funzioni di rete nel dominio s viste ad Elettrotecnica, 
+    adesso analizzeremo, in questo corso di DSP, le funzioni di rete nel dominio z. \newline 
+
+    Per avere un ripasso al volo: \newline 
+
+    Funzione di trasferimento - Wikipedia \\
+    \url{https://it.wikipedia.org/wiki/Funzione_di_trasferimento}
+\end{tcolorbox} 
+
+Per un circuito, o sistema, a tempo discreto descritto dall'equazione alle differenze finite: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = 0}^{N}
+        a_k \cdot y \left[ n - k\right]
+        = 
+        \sum_{k = 0}^{M}
+        b_k \cdot x \left[ n - k\right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $x \left[ n\right]$ è una sequenza di ingresso al sistema LTI a tempo discreto 
+    \item $y \left[ n\right]$ è una sequenza di uscita al sistema LTI a tempo discreto 
+    \item $a_k$ e $b_k$ sono coefficienti reali
+\end{itemize}
+
+Applicando la trasformata-z al sistema, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \sum_{k = 0}^{N}
+        a_k \cdot y \left[ n - k\right]
+        &= 
+        \sum_{k = 0}^{M}
+        b_k \cdot x \left[ n - k\right]
+        \\
+        &\updownarrow
+        \\
+        \sum_{k = 0}^{N}
+        a_k \cdot z^{-k} \cdot Y \left( z\right)
+        &= 
+        \sum_{k = 0}^{M}
+        b_k \cdot z^{-k} \cdot X \left( z\right)
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $X \left( z\right)$ è la trasformata-z della sequenza in ingresso al sistema LTI a tempo discreto $x \left[ n\right]$
+    \item $Y \left( z\right)$ è la trasformata-z della sequenza in uscita al sistema LTI a tempo discreto $y \left[ n\right]$
+\end{itemize} 
+
+\newpage 
+
+Visto che i termini $Y \left( z\right)$ e $X \left( z\right)$ sono costanti nella sommatoria nel dominio z (a differenza del dominio n), 
+possiamo svolgere queste sostituzioni (step-by-step):
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \sum_{k = 0}^{N}
+        a_k \cdot z^{-k} \cdot Y \left( z\right)
+        &= 
+        \sum_{k = 0}^{M}
+        b_k \cdot z^{-k} \cdot X \left( z\right)
+        \\
+        Y \left( z\right)
+        &=
+        \dfrac{\sum_{k = 0}^{M}
+        b_k \cdot z^{-k}
+        }{\sum_{k = 0}^{N}
+        a_k \cdot z^{-k}}
+        \cdot X \left( z\right)
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        =
+        \dfrac{\sum_{k = 0}^{M}
+        b_k \cdot z^{-k}
+        }{\sum_{k = 0}^{N}
+        a_k \cdot z^{-k}} 
+    \end{equation}
+
+}
+
+prende il nome di funzione di rete (o in inglese System Function) perchè descrive il legame ingresso-uscita da una funzione razionale. \newline 
+
+\newpage 
+
+\subsection{La funzioni di rete nei vari domini}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 3\\
+    Appunti | 2025-10-15 | pag 3  
+}
+
+Come dimostrato precedentemente, la funzione di rete $H \left(z\right)$ può essere ancora calcolata, 
+sapendo la trasformata-z dell'uscita del sistema LTI a tempo discreto $Y \left(z\right)$ 
+e  la trasformata-z dell'ingresso del sistema LTI a tempo discreto $X \left(z\right)$ anche come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( z\right)
+        = 
+        \dfrac{Y \left(z\right)}{X \left(z\right)}
+        = 
+        \dfrac{\sum_{k = 0}^{M}
+        b_k \cdot z^{-k}
+        }{\sum_{k = 0}^{N}
+        a_k \cdot z^{-k}} 
+    \end{equation}
+}
+
+$H \left(z\right)$ è anche la trasformata-z della risposta impulsiva di un sistema LTI a tempo discreto $h \left[ n\right]$. \newline 
+
+In formule: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( z\right)
+        = 
+        Z \left\{ h \left[ n\right]\right\}
+    \end{equation}
+}
+
+Un circuito (o sistema) a tempo discreto, lineare e stazionario (cioè LTI) è caratterizzato da un legame ingresso-uscita, 
+che può essere rappresentato in tre domini: \newline 
+
+\textbf{Dominio - Tempo} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        h \left[ n\right]
+        * 
+        x \left[ n\right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $h \left[ n\right]$ è la risposta impulsiva del sistema LTI 
+    \item l'uscita del sistema LTI nel dominio n, cioè $y \left[ n\right]$, è una convoluzione (che è un processo matematico difficile da computazionare) tra la risposta impulsiva $h \left[ n\right]$ e l'ingresso $x \left[ n\right]$ \newline
+\end{itemize} 
+
+\textbf{Dominio - Frequenza} \newline 
+
+\begin{tcolorbox}
+    Tecnicamente dovrebbe essere il dominio delle pulsazione, ma sappiamo bene che tra pulsazioni e frequenza c'è il coefficiente $2 \pi$ che li differisce. \newline 
+
+    Come dice Chiaraluce a lezione di Telecomunicazioni: "Tanto è solo un coefficiente"
+\end{tcolorbox}
+
+{
+    \Large 
+    \begin{equation}
+        Y \left( e^{\jmath \omega}\right)
+        = 
+        H \left( e^{\jmath \omega}\right) 
+        \cdot 
+        X \left( e^{\jmath \omega}\right) 
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $H \left( e^{\jmath \omega}\right)$ è la DTFT di $h \left[ n\right]$
+    \item l'uscita del sistema LTI nel dominio delle frequenze, cioè $Y \left( e^{\jmath \omega}\right)$, è un prodotto algebrico (che è un processo matematico facile da computazionare) tra la risposta in frequenza $H \left( e^{\jmath \omega}\right)$ e l'ingresso $X \left( e^{\jmath \omega}\right)$ \newline
+\end{itemize}
+
+\newpage 
+
+\textbf{Dominio - Dominio-z} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left( z\right)
+        = 
+        H \left( z\right) 
+        \cdot 
+        X \left( z\right) 
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $H \left( z \right)$ è la trasformata-z di $h \left[ n\right]$
+    \item anche qui, come nel dominio delle frequenze, l'uscita del sistema LTI nel dominio delle z, cioè $Y \left( z \right)$, è un prodotto algebrico (che è un processo matematico facile da computazionare) tra la risposta nel dominio z $H \left( z\right)$ e l'ingresso $X \left( z\right)$ \newline
+\end{itemize} 
+
+\begin{tcolorbox}
+Ricordiamo al volo che per passare dal dominio delle frequenza al dominio z è necessario definire una ROC, 
+importante soprattutto per l'anti-trasformata-z (vedi \ref{sec: Proprietà della ROC} \nameref{sec: Proprietà della ROC} pag \pageref{sec: Proprietà della ROC})   
+\end{tcolorbox}
+
+\newpage 
+
+\section{System Function}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 5\\
+    Appunti | 2025-10-15 | pag 3 - 4  
+}
+
+Per sistemi LTI: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistea LTI a tempo discreto.png}
+\end{figure}  
+
+con risposta impulsiva $h \left[ n\right]$ ed ingressi Z-trasformabili, vale: 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left( z \right)
+        = 
+        H \left(z\right)
+        \cdot 
+        X \left( z\right)
+        \quad 
+        z \in ROC 
+    \end{equation}
+}
+
+Se esistono le trasformate di Fourier (quindi si visualizza il sistema LTI non più a regime transitorio, bensì nel regime permanente), 
+cioè che è ammissibile scrivere: 
+
+{
+    \Large 
+    \begin{equation}
+        z = e^{\jmath \omega}
+    \end{equation}
+}
+
+allora possiamo scrivere che valgono le seguenti relazioni: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \abs{Y \left(e^{\jmath \omega}\right)}
+            &= 
+            \abs{H \left(e^{\jmath \omega}\right)}
+            \cdot 
+            \abs{X \left(e^{\jmath \omega}\right)}
+            \\
+            &\quad
+            \\
+            \sphericalangle Y \left(e^{\jmath \omega}\right)
+            &= 
+            \sphericalangle H \left(e^{\jmath \omega}\right)
+            +
+            \sphericalangle X \left(e^{\jmath \omega}\right) 
+        \end{split}
+    \end{equation}
+}
+
+cioè che: 
+
+\begin{itemize}
+    \item per quanto riguarda i moduli, il modulo di $Y \left(e^{\jmath \omega}\right)$ è il prodotto tra il modulo di $H \left(e^{\jmath \omega}\right)$ e il modulo di $X \left(e^{\jmath \omega}\right)$ 
+    \item invece, per quanto riguarda le fasi, la fase di $Y \left(e^{\jmath \omega}\right)$ è la somma tra la fase di $H \left(e^{\jmath \omega}\right)$ e la fase di $X \left(e^{\jmath \omega}\right)$ 
+\end{itemize}
+
+Grazie a queste relazioni, possiamo scrivere che, per quanto riguarda il filtro LTI in Fourier, 
+la sua funzione di rete $H \left( e^{\jmath \omega}\right)$ in Fourier è: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( e^{\jmath \omega}\right)
+        = 
+        \abs{H \left( e^{\jmath \omega}\right)}
+        \cdot 
+        e^{\jmath \sphericalangle H \left( e^{\jmath \omega}\right)}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\abs{H \left( e^{\jmath \omega}\right)}$ è la risposta in ampiezza del filtro LTI 
+    \item $e^{\jmath \sphericalangle H \left( e^{\jmath \omega}\right)}$ è la risposta in fase del filtro LTI
+\end{itemize}
+
+Sia $\abs{H \left( e^{\jmath \omega}\right)}$ che $e^{\jmath \sphericalangle H \left( e^{\jmath \omega}\right)}$ sono funzioni continue nel dominio $\omega$. \newline 
+
+\newpage 
+
+\subsection{Magnitude}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 6\\
+    Appunti | 2025-10-15 | pag 4  
+}
+
+
+
+
+
