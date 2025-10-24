@@ -337,7 +337,342 @@ Sia $\abs{H \left( e^{\jmath \omega}\right)}$ che $e^{\jmath \sphericalangle H \
     Appunti | 2025-10-15 | pag 4  
 }
 
+Nei filtri LTI, spesso si considerano i segnali random che, essendo ciclostazionari, 
+non analizziamo il loro modulo (in inglese Magnitude) in Fourier, bensì la loro varianza. \newline 
 
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Inserire il capitolo di Telecomunicazioni in cui si dimostra ciò
+\end{tcolorbox} 
 
+In particolare, data la trasformata di Fouerier della risposta impulsiva $h \left[ n\right]$, 
+cioè $H \left( e^{\jmath \omega}\right)$, consideriamo come spettro dei moduli la sua potenza, cioè: 
 
+{
+    \Large 
+    \begin{equation}
+        \abs{H \left( e^{\jmath \omega}\right)}^{2}
+    \end{equation}
+}
+
+che prende il nome di "magnitude-squared". \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2}
+$\abs{H \left( e^{\jmath \omega}\right)}^{2}$, oltre in inglese a "magnitude-squared", quale è il suo equivalente, ha un nome in italiano? \newline 
+
+Spettro dei moduli della potenza? Gli si può assegnare un nome o una variabile? 
+\end{tcolorbox}
+
+Generalmente di $\abs{H \left( e^{\jmath \omega}\right)}^{2}$ si calcola il suo valore in decibel, o dB, come (step-by-step): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            10 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}^{2}\right)
+            &= 
+            2 \cdot 10 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)
+            \\
+            &= 
+            20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)
+        \end{split}
+    \end{equation}
+}
+
+$20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)$ prende il nome, in inglese, di "log magnitude". \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3}
+Stessa domanda di prima, ma riferita a $20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)$
+\end{tcolorbox}
+
+Consideriamo il "log magnitude" un guadagno in dB se è positivo, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right) > 0
+    \end{equation}
+}
+
+Consideriamo il "log magnitude" un'attenuazione in dB se è negativo, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right) < 0
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Questo accade perchè, ricordando da Teoria dei segnali, se il dB è positivo significa che si moltiplica l'argomento del logaritmo per un numero maggiore di 1. \newline 
+
+    Se il dB è negativo, significa che si moltiplica l'argomento per un numero compreso tra 0 e 1, in pratica si fa una divisione rispetto all'argomento del logaritmo. 
+\end{tcolorbox}
+
+\newpage 
+
+Ricordando che, per dei segnali deterministici, avevamo che: 
+
+{
+    \Large 
+    \begin{equation}
+            \abs{Y \left(e^{\jmath \omega}\right)}
+            = 
+            \abs{H \left(e^{\jmath \omega}\right)}
+            \cdot 
+            \abs{X \left(e^{\jmath \omega}\right)}
+    \end{equation}
+}
+
+Per segnali random, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \abs{Y \left(e^{\jmath \omega}\right)}
+            &= 
+            \abs{H \left(e^{\jmath \omega}\right)}
+            \cdot 
+            \abs{X \left(e^{\jmath \omega}\right)}
+            \\
+            &\downarrow
+            \\
+            \abs{Y \left(e^{\jmath \omega}\right)}^{2}
+            &= 
+            \abs{H \left(e^{\jmath \omega}\right)}^{2}
+            \cdot 
+            \abs{X \left(e^{\jmath \omega}\right)}^{2}
+        \end{split}
+    \end{equation}
+}
+
+che in dB diventa: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \abs{Y \left(e^{\jmath \omega}\right)}^{2}
+            &= 
+            \abs{H \left(e^{\jmath \omega}\right)}^{2}
+            \cdot 
+            \abs{X \left(e^{\jmath \omega}\right)}^{2}
+            \\
+            &\downarrow
+            \\
+            20 \cdot \log_{10} \left( \abs{Y \left( e^{\jmath \omega}\right)}\right)
+            &=
+            20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)
+            +
+            20 \cdot \log_{10} \left( \abs{X \left( e^{\jmath \omega}\right)}\right)
+        \end{split}
+    \end{equation}
+}
+
+Quindi, per segnali random, l'uscita di un filtro LTI in Fourier in dB è una semplice somma. \newline 
+
+In particolare, possiamo graficare lo spettro dei "magnitude-squared" di $H \left(e^{\jmath \omega}\right)$ al variare della pulsazione $\omega$ con il diagramma di Bode. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
+La figura possiamo considerarla come il diagramma di Bode di $\abs{H \left(e^{\jmath \omega}\right)}^{2}$? \newline 
+
+Se si, inserire riferimenti e link al diagramma di Bode qui.
+\end{tcolorbox}
+
+Se si considera solo le pulsazioni positive, possiamo tracciare un esempio di $\abs{H \left(e^{\jmath \omega}\right)}^{2}$ al variare dele pulsazioni $\omega$ (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Esempio di un filtro passa-basso in db.png}
+\end{figure}  
+
+\newpage 
+
+\subsection{Risposta in Fase}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 7\\
+    Appunti | 2025-10-15 | pag 4  
+}
+
+Si definisce la risposta in fase di un sistema LTI in Fourier: 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right]
+    \end{equation}
+}
+
+la quale è una funzione continua in $\omega$ per $\abs{\omega} < \pi$. \newline 
+
+Un esempio di un andamento della risposta in fase di un filtro LTI: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Esempio dell'andamento della risposta in fase.png}
+\end{figure}  
+
+ma, generalmente, si preferisce rappresentarlo nell'intervallo $\left[ - \pi, + \pi\right]$, 
+quindi la figura precendente diventa: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Esempio dell'andamento della risposta in fase nell'intervallo pi.png}
+\end{figure}  
+
+Notando la figura, apparentemente esiste una discontinuità, ma nella realtà $arg \left[ H \left( e^{\jmath \omega}\right)\right]$ non lo è. \newline 
+
+Per calcolare la risposta in fase del filtro $arg \left[ H \left( e^{\jmath \omega}\right)\right]$, 
+esso sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        \arctan \left( \dfrac{\mathfrak{J} \left[ H \left( e^{\jmath \omega}\right)\right]}{\Re \left[ H \left( e^{\jmath \omega}\right)\right]}\right)
+    \end{equation}
+}
+
+e va calcolato per tutti e quattro i quadranti. \newline 
+
+A differenza del calcolo del modulo, per la risposta in fase, dati diversi segnali in frequenza, 
+non è possibile sommarli. \newline 
+
+Quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ a + b + c\right]
+        \neq 
+        \arg[a] 
+        + 
+        \arg[b] 
+        + 
+        \arg[c] 
+    \end{equation}
+}
+
+\newpage 
+
+\subsubsection{Distorsione di Fase}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 8\\
+    Appunti | 2025-10-15 | pag 4  
+}
+
+In molti casi, la risposta in fase di un sistema è considerata una distorsione perchè le varie componenti si sommano con fasi differenti. \newline 
+
+Per questo motivo è necessario distinguere i vari casi della risposta in fase del sistema LTI $\arg \left[ H \left( e^{\jmath \omega}\right)\right]$. \newline 
+
+Di seguito elenchiamo i casi più importanti di $\arg \left[ H \left( e^{\jmath \omega}\right)\right]$. \newline 
+
+\textbf{Fase zero} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        0 
+        \quad 
+        \abs{\omega} < \pi
+    \end{equation}
+}
+
+In questo caso, non si ha nessuna distorsione perchè il sistema è istantaneo (nella realtà sarà impossibile progettarlo). \newline 
+
+\textbf{Fase lineare} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        - \alpha \omega
+        \quad 
+        \abs{\omega} < \pi, \alpha \text{ costante}
+    \end{equation}
+}
+
+In questo caso, non si ha nessuna distorsione ed il sistema ha un ritardo di $\alpha$. \newline
+
+\begin{tcolorbox}
+    Questo è il caso che vorremmo avere nella maggior parte dei casi perchè 
+    $\arg \left[ H \left( e^{\jmath \omega}\right)\right] $ sarà una retta con pendenza negativa (dato da $- \alpha \omega$) lungo le pulsazioni. 
+\end{tcolorbox}
+
+Come esempio di risposta in fase lineare: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left(e^{\jmath \omega}\right)
+        &= 
+        2 \cdot e^{- \jmath \omega 3}
+        \\
+        &\downarrow
+        \\
+        y \left[ n \right]
+        &= 
+        2 x \left[ x - 3\right]
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
+Avremo in uscita questo risultato dato come ingresso una sequenza $x \left[ n\right]$? Quali sono i passaggi logici per arrivare alla $y \left[ n\right]$ data $H \left( e^{\jmath \omega}\right)$ ?
+\end{tcolorbox}
+
+\textbf{Fase lineare generalizzata} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        - \alpha \omega + \beta
+        \quad 
+        \abs{\omega} < \pi, \alpha, \beta \text{ costanti}
+    \end{equation}
+}
+
+In questo caso, non si ha nessuna distorsione,
+ma il sistema ha un ritardo di $\alpha$ e costante moltilplicativa di $e^{\jmath \beta}$. \newline
+
+\begin{tcolorbox}
+    Come il caso con fase lineare, ma con una costante, che è $\beta$
+\end{tcolorbox} 
+
+\newpage 
+
+\textbf{Fase arbitraria} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        \text{ non lineare}
+    \end{equation}
+}
+
+In questo caso, si ha una distorsione di fase. \newline 
+
+\begin{tcolorbox}
+    In questo corso, non vorremmo mai avere una distorsione non lineare.  
+\end{tcolorbox}
+
+\newpage 
+
+\section{Ritardo di Gruppo e di Fase}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 9 - 10\\
+    Appunti | 2025-10-21 | pag 1  
+}
 
