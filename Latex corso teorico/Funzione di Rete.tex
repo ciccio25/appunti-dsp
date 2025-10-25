@@ -236,7 +236,7 @@ importante soprattutto per l'anti-trasformata-z (vedi \ref{sec: Proprietà della
 
 \newpage 
 
-\section{System Function}
+\section{System Function} \label{sec: System Function}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 5\\
@@ -330,7 +330,7 @@ Sia $\abs{H \left( e^{\jmath \omega}\right)}$ che $e^{\jmath \sphericalangle H \
 
 \newpage 
 
-\subsection{Magnitude}
+\subsection{Magnitude} \label{subsec: Magnitude}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 6\\
@@ -1170,6 +1170,527 @@ avremo che vale:
 \section{Sistemi LTI con H(z) razionale}
 
 \footnote{ 
-    Slide del prof | 6 - Funzioni di Rete | pag 11 - 15\\
-    Appunti | 2025-10-21 | pag 2 - 3
+    Slide del prof | 6 - Funzioni di Rete | pag 11\\
+    Appunti | 2025-10-21 | pag 2
+} 
+
+Come scritto precedentemente, i sistemi che andremo ad affrontare in questo corso sono sistemi che sono descritti nel tempo 
+con equazioni alle differenze finite del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = 0}^{N}
+        a_k \cdot y [n - k]
+        =
+        \sum_{k = 0}^{M}
+        b_k \cdot x [n - k] 
+    \end{equation}
+} 
+
+Ipotizzando che avremo un sistema causale, allora l'uscita di un sistema LTI discreto avrà un andamento del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        \dfrac{1}{a_0} 
+        \cdot
+        \left[ 
+            - \sum_{k = 0}^{N} a_k \cdot y [n - k]
+            + 
+            \sum_{k = 0}^{M} b_k \cdot x [n - k] 
+        \right]
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item gli $a_k$ coefficienti sono i coefficienti della risposta libera del sistema LTI, libera perchè non dipende dall'ingresso $x \left[ n\right]$
+    \item i $b_k$ coefficienti sono i coefficienti della risposta forzata del sistema LTI, forzata perchè il funzionamento del sistema LTI cambia in base all'ingresso $x \left[ n\right]$ 
+    \item le sommatorie iniziano da $k = 0$ perchè si considera un sistema causale, dove $n = 0$ è l'istante iniziale di osservazione del sistema LTI discreto
+\end{itemize}
+
+in cui le condizioni iniziali a $n = 0$ sono: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ -1\right], 
+        y \left[ -2\right], 
+        \dots, 
+        y \left[ -N\right] 
+        \text{ in } n = 0 
+    \end{equation}
 }
+
+Avere delle condizioni iniziali significa che, ad ogni n+1 indice, andremo a confrontare l'uscita del sistema LTI $y \left[ n\right]$ con ciò che è successo l'istante precedente. \newline 
+
+\begin{tcolorbox}
+    Per quelli che hanno fatto Controlli automatici, potete trovare qui un ripasso della risposta libera e forzata per sistemi LTI e la relazione tra tempo e dominio s: \newline 
+
+    \url{http://wpage.unina.it/carcosen/FondAut_file/6.%20Analisi%20nel%20Tempo.pdf} \newline 
+
+    Si può risolvere un sistema LTI discreto anche per sistemi non-causali, in cui l'uscita del sistema LTI avrà la forma del tipo: 
+
+    {
+    \Large 
+    \begin{equation}
+        y \left[ n - N\right]
+        = 
+        \dfrac{1}{a_0} 
+        \cdot
+        \left[ 
+            - \sum_{k = 0}^{N - 1} a_k \cdot y [n - k]
+            + 
+            \sum_{k = 0}^{M} b_k \cdot x [n - k] 
+        \right]
+    \end{equation}
+} 
+
+Quindi un sistema anti-causale non si risolverà da $- \infty$ a $+ \infty$ (o da sinistra verso destra) come nei sistemi causali, 
+bensì si risolverà partendo da $+ \infty$ a $- \infty$ (o da destra verso sinistra). \newline 
+
+Anche se ingegneristicamente parlando andremo a che fare principalmente con sistemi causali, questa modalità di risolvere i sistemi alle differenze sarà molto utile per gli esercizi di DSP su Matlab. \newline 
+
+E anche perchè, nel "fantastico mondo del DSP", non esiste un verso del "tempo": tutto è possibile. 
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 8}
+Quindi, se volessimo risolvere il sistema in modo anti-causale, dovremmo avere non le condizioni iniziali bensì le condizioni future, giusto? 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{H(z) razionale nel dominio z}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 12\\
+    Appunti | 2025-10-21 | pag 2
+} 
+
+Come scritto precedentemente in \ref{sec: System Function} \nameref{sec: System Function} pag \pageref{sec: System Function}, 
+la trasformata-z di un sistema LTI può essere scritta anche come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        \dfrac{Y \left(z\right)}{X \left(z\right)}
+    \end{equation}
+}
+
+dove $Y \left(z\right)$ e $X \left(z\right)$ sono, rispettivamente, le trasformate-z di $y \left[ n\right]$ e $x \left[ n\right]$, cioè la sequenza di uscita del sistema LTI e la sequenza di ingresso del sistema LTI. \newline 
+
+
+Però, sapendo che: 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left(z \right) = \sum_{k = 0}^{M} b_k \cdot z^{-k}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        X \left(z \right) = \sum_{k = 0}^{N} a_k \cdot z^{-k}
+    \end{equation}
+}
+
+allora possiamo scrivere $H \left(z\right)$ anche come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        \dfrac{Y \left(z\right)}{X \left(z\right)} 
+        = 
+        \dfrac{\sum_{k = 0}^{M} b_k \cdot z^{-k}}{\sum_{k = 0}^{N} a_k \cdot z^{-k}}
+    \end{equation}
+}
+
+dove M sono il numero degli zeri e N sono dei poli. \newline 
+
+Se $M > N$, allora ci saranno M-N poli che si troveranno a z = 0. \newline 
+
+Se $N > M$, allora ci saranno N - M poli che si troveranno a z = 0. \newline 
+
+Essendo $H \left(z\right)$ una funzione razionale, possiamo scriverla anche come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \dfrac{b_0}{a_0}
+        \cdot 
+        \dfrac{\prod_{k = 1}^{M} \left( 1 - c_k z^{-1}\right)}{\prod_{k = 1}^{N} \left( 1 - d_k z^{-1}\right)}
+    \end{equation}
+}
+
+In questa maniera $H \left(z\right)$ è esprimibile non più da un rapporto di sommatorie, bensì è esprimibile da un rapporto di produttorie. \newline 
+
+Ipotizzando di avere poli semplici, cioè con molteplicità uguale ad uno, e il numero degli zeri M è maggiore del numero dei poli N, 
+allora $H \left(z\right)$ può essere ulteriormente semplificata come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        \sum_{r = 0}^{M -N}
+        B_r z^{-r}
+        + 
+        \sum_{k = 1}^{N}
+        \dfrac{A_k}{1 - d_k z^{-1}}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Perchè farsi le pippe mentali per descrivere $H \left(z\right)$ nella stessa maniera? Perchè, circuitalmente, vedremo nelle prossime pagine che, 
+    diversi modi di rappresentare $H \left(z\right)$ comporta un diverso circuito realizzativo. 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{H(z) razionale e stabilità}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 13 - 14\\
+    Appunti | 2025-10-21 | pag 3
+} 
+
+Come ricordato in \ref{sec: Proprietà della ROC} \nameref{sec: Proprietà della ROC} pag \pageref{sec: Proprietà della ROC}, 
+per le sequenze $x \left[ n\right]$ monolatere destre avevamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = n_1}^{+ \infty}
+        x \left[ n\right] \cdot z^{-n}
+    \end{equation}
+}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        n_1 > - \infty
+    \end{equation}
+}
+
+la ROC è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC = \forall z: \abs{z} > \abs{z_0}
+    \end{equation}
+}
+
+Se invece abbiamo a che fare con un sistema LTI, che ha una risposta impulsiva $h \left[ n\right]$ causale (quindi anche lei una sequenza monolatera destra), 
+la cui trasformata-z è $H \left(z\right)$, allora possiamo definire la ROC di un sistema LTI con $H \left(z\right)$ razionale come: 
+
+{
+    \Large 
+    \begin{equation}
+        ROC \left\{ H \left(z\right)\right\}
+        = 
+        \forall z : 
+        \abs{z} > r
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item z è un qualsiasi punto sul piano z 
+    \item r è il modulo del polo più lontano dall'origine
+\end{itemize}
+
+Un esempio sul piano z di un sistema LTI causale è rappresentato nella seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{ROC di un sistema causale di esempio.png}
+\end{figure}  
+
+dove, nel piano-z: 
+
+\begin{itemize}
+    \item con il simbolo X (cioè la crocetta) indichiamo l'i-esimo polo 
+    \item con il simbolo O (cioè il cerchio) indichiamo l'i-esimo zero  
+\end{itemize}
+
+\newpage 
+
+Ipotizzando di avere poli semplici, cioè con molteplicità uguale ad uno, e il numero degli zeri M è maggiore del numero dei poli N, 
+allora $H \left(z\right)$ può essere ulteriormente semplificata come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        \sum_{r = 0}^{M -N}
+        B_r z^{-r}
+        + 
+        \sum_{k = 1}^{N}
+        \dfrac{A_k}{1 - d_k z^{-1}}
+    \end{equation}
+}
+
+e anti-trasformando-z, quindi passando dal dominio z al dominio delle sequenze n, avremo che, 
+la risposta impulsiva di un sistema LTI con $H \left(z\right)$ nel dominio z, nel dominio n $h \left[ n\right]$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left(z\right)
+        &= 
+        \sum_{r = 0}^{M -N}
+        B_r z^{-r}
+        + 
+        \sum_{k = 1}^{N}
+        \dfrac{A_k}{1 - d_k z^{-1}}
+        \\
+        &\updownarrow
+        \\
+        h \left[ n\right]
+        &=
+        \sum_{r = 0}^{M -N}
+        B_r \delta \left[ n - r\right] 
+        + 
+        \sum_{k = 1}^{N}
+        A_k \cdot d_k^{n} \cdot u \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\sum_{r = 0}^{M -N} B_r \delta \left[ n - r\right] $ è una somma di impulsi 
+    \item $\sum_{k = 1}^{N} A_k \cdot d_k^{n} \cdot u \left[ n\right] $ è una somma di esponenziali 
+    \item $u \left[ n\right]$ è un gradino
+\end{itemize}
+
+Inoltre, se il numero dei poli N è nullo, cioè $N = 0$, $h \left[ n\right]$ rappresenterà un sistema FIR, cioè un sistema LTI con una risposta impulsiva finita (in inglese Finite Impulse Response). \newline 
+
+Se il numero dei poli N è maggiore di zero, cioè $N > 0$, $h \left[ n\right]$ rappresenterà un sistema IIR, cioè un sistema LTI con una risposta impulsiva infinita (in inglese Infinite Impulse Response). \newline
+
+Poichè la condizione di stabilità è: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{h \left[ n\right]}
+        < 
+        + \infty
+    \end{equation}
+}
+
+cioè, scritta a parole, la risposta impulsiva $h \left[ n\right]$, deve essere assolutamente sommabile affinche il sistema LTI sia stabile, 
+allora deve risultare che: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{d_k} < 1 \quad \forall k
+    \end{equation}
+}
+
+cioè tutti i poli, se considerati semplici, di $H \left(z\right)$ devono essere dentro al cerchio unitario, 
+come nella seguente figura di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.18]{Piano z di esempio di un sistema LTI razionale causale stabile.png}
+\end{figure}  
+
+Proprio per questo motivo, per sistemi stabili esisterà sempre una trasformata di Fourier. \newline 
+
+Se esiste o esistono più poli $\abs{d_k}$ che si trovano nel cerchio unitario, avremo che il sistema LTI avrà una stabilità condizionata. \newline 
+
+\newpage 
+
+\begin{tcolorbox}
+    Alcune osservazioni (come al solito perchè non siamo contenti se non facciamo osservazioni da futuri ingegneri): 
+
+    \begin{itemize}
+        \item in un sistema anti-causale, avremo stabilità al contrario, cioè se gli N-esimi poli hanno $\abs{d_k} > 1$, cioè se tutti i poli si trovano fuori dal cerchio unitario 
+        \item in Elettrotecnica avevamo visto che nel piano s di Laplace, se il polo si trova esattamente sull'asse immaginario (e non sul cerchio unitario come nel dominio z), il sistema LTI avrà una stabilità condizionata (che non ha caso pratico, a differenza del cerchio unitario nel dominio z in cui è molto importante) 
+    \end{itemize}
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Risposta in Frequenza di H(z) razionali}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 15\\
+    Appunti | 2025-10-21 | pag 3
+} 
+
+\begin{tcolorbox}
+    Questo paragrafo è molto utile come tabella riassuntiva
+\end{tcolorbox}
+
+Per sistemi LTI causali e stabili, avremo che possiamo esprimere la loro risposta in modulo, in fase e il ritardo di gruppo nel dominio della frequenza con le seguenti formule. \newline 
+
+\textbf{Risposta in modulo} \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 9}
+A \ref{subsec: Magnitude} \nameref{subsec: Magnitude} pag \pageref{subsec: Magnitude} avevamo scritto che "siccome andiamo a considererà dei segnali causali non andremo a calcolare il modulo, bensì il modulo al quadrato". \newline 
+
+Quindi, nel corso useremo $\abs{H \left(e^{\jmath \omega}\right)}$ ma in realtà dovremmo usare $\abs{H \left(e^{\jmath \omega}\right)}^{2}$ ?
+\end{tcolorbox}
+
+La risposta in modulo di $H \left(e^{\jmath \omega}\right)$ la possiamo calcolare come: 
+
+{ 
+    \Large 
+    \begin{equation}
+        \abs{H \left(e^{\jmath \omega}\right)} 
+        = 
+        \abs{\dfrac{b_0}{a_0}}
+        \cdot 
+        \dfrac{\prod_{k = 1}^{M} \abs{\left( 1 - c_k e^{-\jmath \omega}\right)}}{\prod_{k = 1}^{N} \abs{\left( 1 - d_k e^{-\jmath \omega}\right)}}
+    \end{equation}
+}
+
+Se invece volessimo calcolare $\abs{H \left(e^{\jmath \omega}\right)}$ in dB, 
+lo possiamo calcolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \left.
+        \abs{H \left(e^{\jmath \omega}\right)}
+        \right|_{dB}
+        &= 
+        20 \cdot \log_{10}
+        \left( \abs{\dfrac{b_0}{a_0}} \right)
+        \\
+        &\quad
+        +
+        \sum_{k = 1}^{M}
+        20 \cdot \log_{10}
+        \left(  \abs{\left( 1 - c_k e^{-\jmath \omega}\right)} \right)
+        \\
+        &\quad
+        -
+        \sum_{k = 1}^{N}
+        20 \cdot \log_{10}
+        \left(  \abs{\left( 1 - d_k e^{-\jmath \omega}\right)} \right) 
+        \end{split}
+    \end{equation}
+}
+
+Quindi, in dB, accade che: 
+
+\begin{itemize}
+    \item gli zeri contribuiscono in positivo al guadagno del filtro (a causa del segno positivo davanti la sommatoria $+ \sum_{k = 1}^{M} 20 \cdot \log_{10} \left(  \abs{\left( 1 - c_k e^{-\jmath \omega}\right)} \right)$ ), 
+    \item i poli contribuiscono in negativo (a causa del segno negativo davanti la sommatoria $\sum_{k = 1}^{N} 20 \cdot \log_{10} \left(  \abs{\left( 1 - d_k e^{-\jmath \omega}\right)} \right)$)
+\end{itemize} 
+
+\newpage 
+
+\textbf{Risposta in fase} \newline 
+
+La risposta in fase di $H \left(e^{\jmath \omega}\right)$ la possiamo calcolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right]
+        &= 
+        \arg
+        \left[ \dfrac{b_0}{a_0} \right]
+        \\
+        &\quad
+        +
+        \sum_{k = 1}^{M}
+        \arg
+        \left[  1 - c_k e^{-\jmath \omega} \right]
+        \\
+        &\quad
+        -
+        \sum_{k = 1}^{N}
+        \arg
+        \left[ 1 - d_k e^{-\jmath \omega} \right] 
+        \end{split}
+    \end{equation}
+}
+
+oppure la possiamo calcolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        ARG \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        \arctan \left( \dfrac{\mathfrak{J} \left[ H \left( e^{\jmath \omega}\right)\right]}{\Re \left[ H \left( e^{\jmath \omega}\right)\right]}\right) 
+        \text{ su 4 quadranti}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 10}
+Perchè una arg è scritta in minuscolo e un'altra arg in maiuscolo?
+\end{tcolorbox}
+
+\textbf{Ritardo di gruppo} \newline 
+
+Il ritardo di gruppo di $H \left(e^{\jmath \omega}\right)$ lo possiamo calcolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        grd \left[ H \left( e^{\jmath \omega}\right)\right]
+        &= 
+        -
+        \sum_{k = 1}^{M}
+        \dfrac{d}{d \omega}
+        \arg
+        \left[  1 - c_k e^{-\jmath \omega} \right]
+        \\
+        &\quad
+        +
+        \sum_{k = 1}^{N}
+        \dfrac{d}{d \omega}
+        \arg
+        \left[ 1 - d_k e^{-\jmath \omega} \right] 
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item gli zeri contribuiscono in negativo al ritardo di gruppo (a causa del segno negativo davanti la sommatoria $\sum_{k = 1}^{M} \dfrac{d}{d \omega} \arg \left[  1 - c_k e^{-\jmath \omega} \right]$ ), 
+    \item i poli contribuiscono in positivo al ritardo di gruppo (a causa del segno positivo davanti la sommatoria $\sum_{k = 1}^{N} \dfrac{d}{d \omega} \arg \left[ 1 - d_k e^{-\jmath \omega} \right] $)
+\end{itemize} 
+
+Quindi, i poli e gli zeri hanno effetti opposti in modulo e nel ritardo di gruppo. \newline 
+
+\newpage 
+
+\subsection{Effetto di un polo o di uno zero in H (z)}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 16 - 17\\
+    Appunti | 2025-10-21 | pag 3
+} 
+
