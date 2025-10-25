@@ -1171,7 +1171,7 @@ avremo che vale:
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 11\\
-    Appunti | 2025-10-21 | pag 2
+    Appunti | 2025-10-21 | pag 2, 4
 } 
 
 Come scritto precedentemente, i sistemi che andremo ad affrontare in questo corso sono sistemi che sono descritti nel tempo 
@@ -1260,6 +1260,13 @@ E anche perchè, nel "fantastico mondo del DSP", non esiste un verso del "tempo"
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 8}
 Quindi, se volessimo risolvere il sistema in modo anti-causale, dovremmo avere non le condizioni iniziali bensì le condizioni future, giusto? 
+\end{tcolorbox}
+
+\begin{tcolorbox}
+Una piccola osservazione rispetto al numero di N e M. \newline 
+
+Più coefficienti in sistema alle differenze ci sono e più calcoli bisogna fare: ecco perchè, in questo corso (ma anche fuori dall'università) si sceglierà di utilizzare un sistema IIR, 
+perchè, per fare gli stessi conti, ci vuole meno tempo rispetto a un sistema con tanti M rispetto a N.    
 \end{tcolorbox}
 
 \newpage 
@@ -1693,4 +1700,120 @@ Quindi, i poli e gli zeri hanno effetti opposti in modulo e nel ritardo di grupp
     Slide del prof | 6 - Funzioni di Rete | pag 16 - 17\\
     Appunti | 2025-10-21 | pag 3
 } 
+
+\begin{tcolorbox}
+    Queste due slides sono un po' confusionarie perchè non è lo stesso esempio graficato, ma tre poli e zeri completamenti differenti, ma sono solo per affermare un po' di concetti chiave. 
+\end{tcolorbox}
+
+Consideriamo una funzione razione $H \left(z\right)$ esprimibile come: 
+
+{ 
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \dfrac{b_0}{a_0}
+        \cdot 
+        \dfrac{\prod_{k = 1}^{M} \left( 1 - c_k z^{-1}\right)}{\prod_{k = 1}^{N} \left( 1 - d_k z^{-1}\right)}
+    \end{equation}
+}
+
+Se prendessimo un k-esimo zero del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        \left( 1 - c_k z^{-1}\right)
+    \end{equation}
+}
+
+allora possiamo graficarlo sul piano-z come: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{zero in un piano z di esempio.png}
+\end{figure}  
+
+polo che può essere graficato con nei diagrammi della risposta in modulo e in fase. \newline 
+
+Consideriamo a titolo di esempio che abbiamo la seguente funzione razionale $H \left( z\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        1 + 0.99 z^{-1}
+    \end{equation}
+}
+
+dove il zero vale $-0.99$ (vale dello zero non scelto a caso). \newline 
+
+Allora possiamo graficare la risposta in modulo di $H \left(z\right)$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H \left(z\right)}
+        = 
+        \abs{1 + 0.99 z^{-1}}
+    \end{equation}
+}
+
+con il seguente grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Andamento dei moduli di una funzione razionale di esempio.png}
+\end{figure} 
+
+\newpage 
+
+Analizzando la figura, osserbiamo che $H \left(z\right)$ è un filtro passa-basso perchè fa passare tutte le pulsazioni da 0 a $\pi$. \newline 
+
+Inoltre, il polo $-0.99$ è un polo molto vicino al cerchio unitario, che nel piano z si troverebbe sull'ordinata tra il secondo ed il terzo quadrante. \newline 
+
+Essere vicino al cerchio unitario, significa che l'effetto del filtro è molto accentuato, ma bisogna stare attenti alla stabilità perchè, 
+a causa di piccoli fluttuamenti del segnale, il filtro da stabile, può uscire dal cerchio unitario e non essere più stabile. \newline 
+
+Portando un altro esempio di $H \left(z\right)$, ma in questo caso dove è presente un altro generico zero: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Andamento della fase di uno zero esempio.png}
+\end{figure} 
+
+possiamo affermare che, in base alla pulsazione scelta, il filtro $H \left(z\right)$ comporta un effetto diverso. \newline 
+
+Ad esempio, se si sceglie una pulsazione che si trova nell'intervallo $\left[ 0, \pi\right]$, 
+il valore delle fasi è negativo, quindi il segnale di ingresso verrà anticipata, 
+rispetto a scegliere una pulsazione che si trova nell'intervallo $\left[\pi, 2 \pi\right]$, 
+in cui il valore delle fasi è positivo, quindi il segnale di ingresso viene ritardato. \newline 
+
+Inoltre, un polo non influisce tanto sul modulo del segnale di ingresso, bensì influisce tanto sulla fase iniziale del segnale di ingresso. \newline 
+
+Ora, grazie a tutte le considerazioni fatte sullo zero, 
+guardando la slide: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{slide sul polo.png}
+\end{figure} 
+
+possiamo svolgere le stesse considerazioni, ma al contrario. \newline 
+
+\begin{tcolorbox}
+    "Mutatis mutandis" cit.
+\end{tcolorbox}
+
+\newpage 
+
+\section{Sistemi con risposta di fase lineare}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 21 - 22\\
+    Appunti | 2025-10-22 | pag 2
+} 
+
+
 
