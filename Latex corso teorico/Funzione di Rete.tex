@@ -488,7 +488,7 @@ Se si considera solo le pulsazioni positive, possiamo tracciare un esempio di $\
 
 \newpage 
 
-\subsection{Risposta in Fase}
+\subsection{Risposta in Fase} \label{subsec: Risposta in Fase}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 7\\
@@ -557,12 +557,18 @@ Quindi:
 
 \newpage 
 
-\subsubsection{Distorsione di Fase}
+\subsubsection{Distorsione di Fase} \label{subsubsec: Distorsione di Fase}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 8\\
-    Appunti | 2025-10-15 | pag 4  
+    Appunti | 2025-10-15 | pag 4  \\ 
+    Appunti | 2025-10-21 | pag 1
 }
+
+\begin{tcolorbox}
+Generalmente, la risposta in ampiezza in un sistema LTI è quella che ci interessa di più, 
+ma la fase non la dobbiamo scordare.     
+\end{tcolorbox}
 
 In molti casi, la risposta in fase di un sistema è considerata una distorsione perchè le varie componenti si sommano con fasi differenti. \newline 
 
@@ -672,7 +678,498 @@ In questo caso, si ha una distorsione di fase. \newline
 \section{Ritardo di Gruppo e di Fase}
 
 \footnote{ 
-    Slide del prof | 6 - Funzioni di Rete | pag 9 - 10\\
+    Slide del prof | 6 - Funzioni di Rete | pag 9\\
     Appunti | 2025-10-21 | pag 1  
 }
 
+\begin{tcolorbox}
+    In questa pagina ci saranno una serie di conti per un'analisi qualitativa del ritardo di gruppo e di fase. \newline 
+
+    Questi conti non sono richiesti per l'esame, l'importante, come al solito, sono le considerazioni finali. 
+\end{tcolorbox}
+
+Per conoscere il tempo di transito (in campioni o frazioni) di un segnale attraverso un sistema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Sistea LTI a tempo discreto.png}
+\end{figure}  
+
+consideriamo la risposta in Fourier del sistema LTI $H \left( e^{\jmath \omega}\right)$ con una sequenza di ingresso $x \left[ n\right]$ a piacere: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            H \left( e^{\jmath \omega}\right) 
+            = 
+            A \left(\omega\right) \cdot e^{\jmath \beta \left(\omega\right)}
+            \\
+            \quad 
+            \\
+            x \left[ n \right] = 2 \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $A \left(\omega\right)$ è la funzione dei moduli del filtro LTI che dipende dal valore di pulsazione $\omega$ 
+    \item $\beta \left( \omega\right)$ è la funzione delle fasi del filtro LTI che dipende dal valore di pulsazione $\omega$  
+    \item $\Delta \omega$ si intende uno shift di pulsazioni infinitisimale, cioè in cui $\Delta \omega \to 0$ 
+    \item $\omega_0$ è la pulsazione della sequenza di ingresso $x \left[ n\right]$
+\end{itemize}
+
+Grazie alle formule trigonometriche, possiamo riscrivere la sequenza di ingresso $x \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            x \left[ n \right] 
+            &= 
+            2 \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
+            \\
+            &= 
+            \cos \left[ \left(\omega_0 + \Delta \omega\right) \cdot n\right]
+            + 
+            \cos \left[ \left(\omega_0 - \Delta \omega\right) \cdot n\right]
+        \end{split}
+    \end{equation}
+}
+\begin{tcolorbox}
+    Un ripasso delle formule trigonometriche: \newline 
+
+    \url{https://www.youmath.it/formulari/65-formulari-di-trigonometria-logaritmi-esponenziali/159-identita-trigonometriche-formule-di-prostaferesi-formule-di-werner.html}
+\end{tcolorbox}
+
+Quindi, grazie alle formule trigonometriche, siamo riusciti a riscrivere l'ingresso non come un prodotto tra coseni (cioè $2 \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)$), 
+bensì come una somma tra coseni (cioè $\cos \left[ \left(\omega_0 + \Delta \omega\right) \cdot n\right] + \cos \left[ \left(\omega_0 - \Delta \omega\right) \cdot n\right]$). \newline 
+
+\newpage 
+
+Sapendo ora quanto vale $H \left(e^{\jmath \omega}\right)$ e $x \left[ n\right]$, e semplicando i conti con le formule di Werner, 
+possiamo calcolare l'uscita del sistema LTI, che è: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right] 
+        = 
+        &A \left(\omega_0 + \Delta \omega\right) 
+        \cdot 
+        \cos 
+        \left[
+            \left(
+                \omega_0 + \Delta \omega
+            \right)
+            \cdot 
+            n
+            + 
+            \beta 
+            \cdot 
+            \left(
+                \omega_0 + \Delta \omega
+            \right)
+        \right]
+        \\
+        &+
+        A \left(\omega_0 - \Delta \omega\right) 
+        \cdot 
+        \cos 
+        \left[
+            \left(
+                \omega_0 - \Delta \omega
+            \right)
+            \cdot 
+            n
+            + 
+            \beta 
+            \cdot 
+            \left(
+                \omega_0 - \Delta \omega
+            \right)
+        \right]    
+        \end{split}
+        \end{equation}
+}
+
+\begin{tcolorbox}
+    Un piccolo ripasso delle formule di Werner: \newline 
+
+    \url{https://www.youmath.it/formulari/65-formulari-di-trigonometria-logaritmi-esponenziali/1054-formule-di-werner.html}
+\end{tcolorbox}
+
+Ipotizzando che: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega \to 0
+    \end{equation}
+}
+
+Allora possiamo anche scrivere i componenti di $y \left[ n\right]$ (per definizione e con qualche passaggio algebrico), come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        A \left( \omega_0 \pm \Delta \omega \right)
+        &\simeq
+        A \left(\omega_0\right)
+        \pm 
+        \left.
+        \dfrac{d A \left(\omega\right)}{d \omega}
+        \right|_{\omega = \omega_0}
+        \cdot 
+        \Delta \omega
+        \\
+        &= 
+        A_0 \pm A_o^{'} \cdot \Delta \omega 
+        \end{split} 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \beta \left( \omega_0 \pm \Delta \omega \right)
+        &\simeq
+        \beta \left(\omega_0\right)
+        \pm 
+        \left.
+        \dfrac{d \beta \left(\omega\right)}{d \omega}
+        \right|_{\omega = \omega_0}
+        \cdot 
+        \Delta \omega
+        \\
+        &= 
+        \beta_0 \pm \beta_o^{'} \cdot \Delta \omega 
+        \end{split} 
+    \end{equation}
+}
+
+Ipotizzando di trascurare i termini infintesimali in modulo (perchè in questa dimostrazione ci interessa fare un'analisa qualitativa della fase in uscita dal sistema LTI), 
+cioè trascruando il termine $A_0 \pm A_o^{'} \cdot \Delta \omega$ da $y \left[ n\right]$, 
+$y \left[ n\right]$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right] 
+        = 
+        &A \left(\omega_0 + \Delta \omega\right) 
+        \cdot 
+        \cos 
+        \left[
+            \left(
+                \omega_0 + \Delta \omega
+            \right)
+            \cdot 
+            n
+            + 
+            \beta 
+            \cdot 
+            \left(
+                \omega_0 + \Delta \omega
+            \right)
+        \right]
+        \\
+        &+
+        A \left(\omega_0 - \Delta \omega\right) 
+        \cdot 
+        \cos 
+        \left[
+            \left(
+                \omega_0 - \Delta \omega
+            \right)
+            \cdot 
+            n
+            + 
+            \beta 
+            \cdot 
+            \left(
+                \omega_0 - \Delta \omega
+            \right)
+        \right]
+        \\
+        \downarrow&
+        \\
+        y \left[ n\right]&  
+        =  
+        A_0
+        \cos 
+        \left[ 
+        \left(\omega_0 + \Delta \omega\right) 
+        \cdot
+        n 
+        + 
+        \beta_0 
+        + 
+        \beta_0^{'}
+        \cdot 
+        \Delta \omega
+        \right] 
+        \\
+        &+ 
+        A_0
+        \cos 
+        \left[ 
+        \left(\omega_0 - \Delta \omega\right) 
+        \cdot
+        n 
+        + 
+        \beta_0 
+        - 
+        \beta_0^{'}
+        \cdot 
+        \Delta \omega
+        \right] 
+        \end{split}
+        \end{equation}
+} 
+
+Se ipotiziamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        << 
+        \omega_0
+    \end{equation}
+}
+
+allora possiamo dire che il contributo in $y \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        \beta_0 
+        - 
+        \beta_0^{'}
+        \cdot 
+        \Delta \omega
+    \end{equation}
+}
+
+indica lo sfasamento totale totale a $\omega_0 + \Delta \omega$. \newline 
+
+Continuando a riscrivere $y \left[ n\right]$, ma questa volta applicando le formule di Werner al contrario, 
+avremo che $y \left[ n\right]$ può essere riscritto come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]&  
+        =  
+        A_0
+        \cos 
+        \left[ 
+        \left(\omega_0 + \Delta \omega\right) 
+        \cdot
+        n 
+        + 
+        \beta_0 
+        + 
+        \beta_0^{'}
+        \cdot 
+        \Delta \omega
+        \right] 
+        \\
+        &\quad
+        + 
+        A_0
+        \cos 
+        \left[ 
+        \left(\omega_0 - \Delta \omega\right) 
+        \cdot
+        n 
+        + 
+        \beta_0 
+        - 
+        \beta_0^{'}
+        \cdot 
+        \Delta \omega
+        \right] 
+        \\
+        &=
+        2 A_0 
+        \cos 
+        \left[ 
+            \Delta \omega \left( n + \beta_0^{'}\right)
+            \cdot 
+            \cos \left[ \omega_0 n + \beta_0\right]
+        \right]
+        \end{split}
+        \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $\beta_0$ è il termine che indica lo sfasamento del coseno 
+    \item il termine $n + \beta_0^{'}$ indica lo sfasamento dell'invilippo 
+    \item $\beta_0^{'}$ è la derivata di $\beta_0$ , ha la dimensione del tempo e prende il nome di ritardo di gruppo
+\end{itemize}
+
+Quindi il ritardo di gruppo, cioè $\beta_0^{'}$, esprime come cambia l'ampiezza del segnale in ingresso, cioè $A_0$, dopo il sistema LTI. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
+Nella formula finale di $y \left[ n\right]$ chi è il ritardo in fase, $\beta_0$ ?
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Inserire delle foto di come cambia il segnale di ingresso al sistema LTI prima e dopo il filtro a causa del ritardo di gruppo e di fase
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Definizioni di Ritardo di Gruppo e di Fase e condizione di non distosione di fase}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 10\\
+    Appunti | 2025-10-21 | pag 1 - 2  
+}
+
+Grazie alle dimostrazione delle pagine precedenti, data la risposta in fase di un sistema LTI, 
+cioè: 
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right]
+    \end{equation}
+}
+
+(vista a \ref{subsec: Risposta in Fase} \nameref{subsec: Risposta in Fase} pag \pageref{subsec: Risposta in Fase}), 
+possiamo scrivere le definizioni di ritardo di gruppo e di fase. \newline 
+
+\textbf{Ritardo di fase} \newline 
+
+Si definisce ritardo di fase $\tau_{ph}$ (detto anche in inglese come Phase Delay) come: 
+
+{
+    \Large 
+    \begin{equation}
+        \tau_{ph} 
+        = 
+        - 
+        \dfrac{\arg \left[ H \left( e^{\jmath \omega}\right)\right]}{\omega} 
+        \text{ per }
+        \abs{\omega} < \pi
+    \end{equation}
+}
+
+Il ritardo di fase rappresenta il tempo associato allo sfasamento totale alla pulsazione $\omega$. \newline 
+
+\textbf{Ritardo di gruppo} \newline 
+
+Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) come:
+
+{
+    \Large 
+    \begin{equation}
+        \tau_{gr} 
+        = 
+        grd \left[ H \left( e^{\jmath \omega}\right)\right]
+        = 
+        - \dfrac{d}{d \omega} \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        \text{ per }
+        \abs{\omega} < \pi
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
+Come lo chiamiamo grd in $grd \left[ H \left( e^{\jmath \omega}\right)\right]$?
+\end{tcolorbox}
+
+Il ritardo di gruppo rappresenta il tempo necessario al segnale per passare attraverso il sistema LTI discreto. \newline 
+
+La condizione per cui il sistema LTI discreto $H \left(e^{\jmath \omega}\right)$ non distorca la sequenza $x \left[ n\right]$ è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        \tau_{gr} 
+        = 
+        grd \left[ H \left( e^{\jmath \omega}\right)\right]
+        = 
+        - \dfrac{d}{d \omega} \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        =
+        \text{ costante }
+        \text{ per }
+        \abs{\omega} < \pi
+    \end{equation}
+}
+
+cioè il ritardo di gruppo $\tau_{gr}$ è costante, quindi significa che il sistema LTI $H \left(e^{\jmath \omega}\right)$ 
+deve avere fase lineare (quindi fase zero o generalizzata). \newline 
+
+O, in altri termini, il ritardo di gruppo costante significa che tutte le componti di $x \left[ n\right]$, 
+all'uscita del sistema LTI, vengono ritardate della stessa quantità. \newline 
+
+A titolo di esempio, da \ref{subsubsec: Distorsione di Fase} \nameref{subsubsec: Distorsione di Fase} pag \pageref{subsubsec: Distorsione di Fase}, 
+consideriamo un filtro LTI a fase generalizzata con: 
+
+{
+    \Large 
+    \begin{equation}
+    \angle H \left(e^{- \jmath \omega}\right)
+    = 
+    - \alpha \omega + \beta      
+    \end{equation}
+}
+
+dove $\alpha$ e $\beta$ sono costanti. \newline 
+
+\begin{tcolorbox}
+    Per indicare la fase di un sistema LTI, il prof a lezione non scrive $\arg \left[ H \left( e^{\jmath \omega}\right)\right]$, 
+    bensì $\angle \left[ H \left( e^{\jmath \omega}\right)\right]$: simboli diversi, ma che intendono la stessa cosa.  
+\end{tcolorbox}
+
+\newpage 
+
+Calcolando il ritardo di gruppo $\beta_0^{'}$ da $\angle H \left(e^{- \jmath \omega}\right)$, 
+avremo che vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \beta_0^{'} 
+            &= 
+            - \dfrac{d}{d \omega}
+            \angle H \left(e^{- \jmath \omega}\right) 
+            \\
+            &=
+            - \dfrac{d}{d \omega}
+            \left( - \alpha \omega + \beta\right)
+            \\
+            &= 
+            + \alpha
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Noi vorremmo dei sistemi LTI discreti che abbiano ritardo di fase costante, cosicchè il ritardo di gruppo sia nullo. \newline 
+
+    Ma, nella realtà, accetteremo un ritardo di fase abbastanza basso, possibilmente lineare, cossicchè il ritardo di gruppo sia costante e molto basso. \newline 
+
+    La durata del ritardo di gruppo dipende dall'applicazione in cui il sistema LTI sarà applicato: il ritardo di gruppo in un sistema di telecomunicazioni è diverso dal ritardo di gruppo per un sistema di audio. 
+\end{tcolorbox}
+
+\newpage 
+
+\section{Sistemi LTI con H(z) razionale}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 11 - 15\\
+    Appunti | 2025-10-21 | pag 2 - 3
+}
