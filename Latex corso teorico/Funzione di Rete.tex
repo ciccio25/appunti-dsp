@@ -2529,3 +2529,78 @@ Allora, grazie a questa proprietà dei sistemi FIR, possiamo distinguere queste 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la foto qui sopra (togliere scritta dell'università e cose cerchiate verde sopra)
 \end{tcolorbox} 
+
+\begin{tcolorbox}
+Questo tipo di FIR è molto importante per il corso.     
+\end{tcolorbox}
+
+Questi tipi di sistemi possono essere solo FIR, usualmente simmetrici e anti-simmetrici, poichè: 
+
+{
+    \Large 
+    \begin{equation}
+            H \left( z\right) 
+            = 
+            \sum_{n = 0}^{M} 
+            h \left[ n\right]
+            \cdot 
+            z^{-n}
+    \end{equation}
+}
+
+insieme a: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] = h \left[ M - n\right]
+        \text{ oppure }  
+        h \left[ n\right] = - h \left[ M - n\right]
+    \end{equation}
+}
+
+risulta che: 
+
+\begin{itemize}
+    \item se il k-esimo zero $c_k$ di $H \left(z \right)$, lo è anche $\dfrac{1}{c_k^{*}}$ (detto anche che sono zeri coniugati e reciproci) 
+    \item se $h \left[ n\right]$ è reale, gli zeri sono sempre a coppie complesse coniugate, come si vede in questa figura di esempio: 
+    
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{FIR causale con fase lineare generalizzata esempio.png}
+    \end{figure}  
+
+\end{itemize}
+
+Una nota importante: i FIR di tipo I, II, III e IV a fase lineare non sono mai a fase minima. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 13}
+Cosa significa "non sono a fase minima"? Ci sono altri tipi di filtri che possono raggiungere una fase minima? 
+\end{tcolorbox} 
+
+\newpage 
+
+In particolare vale sempre che: 
+
+\begin{itemize}
+    \item per i FIR di tipo II, $h \left[ n\right]$ è simmetrico e M è dispari, allora ci sarà uno zero in $z = - 1$ 
+    \item per i FIR di tipo III, $h \left[ n\right]$ è anti-simmetrico e M è pari, allora ci sarà uno zero in $z = - 1$ e $z = 1$
+    \item per i FIR di tipo IV, $h \left[ n\right]$ è anti-simmetrico e M è dispari, allora ci sarà uno zero in $z = 1$   
+\end{itemize}
+
+Per M pari, come si vede in figura: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.25]{FIR di tipo I e tipo III.png}
+\end{figure} 
+
+nelle implementazioni di questi filtri, si possono realizzare a fase zero nelle versioni I e III. \newline 
+
+\begin{tcolorbox}
+Generalmente avremo a che fare con FIR di tipo I.    
+\end{tcolorbox}
+
+\newpage 
+
+
