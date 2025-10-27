@@ -1815,5 +1815,717 @@ possiamo svolgere le stesse considerazioni, ma al contrario. \newline
     Appunti | 2025-10-22 | pag 2
 } 
 
+Come scritto precedentemente in \ref{subsubsec: Distorsione di Fase} \nameref{subsubsec: Distorsione di Fase} a pag \pageref{subsubsec: Distorsione di Fase}, 
+se consideriamo un sistema LTI discreto, con risposta impulsiva $h \left[ n\right]$ e la trasformata di Fourier che vale $H \left(e^{\jmath \omega}\right)$, avremo una risposta di fase lineare se: 
+
+{
+    \Large 
+    \begin{equation}
+        \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        = 
+        - \alpha \omega
+        \quad 
+        \abs{\omega} < \pi, \alpha \text{ costante}
+    \end{equation}
+}
+
+quindi, possiamo vedere $H \left(e^{\jmath \omega}\right)$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left(e^{\jmath \omega}\right) 
+        &= 
+        \abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath \alpha \omega} 
+        \\
+        &=
+        \abs{H \left(e^{\jmath \omega}\right)} \cdot 1 \cdot e^{\jmath \alpha \omega}
+        \\
+        &=
+        \left[ \abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath 0} \right] \cdot \left[ 1\cdot e^{\jmath \alpha \omega} \right]     
+        \end{split}
+    \end{equation}
+}
+
+cioè, una cascata tra un sistema LTI di fase zero $\abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath 0}$ 
+con un ritardo puro $1\cdot e^{\jmath \alpha \omega}$, 
+come si vede dalla seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Sistema con risposta di fase lineare come cascata.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 11}
+In che sennso $1\cdot e^{\jmath \alpha \omega}$ è un ritardo puro frazionario?
+\end{tcolorbox}
+
+Come scritto precedentemente in \ref{subsec: Simmetria della trasformata di Fourier} \nameref{subsec: Simmetria della trasformata di Fourier} a pag \pageref{subsec: Simmetria della trasformata di Fourier}, 
+se $\abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath 0}$ è reale, allora la sua anti-trasformata di Fourier, cioè $h^{'} \left[ n\right]$, è coniugata simmetrica pari. \newline 
+
+Quindi, $h \left[ n\right]$ è la versione ritardata di $\alpha$ campioni della sequenza $h^{'} \left[ n\right]$. \newline 
+
+In linea generale, il valore di $\alpha$ può essere qualsiasi. \newline 
+
+Grazie a questa astrazione, possiamo vedere un qualsiasi sistema LTI discreto come un ricampionamento in analogico del segnale a un diverso istante di ritardo $alpha$: 
+per questo motivo, il valore di $\alpha$ va opportunamente scelto. \newline 
+
+Possiamo considerare due casi particolari di $\alpha$: 
+
+\begin{itemize}
+    \item $\alpha$ intero 
+    \item $\alpha$ intero + $\dfrac{1}{2}$
+\end{itemize}
+
+\newpage 
+
+Se $\alpha$ è intero, allora la risposta impulsiva del sistema LTI discreto $h \left[ n\right]$ è coniugata simmetrica rispetto ad $\alpha$, come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.1]{Shift di una sequenza per alpha intero.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la foto qui sopra meglio oppure rifarla su Matlab 
+\end{tcolorbox} 
+
+cioè l'asse di simmetria coicide con un impulso. \newline 
+
+Quindi, in questo caso: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+    \end{equation}
+}
+
+allora $H \left( e^{\jmath \omega}\right) $ sarà a fase zero se in cascata c'è un ritardo puramente immaginario, cioè $e^{\jmath \omega \alpha}$, 
+il quale $e^{\jmath \omega \alpha}$ è un anticipo non causale FIR. \newline 
+
+Se invece viene scelto un $\alpha$ intero + $\dfrac{1}{2}$, 
+accade come il caso precedente, quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+    \end{equation}
+}
+
+ma in questo caso non si può compensare ed avere il sitema LTI a fase zero e l'asse di simmetria non coincide con un impulso. \newline 
+
+\newpage 
+
+\section{Sistemi con risposta di fase lineare generilazzata}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 23 - 24\\
+    Appunti | 2025-10-22 | pag 2
+} 
+
+Considerando il caso generale di un sistema LTI con risposta in fase lineare generalizzata, 
+avremo che $H \left( e^{\jmath \omega }\right)$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( e^{\jmath \omega}\right)
+        = 
+        \abs{H \left(e^{\jmath \omega}\right)}
+        \cdot 
+        e^{- \jmath \left(\beta + \alpha \omega\right)} 
+    \end{equation}
+}
+
+dove, rispetto al caso dei sistemi con risposta di fase lineare, il valore $\beta$ è diverso da zero. \newline 
+
+\begin{tcolorbox}
+    Nel corso di DSP, consideriamo quasi sempre un $\beta$ nulla. \newline 
+
+    Questo sotto-capitolo serve per capire il caso generalizzato. 
+\end{tcolorbox}
+
+I sistemi con risposta di fase lineare generalizzata sono equivalenti ai sistemi a fase lineare, 
+la cui risposta all'impulso sia moltiplicata per la costante $e^{\jmath \beta}$: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left( e^{\jmath \omega}\right)
+        &= 
+        \abs{H \left(e^{\jmath \omega}\right)}
+        \cdot 
+        e^{- \jmath \left(\beta + \alpha \omega\right)} 
+        \\
+        &= 
+        \abs{H \left(e^{\jmath \omega}\right)}
+        \cdot 
+        e^{\jmath \alpha \omega}
+        \cdot 
+        e^{- \jmath \beta } 
+        \end{split}
+    \end{equation}
+}
+
+dove $\abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath \alpha \omega} $ è proprio il sistema con risposta di fase lineare. \newline 
+
+Come il caso precedente, 
+dobbiamo considerare dei casi particolari di $\alpha$ e $\beta$ che modifica la risposta impulsiva $h \left[ n\right]$: 
+
+\begin{itemize}
+    \item se $\alpha$ è intero e $\beta = 0$ o $\beta = \pi$, allora $h \left[ n\right]$ è coniugata simmetrica rispetto ad $\alpha$, quindi: 
+    
+    {
+        \Large 
+        \begin{equation}
+            h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        \end{equation}
+    }
+
+    \item se $\alpha$ è intero + $\dfrac{1}{2}$ e $\beta = 0$ o $\beta = \pi$, allora $h \left[ n\right]$ è coniugata simmetrica rispetto ad $\alpha$, quindi: 
+    
+    {
+        \Large 
+        \begin{equation}
+            h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        \end{equation}
+    }
+
+    \item se $\alpha$ è intero e $\beta = \dfrac{\pi}{2}$ o $\beta = 3 \dfrac{\pi}{2}$, allora $h \left[ n\right]$ è coniugata anti-simmetrica rispetto ad $\alpha$, quindi: 
+    
+    {
+        \Large 
+        \begin{equation}
+            h \left[ 2 \alpha - n\right] = - h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        \end{equation}
+    }
+
+    \item se $\alpha$ è intero + $\dfrac{1}{2}$ e $\beta = \dfrac{\pi}{2}$ o $\beta = 3 \dfrac{\pi}{2}$, allora $h \left[ n\right]$ è coniugata anti-simmetrica rispetto ad $\alpha$, quindi: 
+    
+    {
+        \Large 
+        \begin{equation}
+            h \left[ 2 \alpha - n\right] = - h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        \end{equation}
+    }
+\end{itemize}
+
+Essendo $\alpha$ intero, avremo che $h \left[ n\right]$ sarà simmetrica e che l'asse di simmetria coincide con un campione. \newline 
+
+Si ricorda che se: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \frac{\pi}{2}}
+        = 
+        \pm \jmath
+    \end{equation}
+}
+
+e che è una sequenza coniugata anti-semmetrica, 
+avrà sicuramente una DTFT puramente immaginaria. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 12}
+Il fatto di avere una DTFT puramente immaginaria è un problema? Perchè noi in questo corso consideriamo DTFT reali, giusto? 
+\end{tcolorbox} 
+
+Spesso si sceglie $\beta$ costante a tratti, ad esempio: 
+
+{
+    \Large 
+    \begin{equation}
+        \beta 
+        = 
+        \begin{cases}
+            0 \quad \abs{\omega} < \omega_0 
+            \\
+            \pi \quad \omega_0 < \abs{\omega} < \pi  
+        \end{cases}
+    \end{equation}
+}
+
+In tali casi, il ritardo di gruppo è costante, eccetto nelle discontinuità; 
+in genere in tali punti: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H \left( e^{\jmath \omega}\right)} = 0
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Esempi di sistemi con risposta di fase lineare generilazzata}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 25 - 26\\
+    Appunti | 2025-10-22 | pag 2
+} 
+
+Di seguito due esempi di sistemi LTI discreti con fase generalizzata. \newline 
+
+\textbf{Esercizio 1} \newline 
+
+Data la seguente risposta impulsiva $h \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        \begin{cases}
+        \delta \left[ n\right] 
+        -
+        \delta \left[ n - 1\right] \quad \forall n \neq 0 
+        \\
+        0 \quad \text{per } n = 0       
+        \end{cases}
+    \end{equation}
+}
+
+dove per $\delta \left[ n\right]$ è un impulso unitario. \newline 
+
+Allora $h \left[ n\right]$ è una derivata in un sistema discreto. \newline 
+
+\begin{tcolorbox}
+    Se invece al posto del segno negativo, ci fosse un segno positivo: 
+
+ {
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        \begin{cases}
+        \delta \left[ n\right] 
+        +
+        \delta \left[ n - 1\right] \quad \forall n \neq 0 
+        \\
+        0 \quad \text{per } n = 0       
+        \end{cases}
+    \end{equation}
+}
+
+$h \left[ n\right]$ non sarbbe più un derivatore, bensì un intergratore.
+\end{tcolorbox}
 
 
+
+Senza dall'integrale della DTFT, ma applicando semplicemente le proprietà della DTFT come visto in \ref{subsec: Alcune trasformate di Fourier} \nameref{subsec: Alcune trasformate di Fourier} a pag \pageref{subsec: Alcune trasformate di Fourier}, 
+possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[ n\right] \leftrightarrow 1 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \delta \left[ n -1\right] 
+        \leftrightarrow 
+        e^{- \jmath \omega}
+    \end{equation}
+}
+
+Sapendo che la trasformata di Fourier è un operatore lineare, 
+allora la trasformata di Fourier di $h \left[ n\right]$ è (non considerando il caso $n = 0$): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        h \left[ n\right]
+        &= 
+        \delta \left[ n\right] 
+        +
+        \delta \left[ n - 1\right] 
+        \\
+        &\updownarrow
+        \\ 
+        H \left( e^{\jmath \omega}\right)
+        &= 
+        1 - e^{- \jmath \omega}
+        \end{split}
+    \end{equation}
+}
+
+Possiamo continuare a semplificare $H \left( e^{\jmath \omega}\right)$ in modo tale da scomporlo in modulo e fase: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H \left(e^{\jmath \omega}\right)
+            &= 
+            1 - e^{- \jmath \omega}
+            \\
+            &= 
+            e^{- \jmath \frac{\omega}{2}} 
+            \cdot 
+            \left( 
+                e^{\jmath \frac{\omega}{2}} 
+                - 
+                e^{- \jmath \frac{\omega}{2}} 
+            \right)
+            \\
+            &= 
+            2 \jmath e^{- \jmath \frac{\omega}{2}}
+            \cdot 
+            \sin \left( \dfrac{\omega}{2}\right)
+            \\
+            &= 
+            \left[ 
+                2 \sin \left( \dfrac{\omega}{2}\right) 
+            \right]
+            \cdot 
+            e^{\jmath \left( - \frac{\omega}{2} + \frac{\pi}{2}\right)}
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+dove, i valori di $\alpha$ e $\beta$ sono, rispettivamente, uguali a: 
+
+{
+    \Large 
+    \begin{equation}
+        \alpha = \dfrac{1}{2}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \beta = \dfrac{\pi}{2}
+    \end{equation}
+}
+
+Allora, adesso, possiamo graficare l'andamento di $h \left[ n\right]$, solo per valori n positivi, 
+solo per due valori, cioè: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{derivata esempio nelle sequenze.png}
+\end{figure} 
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        \begin{cases}
+        +1 \quad \text{ per } n = 0 
+        \\
+        -1 \quad \text{ per } n = 1
+        \\
+        0 \quad \forall n > 1
+        \end{cases}
+    \end{equation}
+}
+
+Sapendo quanto vale $H \left( e^{\jmath \omega}\right)$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( e^{\jmath \omega}\right)
+        =
+        \left[ 
+            2 \sin \left( \dfrac{\omega}{2}\right) 
+            \right]
+            \cdot 
+            e^{\jmath \left( - \frac{\omega}{2} + \frac{\pi}{2}\right)}
+    \end{equation}
+}
+
+possiamo graficare l'andamento dei moduli di $H \left( e^{\jmath \omega}\right)$, cioè: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{moduli in Fourier di una derivata.png}
+\end{figure} 
+
+Possiamo notare che $H \left( e^{\jmath \omega}\right)$ è un filtro passa-alto perchè $H \left( e^{\jmath \omega}\right)$ è crescente nell'intervallo $\left[ 0, \pi\right]$ delle pulsazioni $\omega$. \newline 
+
+\newpage 
+
+Analizzando invece l'andamento in fase di $H \left( e^{\jmath \omega}\right)$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Fase lineare per un filtro passa alto.png}
+\end{figure} 
+
+quindi $H \left( e^{\jmath \omega}\right)$ ha, nelle fasi, un andamento di tipo lineare. \newline 
+
+\begin{tcolorbox}
+    Tutto questo esercizio solo per dimostrare che è possibile realizzare un filtro, in questo caso filtro passa alto, solo con soli due impulsi. 
+\end{tcolorbox}
+
+\newpage 
+
+\textbf{Esercizio 2} \newline 
+
+\begin{tcolorbox}
+    Un altro esercizio, simile ma con considerazioni finali diverse. 
+\end{tcolorbox}
+
+Considerando ua risposta impulsiva $h \left[ n\right]$ del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        =
+        \begin{cases}
+        \delta \left[ n\right]
+        - 
+        \delta \left[ n - 2\right] 
+        \quad \forall n \neq 1, n \neq -1
+        \\ 
+        0 \text{ per } n = 1, n = -1
+        \end{cases}
+    \end{equation}
+}
+
+Sapendo che la trasformata di Fourier è un operatore lineare, 
+allora la trasformata di Fourier di $h \left[ n\right]$ è (non considerando il caso $n = 1$ e $n = -1$ ): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        h \left[ n\right]
+        &= 
+        \delta \left[ n\right] 
+        +
+        \delta \left[ n - 2\right] 
+        \\
+        &\updownarrow
+        \\ 
+        H \left( e^{\jmath \omega}\right)
+        &= 
+        1 - e^{- \jmath 2\omega}
+        \end{split}
+    \end{equation}
+}
+
+Possiamo continuare a semplificare $H \left( e^{\jmath \omega}\right)$ in modo tale da scomporlo in modulo e fase: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H \left(e^{\jmath \omega}\right)
+            &= 
+            1 - e^{- \jmath 2 \omega}
+            \\
+            &= 
+            e^{- \jmath \frac{\omega}{2}} 
+            \cdot 
+            \left( 
+                e^{\jmath \frac{\omega}{2}} 
+                - 
+                e^{- \jmath \frac{\omega}{2}} 
+            \right)
+            \\
+            &= 
+            2 \jmath e^{- \jmath \omega}
+            \cdot 
+            \sin \left( \omega\right)
+            \\
+            &= 
+            \left[ 
+                2 \sin \left( \omega\right) 
+            \right]
+            \cdot 
+            e^{\jmath \left( - \omega + \frac{\pi}{2}\right)}
+        \end{split}
+    \end{equation}
+}
+
+dove, i valori di $\alpha$ e $\beta$ sono, rispettivamente, uguali a: 
+
+{
+    \Large 
+    \begin{equation}
+        \alpha = 1
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \beta 
+        = 
+        \begin{cases}
+            \dfrac{\pi}{2} \quad 0 \leq \omega \leq \pi 
+            \\
+            \quad
+            \\
+            \dfrac{\pi}{2} + \pi \quad \pi  < \omega  < 2 \pi 
+        \end{cases}
+    \end{equation}
+}
+
+quindi, in questo tipo di filtro, il valore di $\beta$ varia, in particolare è costante a tratt. \newline 
+
+\newpage 
+
+Allora, adesso, possiamo graficare l'andamento di $h \left[ n\right]$, solo per valori n positivi, 
+solo per due valori, cioè: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{andamento nelle sequenze di un derivatore di due.png}
+\end{figure} 
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        \begin{cases}
+        +1 \quad \text{ per } n = 0 
+        \\
+        0 \quad \text{ per } n = 1
+        \\
+        -1 \quad \text{ per } n = 2
+        \\
+        0 \quad \forall n > 2
+        \end{cases}
+    \end{equation}
+}
+
+Sapendo quanto vale $H \left( e^{\jmath \omega}\right)$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left( e^{\jmath \omega}\right)
+        =
+        \left[ 
+            2 \sin \left( \omega\right) 
+        \right]
+            \cdot 
+        e^{\jmath \left( - \omega + \frac{\pi}{2}\right)}
+    \end{equation}
+}
+
+possiamo graficare l'andamento dei moduli e delle fasi di $H \left( e^{\jmath \omega}\right)$, cioè: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{andamento nelle sequenze di un derivatore di due moduli e fase.png}
+\end{figure} 
+
+Possiamo notare che: 
+
+\begin{itemize}
+    \item $H \left( e^{\jmath \omega}\right)$ è un filtro passa-banda perchè $\abs{H \left( e^{\jmath \omega}\right)}$ è crescente e poi decresce nell'intervallo $\left[ 0, \pi\right]$ delle pulsazioni $\omega$ 
+    \item siccome nello spettro dei moduli a $\omega = \pi$, il modulo $\abs{H \left( e^{\jmath \omega}\right)} = 0$, allora possiamo dire che questo tipo di filtro è lineare a tratti nelle fasi  
+\end{itemize}
+
+\newpage 
+
+Questo filtro prende anche il nome di filtro comb. \newline 
+
+\begin{tcolorbox}
+    Se vuoi approfondire sull'argomento: \newline 
+
+    \url{https://it.wikipedia.org/wiki/Filtro_comb}
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Sistemi causali con fase generalizzata lineare}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 27 - 29\\
+    Appunti | 2025-10-22 | pag 2 - 3
+} 
+
+Per quanto riguarda i sistemi IIR (cioè dall'inglese Infinite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare, 
+ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale ed i sistemi IIR, per definizione, non possono essere descritti da una equazioone alle differenze finite. \newline 
+
+\begin{tcolorbox}
+    Ma, come dice al prof a lezione, i sistemi IIR "sono un male necessario se si vuole avere un feedback all'uscita". 
+\end{tcolorbox}
+
+Invece, per quanto riguarda i sistemi FIR (cioè dall'inglese Finite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare. \newline 
+
+Le condizioni sufficiente (ma non necessarie) sono: 
+
+\begin{itemize}
+    \item quello di avere $\alpha$ intero, o intero + $\dfrac{1}{2}$
+    \item quella di essere simmetrici o anti-simmetrici
+\end{itemize}
+
+Considerando ad esempio: 
+
+{
+    \Large 
+    \begin{equation}
+        M = 2 \alpha 
+    \end{equation}
+}
+
+in cui M è sempre intero, per ipotesi. \newline 
+
+Allora, se esiste simmetria nel sistema FIR, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        \begin{cases}
+            h \left[ M - n\right] \quad 0 \leq n \leq M 
+            \\
+            0 \quad \text{altrove }
+        \end{cases}
+    \end{equation}
+}
+
+Capiamo che esiste simmetria perchè davanti a $h \left[ M - n\right]$ è presente un segno positivo. \newline 
+
+Oppure, se esiste anti-simmetria nel sistema FIR, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        \begin{cases}
+            - h \left[ M - n\right] \quad 0 \leq n \leq M 
+            \\
+            0 \quad \text{altrove }
+        \end{cases}
+    \end{equation}
+}
+
+Capiamo che esiste anti-simmetria perchè davanti a $h \left[ M - n\right]$ è presente un segno negativo. \newline 
+
+\newpage 
+
+Allora, grazie a questa proprietà dei sistemi FIR, possiamo distinguere queste 4 tipologie di sistemi FIR (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.38]{Sistemi FIR 4 tipi .png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la foto qui sopra (togliere scritta dell'università e cose cerchiate verde sopra)
+\end{tcolorbox} 
