@@ -334,7 +334,8 @@ Sia $\abs{H \left( e^{\jmath \omega}\right)}$ che $e^{\jmath \sphericalangle H \
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 6\\
-    Appunti | 2025-10-15 | pag 4  
+    Appunti | 2025-10-15 | pag 4 \\ 
+    Latex | 2025-10-27 Sera | pag 135 - 136 
 }
 
 Nei filtri LTI, spesso si considerano i segnali random che, essendo ciclostazionari, 
@@ -354,12 +355,11 @@ cioè $H \left( e^{\jmath \omega}\right)$, consideriamo come spettro dei moduli 
     \end{equation}
 }
 
-che prende il nome di "magnitude-squared". \newline 
+che prende il nome di "magnitude-squared", cioè il modulo di $H \left( e^{\jmath \omega}\right)$ al quadrato. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2}
-$\abs{H \left( e^{\jmath \omega}\right)}^{2}$, oltre in inglese a "magnitude-squared", quale è il suo equivalente, ha un nome in italiano? \newline 
-
-Spettro dei moduli della potenza? Gli si può assegnare un nome o una variabile? 
+\begin{tcolorbox}
+    Grazie al teorema di Parseval, e come studiato al corso di Telecomunicazioni, in realtà andremo ad analizzare lo spettro di potenza di $H \left( e^{\jmath \omega}\right)$, 
+    ma verrà analizzato in meglio nei futuri episodi.
 \end{tcolorbox}
 
 Generalmente di $\abs{H \left( e^{\jmath \omega}\right)}^{2}$ si calcola il suo valore in decibel, o dB, come (step-by-step): 
@@ -379,10 +379,6 @@ Generalmente di $\abs{H \left( e^{\jmath \omega}\right)}^{2}$ si calcola il suo 
 }
 
 $20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)$ prende il nome, in inglese, di "log magnitude". \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3}
-Stessa domanda di prima, ma riferita a $20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)$
-\end{tcolorbox}
 
 Consideriamo il "log magnitude" un guadagno in dB se è positivo, cioè: 
 
@@ -473,18 +469,16 @@ Quindi, per segnali random, l'uscita di un filtro LTI in Fourier in dB è una se
 
 In particolare, possiamo graficare lo spettro dei "magnitude-squared" di $H \left(e^{\jmath \omega}\right)$ al variare della pulsazione $\omega$ con il diagramma di Bode. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
-La figura possiamo considerarla come il diagramma di Bode di $\abs{H \left(e^{\jmath \omega}\right)}^{2}$? \newline 
-
-Se si, inserire riferimenti e link al diagramma di Bode qui.
-\end{tcolorbox}
-
 Se si considera solo le pulsazioni positive, possiamo tracciare un esempio di $\abs{H \left(e^{\jmath \omega}\right)}^{2}$ al variare dele pulsazioni $\omega$ (con note): 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.35]{Esempio di un filtro passa-basso in db.png}
 \end{figure}  
+
+\begin{tcolorbox}
+Tecnicamente, questa figura non è proprio un diagramma di Bode perchè le pulsazioni $\omega$ non sono disposte logaritmicamente.     
+\end{tcolorbox}
 
 \newpage 
 
@@ -630,7 +624,7 @@ Come esempio di risposta in fase lineare:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
 Avremo in uscita questo risultato dato come ingresso una sequenza $x \left[ n\right]$? Quali sono i passaggi logici per arrivare alla $y \left[ n\right]$ data $H \left( e^{\jmath \omega}\right)$ ?
 \end{tcolorbox}
 
@@ -679,7 +673,8 @@ In questo caso, si ha una distorsione di fase. \newline
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 9\\
-    Appunti | 2025-10-21 | pag 1  
+    Appunti | 2025-10-21 | pag 1  \\ 
+    Latex | 2025-10-27 Sera | pag 142 
 }
 
 \begin{tcolorbox}
@@ -1014,16 +1009,12 @@ avremo che $y \left[ n\right]$ può essere riscritto come:
 dove: 
 
 \begin{itemize}
-    \item $\beta_0$ è il termine che indica lo sfasamento del coseno 
+    \item $\beta_0$ è il termine che indica lo sfasamento del coseno, in altri temrini è il contributo dell'LTI al ritardo di fase in $\omega_0$ 
     \item il termine $n + \beta_0^{'}$ indica lo sfasamento dell'invilippo 
     \item $\beta_0^{'}$ è la derivata di $\beta_0$ , ha la dimensione del tempo e prende il nome di ritardo di gruppo
 \end{itemize}
 
 Quindi il ritardo di gruppo, cioè $\beta_0^{'}$, esprime come cambia l'ampiezza del segnale in ingresso, cioè $A_0$, dopo il sistema LTI. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
-Nella formula finale di $y \left[ n\right]$ chi è il ritardo in fase, $\beta_0$ ?
-\end{tcolorbox}
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire delle foto di come cambia il segnale di ingresso al sistema LTI prima e dopo il filtro a causa del ritardo di gruppo e di fase
@@ -1035,7 +1026,8 @@ TO-DO: Inserire delle foto di come cambia il segnale di ingresso al sistema LTI 
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 10\\
-    Appunti | 2025-10-21 | pag 1 - 2  
+    Appunti | 2025-10-21 | pag 1 - 2  \\
+    Latex | 2025-10-27 Sera | pag 143
 }
 
 Grazie alle dimostrazione delle pagine precedenti, data la risposta in fase di un sistema LTI, 
@@ -1085,9 +1077,7 @@ Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) 
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
-Come lo chiamiamo grd in $grd \left[ H \left( e^{\jmath \omega}\right)\right]$?
-\end{tcolorbox}
+dove $grd \left[ H \left( e^{\jmath \omega}\right)\right]$ indicare il group delay di $H \left( e^{\jmath \omega}\right)$. \newline 
 
 Il ritardo di gruppo rappresenta il tempo necessario al segnale per passare attraverso il sistema LTI discreto. \newline 
 
@@ -1171,7 +1161,8 @@ avremo che vale:
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 11\\
-    Appunti | 2025-10-21 | pag 2, 4
+    Appunti | 2025-10-21 | pag 2, 4 \\ 
+    Latex | 2025-10-27 Sera | pag 146
 } 
 
 Come scritto precedentemente, i sistemi che andremo ad affrontare in questo corso sono sistemi che sono descritti nel tempo 
@@ -1258,9 +1249,7 @@ Anche se ingegneristicamente parlando andremo a che fare principalmente con sist
 E anche perchè, nel "fantastico mondo del DSP", non esiste un verso del "tempo": tutto è possibile. 
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 8}
-Quindi, se volessimo risolvere il sistema in modo anti-causale, dovremmo avere non le condizioni iniziali bensì le condizioni future, giusto? 
-\end{tcolorbox}
+Se volessimo risolvere il sistema in modo anti-causale, dovremmo avere le condizioni "all'inizio dell'evoluzione" della sequenza. \newline 
 
 \begin{tcolorbox}
 Una piccola osservazione rispetto al numero di N e M. \newline 
@@ -1545,7 +1534,8 @@ Se esiste o esistono più poli $\abs{d_k}$ che si trovano nel cerchio unitario, 
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 15\\
-    Appunti | 2025-10-21 | pag 3
+    Appunti | 2025-10-21 | pag 3 \\ 
+    Latex | 2025-10-27 Sera | pag 152 - 153
 } 
 
 \begin{tcolorbox}
@@ -1556,10 +1546,8 @@ Per sistemi LTI causali e stabili, avremo che possiamo esprimere la loro rispost
 
 \textbf{Risposta in modulo} \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 9}
-A \ref{subsec: Magnitude} \nameref{subsec: Magnitude} pag \pageref{subsec: Magnitude} avevamo scritto che "siccome andiamo a considererà dei segnali causali non andremo a calcolare il modulo, bensì il modulo al quadrato". \newline 
-
-Quindi, nel corso useremo $\abs{H \left(e^{\jmath \omega}\right)}$ ma in realtà dovremmo usare $\abs{H \left(e^{\jmath \omega}\right)}^{2}$ ?
+\begin{tcolorbox}
+Per adesso, nel corso useremo $\abs{H \left(e^{\jmath \omega}\right)}$ ma in realtà dovremmo usare $\abs{H \left(e^{\jmath \omega}\right)}^{2}$ per segnali random.     
 \end{tcolorbox}
 
 La risposta in modulo di $H \left(e^{\jmath \omega}\right)$ la possiamo calcolare come: 
@@ -1653,8 +1641,8 @@ oppure la possiamo calcolare come:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 10}
-Perchè una arg è scritta in minuscolo e un'altra arg in maiuscolo?
+\begin{tcolorbox}
+    Per $ARG \left[ H \left( e^{\jmath \omega}\right)\right]$ in maiuscolo si intende che la fase di $H \left( e^{\jmath \omega}\right)$ va valutata nell'intervallo $\left[ - \pi, + \pi\right]$
 \end{tcolorbox}
 
 \textbf{Ritardo di gruppo} \newline 
@@ -1812,7 +1800,8 @@ possiamo svolgere le stesse considerazioni, ma al contrario. \newline
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 21 - 22\\
-    Appunti | 2025-10-22 | pag 2
+    Appunti | 2025-10-22 | pag 2 \\ 
+    Latex | 2025-10-27 Sera | pag 157
 } 
 
 Come scritto precedentemente in \ref{subsubsec: Distorsione di Fase} \nameref{subsubsec: Distorsione di Fase} a pag \pageref{subsubsec: Distorsione di Fase}, 
@@ -1857,8 +1846,12 @@ come si vede dalla seguente figura:
     \includegraphics[scale = 0.3]{Sistema con risposta di fase lineare come cascata.png}
 \end{figure} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 11}
-In che sennso $1\cdot e^{\jmath \alpha \omega}$ è un ritardo puro frazionario?
+
+\begin{tcolorbox}
+Il valore di $\alpha$ può essere qualsiasi. \newline 
+
+Se il valore di $\alpha$ non è quello dei casi particolari indicati sotto, 
+allora possiamo vedere $h \left[ n\right]$ come se fosse shiftata in analogico di $\alpha$ qualsiasi e poi ricampionata.  
 \end{tcolorbox}
 
 Come scritto precedentemente in \ref{subsec: Simmetria della trasformata di Fourier} \nameref{subsec: Simmetria della trasformata di Fourier} a pag \pageref{subsec: Simmetria della trasformata di Fourier}, 
@@ -1923,7 +1916,8 @@ ma in questo caso non si può compensare ed avere il sitema LTI a fase zero e l'
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 23 - 24\\
-    Appunti | 2025-10-22 | pag 2
+    Appunti | 2025-10-22 | pag 2 \\ 
+    Latex | 2025-10-27 Sera | pag 160
 } 
 
 Considerando il caso generale di un sistema LTI con risposta in fase lineare generalizzata, 
@@ -2029,10 +2023,6 @@ Si ricorda che se:
 
 e che è una sequenza coniugata anti-semmetrica, 
 avrà sicuramente una DTFT puramente immaginaria. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 12}
-Il fatto di avere una DTFT puramente immaginaria è un problema? Perchè noi in questo corso consideriamo DTFT reali, giusto? 
-\end{tcolorbox} 
 
 Spesso si sceglie $\beta$ costante a tratti, ad esempio: 
 
@@ -2453,7 +2443,8 @@ Questo filtro prende anche il nome di filtro comb. \newline
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 27 - 29\\
-    Appunti | 2025-10-22 | pag 2 - 3
+    Appunti | 2025-10-22 | pag 2 - 3 \\
+    Latex | 2025-10-27 Sera | pag 168
 } 
 
 Per quanto riguarda i sistemi IIR (cioè dall'inglese Infinite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare, 
@@ -2574,9 +2565,9 @@ risulta che:
 
 Una nota importante: i FIR di tipo I, II, III e IV a fase lineare non sono mai a fase minima. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 13}
-Cosa significa "non sono a fase minima"? Ci sono altri tipi di filtri che possono raggiungere una fase minima? 
-\end{tcolorbox} 
+\begin{tcolorbox}
+Prossimo capitolo sarà proprio sui sistemi LTI a fase minima.    
+\end{tcolorbox}
 
 \newpage 
 
