@@ -2594,4 +2594,199 @@ Generalmente avremo a che fare con FIR di tipo I.
 
 \newpage 
 
+\section{Sistemi All-Pass}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 31 - 32\\
+    Appunti | 2025-10-28 | pag 1  
+} 
+
+\begin{tcolorbox}
+    Questo tipo di sistema è molto interessante nel nostro corso di studi: i motivi, verranno spiegati meglio nei futuri capitoli. 
+\end{tcolorbox}
+
+Possiamo svolgere la seguente osservazioni, dati questi due sistemi, possiamo esprimere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \left(1 - \alpha e^{-\jmath \omega}\right)
+        = 
+        \left(1 - \alpha^{*} e^{\jmath \omega}\right)^{*}
+    \end{equation}
+}
+
+in cui questi due sistemi hanno lo stesso modulo nel dominio-z, perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \left(1 - \alpha e^{-\jmath \omega}\right)
+        \to
+        \left(1 - \alpha z^{-1}\right) 
+        = 
+        \dfrac{z - \alpha}{z} 
+        \end{split}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \left(1 - \alpha^{*} e^{\jmath \omega}\right)
+        \to
+        \left(1 - \alpha^{*} z\right) 
+        = 
+        \left( z^{-1} - \alpha^{*} \right) 
+        =
+        \dfrac{1 - \alpha^{*} z}{z} 
+        \end{split}
+    \end{equation}
+}
+
+I due termini, cioè $\dfrac{z - \alpha}{z}$ e $\dfrac{1 - \alpha^{*} z}{z} $, hanno radici coniugate reciproche perchè (facendo i passaggi step-by step di ogni equazione): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \dfrac{z - \alpha}{z} 
+        &= 
+        0
+        \\
+        z - \alpha &= 0
+        \\
+        z &= \alpha    
+        \end{split}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \dfrac{1 - \alpha^{*} z}{z} 
+        &= 
+        0
+        \\
+        1 - \alpha^{*} z 
+        &= 
+        0
+        \\
+        - \alpha^{*} z 
+        &= 
+        -1 
+        \\
+        \alpha^{*} z 
+        &= 
+        1
+        \\
+        z 
+        &= 
+        \dfrac{1}{\alpha^{*}}            
+        \end{split}
+    \end{equation}
+}
+
+$z = \alpha$ e $z = \dfrac{1}{\alpha^{*}}$ sono radici diverse, ma hanno lo stesso modulo. \newline 
+
+Grazie a questa osservazione, possiamo definire un sistema passa-tutto (All-pass filter in inglese) come: 
+
+{
+    \Large 
+    \begin{equation}
+        H_{al} \left(z\right) 
+        = 
+        \prod_{k = 1}^{N} 
+        \dfrac{z^{-1} - d_k^{*}}{1 - d_k^{*} z^{-1}}
+    \end{equation}
+}
+
+dove, possiamo notare che il filtro all-pass ha un unico vettore dei coefficienti. \newline 
+
+\newpage
+
+Abbiamo un unico vettore dei coefficienti perchè, dato $D \left(z \right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        D \left( z\right)
+        = 
+        \sum_{k = 0 }^{N}
+        a_k \cdot z^{-k}
+    \end{equation}
+}
+
+allora possiamo definire il filtro all-pass $H_{al} \left(z\right)$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H_{al} \left(z\right) 
+        &= 
+        \dfrac{D \left(z^{-1}\right)}{D \left(z\right)} \cdot z^{-N} 
+        \\ 
+        &= 
+        \dfrac{z^{-N} + a_1 z^{-N + 1} + \dots + a_N}{1 + a_1 z^{-1} + \dots + a_N z^{-N}}    
+        \end{split}
+    \end{equation}
+}
+
+Quindi $H_{al} \left(z\right)$ è il rapporto dello stesso polinomio, ma al nomininatore valutato in $z^{-1}$ (appunto $D \left(z^{-1}\right)$ ), 
+e al denominatore valutato in z (cioè $D \left(z\right)$). \newline 
+
+$H_{al} \left(z\right)$ è un sistema IIR, che è costante in modulo (non da un contributo) ma distorce \textbf{sempre} in fase. \newline 
+
+Di seguito le proprietà dei sistemi all-pass: 
+
+\begin{itemize}
+    \item per ogni polo, c'è uno zero coniugato e reciproco come si vede nella figura nel dominio z di esempio (con note): 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Esempio di sistema all pass nel dominio z.png}
+    \end{figure} 
+    \item il modulo $\abs{H_{al} \left(z\right)}$ è sempre uguale ad 1 per ogni pulsazione 
+    \item la fase $\arg \left[ H_{al} \left(z\right)\right]$ è sempre minore o uguale a 0 per ogni pulsazione 
+    \item il ritardo di gruppo di $grd \left[ H_{al} \left(z\right)\right]$ è sempre maggiore di 0 per ogni pulsazione  
+\end{itemize}
+
+
+\begin{tcolorbox}
+
+Ricordiamo al volo la definizione di ritardo di gruppo. \newline 
+
+Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) come:
+
+{
+    \Large 
+    \begin{equation}
+        \tau_{gr} 
+        = 
+        grd \left[ H \left( e^{\jmath \omega}\right)\right]
+        = 
+        - \dfrac{d}{d \omega} \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        \text{ per }
+        \abs{\omega} < \pi
+    \end{equation}
+}
+
+Ecco perchè se la fase è sempre negativa, il ritardo di gruppo è sempre positivo. 
+\end{tcolorbox}
+
+Siccome il ritardo di gruppo di un filtro All-pass è sempre positiva, 
+generalmente questo tipo di sistema è utilizzato come sistema ritardante. \newline  
+
+\newpage 
+
+\subsection{IMportanza dei sistemi All-Pass}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 33\\
+    Appunti | 2025-10-28 | pag 1  
+}
+
 
