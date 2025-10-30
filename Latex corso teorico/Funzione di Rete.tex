@@ -642,7 +642,7 @@ Avremo in uscita questo risultato dato come ingresso una sequenza $x \left[ n\ri
 }
 
 In questo caso, non si ha nessuna distorsione,
-ma il sistema ha un ritardo di $\alpha$ e costante moltilplicativa di $e^{\jmath \beta}$. \newline
+ma il sistema ha un ritardo di $\alpha$ e costante moltiplicativa di $e^{\jmath \beta}$. \newline
 
 \begin{tcolorbox}
     Come il caso con fase lineare, ma con una costante, che è $\beta$
@@ -712,7 +712,7 @@ dove:
 \begin{itemize}
     \item $A \left(\omega\right)$ è la funzione dei moduli del filtro LTI che dipende dal valore di pulsazione $\omega$ 
     \item $\beta \left( \omega\right)$ è la funzione delle fasi del filtro LTI che dipende dal valore di pulsazione $\omega$  
-    \item $\Delta \omega$ si intende uno shift di pulsazioni infinitisimale, cioè in cui $\Delta \omega \to 0$ 
+    \item $\Delta \omega$ si intende uno shift di pulsazioni infinitesimale, cioè in cui $\Delta \omega \to 0$ 
     \item $\omega_0$ è la pulsazione della sequenza di ingresso $x \left[ n\right]$
 \end{itemize}
 
@@ -744,7 +744,7 @@ bensì come una somma tra coseni (cioè $\cos \left[ \left(\omega_0 + \Delta \om
 
 \newpage 
 
-Sapendo ora quanto vale $H \left(e^{\jmath \omega}\right)$ e $x \left[ n\right]$, e semplicando i conti con le formule di Werner, 
+Sapendo ora quanto vale $H \left(e^{\jmath \omega}\right)$ e $x \left[ n\right]$, e semplificando i conti con le formule di Werner, 
 possiamo calcolare l'uscita del sistema LTI, che è: 
 
 {
@@ -848,8 +848,8 @@ Allora possiamo anche scrivere i componenti di $y \left[ n\right]$ (per definizi
     \end{equation}
 }
 
-Ipotizzando di trascurare i termini infintesimali in modulo (perchè in questa dimostrazione ci interessa fare un'analisa qualitativa della fase in uscita dal sistema LTI), 
-cioè trascruando il termine $A_0 \pm A_o^{'} \cdot \Delta \omega$ da $y \left[ n\right]$, 
+Ipotizzando di trascurare i termini infinitesimali in modulo (perchè in questa dimostrazione ci interessa fare un'analisi qualitativa della fase in uscita dal sistema LTI), 
+cioè trascurando il termine $A_0 \pm A_o^{'} \cdot \Delta \omega$ da $y \left[ n\right]$, 
 $y \left[ n\right]$ sarà uguale a: 
 
 {
@@ -929,7 +929,7 @@ $y \left[ n\right]$ sarà uguale a:
         \end{equation}
 } 
 
-Se ipotiziamo che: 
+Se ipotizzassimo che: 
 
 {
     \Large 
@@ -1009,8 +1009,8 @@ avremo che $y \left[ n\right]$ può essere riscritto come:
 dove: 
 
 \begin{itemize}
-    \item $\beta_0$ è il termine che indica lo sfasamento del coseno, in altri temrini è il contributo dell'LTI al ritardo di fase in $\omega_0$ 
-    \item il termine $n + \beta_0^{'}$ indica lo sfasamento dell'invilippo 
+    \item $\beta_0$ è il termine che indica lo sfasamento del coseno, in altri termini è il contributo dell'LTI al ritardo di fase in $\omega_0$ 
+    \item il termine $n + \beta_0^{'}$ indica lo sfasamento dell'inviluppo 
     \item $\beta_0^{'}$ è la derivata di $\beta_0$ , ha la dimensione del tempo e prende il nome di ritardo di gruppo
 \end{itemize}
 
@@ -1022,7 +1022,7 @@ TO-DO: Inserire delle foto di come cambia il segnale di ingresso al sistema LTI 
 
 \newpage 
 
-\subsection{Definizioni di Ritardo di Gruppo e di Fase e condizione di non distosione di fase}
+\subsection{Definizioni di Ritardo di Gruppo e di Fase e condizione di non distorsione di fase}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 10\\
@@ -1101,7 +1101,7 @@ La condizione per cui il sistema LTI discreto $H \left(e^{\jmath \omega}\right)$
 cioè il ritardo di gruppo $\tau_{gr}$ è costante, quindi significa che il sistema LTI $H \left(e^{\jmath \omega}\right)$ 
 deve avere fase lineare (quindi fase zero o generalizzata). \newline 
 
-O, in altri termini, il ritardo di gruppo costante significa che tutte le componti di $x \left[ n\right]$, 
+O, in altri termini, il ritardo di gruppo costante significa che tutte le componenti di $x \left[ n\right]$, 
 all'uscita del sistema LTI, vengono ritardate della stessa quantità. \newline 
 
 A titolo di esempio, da \ref{subsubsec: Distorsione di Fase} \nameref{subsubsec: Distorsione di Fase} pag \pageref{subsubsec: Distorsione di Fase}, 
@@ -1150,7 +1150,7 @@ avremo che vale:
 \begin{tcolorbox}
     Noi vorremmo dei sistemi LTI discreti che abbiano ritardo di fase costante, cosicchè il ritardo di gruppo sia nullo. \newline 
 
-    Ma, nella realtà, accetteremo un ritardo di fase abbastanza basso, possibilmente lineare, cossicchè il ritardo di gruppo sia costante e molto basso. \newline 
+    Ma, nella realtà, accetteremo un ritardo di fase abbastanza basso, possibilmente lineare, cosicchè il ritardo di gruppo sia costante e molto basso. \newline 
 
     La durata del ritardo di gruppo dipende dall'applicazione in cui il sistema LTI sarà applicato: il ritardo di gruppo in un sistema di telecomunicazioni è diverso dal ritardo di gruppo per un sistema di audio. 
 \end{tcolorbox}
@@ -1165,7 +1165,7 @@ avremo che vale:
     Latex | 2025-10-27 Sera | pag 146
 } 
 
-Come scritto precedentemente, i sistemi che andremo ad affrontare in questo corso sono sistemi che sono descritti nel tempo 
+Come scritto precedentemente, i sistemi che andremo ad affrontare in questo corso sono sistemi descritti nel tempo 
 con equazioni alle differenze finite del tipo: 
 
 {
@@ -1495,7 +1495,7 @@ Poichè la condizione di stabilità è:
     \end{equation}
 }
 
-cioè, scritta a parole, la risposta impulsiva $h \left[ n\right]$, deve essere assolutamente sommabile affinche il sistema LTI sia stabile, 
+cioè, scritta a parole, la risposta impulsiva $h \left[ n\right]$, deve essere assolutamente sommabile affinchè il sistema LTI sia stabile, 
 allora deve risultare che: 
 
 {
@@ -1757,7 +1757,7 @@ con il seguente grafico:
 
 \newpage 
 
-Analizzando la figura, osserbiamo che $H \left(z\right)$ è un filtro passa-basso perchè fa passare tutte le pulsazioni da 0 a $\pi$. \newline 
+Analizzando la figura, osserviamo che $H \left(z\right)$ è un filtro passa-basso perchè fa passare tutte le pulsazioni da 0 a $\pi$. \newline 
 
 Inoltre, il polo $-0.99$ è un polo molto vicino al cerchio unitario, che nel piano z si troverebbe sull'ordinata tra il secondo ed il terzo quadrante. \newline 
 
@@ -1884,7 +1884,7 @@ Se $\alpha$ è intero, allora la risposta impulsiva del sistema LTI discreto $h 
 TO-DO: Modificare la foto qui sopra meglio oppure rifarla su Matlab 
 \end{tcolorbox} 
 
-cioè l'asse di simmetria coicide con un impulso. \newline 
+cioè l'asse di simmetria coincide con un impulso. \newline 
 
 Quindi, in questo caso: 
 
@@ -1912,7 +1912,7 @@ ma in questo caso non si può compensare ed avere il sitema LTI a fase zero e l'
 
 \newpage 
 
-\section{Sistemi con risposta di fase lineare generilazzata}
+\section{Sistemi con risposta di fase lineare generalizzata}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 23 - 24\\
@@ -2051,7 +2051,7 @@ in genere in tali punti:
 
 \newpage 
 
-\subsection{Esempi di sistemi con risposta di fase lineare generilazzata}
+\subsection{Esempi di sistemi con risposta di fase lineare generalizzata}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 25 - 26\\
@@ -2101,7 +2101,7 @@ Allora $h \left[ n\right]$ è una derivata in un sistema discreto. \newline
     \end{equation}
 }
 
-$h \left[ n\right]$ non sarbbe più un derivatore, bensì un intergratore.
+$h \left[ n\right]$ non sarebbe più un derivatore, bensì un integratore.
 \end{tcolorbox}
 
 
@@ -2448,7 +2448,7 @@ Questo filtro prende anche il nome di filtro comb. \newline
 } 
 
 Per quanto riguarda i sistemi IIR (cioè dall'inglese Infinite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare, 
-ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale ed i sistemi IIR, per definizione, non possono essere descritti da una equazioone alle differenze finite. \newline 
+ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale ed i sistemi IIR, per definizione, non possono essere descritti da una equazione alle differenze finite. \newline 
 
 \begin{tcolorbox}
     Ma, come dice al prof a lezione, i sistemi IIR "sono un male necessario se si vuole avere un feedback all'uscita". 
@@ -2736,7 +2736,7 @@ allora possiamo definire il filtro all-pass $H_{al} \left(z\right)$ come:
     \end{equation}
 }
 
-Quindi $H_{al} \left(z\right)$ è il rapporto dello stesso polinomio, ma al nomininatore valutato in $z^{-1}$ (appunto $D \left(z^{-1}\right)$ ), 
+Quindi $H_{al} \left(z\right)$ è il rapporto dello stesso polinomio, ma al nominatore valutato in $z^{-1}$ (appunto $D \left(z^{-1}\right)$ ), 
 e al denominatore valutato in z (cioè $D \left(z\right)$). \newline 
 
 $H_{al} \left(z\right)$ è un sistema IIR, che è costante in modulo (non da un contributo) ma distorce \textbf{sempre} in fase. \newline 
@@ -2922,7 +2922,7 @@ dove:
     \item $\prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) \prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)$ è il contributo del filtro all-pass $H_{al} \left(z\right)$ 
     \item i k-esimi $l_k$ zeri sono zeri che si devono trovano dentro al cerchio unitario nel piano z 
     \item i k-esimi $d_k$ poli sono poli che si trovano dentro al cerchio unitario nel piano z (perchè abbiamo ipotizzando di studiare sistemi causali stabili)
-    \item i k-esimi $\dfrac{1}{g_k^{*}}$ zeri che si trovano all'interno del cerchio unitario nle piano z
+    \item i k-esimi $\dfrac{1}{g_k^{*}}$ zeri che si trovano all'interno del cerchio unitario nel piano z
     \item tutti i poli e gli zeri possono essere a molteplicità maggiore di 1
     \item A è un coefficiente moltiplicativo qualsiasi   
 \end{itemize}
@@ -2997,7 +2997,7 @@ dove:
     Appunti | 2025-10-28 | pag 2 - 3   
 }
 
-Di seguito le proprietà dei sistemi a sistemi a fase minima. \newline 
+Di seguito le proprietà dei sistemi a fase minima. \newline 
 
 \begin{itemize}
     \item poli e zeri sono dentro al cerchio unitario 
@@ -3075,7 +3075,7 @@ Di seguito le proprietà dei sistemi a sistemi a fase minima. \newline
 
 \newpage 
 
-L'ultimo punto è molto importante perchè il ritardo di enegia è legato al ritardo del sistema. \newline 
+L'ultimo punto è molto importante perchè il ritardo di energia è legato al ritardo del sistema. \newline 
 
 Inoltre, essendo l'asse di simmetria più vicino al valore iniziale a $ n = 0$ come si vede nella figura (indicato con il colore arancione): 
 
@@ -3084,7 +3084,7 @@ Inoltre, essendo l'asse di simmetria più vicino al valore iniziale a $ n = 0$ c
     \includegraphics[scale = 0.35]{minimo ritardo di energia in un sistema a fase minima confronto.png}
 \end{figure} 
 
-allora il segnale sarà eleborato più velocemente. \newline 
+allora il segnale sarà elaborato più velocemente. \newline 
 
 \newpage 
 
