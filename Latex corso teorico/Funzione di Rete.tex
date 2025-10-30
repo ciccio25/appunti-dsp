@@ -1796,7 +1796,7 @@ possiamo svolgere le stesse considerazioni, ma al contrario. \newline
 
 \newpage 
 
-\section{Sistemi con risposta di fase lineare}
+\section{Sistemi con risposta di fase lineare} \label{sec: Sistemi con risposta di fase lineare}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 21 - 22\\
@@ -2782,11 +2782,309 @@ generalmente questo tipo di sistema è utilizzato come sistema ritardante. \newl
 
 \newpage 
 
-\subsection{IMportanza dei sistemi All-Pass}
+\subsection{Importanza dei sistemi All-Pass}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 33\\
     Appunti | 2025-10-28 | pag 1  
 }
 
+Di seguito i motivi per cui i sistemi All-pass sono più noti per: 
+
+\begin{itemize}
+    \item compensazione della distorsione in fase o del ritardo di gruppo di un sistema (il ritardo di gruppo di $grd \left[ H_{al} \left(z\right)\right]$ è sempre maggiore di 0 per ogni pulsazione) 
+    \item utili per la comprensione dei sistemi a fase minima 
+    \item utilizzati per trasformare filtri passa-basso in altre tipologie di filtro o per creare filtri a passa-basso a cutoff variabile (questo tipo di filtro verrà approfondito alla magistrale)
+\end{itemize}
+
+\newpage 
+
+\section{Sistemi a fase minima}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 34 - 35\\
+    Appunti | 2025-10-28 | pag 2   
+}
+
+Come avevamo visto a \ref{sec: Sistemi con risposta di fase lineare} \nameref{sec: Sistemi con risposta di fase lineare} a pag \pageref{sec: Sistemi con risposta di fase lineare},  
+abbiamo visto che un sistema $H \left(e^{\jmath \omega}\right)$ con risposta di fase lineare lo possiamo vedere come: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(e^{\jmath \omega}\right)  
+        =
+        \left[ \abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath 0} \right] \cdot \left[ 1\cdot e^{\jmath \alpha \omega} \right]     
+    \end{equation}
+}
+
+cioè, una cascata tra un sistema LTI di fase zero $\abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath 0}$ 
+con un ritardo puro $1\cdot e^{\jmath \alpha \omega}$, 
+come si vede dalla seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Sistema con risposta di fase lineare come cascata.png}
+\end{figure} 
+
+Utilizzando invece un sistema $H_2 \left(z\right)$ qualsiasi, possiamo vederlo come una scomposizione di due sistemi come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Sistema LTI come scomposizione di due sistemi di cui uno a fase minima.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la figura, al posto di scrivere nel blocchetto $H_{AP} \left(z\right)$, scrivere $H_{al} \left(z\right)$
+\end{tcolorbox} 
+
+i cui sistemi sono $H_1 \left(z\right)$ e $H_{al} \left(z\right)$. \newline 
+
+Questi due sistemi hanno la seguente relazione: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            H_1 \left(z\right) = \abs{H_1 \left(z\right)} e^{\jmath \arg \left[H_1 \left(z\right) \right]}
+            \\
+            H_2 \left(z\right) = H_1 \left(z \right) \cdot H_{al} \left(z\right)
+        \end{cases}
+    \end{equation}
+}
+
+\newpage 
+
+Sapendo che un sistema $H_{al} \left(z\right)$ all-pass non impone un modulo, ma modifica solo la fase,  
+allora possiamo scrivere che un generico sistema $H_2 \left(z\right)$, lo possiamo scrivere come (facendo i passaggio step-by step): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H_2 \left(z\right) 
+            &= 
+            H_1 \left(z \right) \cdot H_{al} \left(z\right)
+            \\
+            &= 
+            \abs{H_1 \left(z \right)} e^{\jmath \arg \left[H_1 \left(z\right) \right]} 
+            \cdot 
+            \abs{H_{al} \left(z\right)} e^{\jmath \arg \left[H_{al} \left(z\right) \right]}
+            \\
+            &= 
+            \abs{H_1 \left(z \right)} e^{\jmath \arg \left[H_1 \left(z\right) \right]} 
+            \cdot 
+            1 \cdot e^{\jmath \arg \left[H_{al} \left(z\right) \right]}
+            \\
+            &= 
+            \abs{H_1 \left(z \right)} e^{\jmath \arg \left[H_1 \left(z\right) \right]} 
+            \cdot 
+            e^{\jmath \arg \left[H_{al} \left(z\right) \right]}
+            \\
+            &= 
+            \abs{H_1 \left(z \right)} e^{\jmath \left( \arg \left[H_1 \left(z\right) \right] + \arg \left[H_{al} \left(z\right) \right]\right)} 
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $H_1 \left(z\right)$ impone il modulo di $H_2 \left(z\right)$
+    \item il filtro $H_{al} \left(z\right)$ all-pass modifica la fase di $H_1 \left(z\right)$
+\end{itemize}
+
+Quindi, ipotizzando di avere sistemi stabili e causali (quindi dove i poli nel piano-z si trovano all'interno del cerchio unitario), 
+dato un qualsiasi sistema $H \left(z\right)$ lo si può vedere come la cascata di un sistema all-pass $H_{al} \left(z\right)$ ed un sistema che verrà chiamata "a fase minima" $H_{min} \left(z\right)$, 
+se quest'ultimo soddisfa la seguente condizione: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H \left(z\right) 
+            &= 
+            H_{min} \left(z\right) \cdot H_{al} \left(z\right)
+            \\
+            &=
+            A \cdot 
+            \dfrac{
+                \prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) 
+                \prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)
+            }{\prod_{k = 1}^{N} \left(1 - d_k z^{-1}\right)}
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) \prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)$ è il contributo del filtro all-pass $H_{al} \left(z\right)$ 
+    \item i k-esimi $l_k$ zeri sono zeri che si devono trovano dentro al cerchio unitario nel piano z 
+    \item i k-esimi $d_k$ poli sono poli che si trovano dentro al cerchio unitario nel piano z (perchè abbiamo ipotizzando di studiare sistemi causali stabili)
+    \item i k-esimi $\dfrac{1}{g_k^{*}}$ zeri che si trovano all'interno del cerchio unitario nle piano z
+    \item tutti i poli e gli zeri possono essere a molteplicità maggiore di 1
+    \item A è un coefficiente moltiplicativo qualsiasi   
+\end{itemize}
+
+\begin{tcolorbox}
+    L'ipotesi che tutte queste osservazioni valgono per sistemi causali stabili, quindi per sistemi un cui i poli sono dentro al cerchio unitario nel piano z, 
+    è un'ipotesi molto importante \textbf{da ricordare}, specialmente per la prova teorica. 
+\end{tcolorbox}
+
+Allora continuando i conti, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H \left(z\right) 
+            &=
+            A \cdot 
+            \dfrac{
+                \prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) 
+                \prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)
+            }{\prod_{k = 1}^{N} \left(1 - d_k z^{-1}\right)}
+            \\
+            &= 
+            A \cdot 
+            \dfrac{
+                \prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) 
+                \prod_{k = 1}^{M_2} \left(1 - g_k z^{-1}\right)
+            }{\prod_{k = 1}^{N} \left(1 - d_k z^{-1}\right)} 
+            \\
+            &\cdot 
+            \dfrac{\prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)}{\prod_{k = 1}^{M_2} \left(1 - g_k z^{-1} \right)}
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        H_{min} \left(z\right)
+        = 
+        \dfrac{
+                \prod_{k = 1}^{M_1} \left(1 - l_k z^{-1}\right) 
+                \prod_{k = 1}^{M_2} \left(1 - g_k z^{-1}\right)
+            }{\prod_{k = 1}^{N} \left(1 - d_k z^{-1}\right)} 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        H_{al} \left(z\right)
+        = 
+        \dfrac{\prod_{k = 1}^{M_2} \left(z^{-1} - g_k^{*}\right)}{\prod_{k = 1}^{M_2} \left(1 - g_k z^{-1} \right)}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Ricordiamo inoltre che nei sistemi lineari, non importa l'ordine dei sistemi in cascata. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Proprietà dei sistemi a fase minima}
+
+\footnote{ 
+    Slide del prof | 6 - Funzioni di Rete | pag 36 - 37\\
+    Appunti | 2025-10-28 | pag 2 - 3   
+}
+
+Di seguito le proprietà dei sistemi a sistemi a fase minima. \newline 
+
+\begin{itemize}
+    \item poli e zeri sono dentro al cerchio unitario 
+    \item esiste sempre il sistema inverso (perchè il sistema è sempre stabile) perchè: 
+    {
+        \Large 
+        \begin{equation}
+            \begin{split}
+                H_{min} \left(z\right) \cdot H_{inv} \left(z\right) &= 1
+                \\
+                &\updownarrow
+                \\
+                H_{inv} \left(z\right) 
+                &= 
+                \dfrac{1}{H_{min} \left(z\right)} 
+            \end{split}
+        \end{equation}
+    }
+    dove i poli di $H_{inv} \left(z\right)$ sono gli zeri di $H \left(z\right)$; 
+    \item si può compensare solo la parte a fase minima di un generico sistema (in cui non sono presenti degli zeri sul cerchio unitario): 
+    {
+        \Large 
+        \begin{equation}
+         \left[ H_{min} \left(z\right) \cdot H_{al} \left(z\right)\right]
+         \cdot 
+         \left[ \dfrac{1}{H_{min} \left(z\right)}\right] 
+         = 
+         H_{al} \left(z\right)  
+        \end{equation}
+    }
+    \begin{tcolorbox}
+        Il prodotto $H_{min} \left(z\right) \cdot H_{al} \left(z\right)$ è definito anche prodotto di de-convoluzione.
+    \end{tcolorbox}
+    \item un sistema a fase minima avrà un minimo phase-lag (che è l'inverso della fase) perchè, considerando un sistema LTI:
+    {
+        \Large 
+        \begin{equation}
+            H \left(e^{\jmath 0}\right) > 0
+        \end{equation}
+    } 
+    allora possiamo scrivere che la sua fase è uguale a:  
+    {
+        \Large 
+        \begin{equation}
+            \arg \left[ H \left(z\right)\right] 
+            = 
+            \arg \left[ H_{min} \left(z\right)\right]
+            + 
+            \arg \left[ H_{al} \left(z\right)\right]
+        \end{equation}
+    } 
+    Se consideriamo che la fase di un sistema all-pass è sempre negativa, allora se consideriamo l'opposto della fase di $H \left(z\right)$, 
+    possiamo scrivere che: 
+    
+    {
+        \Large 
+        \begin{equation}
+            -\arg \left[ H \left(z\right)\right] 
+            = 
+            -\arg \left[ H_{min} \left(z\right)\right]
+            - 
+            \arg \left[ H_{al} \left(z\right)\right]
+        \end{equation}
+    }
+    dove, se $\arg \left[ H_{min} \left(z\right)\right]$ è sempre minore di zero, il suo opposto sarà sempre maggiore di zero, 
+    allora, deve $-\arg \left[ H_{min} \left(z\right)\right]$ deve essere per forza minore di zero. 
+    
+    \begin{tcolorbox}
+    È molto importante capire cosa è la fase di un sistema e cosa è la "phase-leg": sono uno l'opposto dell'altro.     
+    \end{tcolorbox} 
+
+    \item nei sistemi a fase minima il ritardo di gruppo è minimo, quindi è un sistema più veloce rispetto a quelli studiati precedentemente  
+    \item nei sistemi a fase minima, si avrà un minimo ritardo di energia
+\end{itemize}
+
+\newpage 
+
+L'ultimo punto è molto importante perchè il ritardo di enegia è legato al ritardo del sistema. \newline 
+
+Inoltre, essendo l'asse di simmetria più vicino al valore iniziale a $ n = 0$ come si vede nella figura (indicato con il colore arancione): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{minimo ritardo di energia in un sistema a fase minima confronto.png}
+\end{figure} 
+
+allora il segnale sarà eleborato più velocemente. \newline 
+
+\newpage 
 
