@@ -90,6 +90,13 @@ possiamo svolgere queste sostituzioni (step-by-step):
         \sum_{k = 0}^{M}
         b_k \cdot z^{-k} \cdot X \left( z\right)
         \\
+        Y \left( z\right) \cdot
+        \sum_{k = 0}^{N}
+        a_k \cdot z^{-k} 
+        &= 
+        \sum_{k = 0}^{M}
+        b_k \cdot z^{-k} \cdot X \left( z\right)
+        \\
         Y \left( z\right)
         &=
         \dfrac{\sum_{k = 0}^{M}
@@ -120,7 +127,7 @@ prende il nome di funzione di rete (o in inglese System Function) perchè descri
 
 \newpage 
 
-\subsection{La funzioni di rete nei vari domini}
+\subsection{La funzione di rete nei vari domini}
 
 \footnote{ 
     Slide del prof | 6 - Funzioni di Rete | pag 3\\
@@ -129,7 +136,7 @@ prende il nome di funzione di rete (o in inglese System Function) perchè descri
 
 Come dimostrato precedentemente, la funzione di rete $H \left(z\right)$ può essere ancora calcolata, 
 sapendo la trasformata-z dell'uscita del sistema LTI a tempo discreto $Y \left(z\right)$ 
-e  la trasformata-z dell'ingresso del sistema LTI a tempo discreto $X \left(z\right)$ anche come: 
+e  la trasformata-z dell'ingresso del sistema LTI a tempo discreto $X \left(z\right)$, anche come: 
 
 {
     \Large 
@@ -184,7 +191,7 @@ dove:
 \textbf{Dominio - Frequenza} \newline 
 
 \begin{tcolorbox}
-    Tecnicamente dovrebbe essere il dominio delle pulsazione, ma sappiamo bene che tra pulsazioni e frequenza c'è il coefficiente $2 \pi$ che li differisce. \newline 
+    Tecnicamente dovrebbe essere il dominio delle pulsazioni, ma sappiamo bene che tra pulsazione e frequenza c'è il coefficiente $2 \pi$ che li differisce. \newline 
 
     Come dice Chiaraluce a lezione di Telecomunicazioni: "Tanto è solo un coefficiente"
 \end{tcolorbox}
@@ -368,7 +375,12 @@ Generalmente di $\abs{H \left( e^{\jmath \omega}\right)}^{2}$ si calcola il suo 
     \Large 
     \begin{equation}
         \begin{split}
+            \left. 
+                \abs{H \left( e^{\jmath \omega}\right)}^{2}
+            \right|_{db}
+            &=
             10 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}^{2}\right)
+            \\
             &= 
             2 \cdot 10 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right)
             \\
@@ -385,7 +397,10 @@ Consideriamo il "log magnitude" un guadagno in dB se è positivo, cioè:
 {
     \Large 
     \begin{equation}
-        20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right) > 0
+            \left. 
+                \abs{H \left( e^{\jmath \omega}\right)}^{2}
+            \right|_{db} 
+            > 0
     \end{equation}
 }
 
@@ -394,7 +409,10 @@ Consideriamo il "log magnitude" un'attenuazione in dB se è negativo, cioè:
 {
     \Large 
     \begin{equation}
-        20 \cdot \log_{10} \left( \abs{H \left( e^{\jmath \omega}\right)}\right) < 0
+            \left. 
+                \abs{H \left( e^{\jmath \omega}\right)}^{2}
+            \right|_{db}
+            < 0
     \end{equation}
 }
 
@@ -442,7 +460,7 @@ Per segnali random, avremo che:
     \end{equation}
 }
 
-che in dB diventa: 
+che in dB diventa, grazie alla proprietà dei logaritmi: 
 
 {
     \Large 
@@ -690,7 +708,7 @@ Per conoscere il tempo di transito (in campioni o frazioni) di un segnale attrav
     \includegraphics[scale = 0.2]{Sistea LTI a tempo discreto.png}
 \end{figure}  
 
-consideriamo la risposta in Fourier del sistema LTI $H \left( e^{\jmath \omega}\right)$ con una sequenza di ingresso $x \left[ n\right]$ a piacere: 
+consideriamo la risposta in Fourier del sistema LTI $H \left( e^{\jmath \omega}\right)$ con una sequenza di ingresso $x \left[ n\right]$ arbitraria a piacere: 
 
 {
     \Large 
@@ -953,7 +971,7 @@ allora possiamo dire che il contributo in $y \left[ n\right]$:
     \end{equation}
 }
 
-indica lo sfasamento totale totale a $\omega_0 + \Delta \omega$. \newline 
+il quale indica lo sfasamento totale totale a $\omega_0 + \Delta \omega$. \newline 
 
 Continuando a riscrivere $y \left[ n\right]$, ma questa volta applicando le formule di Werner al contrario, 
 avremo che $y \left[ n\right]$ può essere riscritto come: 
@@ -1244,7 +1262,7 @@ Avere delle condizioni iniziali significa che, ad ogni n+1 indice, andremo a con
 Quindi un sistema anti-causale non si risolverà da $- \infty$ a $+ \infty$ (o da sinistra verso destra) come nei sistemi causali, 
 bensì si risolverà partendo da $+ \infty$ a $- \infty$ (o da destra verso sinistra). \newline 
 
-Anche se ingegneristicamente parlando andremo a che fare principalmente con sistemi causali, questa modalità di risolvere i sistemi alle differenze sarà molto utile per gli esercizi di DSP su Matlab. \newline 
+Anche se ingegneristicamente parlando andremo avremo a che fare principalmente con sistemi causali, questa modalità di risolvere i sistemi alle differenze sarà molto utile per gli esercizi di DSP su Matlab. \newline 
 
 E anche perchè, nel "fantastico mondo del DSP", non esiste un verso del "tempo": tutto è possibile. 
 \end{tcolorbox}
@@ -1255,7 +1273,7 @@ Se volessimo risolvere il sistema in modo anti-causale, dovremmo avere le condiz
 Una piccola osservazione rispetto al numero di N e M. \newline 
 
 Più coefficienti in sistema alle differenze ci sono e più calcoli bisogna fare: ecco perchè, in questo corso (ma anche fuori dall'università) si sceglierà di utilizzare un sistema IIR, 
-perchè, per fare gli stessi conti, ci vuole meno tempo rispetto a un sistema con tanti M rispetto a N.    
+perchè, per fare gli stessi conti, ci vuole meno tempo rispetto a un sistema FIR con tanti M rispetto a N.    
 \end{tcolorbox}
 
 \newpage 
@@ -1349,8 +1367,8 @@ allora $H \left(z\right)$ può essere ulteriormente semplificata come:
 }
 
 \begin{tcolorbox}
-    Perchè farsi le pippe mentali per descrivere $H \left(z\right)$ nella stessa maniera? Perchè, circuitalmente, vedremo nelle prossime pagine che, 
-    diversi modi di rappresentare $H \left(z\right)$ comporta un diverso circuito realizzativo. 
+    Perchè farsi le pippe mentali per descrivere $H \left(z\right)$ nella stessa maniera? Perchè vedremo nelle prossime pagine che, 
+    i diversi modi di rappresentare $H \left(z\right)$ comportano a un diverso circuito realizzativo. 
 \end{tcolorbox} 
 
 \newpage 
@@ -1443,8 +1461,8 @@ allora $H \left(z\right)$ può essere ulteriormente semplificata come:
     \end{equation}
 }
 
-e anti-trasformando-z, quindi passando dal dominio z al dominio delle sequenze n, avremo che, 
-la risposta impulsiva di un sistema LTI con $H \left(z\right)$ nel dominio z, nel dominio n $h \left[ n\right]$ sarà uguale a: 
+e anti-trasformando-z, quindi passando dal dominio z al dominio delle sequenze n, avremo che 
+la risposta impulsiva di un sistema LTI con $H \left(z\right)$ nel dominio z( che nel dominio n è $h \left[ n\right]$) sarà uguale a: 
 
 {
     \Large 
@@ -1516,8 +1534,6 @@ come nella seguente figura di esempio:
 Proprio per questo motivo, per sistemi stabili esisterà sempre una trasformata di Fourier. \newline 
 
 Se esiste o esistono più poli $\abs{d_k}$ che si trovano nel cerchio unitario, avremo che il sistema LTI avrà una stabilità condizionata. \newline 
-
-\newpage 
 
 \begin{tcolorbox}
     Alcune osservazioni (come al solito perchè non siamo contenti se non facciamo osservazioni da futuri ingegneri): 
@@ -1690,7 +1706,7 @@ Quindi, i poli e gli zeri hanno effetti opposti in modulo e nel ritardo di grupp
 } 
 
 \begin{tcolorbox}
-    Queste due slides sono un po' confusionarie perchè non è lo stesso esempio graficato, ma tre poli e zeri completamenti differenti, ma sono solo per affermare un po' di concetti chiave. 
+    Queste due slides sono un po' confusionarie perchè non è lo stesso esempio graficato, ma tre poli e tre zeri completamenti differenti: sono solo per affermare un po' di concetti chiave. 
 \end{tcolorbox}
 
 Consideriamo una funzione razione $H \left(z\right)$ esprimibile come: 
@@ -2106,7 +2122,7 @@ $h \left[ n\right]$ non sarebbe più un derivatore, bensì un integratore.
 
 
 
-Senza dall'integrale della DTFT, ma applicando semplicemente le proprietà della DTFT come visto in \ref{subsec: Alcune trasformate di Fourier} \nameref{subsec: Alcune trasformate di Fourier} a pag \pageref{subsec: Alcune trasformate di Fourier}, 
+Senza l'integrale della DTFT, ma applicando semplicemente le proprietà della DTFT come visto in \ref{subsec: Alcune trasformate di Fourier} \nameref{subsec: Alcune trasformate di Fourier} a pag \pageref{subsec: Alcune trasformate di Fourier}, 
 possiamo scrivere che: 
 
 {
@@ -2245,7 +2261,7 @@ possiamo graficare l'andamento dei moduli di $H \left( e^{\jmath \omega}\right)$
     \includegraphics[scale = 0.4]{moduli in Fourier di una derivata.png}
 \end{figure} 
 
-Possiamo notare che $H \left( e^{\jmath \omega}\right)$ è un filtro passa-alto perchè $H \left( e^{\jmath \omega}\right)$ è crescente nell'intervallo $\left[ 0, \pi\right]$ delle pulsazioni $\omega$. \newline 
+Possiamo notare che $H \left( e^{\jmath \omega}\right)$ è un filtro passa-alto perchè $H \left( e^{\jmath \omega}\right)$ è crescente nell'intervallo $\left[ 0, \pi\right]$ delle pulsazioni $\omega$ e decrescente nell'intervallo $\left[\pi, 2 \pi\right]$. \newline 
 
 \newpage 
 
@@ -2256,7 +2272,7 @@ Analizzando invece l'andamento in fase di $H \left( e^{\jmath \omega}\right)$:
     \includegraphics[scale = 0.4]{Fase lineare per un filtro passa alto.png}
 \end{figure} 
 
-quindi $H \left( e^{\jmath \omega}\right)$ ha, nelle fasi, un andamento di tipo lineare. \newline 
+possiamo notare che $H \left( e^{\jmath \omega}\right)$ ha, nelle fasi, un andamento di tipo lineare. \newline 
 
 \begin{tcolorbox}
     Tutto questo esercizio solo per dimostrare che è possibile realizzare un filtro, in questo caso filtro passa alto, solo con soli due impulsi. 
@@ -2359,16 +2375,16 @@ dove, i valori di $\alpha$ e $\beta$ sono, rispettivamente, uguali a:
         \beta 
         = 
         \begin{cases}
-            \dfrac{\pi}{2} \quad 0 \leq \omega \leq \pi 
+            \dfrac{\pi}{2} \quad \text{ per }0 \leq \omega \leq \pi 
             \\
             \quad
             \\
-            \dfrac{\pi}{2} + \pi \quad \pi  < \omega  < 2 \pi 
+            \dfrac{\pi}{2} + \pi \quad \text{ per }\pi  < \omega  < 2 \pi 
         \end{cases}
     \end{equation}
 }
 
-quindi, in questo tipo di filtro, il valore di $\beta$ varia, in particolare è costante a tratt. \newline 
+quindi, in questo tipo di filtro, il valore di $\beta$ varia, in particolare è costante a tratti. \newline 
 
 \newpage 
 
@@ -2448,7 +2464,9 @@ Questo filtro prende anche il nome di filtro comb. \newline
 } 
 
 Per quanto riguarda i sistemi IIR (cioè dall'inglese Infinite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare, 
-ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale ed i sistemi IIR, per definizione, non possono essere descritti da una equazione alle differenze finite. \newline 
+ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale. \newline 
+
+I sistemi IIR, per definizione, non possono essere descritti da un'equazione alle differenze finite. \newline 
 
 \begin{tcolorbox}
     Ma, come dice al prof a lezione, i sistemi IIR "sono un male necessario se si vuole avere un feedback all'uscita". 
@@ -2456,7 +2474,7 @@ ma non hanno trasformata-z, cioè $H \left(z\right)$, razionale ed i sistemi IIR
 
 Invece, per quanto riguarda i sistemi FIR (cioè dall'inglese Finite Impulsive Response) possono esistere dei sistemi causali con fase generalizzata lineare. \newline 
 
-Le condizioni sufficiente (ma non necessarie) sono: 
+Le condizioni sufficienti (ma non necessarie) sono: 
 
 \begin{itemize}
     \item quello di avere $\alpha$ intero, o intero + $\dfrac{1}{2}$
