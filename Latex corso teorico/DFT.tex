@@ -391,3 +391,102 @@ dove:
     Appunti| 2025-10-28 | pag 4   
 }
 
+Data una sequenza periodica $\tilde{x} \left[ n\right]$, essa è completamente rappresentata dalla sua sequenza DFS $\tilde{X} \left[ k\right]$ 
+con $k = 0, 1, \dots, N-1$. \newline 
+
+Invecem data una sequenza aperiodica $x \left[ n\right]$ di lunghezza N, 
+quest'ultima può essere resa periodica replicandola sull'asse n, proprio come si vede nelle figure di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Confronto tra una sequenza aperiodica e periodica di esempio.png}
+\end{figure} 
+
+Allora, la DFS di $\tilde{x} \left[ n\right]$ corrisponde alla DTFT di $x \left[ n\right]$ campionata in N frequenze equispaziate, 
+quindi, per conoscere la DFS non bisogna utilizzare la DTFT. \newline 
+
+\begin{tcolorbox}
+    Ma tanto, ingegneristicamente parlando, non la utilizzeremo mai la DFS. 
+\end{tcolorbox}
+
+Quindi, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]  
+        \leftrightarrow 
+        \left.
+        X \left(e^{\jmath \omega}\right)
+        \right|_{\omega = \frac{2 \pi}{N} k}
+    \end{equation}
+}
+
+per $n = 0, 1, \dots, N-1$ e $k = 0, 1, \dots, N-1$
+
+\newpage 
+
+\section{Aliasing nel tempo}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 13 - 14\\
+    Appunti| 2025-10-28 | pag 4 - 5
+}
+
+Campionare la DTFT della sequenza $x \left[ n\right]$, cioè $X \left( e^{\jmath \omega}\right)$, in N punti equispaziati sul cerchio unitario, 
+equivale ad avere la DFS di una sequenza periodica di periodo N, ottenuta facendo la convoluzione di $x \left[  n \right]$ con un treno di impulsi spaziati di N. \newline 
+
+\begin{tcolorbox}
+    La dimostrazione di questo è svolto nelle pagine 11-12 del PDF "7 - DFT", ma essendo le slides facoltative e non di interesse al corso, perchè tanto la DFS non la useremo mai, l'ho salata. 
+\end{tcolorbox}
+
+Per un prefissato valore di N e data la lunghezza di $x \left[ n\right]$, possiamo considerare due casi interessanti: \newline 
+
+\begin{itemize}
+    
+\item \textbf{$x \left[ n\right]$ di durata finita minore o uguale ad N} \newline 
+
+Come si può visualizzare dalle seguenti figure di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{No aliasing per la DFS di esempio.png}
+\end{figure} 
+
+$x \left[ n\right]$ può essere calcolato dai N campioni della sua $X \left(e^{\jmath \omega}\right)$, in particolare: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right]
+        = 
+        \begin{cases}
+            \tilde{x} \left[ n\right] \text{ per } 0 \leq n \leq N -1 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+\item \textbf{$x \left[ n\right]$ di durata superiore ad  N (anche infinita)} \newline 
+
+Come si può visualizzare dalle seguenti figure di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Aliasing per la DFS di esempio.png}
+\end{figure} 
+
+$x \left[ n\right]$ non può essere calcolato dai N campioni della sua $X \left(e^{\jmath \omega}\right)$: 
+questo fenomeno prende il nome di aliasing temporale. \newline 
+
+\end{itemize}
+
+\newpage 
+
+\section{DFT - Discrete Fourier Transform}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 15 - 16\\
+    Appunti| 2025-10-29 | pag 1
+}
