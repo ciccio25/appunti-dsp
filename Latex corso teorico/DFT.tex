@@ -1,0 +1,393 @@
+\chapter{DFT}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Fourier_transform,_Fourier_series,_DTFT,_DFT.png}
+\end{figure}  
+
+\newpage 
+
+\section{Sequenze periodiche}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 2 - 3\\
+    Appunti| 2025-10-28 | pag 4   
+}
+
+Consideriamo una sequenza periodica $\tilde{x} \left[ n\right]$ per cui: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x} \left[ n\right] 
+        = 
+        \tilde{x} \left[ n + N\right] 
+    \end{equation}
+}
+
+dove N è un numero intero. \newline 
+
+\begin{tcolorbox}
+    A livello di notazione, scriveremo $\tilde{x} \left[ n\right]$, cioè una sequenza $x \left[ n\right]$ periodica, 
+    se è presente un'ondina \~ sopra alla sequenza. 
+\end{tcolorbox}
+
+Di una sequenza periodica $\tilde{x} \left[ n\right]$ possiamo determinare la sua pulsazione (fondamentale) $\omega_0$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega_0 = \dfrac{2 \pi}{N}
+    \end{equation}
+}
+
+A titolo di esempio, possiamo utilizzare la seguente figuta: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Sequenza periodica di esempio.png}
+\end{figure} 
+
+Come si nota dalla figura, la conoscenza degli N campioni, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x} \left[ k\right] \text{ per } k = 0, 1, \dots, \left(N - 1\right)
+    \end{equation}
+}
+
+permette di conoscere l'intera sequenza periodica. \newline 
+
+Proprio perchè una sequenza periodica $\tilde{x} \left[ n\right]$ non è nè assoltamente sommabile, 
+nè quadraticamente sommabile, allora, per calcolare la sua DTFT la calcoleremo come: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x} \left[ n\right]
+        = 
+        x \left[ n\right]
+        *
+        s \left[ n\right]
+    \end{equation}
+}
+
+cioè una convoluzione tra $x \left[ n\right]$ e $s \left[ n\right]$, dove: 
+
+{
+    \Large 
+    \begin{equation}
+        s \left[ n\right] 
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        \delta \left[ n - k N\right]
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \begin{cases}
+            \tilde{x} \left[ n\right] \text{ per } 0 \leq n \leq N - 1 
+            \\
+            0 \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+\newpage 
+
+In altre parole, una sequenza periodica $\tilde{x} \left[ n\right]$ è una convoluzione di un periodo con un treno di impulsi $s \left[ n\right]$ di periodo N. \newline 
+
+Da un punto di vista grafico, a titolo di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{DTFT di una sequenza periodica esempio.png}
+\end{figure} 
+
+\newpage 
+
+\subsection{DFS - Discrete Fourier series}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 4 - 5\\
+    Appunti| 2025-10-28 | pag 4   
+}
+
+Come nel caso continuo, le sequenze periodiche possono essere rappresentate dalla serie discreta di Fourier (a.k.a. DFS - Discrete Fourier Series). \newline 
+
+Quindi, possiamo rappresentare una qualasiasi sequenza periodica $\tilde{x} \left[ n\right]$ che si estende da $\left[ - \infty, + \infty\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x} \left[ n\right]
+        = 
+        \dfrac{1}{N}
+        \sum_{k}
+        \tilde{X} \left[ k\right] \cdot e^{\jmath \omega_0 k n}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item N è il periodo 
+    \item $\dfrac{1}{N}$ è un coefficiente moltiplicativo 
+    \item $\tilde{X} \left[ k\right]$ è il coefficiente della serie, cioè il k-esimo coefficiente della DFS di $\tilde{x} \left[ n\right]$
+\end{itemize}
+
+Dalla formula di $\tilde{x} \left[ n\right]$, possiamo svolgere diverse considerazioni. \newline 
+
+Grazie anche alla notazione, dalla formula di $\tilde{x} \left[ n\right]$, possiamo notare che i coefficiente della serie DFS, 
+$\tilde{X} \left[ k\right]$ sono estendibili da $\left[ - \infty, + \infty\right]$, proprio come $\tilde{x} \left[ n\right]$. \newline 
+
+Sapendo che la pulsazione fondamentale $\omega_0$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega_0 
+        =
+        \dfrac{2 \pi}{N}
+    \end{equation}
+}
+
+esistono solo N distinti esponenziali complessi: 
+
+{
+    \Large 
+    \begin{equation}
+    \sum_{k = 0}^{N - 1}
+    e^{\jmath \omega_0 k n} 
+    = 
+    e^{\jmath \frac{2 \pi}{N} \cdot 0}
+    +
+    e^{\jmath \frac{2 \pi}{N} \cdot 1}
+    + 
+    \dots 
+    e^{\jmath \frac{2 \pi}{N} \cdot \left(N  - 1\right)}  
+    \end{equation}
+}
+
+Grazie alla periodicità di $\tilde{X} \left[ k\right]$ e $\tilde{x} \left[ n\right]$, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \frac{2 \pi}{N} \cdot 0} 
+        = 
+        e^{\jmath \frac{2 \pi}{N} \cdot N}
+    \end{equation}
+}
+
+In generale, dato un valore di k qualasiasi, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        e^{\jmath \frac{2 \pi}{N} \cdot k} 
+        = 
+        e^{\jmath \frac{2 \pi}{N} \cdot \left(k + N\right)}
+    \end{equation}
+}
+
+Scrivendo $e^{- \jmath \frac{2 \pi}{N}}$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        W_N = e^{- \jmath \frac{2 \pi}{N}}
+    \end{equation}
+}
+
+allora possiamo scrivere $\tilde{x} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \tilde{x} \left[ n\right]
+        &= 
+        \dfrac{1}{N}
+        \sum_{k}
+        \tilde{X} \left[ k\right] \cdot e^{\jmath \omega_0 k n}
+        \\
+        &\downarrow
+        \\
+        \tilde{x} \left[ n\right]
+        &= 
+        \dfrac{1}{N}
+        \sum_{k}
+        \tilde{X} \left[ k\right] \cdot W_N^{-k n}
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+Il termine $W_N$ prende il nome di Twiddle. \newline 
+
+\begin{tcolorbox}
+    Il fattore di Twiddle verrà apprfondito nei futuri capitoli della FFT, ma se intanto vuoi avere un assaggio dell'importanza del Twiddle: 
+
+    \begin{itemize}
+        \item \url{https://www.linkedin.com/pulse/how-fft-algorithm-works-part-5-twiddle-factors-mark-newman/}
+        \item \url{https://www.sciencedirect.com/topics/engineering/discrete-fourier-transform}
+    \end{itemize}
+\end{tcolorbox}
+
+In particolare la formula: 
+
+{
+    \Large
+    \begin{equation}
+        \tilde{x} \left[ n\right]
+        =
+        \dfrac{1}{N}
+        \sum_{k = 0}^{N -1}
+        \tilde{X} \left[ k\right] \cdot W_N^{-k n}
+    \end{equation}
+}
+
+prende il nome di DFS inversa. \newline 
+
+Si può dimostrare anche il processo inverso, cioè la DFS diretta come: 
+
+{
+    \Large
+    \begin{equation}
+        \tilde{X} \left[ k\right]
+        =
+        \sum_{k = 0}^{N -1}
+        \tilde{x} \left[ n\right] \cdot W_N^{k n}
+    \end{equation}
+}
+
+ricordando che: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{k = 0}^{N - 1}
+        W_N^{kn} 
+        = 
+        \begin{cases}
+            N \text{ per n multiplo di N}
+            \\
+            0 \text{ altrimenti}
+        \end{cases}
+    \end{equation}
+}
+
+Grazie a questa proprietà dei twiddle $W_N^{kn}$, possiamo dire che il twiddle forma una base ortognale dello spazio nel dominio di DFS. \newline 
+
+\newpage 
+
+\subsubsection{Relazione tra DTFT e DFS}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 7 - 8\\
+    Appunti| 2025-10-28 | pag 4   
+}
+
+Poichè una sequenza periodica $\tilde{x} \left[ n\right]$ con periodo N si può vedere come la convoluzione del singolo periodo di $x \left[ n\right]$ 
+con un treno di impulsi $s \left[ n\right]$, spaziati di N, allora, possiamo scrivere che la DTFT di $x \left[ n\right]$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega}\right) 
+        = 
+        \sum_{n = - \infty}^{+ \infty}
+        x \left[ n\right]
+        \cdot 
+        e^{- \jmath \omega n}
+        =
+        \sum_{n = 0}^{N - 1}
+        x \left[ n\right]
+        \cdot 
+        e^{- \jmath \omega n} 
+    \end{equation}
+}
+
+per cui: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{X} \left[ k\right]
+        = 
+        \left. 
+        X \left(e^{\jmath \omega}\right)
+        \right|_{\omega = \dfrac{2 \pi}{N}k}
+    \end{equation}
+}
+
+dove $\tilde{X} \left[ k\right]$ è la DFS di $\tilde{x} \left[ n\right]$. \newline 
+
+Grazie a quest'ultima relazione tra $\tilde{X} \left[ k\right]$ e $X \left(e^{\jmath \omega}\right)$, 
+possiamo osservare che la DFS di $\tilde{x} \left[ n\right]$, cioè $\tilde{X} \left[ k\right]$, corrisponde alla DTFT di $x \left[ n\right]$, cioè $X \left(e^{\jmath \omega}\right)$, 
+campionata in N frequenze equispazionate: 
+
+{
+    \Large 
+    \begin{equation}
+        0, \dfrac{2 \pi}{N} \cdot 1, \dfrac{2 \pi}{N} \cdot 2, \dots, \dfrac{2 \pi}{N} \cdot \left(N - 1\right) 
+    \end{equation}
+}
+
+In altri termini, eseguire la DFS corrisponde a valutare la trasformata-z della sequenza $x \left[ n\right]$, 
+cioè $X \left(z\right)$, su N punti equispaziati sul cerchio unitario, come si visualizza dalla seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Cerchio unitario discretizzato per la DFS.png}
+\end{figure} 
+
+Inoltre, si può calcolare la DTFT della sequenza $\tilde{x} \left[ n\right]$, cioè $\tilde{X} \left(e^{\jmath \omega}\right)$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{X} \left(e^{\jmath \omega}\right) 
+        = 
+        \sum_{k = - \infty}^{+ \infty}
+        \dfrac{2 \pi}{N}
+        \cdot 
+        X \left(e^{\jmath \omega}\right)
+        \cdot 
+        \overline{\delta}
+        \left(
+            \omega 
+            - 
+            \dfrac{2 \pi}{N} k
+        \right) 
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $X \left(e^{\jmath \omega}\right)$ è la trasformata di Fourier di $x \left[ n\right]$ nel singolo periodo 
+    \item $\overline{\delta}
+        \left(
+            \omega 
+            - 
+            \dfrac{2 \pi}{N} k
+        \right) $ è un treno di impulsi di Dirac 
+\end{itemize}
+
+\newpage 
+
+\section{Sequenze aperiodiche di durata finita}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 9 - 10\\
+    Appunti| 2025-10-28 | pag 4   
+}
+
