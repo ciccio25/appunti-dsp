@@ -426,7 +426,7 @@ per $n = 0, 1, \dots, N-1$ e $k = 0, 1, \dots, N-1$
 
 \newpage 
 
-\section{Aliasing nel tempo}
+\section{Aliasing nel tempo} \label{sec: Aliasing nel tempo}
 
 \footnote{ 
     Slide del prof | 7 - DFT | pag 13 - 14\\
@@ -487,6 +487,295 @@ questo fenomeno prende il nome di aliasing temporale. \newline
 \section{DFT - Discrete Fourier Transform}
 
 \footnote{ 
-    Slide del prof | 7 - DFT | pag 15 - 16\\
+    Slide del prof | 7 - DFT | pag 15\\
     Appunti| 2025-10-29 | pag 1
+}
+
+Una sequenza aperiodica $x \left[ n\right]$ di lunghezza N può essere rappresentata completamente (o anche detta ricostruita) dai suoi N campioni per 
+i seguenti valori di $\omega$: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega = \dfrac{2 \pi}{N} \cdot 0, \dfrac{2 \pi}{N} \cdot 1, \dfrac{2 \pi}{N} \cdot 2, \dots, \dfrac{2 \pi}{N} \cdot \left(N -1\right) 
+    \end{equation}
+}
+
+dalla sua trasformata DTFT, cioè $X \left(e^{\jmath \omega}\right)$. \newline 
+
+Si definisce periò la DFT diretta come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ k\right]
+        = 
+        \begin{cases}
+            \sum_{n = 0}^{N -1}
+            x \left[ n\right] \cdot W_N^{kn} \quad \text{ per } 0 \leq k \leq N -1 
+            \\
+            0 \quad \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Ricordiamo che il Twiddle $W_N$ vale: 
+{
+    \Large 
+    \begin{equation}
+        W_N = e^{- \jmath \frac{2 \pi}{N}}
+    \end{equation}
+}
+\end{tcolorbox}
+
+Possiamo definire il processo inverso della DFT diretta, cioè la DFT inversa come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \begin{cases}
+            \sum_{k = 0}^{N -1}
+            X \left[ k\right] \cdot W_N^{-kn} \quad \text{ per } 0 \leq k \leq N -1 
+            \\
+            0 \quad \text{ altrove}
+        \end{cases}
+    \end{equation}
+}
+
+Possiamo svolgere le seguenti osservazioni: 
+\begin{itemize}
+
+    \item La DFT ha le stesse proprietà della DFS (che non abbiamo elencato in questi appunti), ma perde la periodicità della DFS. \newline 
+
+\begin{tcolorbox}
+    Perdere la periodicità della DFS è cosa buona e giusta perchè sennò, per calcolare la sequenza, si impiegerebbe un tempo che va da $- \infty$ a $+ \infty$, 
+    cioè un tempo infinito. 
+\end{tcolorbox}
+
+    \item La DFT di una sequenza finita di lunghezza N è una sequenza di lunghezza finita N 
+    \item La DFT equivale ad un periodo della DFS della sequenza periodica $\tilde{x} \left[ n\right]$, quest'ultima ottenuta replicando $x \left[ n\right]$ per periodi multipli di N da $- \infty$ a $+ \infty$
+\end{itemize}
+
+
+\begin{tcolorbox}
+    QUindi possiamo dire che la DFT è la trasformata di Fourier della sequenza $x \left[ n\right]$ in N punti. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Relazione tra DFT e DFS}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 16\\
+    Appunti| 2025-10-29 | pag 1
+}
+
+Per passare da una sequenza periodica $\tilde{x} \left[ n\right]$ a una seuqnza aperiodica $x \left[ n\right]$, 
+dobbiamo utilizzare la seguente formula: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x} \left[n\right]
+        = 
+        x \left[ \left(n \right)_{\mod N}\right]
+    \end{equation}
+}
+
+dove la dicitura $\mod N$ si intende il modulo, cioè il resto intero della divisione tra l'indice n e N periodo. \newline 
+
+Se invece volessimo fare il processo inverso: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \begin{cases}
+            \tilde{x} \left[ n\right] \quad \text{ per } 0 \leq n \leq N -1
+            \\
+            0 \quad \text{ altrove }
+        \end{cases}
+    \end{equation}
+}
+
+Per quanti riguarda le rispettive rappresentazioni nello spettro, cioè per passare da una DFT a una DFS, bisogna applicare questa formula: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{X} \left[k\right]
+        = 
+        X \left[ \left(k \right)_{\mod N}\right]
+    \end{equation}
+}
+
+Se invece volessimo fare il processo inverso: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ k\right]
+        = 
+        \begin{cases}
+            \tilde{X} \left[ k\right] \quad \text{ per } 0 \leq k \leq N -1
+            \\
+            0 \quad \text{ altrove }
+        \end{cases}
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Zero Padding}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 17\\
+    Appunti| 2025-10-29 | pag 1
+}
+
+Poichè la DFT della sequenza $x \left[ n\right]$ è la DTFT di $x \left[ n\right]$ campionata nei punti: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega = \dfrac{2 \pi}{N} \cdot 0, \dfrac{2 \pi}{N} \cdot 1, \dfrac{2 \pi}{N} \cdot 2, \dots, \dfrac{2 \pi}{N} \cdot \left(N -1\right) 
+    \end{equation}
+}
+
+e poichè la ricostruzione perfetto di $x \left[ n\right]$ richiede \textbf{ almeno } N campioni in frequenza, per evitare aliasing temporale 
+(come visto in \ref{sec: Aliasing nel tempo} \nameref{sec: Aliasing nel tempo} a pag \pageref{sec: Aliasing nel tempo}), 
+allora si può aumentare la lunghezza della DFT con la tecnica chiamata Zero Padding, cioè aggiungere M-N zeri alla sequenza iniziale $x \left[ n\right]$. \newline 
+
+\begin{tcolorbox}
+    Alcune accortezze riguardo allo Zero Padding. \newline 
+
+    La prima accortezza è che questa tecnica può essere applicata o prima o dopo che si ha la sequenza $x \left[ n\right]$, 
+    cioè non si può aggiungere degli M - N zeri all'interno della sequenza $x \left[ n\right]$ (a meno che $x \left[ n\right]$ non abbia dei valori uguali a zero prima della tecnica dello zero padding, in quel caso è giusto che siano presenti degli zeri). \newline 
+
+    La seconda accortezza è che la tecnica Zero Padding va scelta con cura in base al segnale perchè si aggiunge "artificialmente" dei valori che non esistono nella sequenza inziale $x \left[ n\right]$.  
+\end{tcolorbox}
+
+Come si vede dalla seguenti figure di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Zero padding esempio.png}
+\end{figure} 
+
+dove si confronta: 
+
+\begin{itemize}
+    \item in alto, una sequenza $x \left[ n\right]$ senza zero padding, perchè $M = N = 5$ 
+    \item in basso, una sequenza $x \left[ n\right]$ con zero padding, perchè si è aggiunto $M - N = 10 - 5 = 5$ zeri, quindi $M > N$
+\end{itemize}
+ 
+con a destra i relativi spettri dei moduli della DFT. \newline 
+
+La reversibilità tra il dominio n e quello delle DFT è garantito perchè, in tutti e due i casi, $M \ge N$. \newline 
+
+\newpage 
+
+Confrontando gli spettri delle DFT delle due sequenze (cioè le due figure a destra) possiamo notare che: 
+
+\begin{itemize}
+    \item la sequenza rossa tratteggiata indica lo spettro della DFT se M tende ad infinito, cioè se la DFT fosse uguale alla DTFT 
+    \item nella sequenza con zero padding, cioè quella con $M = 10$, ci sono più valori di $\abs{X \left[ k\right]}$ rispetto alla sequenza senza zero padding, con $M = 5$; questi valori in più non altera la DFT, ma aggiunge campioni intermedi (chiamati anche interpolazione)
+\end{itemize}
+
+\begin{tcolorbox}
+    La scelta dei valori M deve essere almeno uguale a N. \newline 
+
+    Se si vuole elaborare il segnale $X \left[ k\right]$, è sempre meglio scegliere un M più piccolo possibile. \newline 
+
+    Se invece si vuole stimare meglio la DTFT, quindi avvicinarsi alla linea tratteggiata rossa in figura, bisogna scegliere un valore di M più alto possibile. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Proprietà della DFT}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 18\\
+    Appunti| 2025-10-29 | pag 1 - 2
+}
+
+La DFT della sequenza di $x \left[ n\right]$ non è altro che la DFS della sequenza periodicizzata $\tilde{x} \left[ n\right]$, 
+quindi le proprietà della DFT sono le stessa della DFS, salvo che ora gli indici vanno calcolati in modulo N. \newline 
+
+Le proprietà della DFT sono le seguenti: 
+
+\begin{itemize}
+    \item linearità 
+    \item dualità 
+    \item simmetria 
+    \item traslazione, sia in tempo che in frequenza
+\end{itemize}
+
+Per quanto riguarda la traslazione nel tempo, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ \left(n - m\right)_{N}\right]
+        \leftrightarrow 
+        X \left[ k\right] \cdot W_N^{km}
+    \end{equation}
+}
+
+dove il simbolo N come pedice a $\left( n - m\right)$ indica una traslazione (in inglese) shift, circolare, 
+cioè ciò che esce da un altro rientra nell'altro. \newline 
+
+Un esempio di traslazione circolare nel tempo con $m = 3$ ed $N = 6$ (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Esempio di sequenza shiftata circolare nellle slide.png}
+\end{figure} 
+
+\newpage 
+
+Un esempio di traslazione circolare passo-passo fatto a lezione: \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.23]{2025-10-29 Esempio di convoluzione circolare con due sequenze editata.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare l'immagine per renderla più nitida
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+    Vi lascio degli esercizi fatti passo passo: 
+
+    \begin{itemize}
+        \item Circular Time Reversal Property of DFT by Sarita Bopalkar\\ \url{https://www.youtube.com/watch?v=y-yebCIZoW4}
+        \item DFT - Circular Shifting Operation by Sri Hari B H\\ \url{https://www.youtube.com/watch?v=9GM3rEGHTus&t=5s}
+    \end{itemize}
+\end{tcolorbox}
+
+Un'altra proprietà della DFT è la sequente: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n \right] \cdot W_{N}^{-nm} 
+        \leftrightarrow 
+        X \left[ \left(k - m\right)_{N}\right]
+    \end{equation}
+}
+
+cioè si svolge la traslazione nello spettro della DFT e non del tempo. \newline 
+
+\newpage 
+
+\subsection{Convoluzione periodica}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 21\\
+    Appunti| 2025-10-29 | pag 2 - 3
 }
