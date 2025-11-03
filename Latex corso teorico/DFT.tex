@@ -779,3 +779,201 @@ cioè si svolge la traslazione nello spettro della DFT e non del tempo. \newline
     Slide del prof | 7 - DFT | pag 21\\
     Appunti| 2025-10-29 | pag 2 - 3
 }
+
+\begin{tcolorbox}
+    Se abbiamo una convoluzione lineare tra due sequenze $x_1 \left[ n\right]$ lunga L e $x_2 \left[ n\right]$ lunga M 
+    come studiato in \ref{subsec: Prodotto di convoluzione e le sue proprietà} \nameref{subsec: Prodotto di convoluzione e le sue proprietà} a pag \pageref{subsec: Prodotto di convoluzione e le sue proprietà}, 
+    avremo che la sequenza $x_1 \left[ n\right] * x_2 \left[ n\right]$ sarò lunga $L + M -1$, quindi la sequenza convoluita sarà più lunga di $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$. \newline 
+    
+    Ma, nel "fantastico mondo del DSP", noi vorremmo avere una convoluzione di lunghezza fissa: per questo motivo, oltre alla convoluzione lineare precedentemente studiata, 
+    è necessario presentare altri tipi di convoluzione. 
+\end{tcolorbox}
+
+Date due sequenze periodiche $\tilde{x_1} \left[ n\right]$ e $\tilde{x_2} \left[ n\right]$ con entrambe periodo N, 
+allora si può definire la loro convoluzione circolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x}_1 \left[ n\right] 
+        \circledast
+        \tilde{x}_2 \left[ n\right] 
+    \end{equation}
+}
+
+dove il simbolo $\circledast$ indica il simbolo per la convoluzione circolare. \newline 
+
+La convoluzione circolare tra due sequenze è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \tilde{x}_1 \left[ n\right] 
+        \circledast
+        \tilde{x}_2 \left[ n\right]
+        &= 
+        \sum_{m = 0}^{N -1}
+        \tilde{x}_1 \left[ m\right] 
+        \cdot
+        \tilde{x}_2 \left[ n - m\right]
+        \\
+        &= 
+        \sum_{m = 0}^{N -1}
+        \tilde{x}_1 \left[ n - m\right] 
+        \cdot
+        \tilde{x}_2 \left[ m\right]  
+        \end{split}
+    \end{equation}
+}
+
+dove $\tilde{x}_1 \left[ n - m\right] $ e $\tilde{x}_2 \left[ n - m\right]$ si intendono degli shift lineari 
+(quindi la sequenza $\tilde{x}_1 \left[ n\right]$ o $\tilde{x}_2 \left[ n\right]$ viene ritardata N volte e poi, ad ogni ritardo, la sequenza shiftata viene moltiplicata per l'altra sequenza e poi vengono sommati i componenti). \newline 
+
+Le due sommatorie sono uguali perchè la convoluzione ciroclare è commutativa. \newline 
+
+Un esempio di convoluzuione circolare con sequenze periodiche è la seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Esempio convoluzione circolare con sequenze periodiche.png}
+\end{figure} 
+
+\newpage
+
+Si può dimostrare (cioè non lo dimostreremo) che valgono le seguenti relazioni tra dominio n e dominio DFS se tutte le sequenze sono di periodo N: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x}_1 \left[ n\right]
+        \circledast
+        \tilde{x}_2 \left[ n\right]
+        \leftrightarrow
+        \tilde{X}_1 \left[ k\right]
+        \cdot
+        \tilde{X}_2 \left[ k\right]
+    \end{equation}
+}
+
+cioè la convoluzione circolare tra $\tilde{x}_1 \left[ n\right]$ e $\tilde{x}_2 \left[ n\right]$ è un prodotto nel dominio DFS, invece: 
+
+{
+    \Large 
+    \begin{equation}
+        \tilde{x}_1 \left[ n\right]
+        \cdot
+        \tilde{x}_2 \left[ n\right]
+        \leftrightarrow
+        \dfrac{1}{N}
+        \left(
+        \tilde{X}_1 \left[ k\right]
+        \circledast
+        \tilde{X}_2 \left[ k\right]
+        \right)
+    \end{equation}
+}
+
+cioè il prodotto tra $\tilde{x}_1 \left[ n\right]$ e $\tilde{x}_2 \left[ n\right]$ è una convoluzione circolare nel dominio DFS. \newline 
+
+Siccome abbiamo a che fare con sequenze periodiche, la convoluzione circolare, in questo caso, prende il nome di convoluzione periodica. \newline 
+
+\newpage 
+
+\subsection{Convoluzione circolare}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 22\\
+    Appunti| 2025-10-29 | pag 3 - 4
+}
+
+La convoluzione circolare è una convoluzione periodica svolta per sequenze non periodiche. \newline 
+
+Date due sequenze $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ di lunghezza N, allora possiamo definire la loro convoluzione circolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n\right]
+        \circledast
+        x_2 \left[ n\right]
+        = 
+        \sum_{m = 0}^{N -1}
+        x_1 \left[ m\right]
+        \cdot
+        x_2 \left[ \left( n- m\right)_{N}\right]  
+    \end{equation}
+}
+
+dove la N sotto a $\left(n - m\right)$ indica il modulo N dell'indice. \newline 
+
+Nel dominio DFT, la convoluzione circolare $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ nel dominio n vale: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n\right]
+        \circledast
+        x_2 \left[ n\right]
+        \leftrightarrow
+        X_1 \left[ k\right]
+        \cdot
+        X_2 \left[ k\right]  
+    \end{equation}
+}
+
+Un esempio di convoluzuione circolare con sequenze aperiodiche è la seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{Esempio convoluzione circolare con sequenze aperiodiche.png}
+\end{figure} 
+
+Nel dominio DFT, il prodotto tra due sequenze $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ nel dominio n vale: 
+        
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n\right]
+        \cdot
+        x_2 \left[ n\right]
+        \leftrightarrow
+        \dfrac{1}{N}
+        \left(
+        X_1 \left[ k\right]
+        \circledast
+        X_2 \left[ k\right] 
+        \right)
+        \end{equation}
+}
+
+dove $ \dfrac{1}{N} \left( X_1 \left[ k\right] \circledast X_2 \left[ k\right] \right)$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{1}{N}
+        \left(
+        X_1 \left[ k\right]
+        \circledast
+        X_2 \left[ k\right] 
+        \right)
+        =
+        \dfrac{1}{N}
+        \sum_{m = 0}^{N - 1}
+        X_1 \left[ m\right]
+        \cdot
+        X_2 \left[ \left( k- m\right)_{N}\right]  
+    \end{equation}
+}
+
+\newpage 
+
+\begin{tcolorbox}
+    Se vuoi approfondire il tema della convoluzione circolare: \newline 
+
+    Circular vs. Linear Convolution: What's the Difference? [DSP \#08] by WolfSound \\ 
+    \url{https://www.youtube.com/watch?v=zquMVVCnmuk&t=50s}
+\end{tcolorbox}
+
+\newpage 
