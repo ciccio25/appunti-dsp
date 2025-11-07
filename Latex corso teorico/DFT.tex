@@ -25,11 +25,11 @@ Consideriamo una sequenza periodica $\tilde{x} \left[ n\right]$ per cui:
     \end{equation}
 }
 
-dove N è un numero intero. \newline 
+dove N è un numero intero, cioè il periodo della sequenza. \newline 
 
 \begin{tcolorbox}
     A livello di notazione, scriveremo $\tilde{x} \left[ n\right]$, cioè una sequenza $x \left[ n\right]$ periodica, 
-    se è presente un'ondina \~ sopra alla sequenza. 
+    se è presente un'ondina sopra alla sequenza. 
 \end{tcolorbox}
 
 Di una sequenza periodica $\tilde{x} \left[ n\right]$ possiamo determinare la sua pulsazione (fondamentale) $\omega_0$ come: 
@@ -100,7 +100,7 @@ cioè una convoluzione tra $x \left[ n\right]$ e $s \left[ n\right]$, dove:
 
 \newpage 
 
-In altre parole, una sequenza periodica $\tilde{x} \left[ n\right]$ è una convoluzione di un periodo con un treno di impulsi $s \left[ n\right]$ di periodo N. \newline 
+In altre parole, una sequenza periodica $\tilde{x} \left[ n\right]$ è una convoluzione di un periodo con un treno di impulsi $s \left[ n\right]$ equispaziati di periodo N. \newline 
 
 Da un punto di vista grafico, a titolo di esempio: 
 
@@ -138,7 +138,7 @@ dove:
 \begin{itemize}
     \item N è il periodo 
     \item $\dfrac{1}{N}$ è un coefficiente moltiplicativo 
-    \item $\tilde{X} \left[ k\right]$ è il coefficiente della serie, cioè il k-esimo coefficiente della DFS di $\tilde{x} \left[ n\right]$
+    \item $\tilde{X} \left[ k\right]$ è il coefficiente della serie, cioè il k-esimo coefficiente della DFS di $\tilde{x} \left[ n\right]$ \newline
 \end{itemize}
 
 Dalla formula di $\tilde{x} \left[ n\right]$, possiamo svolgere diverse considerazioni. \newline 
@@ -196,6 +196,8 @@ In generale, dato un valore di k qualsiasi, possiamo scrivere che:
     \end{equation}
 }
 
+\newpage 
+
 Scrivendo $e^{- \jmath \frac{2 \pi}{N}}$ come: 
 
 {
@@ -227,8 +229,6 @@ allora possiamo scrivere $\tilde{x} \left[ n\right]$ come:
         \end{split}
     \end{equation}
 }
-
-\newpage 
 
 Il termine $W_N$ prende il nome di Twiddle. \newline 
 
@@ -324,7 +324,7 @@ per cui:
         = 
         \left. 
         X \left(e^{\jmath \omega}\right)
-        \right|_{\omega = \dfrac{2 \pi}{N}k}
+        \right|_{\omega = \frac{2 \pi}{N}k}
     \end{equation}
 }
 
@@ -402,7 +402,7 @@ quest'ultima può essere resa periodica replicandola sull'asse n, proprio come s
     \includegraphics[scale = 0.5]{Confronto tra una sequenza aperiodica e periodica di esempio.png}
 \end{figure} 
 
-Allora, la DFS di $\tilde{x} \left[ n\right]$ corrisponde alla DTFT di $x \left[ n\right]$ campionata in N frequenze equispaziate, 
+Allora, la DFS di $\tilde{x} \left[ n\right]$ corrisponde alla DTFT di $x \left[ n\right]$ campionata in N frequenze equispaziate; 
 quindi, per conoscere la DFS non bisogna utilizzare la DTFT. \newline 
 
 \begin{tcolorbox}
@@ -561,7 +561,7 @@ Possiamo svolgere le seguenti osservazioni:
 
 
 \begin{tcolorbox}
-    QUindi possiamo dire che la DFT è la trasformata di Fourier della sequenza $x \left[ n\right]$ in N punti. 
+    Quindi possiamo dire che la DFT è la trasformata di Fourier della sequenza $x \left[ n\right]$ in N punti. 
 \end{tcolorbox}
 
 \newpage 
@@ -602,7 +602,7 @@ Se invece volessimo fare il processo inverso:
     \end{equation}
 }
 
-Per quanti riguarda le rispettive rappresentazioni nello spettro, cioè per passare da una DFT a una DFS, bisogna applicare questa formula: 
+Per quanto riguarda le rispettive rappresentazioni nello spettro, cioè per passare da una DFT a una DFS, bisogna applicare questa formula: 
 
 {
     \Large 
@@ -683,7 +683,7 @@ Confrontando gli spettri delle DFT delle due sequenze (cioè le due figure a des
 
 \begin{itemize}
     \item la sequenza rossa tratteggiata indica lo spettro della DFT se M tende ad infinito, cioè se la DFT fosse uguale alla DTFT 
-    \item nella sequenza con zero padding, cioè quella con $M = 10$, ci sono più valori di $\abs{X \left[ k\right]}$ rispetto alla sequenza senza zero padding, con $M = 5$; questi valori in più non altera la DFT, ma aggiunge campioni intermedi (chiamati anche interpolazione)
+    \item nella sequenza con zero padding, cioè quella con $M = 10$, ci sono più valori di $\abs{X \left[ k\right]}$ rispetto alla sequenza senza zero padding, con $M = 5$; questi valori in più non alterano la DFT, ma aggiunge campioni intermedi (chiamati anche campioni di interpolazione)
 \end{itemize}
 
 \begin{tcolorbox}
@@ -704,7 +704,7 @@ Confrontando gli spettri delle DFT delle due sequenze (cioè le due figure a des
 }
 
 La DFT della sequenza di $x \left[ n\right]$ non è altro che la DFS della sequenza periodicizzata $\tilde{x} \left[ n\right]$, 
-quindi le proprietà della DFT sono le stessa della DFS, salvo che ora gli indici vanno calcolati in modulo N. \newline 
+quindi le proprietà della DFT sono le stessa della DFS, salvo che ora che gli indici vanno calcolati in modulo N. \newline 
 
 Le proprietà della DFT sono le seguenti: 
 
@@ -1009,7 +1009,7 @@ allora possiamo scrivere che la loro convoluzione lineare è uguale a:
     \end{equation}
 }
 
-convoluzione nel dominio n che, facendo la DTFT (e non la DFT), è uguale a: 
+cioè convoluzione nel dominio n che, facendo la DTFT (e non la DFT), è uguale a: 
 
 {
     \Large 
@@ -1041,7 +1041,7 @@ abbiamo che:
     \end{equation}
 }
 
-convoluzione circolare nel dominio n che, facendo la DFT (e non la DTFT), è uguale a: 
+cioè convoluzione circolare nel dominio n che, facendo la DFT (e non la DTFT), è uguale a: 
 
 {
     \Large 
@@ -1162,7 +1162,7 @@ Se invece facessimo una convoluzione ciclica nel dominio n:
 }
 
 dove $x_2^{'} \left[ n \right]$ è la sequenza $x_2 \left[ n \right]$ con zero-padding fino ad $L - 1$, 
-allora la sequenza circolare è lunga L, che è di lunghezza minore, cioè $ L+ P - 1$, della convoluzine aperiodica . \newline 
+allora la sequenza circolare è lunga L, che è di lunghezza minore rispetto alla convoluzine aperiodica . \newline 
 
 Come il caso precedente in cui $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$, hanno la stessa lunghezza N, 
 a titolo di esempio abbiamo la seguente figura: 
