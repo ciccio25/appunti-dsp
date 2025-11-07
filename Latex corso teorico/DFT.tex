@@ -41,7 +41,7 @@ Di una sequenza periodica $\tilde{x} \left[ n\right]$ possiamo determinare la su
     \end{equation}
 }
 
-A titolo di esempio, possiamo utilizzare la seguente figuta: 
+A titolo di esempio, possiamo utilizzare la seguente figura: 
 
 \begin{figure}[h]
     \centering
@@ -59,7 +59,7 @@ Come si nota dalla figura, la conoscenza degli N campioni, cioè:
 
 permette di conoscere l'intera sequenza periodica. \newline 
 
-Proprio perchè una sequenza periodica $\tilde{x} \left[ n\right]$ non è nè assoltamente sommabile, 
+Proprio perchè una sequenza periodica $\tilde{x} \left[ n\right]$ non è nè assolutamente sommabile, 
 nè quadraticamente sommabile, allora, per calcolare la sua DTFT la calcoleremo come: 
 
 {
@@ -120,7 +120,7 @@ Da un punto di vista grafico, a titolo di esempio:
 
 Come nel caso continuo, le sequenze periodiche possono essere rappresentate dalla serie discreta di Fourier (a.k.a. DFS - Discrete Fourier Series). \newline 
 
-Quindi, possiamo rappresentare una qualasiasi sequenza periodica $\tilde{x} \left[ n\right]$ che si estende da $\left[ - \infty, + \infty\right]$ come: 
+Quindi, possiamo rappresentare una qualsiasi sequenza periodica $\tilde{x} \left[ n\right]$ che si estende da $\left[ - \infty, + \infty\right]$ come: 
 
 {
     \Large 
@@ -185,7 +185,7 @@ Grazie alla periodicità di $\tilde{X} \left[ k\right]$ e $\tilde{x} \left[ n\ri
     \end{equation}
 }
 
-In generale, dato un valore di k qualasiasi, possiamo scrivere che: 
+In generale, dato un valore di k qualsiasi, possiamo scrivere che: 
 
 {
     \Large 
@@ -233,7 +233,7 @@ allora possiamo scrivere $\tilde{x} \left[ n\right]$ come:
 Il termine $W_N$ prende il nome di Twiddle. \newline 
 
 \begin{tcolorbox}
-    Il fattore di Twiddle verrà apprfondito nei futuri capitoli della FFT, ma se intanto vuoi avere un assaggio dell'importanza del Twiddle: 
+    Il fattore di Twiddle verrà approfondito nei futuri capitoli della FFT, ma se intanto vuoi avere un assaggio dell'importanza del Twiddle: 
 
     \begin{itemize}
         \item \url{https://www.linkedin.com/pulse/how-fft-algorithm-works-part-5-twiddle-factors-mark-newman/}
@@ -284,7 +284,7 @@ ricordando che:
     \end{equation}
 }
 
-Grazie a questa proprietà dei twiddle $W_N^{kn}$, possiamo dire che il twiddle forma una base ortognale dello spazio nel dominio di DFS. \newline 
+Grazie a questa proprietà dei twiddle $W_N^{kn}$, possiamo dire che il twiddle forma una base ortogonale dello spazio nel dominio di DFS. \newline 
 
 \newpage 
 
@@ -332,7 +332,7 @@ dove $\tilde{X} \left[ k\right]$ è la DFS di $\tilde{x} \left[ n\right]$. \newl
 
 Grazie a quest'ultima relazione tra $\tilde{X} \left[ k\right]$ e $X \left(e^{\jmath \omega}\right)$, 
 possiamo osservare che la DFS di $\tilde{x} \left[ n\right]$, cioè $\tilde{X} \left[ k\right]$, corrisponde alla DTFT di $x \left[ n\right]$, cioè $X \left(e^{\jmath \omega}\right)$, 
-campionata in N frequenze equispazionate: 
+campionata in N frequenze equispaziate: 
 
 {
     \Large 
@@ -394,7 +394,7 @@ dove:
 Data una sequenza periodica $\tilde{x} \left[ n\right]$, essa è completamente rappresentata dalla sua sequenza DFS $\tilde{X} \left[ k\right]$ 
 con $k = 0, 1, \dots, N-1$. \newline 
 
-Invecem data una sequenza aperiodica $x \left[ n\right]$ di lunghezza N, 
+Invece, data una sequenza aperiodica $x \left[ n\right]$ di lunghezza N, 
 quest'ultima può essere resa periodica replicandola sull'asse n, proprio come si vede nelle figure di esempio: 
 
 \begin{figure}[h]
@@ -503,7 +503,7 @@ i seguenti valori di $\omega$:
 
 dalla sua trasformata DTFT, cioè $X \left(e^{\jmath \omega}\right)$. \newline 
 
-Si definisce periò la DFT diretta come: 
+Si definisce perciò la DFT diretta come: 
 
 {
     \Large 
@@ -551,7 +551,7 @@ Possiamo svolgere le seguenti osservazioni:
     \item La DFT ha le stesse proprietà della DFS (che non abbiamo elencato in questi appunti), ma perde la periodicità della DFS. \newline 
 
 \begin{tcolorbox}
-    Perdere la periodicità della DFS è cosa buona e giusta perchè sennò, per calcolare la sequenza, si impiegerebbe un tempo che va da $- \infty$ a $+ \infty$, 
+    Perdere la periodicità della DFS è cosa buona e giusta perchè sennò, per calcolare la sequenza, si impiegherebbe un tempo che va da $- \infty$ a $+ \infty$, 
     cioè un tempo infinito. 
 \end{tcolorbox}
 
@@ -573,7 +573,7 @@ Possiamo svolgere le seguenti osservazioni:
     Appunti| 2025-10-29 | pag 1
 }
 
-Per passare da una sequenza periodica $\tilde{x} \left[ n\right]$ a una seuqnza aperiodica $x \left[ n\right]$, 
+Per passare da una sequenza periodica $\tilde{x} \left[ n\right]$ a una sequenza aperiodica $x \left[ n\right]$, 
 dobbiamo utilizzare la seguente formula: 
 
 {
@@ -656,7 +656,7 @@ allora si può aumentare la lunghezza della DFT con la tecnica chiamata Zero Pad
     La prima accortezza è che questa tecnica può essere applicata o prima o dopo che si ha la sequenza $x \left[ n\right]$, 
     cioè non si può aggiungere degli M - N zeri all'interno della sequenza $x \left[ n\right]$ (a meno che $x \left[ n\right]$ non abbia dei valori uguali a zero prima della tecnica dello zero padding, in quel caso è giusto che siano presenti degli zeri). \newline 
 
-    La seconda accortezza è che la tecnica Zero Padding va scelta con cura in base al segnale perchè si aggiunge "artificialmente" dei valori che non esistono nella sequenza inziale $x \left[ n\right]$.  
+    La seconda accortezza è che la tecnica Zero Padding va scelta con cura in base al segnale perchè si aggiunge "artificialmente" dei valori che non esistono nella sequenza iniziale $x \left[ n\right]$.  
 \end{tcolorbox}
 
 Come si vede dalla seguenti figure di esempio: 
@@ -758,7 +758,7 @@ TO-DO: Modificare l'immagine per renderla più nitida
     \end{itemize}
 \end{tcolorbox}
 
-Un'altra proprietà della DFT è la sequente: 
+Un'altra proprietà della DFT è la seguente: 
 
 {
     \Large 
@@ -830,7 +830,7 @@ La convoluzione circolare tra due sequenze è uguale a:
 dove $\tilde{x}_1 \left[ n - m\right] $ e $\tilde{x}_2 \left[ n - m\right]$ si intendono degli shift lineari 
 (quindi la sequenza $\tilde{x}_1 \left[ n\right]$ o $\tilde{x}_2 \left[ n\right]$ viene ritardata N volte e poi, ad ogni ritardo, la sequenza shiftata viene moltiplicata per l'altra sequenza e poi vengono sommati i componenti). \newline 
 
-Le due sommatorie sono uguali perchè la convoluzione ciroclare è commutativa. \newline 
+Le due sommatorie sono uguali perchè la convoluzione circolare è commutativa. \newline 
 
 Un esempio di convoluzuione circolare con sequenze periodiche è la seguente: 
 
@@ -978,7 +978,7 @@ dove $ \dfrac{1}{N} \left( X_1 \left[ k\right] \circledast X_2 \left[ k\right] \
 
 \newpage 
 
-\subsection{Rapporto tra convoluzuioni aperiodiche e circolare}
+\subsection{Rapporto tra convoluzioni aperiodiche e circolare}
 
 \footnote{ 
     Slide del prof | 7 - DFT | pag 23 - 26\\
@@ -992,7 +992,7 @@ di seguito elenchiamo due casi di studio particolare. \newline
 
 \item \textbf{$x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghezza finita N} \newline 
 
-La prima è che, se le due sequenze $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghrzza finita N, 
+La prima è che, se le due sequenze $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghezza finita N, 
 allora possiamo scrivere che la loro convoluzione lineare è uguale a: 
 
 {
@@ -1009,7 +1009,7 @@ allora possiamo scrivere che la loro convoluzione lineare è uguale a:
     \end{equation}
 }
 
-convoluzine nel dominio n che, facendo la DTFT (e non la DFT), è uguale a: 
+convoluzione nel dominio n che, facendo la DTFT (e non la DFT), è uguale a: 
 
 {
     \Large 
