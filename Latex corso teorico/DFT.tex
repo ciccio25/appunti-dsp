@@ -977,3 +977,207 @@ dove $ \dfrac{1}{N} \left( X_1 \left[ k\right] \circledast X_2 \left[ k\right] \
 \end{tcolorbox}
 
 \newpage 
+
+\subsection{Rapporto tra convoluzuioni aperiodiche e circolare}
+
+\footnote{ 
+    Slide del prof | 7 - DFT | pag 23 - 26\\
+    Appunti| 2025-11-04 | pag 1 - 2
+}
+
+Esistono diverse relazioni tra una convoluzione aperiodica e quella circolare: 
+di seguito elenchiamo due casi di studio particolare. \newline 
+
+\begin{itemize}
+
+\item \textbf{$x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghezza finita N} \newline 
+
+La prima è che, se le due sequenze $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghrzza finita N, 
+allora possiamo scrivere che la loro convoluzione lineare è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        *
+        x_2 \left[ n \right] 
+        = 
+        \sum_{m = 0}^{N - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2 \left[ n - m \right]
+    \end{equation}
+}
+
+convoluzine nel dominio n che, facendo la DTFT (e non la DFT), è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        *
+        x_2 \left[ n \right] 
+        \leftrightarrow
+        X_1 \left(e^{\jmath \omega}\right)
+        \cdot
+        X_2 \left(e^{\jmath \omega}\right) 
+    \end{equation}
+}
+
+Invece facendo la convoluzione ciclica tra le due sequenze $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$, 
+abbiamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        \circledast
+        x_2 \left[ n \right]
+        = 
+        \sum_{m = 0}^{N - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2 \left[ \left(n - m \right)_{N} \right]
+    \end{equation}
+}
+
+convoluzione circolare nel dominio n che, facendo la DFT (e non la DTFT), è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        \circledast
+        x_2 \left[ n \right] 
+        \leftrightarrow
+        X_1 \left[ k\right]
+        \cdot
+        X_2 \left[ k\right] 
+    \end{equation}
+}
+
+La convoluzione aperiodica $ x_1 \left[ n \right] * x_2 \left[ n \right] $ è lunga $2 N - 1$, 
+grazie agli m shift che deve fare: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{m = 0}^{N - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2 \left[ n - m \right]
+    \end{equation}
+}
+
+invece, nella convoluzione circolare $ x_1 \left[ n \right] \circledast x_2 \left[ n \right] $ è lunga N, 
+che è la stessa lunghezza sia di $ x_1 \left[ n \right]$ che di $ x_2 \left[ n \right]$ perchè gli m shift sono svolti in modulo N: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{m = 0}^{N - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2 \left[ \left(n - m \right)_{N} \right]
+    \end{equation}
+}
+
+Questo è un enorme vantaggio di una convoluzione ciclica. \newline 
+
+Inoltre, nella convoluzione aperiodica nel dominio n, è necessario svolgere una DTFT, che, è periodica nello spettro, 
+invece in una convoluzione ciclica nel dominio n, è necessario svolgere una DFT, che non è periodica e le sequenze dipendono dagli indici k-esimi. \newline 
+
+In generale, la convoluzione aperiodica e quella ciclica non coincidono. \newline 
+
+\newpage 
+
+Grazie a questa figura di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{convoluzione ciclica come convoluzione aperiodica con aliasing esempio.png}
+\end{figure} 
+
+possiamo notare che la convoluzione ciclica è come una convoluzione aperiodica con aliasing. \newline 
+
+Se consideriamo la lunghezza di una convoluzione ciclica lunga N (che nella figura sono i pallini che vanno da 0 a +N), 
+allora i contributi di lunghezza maggiore della convoluzione ciclica si sommano (che nella figura i pallini rossi si sommano ai pallini blu), 
+creando appunto aliasing. \newline 
+
+La somma tra gli impulsi non è reversibilie. \newline 
+
+Per evitare aliasing, e che quindi non si sommano i contributi nella stessa finistra finita, 
+possiamo svolgere uno zero padding alle due sequenze, affinche si arriva a sequenze di almeno $2N - 1$ punti. \newline 
+
+Quindi una convoluzione aperiodica è uguale alla convoluzione ciclica se e solo se si svolge zero padding a $2 N - 1$ punti e si svolge una DFT a $2 N - 1$ punti. \newline
+
+Questo è un altro vantaggio dello zero padding e della DFT 
+perchè permette di calacolare la DTFT attraverso la DFT, in particolare grazie al prodotto delle due sequenze. \newline 
+
+\newpage 
+
+\item \textbf{$x_1 \left[ n \right]$ e $x_2 \left[ n \right]$ hanno lunghezza finita diversa} \newline 
+
+Se abbiamo che due sequenze: 
+
+\begin{itemize}
+    \item $x_1 \left[ n\right]$ aperiodica di lunghezza L 
+    \item $x_2 \left[ n\right]$ aperiodica di lunghezza P, in cui $P < L$, cioè $P \neq L$
+\end{itemize}
+
+allora abbiamo che la convoluzione aperiodica nel dominio n: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        *
+        x_2 \left[ n \right] 
+        = 
+        \sum_{m = 0}^{L - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2 \left[ n - m \right]
+    \end{equation}
+}
+
+sarà lunga $ L+ P - 1$. \newline 
+
+Nella sommatoria, l'indice m parte da 0 e finisce a $L - 1$ perchè si fa la convoluzione per la lunghezza della sequenza più lunga (che in questo caso è $x_1 \left[ n\right]$). \newline 
+
+Se invece facessimo una convoluzione ciclica nel dominio n: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n \right]
+        \circledast
+        x_2^{'} \left[ n \right]
+        = 
+        \sum_{m = 0}^{L - 1}
+        x_1 \left[ m \right]
+        \cdot 
+        x_2^{'} \left[ \left(n - m \right)_{N} \right]
+    \end{equation}
+}
+
+dove $x_2^{'} \left[ n \right]$ è la sequenza $x_2 \left[ n \right]$ con zero-padding fino ad $L - 1$, 
+allora la sequenza circolare è lunga L, che è di lunghezza minore, cioè $ L+ P - 1$, della convoluzine aperiodica . \newline 
+
+Come il caso precedente in cui $x_1 \left[ n \right]$ e $x_2 \left[ n \right]$, hanno la stessa lunghezza N, 
+a titolo di esempio abbiamo la seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{convoluzione ciclica come convoluzione aperiodica con aliasing esempio lunghezze diverse.png}
+\end{figure} 
+
+e ci sono gli stessi problemi di aliasing a causa delle lunghezze delle sequenze. \newline 
+
+Ma se le DFT sono fatte ad almeno $L + P - 1 $ punti, mediante zero padding, 
+allora la convoluzione ciclica e quella aperiodica coincidono. \newline 
+
+\end{itemize}
+
+\newpage 
+
