@@ -2,7 +2,7 @@
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.35]{Copertina FFT.png}
+    \includegraphics[scale = 0.25]{GpYscaWW4AAl0aa.jpeg}
 \end{figure}  
 
 \newpage 
@@ -12,4 +12,589 @@
 \footnote{ 
     Slide del prof | 8 - FFT 1 | pag 2 \\
     Appunti| 2025-11-04 | pag 2   
+} 
+
+Per una sequenza $x \left[ n\right]$ di lunghezza N, come scritto in \ref{sec: DFT - Discrete Fourier Transform} \nameref{sec: DFT - Discrete Fourier Transform} a pag \pageref{sec: DFT - Discrete Fourier Transform}, 
+possiamo scrivere la sua DFT come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ k\right]
+        = 
+        \sum_{n = 0}^{N - 1}
+        x \left[ n\right]
+        \cdot 
+        W_N^{kn}
+        \quad 
+        \text{ per }
+        k = 0, 1, \dots, N - 1
+    \end{equation}
 }
+
+dove $W_N$ prende il nome di Twiddle ed è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        W_N 
+        = 
+        e^{- \jmath 2 \pi}
+    \end{equation}
+}
+
+I problemi del calcolo della DFT sono i seguenti, per ogni valore di k: 
+
+\begin{itemize}
+    \item è una sommatoria di prodotti 
+    \item ci sono N moltiplicazioni complesse per ogni valore di k 
+    \item ci sono $N - 1$ somme complesse 
+\end{itemize}
+
+ovvero, calcolando la complessità del calcolo, avremo che: 
+
+\begin{itemize}
+    \item le moltiplicazioni complesse sono dell'ordine di $N^{2}$ ($4 N^{2}$ reali)
+    \item le somme complesse sono dell'ordine di $N \left(N - 1\right)$ ($N \left(4N - 1\right)$ reali)
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
+Quale è la differenze negli ordini di grandezza da $N^2$ delle moltiplicazioni complesse e $4N^{2}$ delle moltiplicazioni reali? Cosa cambia?
+\end{tcolorbox}
+
+Quindi la complessità del calcolo di una DFT è di O($N^{2}$), cioè una complessità molto elevata. \newline 
+
+\begin{tcolorbox}
+    Il concetto di complessità di un algoritmo in realtà dovrebbe essere stato affrontato nei corsi precedenti di informatica, 
+    come ad esempio "Elementi di Informatica" e/o, nel mio caso, per l'esame di "Programmazione ad oggetti". \newline 
+
+    Per un breve ripasso su cosa si intende per l'ordine di grandezza di complessità di un algoritmo, vi lascio i seguenti video: 
+
+    \begin{itemize}
+        \item  Big-O Notation in 100 Seconds by Fireship \\\url{https://www.youtube.com/watch?v=g2o22C3CRfU}
+        \item Big-O Notation - For Coding Interviews by NeetCode \\\url{https://www.youtube.com/watch?v=BgLTDT03QtU}
+    \end{itemize}
+\end{tcolorbox}
+
+Il Twiddle (cioè dell'esponenziale) gode di due proprietà fondamentali: quella di simmetria e quella di periodicità. \newline 
+
+Ad esempio possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        W_{N}^{kN}
+        = 
+        W_{N}^{0}
+        = 
+        1
+    \end{equation}
+}
+
+\newpage 
+
+perchè: 
+
+
+{
+    \Large 
+    \begin{equation} \label{eq: simmetria e periodicità del Twiddle}
+        W_{N}^{kN}
+        = 
+        W_{N}^{0}
+        = 
+        1
+        \leftrightarrow
+        \begin{cases}
+            W_{N}^{k \left(N - n\right)} 
+            = 
+            W_{N}^{- k  n} 
+            = 
+            \left( W_{N}^{k  n}  \right)^{*}
+            \\
+            W_{N}^{k \left(N + n\right)} 
+            = 
+            W_{N}^{\left(k + N\right)  n} 
+            = 
+            \left( W_{N}^{k  n}  \right)
+        \end{cases}
+    \end{equation}
+}
+
+$W_{N}^{k \left(N - n\right)} = W_{N}^{- k  n} = \left( W_{N}^{k  n}  \right)^{*}$ spiega la proprietà di simmetria del Twiddle. \newline
+
+$W_{N}^{k \left(N + n\right)} = W_{N}^{\left(k + N\right)  n} = \left( W_{N}^{k  n}  \right)$ spiega la proprietà di periodicità del Twiddle. \newline 
+
+Grazie a queste due proprietà del Twiddle, esistono diversi tipi di algoritmi per calcolare la DFT con un costo computazionale inferiore ad O($N^{2}$) che prendono il nome di FFT (acronimo di Fast Fourier Transform). \newline 
+
+\newpage 
+
+\section{Radix 2 - Decimation in time FFT}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 1 | pag 3 - 8 \\
+    Appunti| 2025-11-04 | pag  3   
+} 
+
+\begin{tcolorbox}
+    "In commercio" esistono diversi tipi di FFT, che, anche se nell'acronimo è presente la parola "Transform", la FFT \textbf{non è una trasformata}, 
+    ma un algoritmo. \newline 
+
+    In questo corso di DSP andremo ad analizzare la FFT più semplice: quella Radix 2 DIT 2. \newline 
+
+    Nella realtà, esistono molte FFT in base ai casi d'uso (tipo di processore, numero dei dati, complessità, ecc...). \newline 
+
+    Siccome l'argomento delle FFT è molto vasto, vi lascio dei video molto utili per capire la storia della FFT e perchè è molto utile impiegarla: 
+
+    \begin{itemize}
+        \item Understanding the Discrete Fourier Transform and the FFT by MATLAB \\\url{https://www.youtube.com/watch?v=QmgJmh2I3Fw}
+        \item The FFT Algorithm - Simple Step by Step by Simon Xu \\\url{https://www.youtube.com/watch?v=htCj9exbGo0}
+        \item How the FFT Works - playlist by Mark Newman \\\url{https://www.youtube.com/watch?v=LTk-FoAufYo&list=PLWMUMyAolbNtjRfTR0RvOFs2NY24ckI_A&index=1}
+        \item The Fast Fourier Transform (FFT) by Steve Brunton \\\url{https://www.youtube.com/watch?v=E8HeD-MUrjY} 
+        \item FFT Example: Unraveling the Recursion by Reducible\\\url{https://www.youtube.com/watch?v=Ty0JcR6Dvis}
+    \end{itemize}
+    
+\end{tcolorbox}
+
+La prima idea di FFT fu implementata dal duo Cooley-Tukey nel 1965 con la FFT DIT Radix 2: di seguito la spiegazione dell'algoritmo. \newline 
+
+\begin{tcolorbox}
+    Prima di spiegare l'algoritmo, ti voglio lasciare questa bella intervista tra Cooley e Tukey svolta il 25 Marzo del 1992 nell'International Conference on Acoustics, Speech, and Signal Processing (ICASSP '92) a San Francisco: \newline 
+
+    History of FFT with Cooley and Tukey by engineeringhistory \\
+    \url{https://www.youtube.com/watch?v=o-UUudjFR1Y}
+\end{tcolorbox}
+
+Ipotizzando una sequenza $x \left[ n\right]$ di lungheezza N pari, allora possiamo scomporre la sequenza $x \left[ n \right]$ in due sottosequenze di lunghezza $\dfrac{N}{2}$, 
+contenenti rispettivamente i campioni con indici pari e dispari, come nel seguente caso: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left[ k\right]
+        &= 
+        \sum_{n = 0}^{N - 1}
+        x \left[ n\right]
+        \cdot 
+        W_{N}^{kn}
+        \\
+        &= 
+        \sum_{n \text{ pari}}
+        x \left[ n\right]
+        \cdot 
+        W_{N}^{kn} 
+        + 
+        \sum_{n \text{ dispari}}
+        x \left[ n\right]
+        \cdot 
+        W_{N}^{kn}       
+        \end{split}
+    \end{equation}
+}
+
+allora, possiamo calcolare la DFT di ogni sottosequenza come: 
+
+\newpage 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left[ k\right]
+        &= 
+        \sum_{n \text{ pari}}
+        x \left[ n\right]
+        \cdot 
+        W_{N}^{kn} 
+        + 
+        \sum_{n \text{ dispari}}
+        x \left[ n\right]
+        \cdot 
+        W_{N}^{kn}       
+        \\
+        &= 
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m\right]
+        \cdot 
+        W_{N}^{k2m} 
+        + 
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m + 1\right]
+        \cdot 
+        W_{N}^{k \left( 2m + 1\right)} 
+        \end{split}
+    \end{equation}
+}
+
+ma, grazie alle proprietà degli esponenziali, possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        W_{N}^{k \left(2 m + 1\right)}
+        = 
+        W_{N}^{k} \cdot W_{N}^{k 2m}
+    \end{equation}
+}
+
+in cui a sua volta possiamo scrivere: 
+
+{
+    \Large 
+    \begin{equation}
+        W_{N}^{k 2 m}
+        = 
+        \left( W_{N}^{2} \right)^{km}
+        = 
+        W_{\frac{N}{2}}^{km} 
+    \end{equation}
+} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2}
+Questa ultima equazione vale perchè il twiddle gode di perioditcità?
+\end{tcolorbox}
+
+allora, possiamo ulteriormente semplificare $X \left[ k\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left[ k\right]       
+        &= 
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m\right]
+        \cdot 
+        W_{N}^{k2m} 
+        + 
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m + 1\right]
+        \cdot 
+        W_{N}^{k \left( 2m + 1\right)} 
+        \\
+        &\downarrow
+        \\
+        X \left[ k\right]       
+        &= 
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m\right]
+        \cdot 
+        W_{\frac{N}{2}}^{km} 
+        + 
+        W_{N}^{k}
+        \cdot
+        \sum_{m = 0}^{\frac{N}{2} - 1}
+        x \left[ 2m + 1\right]
+        \cdot 
+        W_{\frac{N}{2}}^{k m} 
+        \end{split}
+    \end{equation}
+}
+
+Ad esempio, se abbiamo una sequenza $x \left[ n\right]$ lunga $N = 8$, 
+possiamo dividerla in due DFT mostrato in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Radix 2 DIT FFT con N = 8.png}
+\end{figure}  
+
+\newpage 
+
+Nella figura, possiamo notare che, prendendo due valori $X \left[ 0\right]$ e $X \left[ 4\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            X \left[ 0\right] = X^{'} \left[ 0\right] + X^{''} \left[ 0\right] \cdot W_{N}^{0}
+            \\
+            X \left[ 4\right] = X^{'} \left[ 4\right] + X^{''} \left[ 4\right] \cdot W_{N}^{4}
+        \end{cases}
+    \end{equation}
+}
+
+ma, dalle proprietà del Twiddle, sappiamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            X^{'} \left[ 0\right] = 
+            X^{'} \left[ 4\right] 
+            \\
+            X^{''} \left[ 0\right] = 
+            X^{''} \left[ 4\right]  
+        \end{cases}
+    \end{equation}
+}
+
+Possiamo continuare a dividiere la DFT (puoi vedere le semplificazioni a pag 5 - 6) 
+fichè non arriviamo alla DFT a 2 punti come nel seguente caso: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{Radix 2 DIT FFT per 2 punti.png}
+\end{figure}  
+
+Se la lunghezza di $x \left[ n\right]$ originale è una potenza di 2, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        N = 2^{M}
+    \end{equation}
+}
+
+allora, si può dividere la DFT fino a $M - 1$ volte, utilizzando la stessa struttura di calcolo. \newline 
+
+\begin{tcolorbox}
+    Sotto a questo albero di 2 punti, non si può ulteriormente dividere. 
+\end{tcolorbox}
+
+Ad esempio, se: 
+
+{
+    \Large 
+    \begin{equation}
+        N = 8 = 2^{3}
+        \to 
+        M = 3
+    \end{equation}
+}
+
+Quindi possiamo dividiere in 3 stadi: 
+
+{
+    \Large 
+    \begin{equation}
+        \text{DFT 8 punti}
+        \to
+        \text{DFT 4 punti}
+        \to
+        \text{DFT 2 punti} 
+    \end{equation}
+}
+
+\newpage 
+
+Questo tipo di struttura di calcolo prende il nome di "Butterfly", come mostrata in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Struttura Butterfly.png}
+\end{figure}  
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            r = 2^{M - l}
+            \\
+            p^{''} = p^{'} + 2^{l - 1}
+        \end{cases}
+    \end{equation}
+}
+
+con i valori di $q^{'}$, $q^{''}$, $p^{'}$, $p^{''}$ opportuni in base allo stadio in cui si svolge la DFT. \newline 
+
+\begin{tcolorbox}
+    Come dice il professore a lezione, gli ingegneri non "toccano terra" quindi vedono la natura in qualsiasi cosa fanno: 
+    
+    \includegraphics[scale = 0.4]{Touching grass meme.png}
+     
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Esempio grafico di una Radix 2 DIT FFT}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 1 | pag 9 - 12 \\
+    Appunti| 2025-11-04 | pag  3 - 4  
+} 
+
+Per una sequenza $x \left[ n\right]$ lunga $N = 8$, possiamo applicare una Radix 2 DIT FFT con la seguente struttura butterfly in place, 
+dividendo a metà la sequenza: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Primo stadio DIT FFT.png}
+\end{figure} 
+
+Continuando la divisione della struttura, avremo che diventa: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Secondo stadio DIT FFT.png}
+\end{figure} 
+
+\newpage 
+
+Continuando la divisione della struttura, avremo che diventa: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Radix 2 DIT FFT stadi.png}
+\end{figure} 
+
+dove, partendo da sinistra verso destra, i collegamenti (a.k.a. intrecci) diventano maggiori e l'intreccio massimo è nell'ultimo stadio. \newline 
+
+Abbiamo la DFT in 3 stadi perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        N = 8 = 2^{3} \to M = 3
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Radix 2 DIT FFT in place}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 1 | pag 13 - 14 \\
+    Appunti| 2025-11-04 | pag  4 
+      
+} 
+
+In base alle formule ottenute, in ogni stadio occorre valutare $\dfrac{N}{2}$ butterflies. \newline 
+
+Poichè ogni butterfly è indipendente dalle altre (cioè per indipendente si intende che si richiede 2 dati e se ne produce altri 2 senza interazioni), 
+allora l'ordine di valutazione delle $\dfrac{N}{2}$ butterflies di ogni stadio è arbitrario, 
+purchè le espressioni analitiche siano rispettate. \newline 
+
+Grazie a questa proprietà di indipendenza, ci sono perciò numerose forme realizzative diverse, a seconda di come si ordinano i dati in ogni stadio. \newline 
+
+Se si indica con $X^{l}$ per $k = 0, 1, \dots, N - 1$  il vettore dei dati allo stadio l per $k = 0, 1, \dots, M$, allora risulta che: 
+
+{
+    \Large 
+    \begin{equation}
+        X^{0} \left[ k\right] 
+        = 
+        x \left[ n\right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3}
+Eh?
+\end{tcolorbox}
+
+dove $x \left[ n\right]$ è la sequenza di ingresso, invece: 
+
+{
+    \Large 
+    \begin{equation}
+        X^{M} \left[ k\right] 
+        = 
+        X \left[ n\right]
+    \end{equation}
+}
+
+dove dove $X \left[ n\right]$ è la sequenza di uscita. \newline 
+
+Allora, il modo più naturale di disporre i dati è quello di far corrispondere alla posizione $X^{l - 1}$ dello stadio $l - 1$, 
+la posizione dello $X^{l} \left[ k\right]$ allo stadio l come si vede nella seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Radix 2 DIT FFT stadi in place.png}
+\end{figure} 
+
+dove: 
+
+\begin{itemize}
+    \item $q = p + 2^{l - 1}$
+    \item $r^{'} = 2^{M-1} \cdot \left(p\right)_{2^{l-1}}$
+    \item $r^{''} = r^{'} + \dfrac{N}{2}$
+\end{itemize}
+
+quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        W_N^{r^{''}} = - W_N^{r^{'}}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Trovare un video in cui si spiega meglio la concenzione di "in place" della butterfly
+\end{tcolorbox} 
+
+\newpage 
+
+Grazie a questa ultima equazione, per ogni coppia di punti, quindi grazie anche alla proprietà di simmetria del Twiddle, 
+è necessario un solo Twiddle. \newline 
+
+Qunidi passeremo da questo: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Radix 2 DIT FFT stadi.png}
+\end{figure} 
+
+a questo: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Radix 2 DIT FFT stadi in place esempio.png}
+\end{figure} 
+
+Il vantaggio di una DIT FFT Radix 2 in place è che può essere utilizzato un unico vettore $x \left[ n\right]$, 
+che, ad ogni stadio, può essere sovrascritto. \newline 
+
+\begin{tcolorbox}
+    Questo concetto è molto utile quando si parla, specialmente, di ottimizzazione del codice. 
+\end{tcolorbox}
+
+La sovrascrittura può essere fatta solo se si applica una FFT DIT in place, sennò non si può fare. \newline 
+
+\newpage 
+
+\subsection{Esempi di Radix 2 DIT FFT}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 1 | pag 17 - 19 \\
+    Appunti| 2025-11-04 | pag  4 
+      
+} 
+
+\begin{tcolorbox}
+    A titolo di esempio, elenco altri tipi di DIT, ma puoi anche saltare no problem. 
+\end{tcolorbox}
+
+Di seguito, esempi di DIT Radix 2 con le loro caratteristiche e delle note. \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{DIT canoninca con note.png}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{DIT alternativa con note.png}
+\end{figure} 
+
+\newpage 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{DIT sequenziale con note.png}
+\end{figure} 
+
+\newpage 
+
+\section{Costo computazionale Radix-2 FFT}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 2 | pag 13 - 14\\
+    Appunti| 2025-11-04 | pag  5 
+      
+} 
+
