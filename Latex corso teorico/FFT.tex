@@ -594,7 +594,276 @@ Di seguito, esempi di DIT Radix 2 con le loro caratteristiche e delle note. \new
 
 \footnote{ 
     Slide del prof | 8 - FFT 2 | pag 13 - 14\\
-    Appunti| 2025-11-04 | pag  5 
-      
+    Appunti| 2025-11-04 | pag  5  
 } 
+
+Considerando il grafo di una FFT DIT Radix-2: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Radix 2 DIT FFT grafo.png}
+\end{figure} 
+
+in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            X^{l} \left[ p^{'}\right] = X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r} 
+            \\
+            X^{l} \left[ p^{''}\right] = X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r}  
+        \end{cases}
+    \end{equation}
+}
+
+Invece considerando il grafo di una FFT DIF Radix-2: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Radix 2 DIF FFT grafo.png}
+\end{figure} 
+
+in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            X^{l} \left[ p^{'}\right] = X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] 
+            \\
+            X^{l} \left[ p^{''}\right] = \left( X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \right)\cdot W_{N}^{r}  
+        \end{cases}
+    \end{equation}
+}
+
+Come si può notare dalle figure, i grafi della DIT e della DIF sono diversi, ma svolgono le stesse operazioni perchè, 
+per ogni butterfly, c'è: 
+
+\begin{itemize}
+    \item 1 prodotto complesso 
+    \item 2 somme complesse 
+\end{itemize}
+
+\begin{tcolorbox}
+Generalamente avremo a che fare con $x \left[ n\right]$ reali, quindi non complesse. \newline 
+
+In questo caso consideriamo somme complesse perchè consideriamo $x \left[ n\right]$ complessa come caso peggiore.     
+\end{tcolorbox}
+
+Generalizzando il caso a una FFT a N punti, 
+avremo che ogni butterfly calcola 2 punti dove: 
+
+\begin{itemize}
+    \item per ogni stadio di N punti è necessario $\dfrac{N}{2}$ 
+    \item se si svolge una FFT a N punti dove $N = 2^{M}$, allora ci saranno M stadi 
+\end{itemize} 
+
+\newpage 
+
+Quindi, il costo computazionale di una FFT Radix-2 è dovuto a: 
+
+\begin{itemize}
+    \item $\dfrac{N}{2} \cdot M$ prodotti complessi 
+    \item $N \cdot M$ somme complesse 
+\end{itemize}
+
+quindi O($N \cdot \log_{2} \left(N\right)$). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
+Come è uscito fuori O($N \cdot \log_{2} \left(N\right)$) per una FFT Radix-2 ?
+\end{tcolorbox}
+
+L'unico problema di una FFT Radix-2 è che ha una precisione finita. \newline
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
+Perchè la FFT Radix-2 ha precisione finita e cosa si intende per precisione finita?
+\end{tcolorbox}
+
+\newpage 
+
+\section{Calcolo della convoluzione e della correlazione}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 2 | pag 20 - 21\\
+    Appunti| 2025-11-05 | pag 1 - 2  
+} 
+
+Date due sequenze reali $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ possiamo scrivere che la convoluzione si può calcolare come: 
+
+{
+    \Large 
+    \begin{equation}
+        x_1 \left[ n\right] * x_2 \left[ n\right] 
+        = 
+        \sum_{m = -\infty}^{+ \infty}
+        x_1 \left[ m\right] 
+        \cdot 
+        x_2 \left[ n - m\right]  
+    \end{equation}
+}
+
+dove, nel dominio DTFT avremo che è uguale a: 
+
+{
+    \Large 
+    \begin{equation} 
+        \sum_{m = -\infty}^{+ \infty}
+        x_1 \left[ m\right] 
+        \cdot 
+        x_2 \left[ n - m\right]
+        \leftrightarrow 
+        X_1 \left(e^{\jmath \omega}\right)
+        \cdot  
+        X_2 \left(e^{\jmath \omega}\right)
+    \end{equation}
+}
+
+Invece la correlazione tra due sequenze reali $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ si calcola come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        x_1 \left[ n\right] * x_2 \left[ -n\right] 
+        &= 
+        \sum_{m = -\infty}^{+ \infty}
+        x_1 \left[ m\right] 
+        \cdot 
+        x_2 \left[ n - \left(-m\right)\right]
+        \\
+        &=
+        \sum_{m = -\infty}^{+ \infty}
+        x_1 \left[ m\right] 
+        \cdot 
+        x_2 \left[ n + m\right]       
+        \end{split}
+        \end{equation}
+}
+
+dove, nel dominio DTFT avremo che è uguale a: 
+
+{
+    \Large 
+    \begin{equation} 
+        \sum_{m = -\infty}^{+ \infty}
+        x_1 \left[ m\right] 
+        \cdot 
+        x_2 \left[ n + m\right]
+        \leftrightarrow 
+        X_1 \left(e^{\jmath \omega}\right)
+        \cdot  
+        X_2^{*} \left(e^{\jmath \omega}\right)
+    \end{equation}
+}
+
+La differenza tra la formula della convoluzione e correlazione è che:
+
+\begin{itemize}
+    \item nella convoluzione, $x_2 \left[ n\right]$ viene shiftata di $-m$, appunto $x_2 \left[ n - m\right]$ 
+    \item nella correlazione, $x_2 \left[ n\right]$ viene shiftata di $+m$, appunto $x_2 \left[ n + m\right]$
+\end{itemize}
+
+Quindi, proprio per questo, considereremo convoluzione e correlazioni uguali a meno di un segno negativo. \newline 
+
+Come scritto a \ref{eq: DFT tra due sequenze di lunghezza diversa} \nameref{eq: DFT tra due sequenze di lunghezza diversa} a pag \pageref{eq: DFT tra due sequenze di lunghezza diversa}, 
+date due sequenze aperiodiche di lunghezza diversa, ad esempio $x_1 \left[ n\right]$ lunga L e $x_2 \left[ n\right]$ lunga P, 
+è possibile calcolare la convoluzione ciclica lunga $L+P-1$ perchè la convoluzione ciclica risulta uguale alla convoluzione lineare se calcolata per $L+P-1$ punti. \newline 
+
+Facendo zero-padding alle due sequenze $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ in modo che siano lunghe $L+P-1$, 
+allora si può calcolare le rispettive DFT, moltiplicarle nel dominio DFT, fare l'anti-DFT per poi calcolare la convoluzione lineare. \newline 
+
+Per calcolare le rispettive DFT, si può utilizzare l'algoritmo FFT. \newline 
+
+\newpage 
+
+La pipeline che da ora in poi useremo per calcolare la convoluzione lineare tra due sequenze $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ di lunghezze diverse sarà la seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Pipeline per il calcolo di una convoluzione lineare.png}
+\end{figure} 
+
+L'impiego dell'algoritmo FFT permette di velocizzare il calcolo convoluzioni lineari: 
+questa velocizzazione prende il nome di "speed-up". \newline 
+
+Ad esempio, nel caso di $L = P = N$ avremo questo speed-up: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Speed up nell'uso di FFT.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
+Per N si intende che le due sequenze sono lunghe una potenza di 2?
+\end{tcolorbox}
+
+Lo speed-up aumenta all'aumentare di N. \newline 
+
+\newpage 
+
+\section{Block convolution}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 2 | pag 22\\
+    Appunti| 2025-11-05 | pag 2
+}
+
+Date due due sequenze, ad esempio:
+
+\begin{itemize}
+    \item $x \left[ n\right]$ una sequenza di ingresso ad un filtro  
+    \item $h \left[ n\right]$ la risposta di un filtro 
+\end{itemize}
+
+e si voglia svolgere una convoluzione lineare tra le due sequenze: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        x \left[ n\right]
+        * 
+        h \left[ n\right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $x \left[ n\right]$ ha lunghezza molto lunga (che tende ad infinito)
+    \item $h \left[ n\right]$ ha lunghezza finita (molto più piccola a $x \left[ n\right]$)
+\end{itemize}
+
+allora, è necessario applicare una convoluzione a blocchi di durata finita estratti dalla sequenza più lunga. \newline 
+
+Questo tipo di convoluzione prende il nome di block convolution, cioè convoluzione a blocchi in italiano. \newline 
+
+I due metodi più importanti per calcolare una block convolution sono i seguenti: 
+
+\begin{itemize}
+    \item overlap and add 
+    \item overlap and save 
+\end{itemize}
+
+\newpage 
+
+\subsection{Overlap and add}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 2 | pag 22 - 23\\
+    Appunti| 2025-11-05 | pag 2
+}
+
+
+
+
+
+
+
+
+
+
+
 
