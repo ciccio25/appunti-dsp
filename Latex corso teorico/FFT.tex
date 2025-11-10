@@ -854,15 +854,128 @@ I due metodi più importanti per calcolare una block convolution sono i seguenti
 \footnote{ 
     Slide del prof | 8 - FFT 2 | pag 22 - 23\\
     Appunti| 2025-11-05 | pag 2
+} 
+
+Data una sequenza $x \left[ n\right]$ molto lunga, si decompone $x \left[ n\right]$ senza sovrapposizione. \newline 
+
+Cioè, dal punto di vista matematico, siccome vorremmo fare: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        x \left[ n\right]
+        *
+        h \left[ n\right]
+    \end{equation}
 }
 
+allora scriviamo $x \left[ n\right]$ come: 
 
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \sum_{r = 0}^{+ \infty}
+        x_r \left[ n - rL\right]
+    \end{equation}
+}
 
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
+Domanda stupida e scontata: si presuppone $x \left[ n\right]$ cauusale perchè la sommatoria inizia dall'indice $r = 0$? 
+\end{tcolorbox}
 
+dove: 
 
+\begin{itemize}
+    \item $x_r \left[ n \right]$ è la sequenza $x \left[ n\right]$ divisia in L 
+    \item L è la lunghezza per cui è stata divisa $x \left[ n\right]$
+    \item per $x_r \left[ n - rL\right]$ si intende che la sequenza $x \left[ n\right]$ si divide per ogni multiplo di L
+\end{itemize}
 
+L'uscita dal filtro $y \left[ n\right]$, per lo stesso principio di suddivisione, sarà uguale a: 
 
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        y \left[ n\right]
+        &= 
+        \sum_{r = 0}^{+ \infty}
+        y_r \left[ n - rL\right]
+        \\
+        &\downarrow
+        \\
+        y \left[ n\right]
+        &= 
+        \sum_{r = 0}^{+ \infty}
+        x_r \left[ n - rL\right]
+        * 
+        h \left[ n\right]    
+        \end{split}
+    \end{equation}
+} 
 
+dove: 
+
+\begin{itemize}
+    \item $x_r \left[ n - rL\right]$ è lunga di L 
+    \item $h \left[ n\right]$ è lunga P 
+    \item $y_r \left[ n - rL\right]$ è lunga $P+L-1$, che è proprio la lunghezza della convoluzione lineare tra $x_r \left[ n - rL\right]$ e $h \left[ n\right]$ 
+\end{itemize}
+
+\newpage 
+
+Da un punto di vista schematico, avremo questo schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{overlap and add schema.png}
+\end{figure} 
+
+\begin{tcolorbox}
+    Schema preso dal video: \newline 
+
+    overlap add by Natraj Wadhai \\
+    \url{https://www.youtube.com/watch?v=v50IMrrWG4E}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la figura mettendo $L+P-1$ al posto di N, $P-1$ al posto di $M-1$ (vedi slide del prof per confronto) 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Overlap and save}
+
+\footnote{ 
+    Slide del prof | 8 - FFT 2 | pag 24 - 25\\
+    Appunti| 2025-11-05 | pag 2 - 3
+} 
+
+Nell'overlap and save (chiamato anche overlap and discard), come nell'overlap and add, 
+si vuole decomporre la sequenza $x \left[ n\right]$ molto lunga in blocchi uguali con sovrapposizione in $P-1$ punti come nell'overlap and add, 
+ma la FFT verrà calcolata in L punti e non in $L+P-1$ punti, come mostrato in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{overlap and save schema.png}
+\end{figure} 
+
+\begin{tcolorbox}
+    Schema preso dal video: \newline 
+
+    overlap save by Natraj Wadhai \\
+    \url{https://www.youtube.com/watch?v=vguD0jt7pFw}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Modificare la figura mettendo $L$ al posto di N, $P-1$ al posto di $M-1$ (vedi slide del prof per confronto) 
+\end{tcolorbox} 
+
+\newpage 
 
 
 
