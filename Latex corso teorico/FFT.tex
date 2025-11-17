@@ -44,7 +44,7 @@ dove $W_N$ prende il nome di Twiddle ed è uguale a:
     \end{equation}
 }
 
-I problemi del calcolo della DFT sono i seguenti, per ogni valore di k: 
+I problemi del calcolo della DFT,  per ogni valore di k, sono i seguenti: 
 
 \begin{itemize}
     \item è una sommatoria di prodotti 
@@ -55,12 +55,12 @@ I problemi del calcolo della DFT sono i seguenti, per ogni valore di k:
 ovvero, calcolando la complessità del calcolo, avremo che: 
 
 \begin{itemize}
-    \item le moltiplicazioni complesse sono dell'ordine di $N^{2}$ ($4 N^{2}$ reali)
-    \item le somme complesse sono dell'ordine di $N \left(N - 1\right)$ ($N \left(4N - 1\right)$ reali)
+    \item le moltiplicazioni complesse sono dell'ordine di $N^{2}$ (per la precisione di $4 N^{2}$ reali)
+    \item le somme complesse sono dell'ordine di $N \left(N - 1\right)$ (per la precisione di $N \left(4N - 1\right)$ reali)
 \end{itemize}
 
 \begin{tcolorbox}
-Le moltiplicazioni complesse sono dell'ordine $4 N^{2}$ perchè, se ipotizziamo $x\left[ n\right]$, allora avremo che, per generici valori a, b, c, d: 
+Le moltiplicazioni complesse sono dell'ordine $4 N^{2}$ perchè, se ipotizziamo $x\left[ n\right]$ complesso, quindi con parte reale ed immaginaria, allora avremo che, per generici valori a, b, c, d: 
 
 {
     \Large 
@@ -78,7 +78,7 @@ Le moltiplicazioni complesse sono dell'ordine $4 N^{2}$ perchè, se ipotizziamo 
     \end{equation}
 }
 
-che, come si può vedere, sono 4 moltiplicazioni per ogni termine, quindi complessità $4 N^{2}$. 
+che, come si può vedere, sono 4 moltiplicazioni per ogni termine n, quindi complessità $4 N^{2}$. 
 \end{tcolorbox}
 
 Considerando N molto elevato, la complessità del calcolo di una DFT è di O($N^{2}$), cioè una complessità molto elevata. \newline 
@@ -145,7 +145,7 @@ $W_{N}^{k \left(N - n\right)} = W_{N}^{- k  n} = \left( W_{N}^{k  n}  \right)^{*
 
 $W_{N}^{k \left(N + n\right)} = W_{N}^{\left(k + N\right)  n} = \left( W_{N}^{k  n}  \right)$ spiega la proprietà di periodicità del Twiddle. \newline 
 
-Grazie a queste due proprietà del Twiddle, esistono diversi tipi di algoritmi per calcolare la DFT con un costo computazionale inferiore ad O($N^{2}$) che prendono il nome di FFT (acronimo di Fast Fourier Transform). \newline 
+Grazie a queste due proprietà del Twiddle, esistono diversi tipi di algoritmi per calcolare la DFT con un costo computazionale inferiore ad O($N^{2}$) che prendono il nome di algoritmi FFT (acronimo di Fast Fourier Transform). \newline 
 
 \newpage 
 
@@ -355,6 +355,8 @@ Grazie a questa proprietà del Twiddle, possiamo ulteriormente semplificare $X \
     \end{equation}
 }
 
+\newpage 
+
 Ad esempio, se abbiamo una sequenza $x \left[ n\right]$ lunga $N = 8$, 
 possiamo dividerla in due DFT mostrato in figura: 
 
@@ -362,8 +364,6 @@ possiamo dividerla in due DFT mostrato in figura:
     \centering
     \includegraphics[scale = 0.6]{Radix 2 DIT FFT con N = 8.png}
 \end{figure}  
-
-\newpage 
 
 Nella figura, possiamo notare che, prendendo due valori $X \left[ 0\right]$ e $X \left[ 4\right]$: 
 
@@ -637,7 +637,7 @@ La sovrascrittura può essere fatta solo se si applica una FFT DIT in place, sen
 } 
 
 \begin{tcolorbox}
-    A titolo di esempio, elenco altri tipi di DIT, ma puoi anche saltare no problem. 
+    A titolo di esempio, elenco altri tipi di DIT, ma puoi anche saltare no problem: non verranno richiesti all'esame. 
 \end{tcolorbox}
 
 Di seguito, esempi di DIT Radix 2 con le loro caratteristiche e delle note. \newline 
@@ -870,7 +870,7 @@ La pipeline che da ora in poi useremo per calcolare la convoluzione lineare tra 
     \includegraphics[scale = 0.25]{Pipeline per il calcolo di una convoluzione lineare.png}
 \end{figure} 
 
-L'impiego dell'algoritmo FFT permette di velocizzare il calcolo convoluzioni lineari: 
+L'impiego dell'algoritmo FFT permette di velocizzare il calcolo delle convoluzioni lineari: 
 questa velocizzazione prende il nome di "speed-up". \newline 
 
 Ad esempio, nel caso di $L = P = N$ avremo questo speed-up: 
@@ -969,7 +969,7 @@ allora scriviamo $x \left[ n\right]$ come:
 dove: 
 
 \begin{itemize}
-    \item $x_r \left[ n \right]$ è la sequenza $x \left[ n\right]$ divisa in L 
+    \item $x_r \left[ n \right]$ è la sequenza $x \left[ n\right]$ divisa in L elementi
     \item L è la lunghezza per cui è stata divisa $x \left[ n\right]$
     \item per $x_r \left[ n - rL\right]$ si intende che la sequenza $x \left[ n\right]$ si divide per ogni multiplo di L
 \end{itemize}
