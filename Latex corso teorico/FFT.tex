@@ -186,7 +186,7 @@ La prima idea di FFT fu implementata dal duo Cooley-Tukey nel 1965 con la FFT DI
     \url{https://www.youtube.com/watch?v=o-UUudjFR1Y}
 \end{tcolorbox}
 
-Ipotizzando una sequenza $x \left[ n\right]$ di lungheezza N pari, allora possiamo scomporre la sequenza $x \left[ n \right]$ in due sottosequenze di lunghezza $\dfrac{N}{2}$, 
+Ipotizzando una sequenza $x \left[ n\right]$ di lunghezza N pari, allora possiamo scomporre la sequenza $x \left[ n \right]$ in due sotto-sequenze di lunghezza $\dfrac{N}{2}$, 
 contenenti rispettivamente i campioni con indici pari e dispari, come nel seguente caso: 
 
 {
@@ -214,7 +214,7 @@ contenenti rispettivamente i campioni con indici pari e dispari, come nel seguen
     \end{equation}
 }
 
-allora, possiamo calcolare la DFT di ogni sottosequenza come: 
+allora, possiamo calcolare la DFT di ogni sotto-sequenza come: 
 
 \newpage 
 
@@ -393,8 +393,8 @@ ma, dalle proprietà del Twiddle, sappiamo che:
     \end{equation}
 }
 
-Possiamo continuare a dividiere la DFT (puoi vedere le semplificazioni a pag 5 - 6) 
-fichè non arriviamo alla DFT a 2 punti come nel seguente caso: 
+Possiamo continuare a dividere la DFT (puoi vedere le semplificazioni a pag 5 - 6) 
+finchè non arriviamo alla DFT a 2 punti come nel seguente caso: 
 
 \begin{figure}[h]
     \centering
@@ -427,7 +427,7 @@ Ad esempio, se:
     \end{equation}
 }
 
-Quindi possiamo dividiere in 3 stadi: 
+Quindi possiamo dividere in 3 stadi: 
 
 {
     \Large 
@@ -969,7 +969,7 @@ allora scriviamo $x \left[ n\right]$ come:
 dove: 
 
 \begin{itemize}
-    \item $x_r \left[ n \right]$ è la sequenza $x \left[ n\right]$ divisia in L 
+    \item $x_r \left[ n \right]$ è la sequenza $x \left[ n\right]$ divisa in L 
     \item L è la lunghezza per cui è stata divisa $x \left[ n\right]$
     \item per $x_r \left[ n - rL\right]$ si intende che la sequenza $x \left[ n\right]$ si divide per ogni multiplo di L
 \end{itemize}
