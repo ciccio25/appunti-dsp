@@ -11,7 +11,8 @@
 
 \footnote{ 
     Slide del prof | 8 - FFT 1 | pag 2 \\
-    Appunti| 2025-11-04 | pag 2   
+    Appunti| 2025-11-04 | pag 2 \\ 
+    Latex | 2025-11-10 Mattino | pag 201  
 } 
 
 Per una sequenza $x \left[ n\right]$ di lunghezza N, come scritto in \ref{sec: DFT - Discrete Fourier Transform} \nameref{sec: DFT - Discrete Fourier Transform} a pag \pageref{sec: DFT - Discrete Fourier Transform}, 
@@ -39,7 +40,7 @@ dove $W_N$ prende il nome di Twiddle ed è uguale a:
     \begin{equation}
         W_N 
         = 
-        e^{- \jmath 2 \pi}
+        e^{\frac{- \jmath 2 \pi}{N}}
     \end{equation}
 }
 
@@ -58,11 +59,29 @@ ovvero, calcolando la complessità del calcolo, avremo che:
     \item le somme complesse sono dell'ordine di $N \left(N - 1\right)$ ($N \left(4N - 1\right)$ reali)
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 1}
-Quale è la differenze negli ordini di grandezza da $N^2$ delle moltiplicazioni complesse e $4N^{2}$ delle moltiplicazioni reali? Cosa cambia?
+\begin{tcolorbox}
+Le moltiplicazioni complesse sono dell'ordine $4 N^{2}$ perchè, se ipotizziamo $x\left[ n\right]$, allora avremo che, per generici valori a, b, c, d: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \left(a + \jmath b\right)
+            \cdot 
+            \left(c + \jmath d\right)
+            &= 
+            a c + \jmath ad + \jmath bc + \jmath^{2}bd
+            \\
+            &=
+            a c + \jmath ad + \jmath bc -bd
+        \end{split}
+    \end{equation}
+}
+
+che, come si può vedere, sono 4 moltiplicazioni per ogni termine, quindi complessità $4 N^{2}$. 
 \end{tcolorbox}
 
-Quindi la complessità del calcolo di una DFT è di O($N^{2}$), cioè una complessità molto elevata. \newline 
+Considerando N molto elevato, la complessità del calcolo di una DFT è di O($N^{2}$), cioè una complessità molto elevata. \newline 
 
 \begin{tcolorbox}
     Il concetto di complessità di un algoritmo in realtà dovrebbe essere stato affrontato nei corsi precedenti di informatica, 
@@ -76,7 +95,9 @@ Quindi la complessità del calcolo di una DFT è di O($N^{2}$), cioè una comple
     \end{itemize}
 \end{tcolorbox}
 
-Il Twiddle (cioè dell'esponenziale) gode di due proprietà fondamentali: quella di simmetria e quella di periodicità. \newline 
+\newpage 
+
+Il Twiddle (cioè l'esponenziale) gode di due proprietà fondamentali: quella di simmetria e quella di periodicità. \newline 
 
 Ad esempio possiamo scrivere che: 
 
@@ -91,7 +112,6 @@ Ad esempio possiamo scrivere che:
     \end{equation}
 }
 
-\newpage 
 
 perchè: 
 
@@ -133,7 +153,8 @@ Grazie a queste due proprietà del Twiddle, esistono diversi tipi di algoritmi p
 
 \footnote{ 
     Slide del prof | 8 - FFT 1 | pag 3 - 8 \\
-    Appunti| 2025-11-04 | pag  3   
+    Appunti| 2025-11-04 | pag  3 \\ 
+    Latex | 2025-11-10 Mattino | pag 204  
 } 
 
 \begin{tcolorbox}
@@ -251,11 +272,53 @@ in cui a sua volta possiamo scrivere:
     \end{equation}
 } 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 2}
-Questa ultima equazione vale perchè il twiddle gode di perioditcità?
+\begin{tcolorbox}
+Ricordando che il twiddle $W_N$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        W_N = e^{\frac{-\jmath 2 \pi}{N}}
+    \end{equation}
+}
+
+allora possiamo scrivere che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            W_N^{k2m} 
+            &= 
+            e^{\frac{-\jmath 2 \pi}{N} k 2 m}
+            = 
+            e^{\frac{-\jmath 4 \pi}{N} k m}
+            \\
+            &\updownarrow
+            \\
+            \left( W_{N}^{2} \right)^{km}
+            &= 
+            e^{\left(2 \cdot \frac{-\jmath 2 \pi}{N}\right) k  m} 
+            = 
+            e^{\left(\frac{-\jmath 4 \pi}{N}\right) k  m} 
+            \\
+            &\updownarrow
+            \\
+            W_{\frac{N}{2}}^{km}
+            &=
+            e^{\left(- \jmath \frac{2 \pi}{\frac{N}{2}} \right) km}
+            = 
+            e^{\left(- \jmath 2 \pi \cdot \frac{2}{N} \right) km}
+            = 
+            e^{\left( \frac{- \jmath 4 \pi}{N} \right) km}
+        \end{split}
+    \end{equation}
+}
+
+cioè, i tre twiddle $W_N^{k2m}$, $ \left( W_{N}^{2} \right)^{km}$, $W_{\frac{N}{2}}^{km}$ sono tutti equivalenti 
 \end{tcolorbox}
 
-allora, possiamo ulteriormente semplificare $X \left[ k\right]$ come: 
+Grazie a questa proprietà del Twiddle, possiamo ulteriormente semplificare $X \left[ k\right]$ come: 
 
 {
     \Large 
@@ -458,7 +521,8 @@ Abbiamo la DFT in 3 stadi perchè:
 
 \footnote{ 
     Slide del prof | 8 - FFT 1 | pag 13 - 14 \\
-    Appunti| 2025-11-04 | pag  4 
+    Appunti| 2025-11-04 | pag  4 \\ 
+    Latex | 2025-11-10 Mattino | pag 209 
       
 } 
 
@@ -481,11 +545,18 @@ Se si indica con $X^{l}$ per $k = 0, 1, \dots, N - 1$  il vettore dei dati allo 
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 3}
-Eh?
+dove $x \left[ n\right]$ è la sequenza di ingresso. \newline 
+
+\begin{tcolorbox}
+Questa relazione è valida grazie al bit reversing che si fa tra bot di ingresso e di uscita nella Radix 2 DIT FFT in place, 
+quindi è possibile fare questa associazione.     
 \end{tcolorbox}
 
-dove $x \left[ n\right]$ è la sequenza di ingresso, invece: 
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Spiegare perchè si usa il bit-reversing in questo tipo di FFT
+\end{tcolorbox} 
+
+Invece: 
 
 {
     \Large 
@@ -496,7 +567,7 @@ dove $x \left[ n\right]$ è la sequenza di ingresso, invece:
     \end{equation}
 }
 
-dove dove $X \left[ n\right]$ è la sequenza di uscita. \newline 
+dove $X \left[ n\right]$ è la sequenza di uscita. \newline 
 
 Allora, il modo più naturale di disporre i dati è quello di far corrispondere alla posizione $X^{l - 1}$ dello stadio $l - 1$, 
 la posizione dello $X^{l} \left[ k\right]$ allo stadio l come si vede nella seguente figura: 
@@ -523,11 +594,11 @@ quindi:
     \end{equation}
 }
 
+\newpage 
+
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Trovare un video in cui si spiega meglio la concenzione di "in place" della butterfly
 \end{tcolorbox} 
-
-\newpage 
 
 Grazie a questa ultima equazione, per ogni coppia di punti, quindi grazie anche alla proprietà di simmetria del Twiddle, 
 è necessario un solo Twiddle. \newline 
@@ -594,7 +665,8 @@ Di seguito, esempi di DIT Radix 2 con le loro caratteristiche e delle note. \new
 
 \footnote{ 
     Slide del prof | 8 - FFT 2 | pag 13 - 14\\
-    Appunti| 2025-11-04 | pag  5  
+    Appunti| 2025-11-04 | pag  5  \\
+    Latex | 2025-11-10 Mattino | pag 214 
 } 
 
 Considerando il grafo di una FFT DIT Radix-2: 
@@ -670,14 +742,27 @@ Quindi, il costo computazionale di una FFT Radix-2 è dovuto a:
 
 quindi O($N \cdot \log_{2} \left(N\right)$). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 4}
-Come è uscito fuori O($N \cdot \log_{2} \left(N\right)$) per una FFT Radix-2 ?
+
+\begin{tcolorbox}
+    Questo perchè l'algoritmo FFT Radix-2 può essere anche visto come un algoritmo ad albero. \newline 
+
+    Per visualizzarlo meglio puoi vedere questi video in ordine: 
+
+    \begin{itemize}
+        \item How the FFT Works | Part 3: What Is Divide And Conquer? by Mark Newman\\\url{https://www.youtube.com/watch?v=J5YvSFAmlkk&list=PLWMUMyAolbNtjRfTR0RvOFs2NY24ckI_A&index=3}
+        \item How the FFT Works | Part 4: Divide And Conquer In The FFT by Mark Newman\\\url{https://www.youtube.com/watch?v=n2Yu0XAAZZE&list=PLWMUMyAolbNtjRfTR0RvOFs2NY24ckI_A&index=4}
+    \end{itemize}
 \end{tcolorbox}
 
 L'unico problema di una FFT Radix-2 è che ha una precisione finita. \newline
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 5}
-Perchè la FFT Radix-2 ha precisione finita e cosa si intende per precisione finita?
+\begin{tcolorbox}
+    Consideriamo una FFT Radix-2 a precisione finita perchè la trasformata di Fourier viene implementata con l'algoritmo FFT, 
+    quindi da un processore o da un computer reale, e che quindi avrà una memoria limitata (e non illimitata come nel caso matematico). \newline 
+    
+    Un esempio di implementazione di una FFT Radix-2 in un microprocessore reale è il seguente: \newline 
+
+    \url{https://www.ti.com/lit/an/spna071a/spna071a.pdf?ts=1763393494446}
 \end{tcolorbox}
 
 \newpage 
@@ -686,7 +771,8 @@ Perchè la FFT Radix-2 ha precisione finita e cosa si intende per precisione fin
 
 \footnote{ 
     Slide del prof | 8 - FFT 2 | pag 20 - 21\\
-    Appunti| 2025-11-05 | pag 1 - 2  
+    Appunti| 2025-11-05 | pag 1 - 2  \\ 
+    Latex | 2025-11-10 Mattino | pag 216 
 } 
 
 Date due sequenze reali $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$ possiamo scrivere che la convoluzione si può calcolare come: 
@@ -794,11 +880,7 @@ Ad esempio, nel caso di $L = P = N$ avremo questo speed-up:
     \includegraphics[scale = 0.25]{Speed up nell'uso di FFT.png}
 \end{figure} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 6}
-Per N si intende che le due sequenze sono lunghe una potenza di 2?
-\end{tcolorbox}
-
-Lo speed-up aumenta all'aumentare di N. \newline 
+Lo speed-up aumenta all'aumentare di N, dove N è una potenza di 2. \newline 
 
 \newpage 
 
@@ -853,7 +935,8 @@ I due metodi più importanti per calcolare una block convolution sono i seguenti
 
 \footnote{ 
     Slide del prof | 8 - FFT 2 | pag 22 - 23\\
-    Appunti| 2025-11-05 | pag 2
+    Appunti| 2025-11-05 | pag 2 \\ 
+    Latex | 2025-11-10 Mattino | pag 218 
 } 
 
 Data una sequenza $x \left[ n\right]$ molto lunga, si decompone $x \left[ n\right]$ senza sovrapposizione. \newline 
@@ -882,10 +965,6 @@ allora scriviamo $x \left[ n\right]$ come:
         x_r \left[ n - rL\right]
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{eq: 7}
-Domanda stupida e scontata: si presuppone $x \left[ n\right]$ cauusale perchè la sommatoria inizia dall'indice $r = 0$? 
-\end{tcolorbox}
 
 dove: 
 
