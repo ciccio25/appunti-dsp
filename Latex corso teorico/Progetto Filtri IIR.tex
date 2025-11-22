@@ -1,0 +1,567 @@
+\chapter{Progetti Filtri IIR}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{schema-di-realizzazione-di-un-filtro-IIR-nella-forma-Diretta-I.jpg}
+\end{figure}  
+
+\newpage 
+
+\section{Progetto di filtri}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 2 - 3\\
+    Appunti | 2025-11-11 | pag 4   
+}
+
+Come scritto nelle pagine precedenti, in questo corso andremo affrontare i filtri discreti, che, essendo sistemi (tristi) lineari (o meglio LTI), 
+sono selettivi in frequenza, capaci di rimuovere e non aggiungere alcune componenti in frequenza. \newline 
+
+Solo i sistemi non lineari posso aggiungere componenti in frequenza, ma non verrano affrontati in questo corso. \newline 
+
+Come ogni progetto, per la progettazione dei filtri, bisogna rispettare delle specifiche. \newline 
+
+\begin{tcolorbox}
+Come ribadito dal prof a lezione, queste specifiche possono essere date da un cliente o da uno sceicco con tanti soldi come il seguente: \newline 
+
+\includegraphics[scale = 0.6]{Ciccio gamer89 lo sceicco.png}
+
+Magari servirà un filtro LTI per filtrare la voce dello sceicco da questa canzone: \newline 
+
+YTP Music - CiccioTrapper89 - HakunamaTATATATATATA! by Frederick Frankenstein\\
+\url{https://www.youtube.com/watch?v=l6X7bur8MsQ&list=RDl6X7bur8MsQ&start_radio=1} \newline 
+
+Oppure in questa fantastico suo discorso: \newline 
+
+un po' di "Hakuna Matata Ragazzi" by UnusualValve\\
+\url{https://www.youtube.com/watch?v=S7d9XmH-IYU} \newline 
+
+(Questi appunti stanno diventando l'incontro tra Wikipedia e Nonciclopedia)
+\end{tcolorbox}
+
+Tipicamente, le specifiche vengono date in analogico e sono le seguenti: 
+
+\begin{itemize}
+    \item si specifica un determinato andamento per la risposta in modulo cioè il modulo del filtro LTI $\abs{H \left(e^{\jmath \omega}\right)}$ deve essere di un certo valore per pulsazioni $\abs{\omega} < \pi$ (perchè consideriamo lo spettro del segnale nelle pulsazioni $\omega$ compreso nell'intervallo $\left[ - \pi, + \pi\right]$) 
+    \item si specificano i vincoli sulla fase e sul ritardo di gruppo (ad esempio fase lineare, fase "zero", fase minima, ecc...)
+    \item si specificano i vincoli sulla precisione sul rapporto segnale rumore (scritto anche come SNR Signal Noise Ratio o S/R) o sulla aritmetica da utilizzare 
+    \item si specificano i vincoli tecnologici (cioè la complessità, la velocità, il costo economico della soluzione, ecc...)
+\end{itemize}
+
+\newpage 
+
+\begin{tcolorbox}
+    Il terzo e quarto punto, in questo corso non verranno affrontati perchè sono degli argomenti in cui è necessario uno studio approfondito: 
+    ci concentreremo sui primi due. \newline 
+
+    Il rapporto segnale rumore può essere anche definito come errore di quantizzazione. 
+\end{tcolorbox}
+
+Per quanto riguarda la progettazione del filtro digitale, cioè $H \left(z\right)$, bisognerà svolgere queste scelte: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
+Giusta la frase scritta? 
+\end{tcolorbox}
+
+\begin{itemize}
+    \item si sceglie se una realizzazione FIR, Finite Impulse Response o risposta impulsiva finita, o una realizzazione IIR, Infinite Impulse Response o risposta impulsiva infinita 
+    \begin{tcolorbox}
+        Come ribadito in \ref{nota: differenza tra FIR e IIR} \nameref{nota: differenza tra FIR e IIR} pag \pageref{nota: differenza tra FIR e IIR}, 
+        i FIR hanno tanti coefficienti $b_k$ ma garantiscono sempre stabilità del filtro, a differenza degli IIR che hanno, in confronto ai FIR, meno coefficienti $a_k$ e $b_k$ ma deve essere garantita la stabilità. 
+    \end{tcolorbox}
+
+    \item si calcola la relativa funzione $H \left(z\right)$
+\end{itemize}
+
+A livello del progetto di struttura, si sceglie la struttura più adatta in basa ai vincoli, cioè l'implementazione del filtro. \newline 
+
+Alla fine, si svolge una verifica delle caratteristiche ottenute: in caso contrario, si ritorna ai passaggi precedenti affinche le specifiche non vengono soddisfatte. \newline 
+
+\newpage 
+
+\subsection{Specifiche "in frequenza"} \label{subsec: Specifiche "in frequenza"}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 4\\
+    Appunti | 2025-11-11 | pag 4   
+} 
+
+Molto spesso, le specifiche vengono date in analogico, nel mondo reale, e non in digitale. \newline 
+
+In particolare, le pulsazioni vengono date "in frequenza" in $\omega$. \newline 
+
+\begin{tcolorbox}
+    Tecnicamente è sbagliato dire che le pulsazioni sono uguali alla frequenza, ma ricordati che la relazione tra $\omega$ pulsazione e f frequenza è la seguente: 
+
+    {
+        \Large 
+        \begin{equation}
+            \omega = 2 \pi f
+        \end{equation}
+    }
+
+    quindi, c'è di mezzo solo un fattore moltiplicativo di $2 \pi$
+\end{tcolorbox}
+
+Considerando la seguente figura di un filtro passa-basso prototipo con le specifche, 
+con risposta normalizzata nella banda passante, cioè $\abs{H \left(e^{\jmath \omega}\right)} = 1$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 1]{prototipo filtro passa basso.png}
+\end{figure}  
+
+possiamo svolgere diverse considerazioni. \newline 
+
+\begin{tcolorbox}
+    Vengono date tutte queste specifiche per un filtro passa-basso perchè i filtri passa-alto e passa-banda si riportano al filtro passa-basso. 
+\end{tcolorbox}
+
+Idealmente vorremmo avere un filtro in cui la banda di transizione fosse nulla perchè vorremmo avere un filtro rettangolare in frequenza, 
+ma ciò non è possibile perchè, ricordando la relazione tra il dominio del tempo e Fourier, se si ha una transizione brusca in Fourier si avrà un andamento nel tempo infinito. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
+Giusta la frase scritta? 
+\end{tcolorbox}
+
+Per questo motivo, nel filtro prototipo, quindi anche nelle specifiche, è necessario avere una banda di transizione non nulla (nella figura, quelle pulsazioni $\omega$ comprese nell'intervallo $\left[ \omega_p, \omega_s\right]$). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
+C'è un motivo per cui il modulo del filtro nella banda di transizione, almeno nella figura, è lineare? Ha a che fare con la fase?  
+\end{tcolorbox}
+
+\newpage
+
+Essendoci una banda di transizione, la risposta in modulo del filtro, cioè $\abs{H \left(e^{\jmath \omega}\right)}$, non viene asseganata come funzione di 
+$\omega$ per $\abs{\omega} < \pi$, ma viene assegnata per punti e/o attraverso dei seguenti vincoli, che devono essere rispettati: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            \left(1 - \delta_1\right) \leq \abs{H \left(e^{\jmath \omega}\right)} \leq \left(1 - \delta_1\right) 
+            \text{ per }
+            \abs{\omega} \leq \pi 
+            \\
+            \abs{H \left(e^{\jmath \omega}\right)} \leq \delta_2 
+            \text{ per }
+            \omega_s \leq \abs{\omega} \leq \pi  
+        \end{cases}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\delta_1$ e $\delta_2$ devono essere il più piccoli possibile, in modo che il filtro tenda all'andamento di un filtro rettangolare ideale 
+    \item $\abs{H \left(e^{\jmath \omega}\right)}$, oltre ad essere compreso $\left(1 - \delta_1\right)$ e $\left(1 + \delta_1\right)$, può avere qualsiasi andamento in modulo ma, ricordando di mantenere, se possibile, la linearità della fase 
+    \item in banda oscura, l'andamento $\abs{H \left(e^{\jmath \omega}\right)}$ può essere qualsiasi sia nei moduli che nella fase, l'importante il modulo sia minore di $\delta_2$
+\end{itemize}
+
+\newpage 
+
+\section{Progetto di filtri IIR}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 5\\
+    Appunti | 2025-11-11 | pag 4   
+} 
+
+Per la progettazione di un filtro IIR, generalmente, si applicano una tra le due tecniche di progettazione: 
+
+\begin{itemize}
+    \item tecniche di trasformazione (le più utilizzate per i filtri IIR)
+    \item tecniche dirette (le più utilizzate per i filtri FIR)
+\end{itemize}
+
+Per tecniche di trasformazione si intende che, inizialmente, si progetta il filtro (o un suo prototipo) nel dominio di Laplce, cioè nel dominio s, 
+cioè si progetta un filtro analogico corrispondente. \newline 
+
+Poi, si trasforma il filtro analogico, cioè $H_c \left(s\right)$ del filtro continuo in una funzione $H \left(z\right)$, cioè nel dominio discreto z, che è proprio il filtro voluto in digitale. \newline 
+
+Il vantaggio maggiore delle tecnice di trasformazione è che, grazie alla teoria della approssimazione, si dispone di forme chiuse per il filtro analogico $H_c \left(s\right)$ (cosa che non è possibile fare nel dominio z a differenza del dominio s). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4}
+Cosa si intende per forme chiuse in s ? \newline 
+
+Da Wikipedia: \newline 
+
+In matematica, per forma chiusa può intendersi:
+\begin{itemize}
+    \item una forma differenziale chiusa, cioè tale che $d\omega = 0$ 
+    \item un'espressione chiusa, cioè definita da un numero finito di applicazioni di certe funzioni, intesa come antitesi di forma ricorsiva.  
+\end{itemize}
+
+Cioè, per quanto riguarda la progettazione dei filtri IIR e le tecniche di trasformazione, per forme chiuse si intende che non possiamo rappresentare tutti i filtri analogici $H_c \left(s\right)$ dal dominio s al dominio z, ma solo alcuni? 
+
+\end{tcolorbox}
+
+Lo svantaggio maggiore delle tenciche di trasformazione è che si ha uno scarso controllo delle prestazione ottenuto, quindi è difficile ottimizzare $H \left(z\right)$ da $H_c \left(s\right)$. \newline 
+
+Invece per tecniche dirette, significa che si progetta il filtro direttamente nel dominio z, ponendo dei vincoli alla funzione $H \left( z\right)$. \newline 
+
+In altre parole, è possibile gestire i coefficienti della funzione $H \left(z\right)$. \newline 
+
+I vantaggi delle tecniche dirette sono che si ha un buon controllo delle prestazioni e si ha hanno delle prestazioni. \newline 
+
+Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci sono dei problemi di convergenza degli algoritmi. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5}
+"Necessitano di calcolatori", cioè ci saranno più conti da fare? 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Filtri analogici di Butterworth}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 6 - 9\\
+    Appunti | 2025-11-11 | pag 4 \\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
+
+\begin{tcolorbox}
+    In commercio sono disponibili diversi filtri analogici. Nei seguenti capitoli ce ne saranno diversi a titolo di esempio, quelli che comunemente vengono utilizzati. \newline
+
+    Inoltre, non dobbiamo ricordare tutte le formule dei filtri, ma il procedimento da specifiche agli argomenti da utilizzare, 
+    perchè ormai le formule ed i software (nel nostro caso Matlab con le sue funzioni e filterDesigner) trovano i valori analitici di questi parametri. 
+\end{tcolorbox}
+
+Data la funzione del modulo del filtro analogico di Butterworth: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H_c \left(\jmath \Omega\right)}^{2} 
+        = 
+        \dfrac{1}{1 + \left( \dfrac{\jmath \Omega}{\jmath \Omega_c}\right)^{2n}}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6}
+$\abs{H_c \left(\jmath \Omega\right)}$ al quadrato perchè si considera lo spettro di potenza per il teorema di Parseval? 
+\end{tcolorbox}
+
+In base al valore di n, avremo questi andamenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 1]{filtro di Butterworth diversi ordini di n.png}
+\end{figure}  
+
+Dalla seguente figura, si possono trarre le seguenti considerazioni: 
+
+\begin{itemize}
+    \item tutte le funzioni n-esime sono monotonicamente decrescenti 
+    \item all'aumentare di n, il filtro si avvicina al filtro rettangolare ideale 
+    \item per qualsiasi valore di n, alla frequenza di cutoff $\Omega_c$: 
+    {
+        \Large 
+        \begin{equation}
+            \abs{H_c \left(\Omega_c\right)}^{2} 
+            = 
+            \dfrac{1}{2} 
+            \approx 
+            -3 \text{ dB}
+        \end{equation}
+    } 
+    \item è un filtro massimamente piatto 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7}
+Ha delle conseguenze e delle implicazioni sapere che è massimamente piatto?
+\end{tcolorbox}
+
+\newpage 
+
+Ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        s = \jmath \Omega
+    \end{equation}
+}
+
+avremo che la funzione $\abs{H \left(\jmath \Omega\right)}^{2}$ diventa: 
+
+{
+    \Large 
+    \begin{equation}
+         \abs{H_c \left(s\right)}^{2}_{s = \jmath \Omega}
+            = 
+            \left. 
+            H_c \left(s\right)
+            \cdot 
+            H_c \left(- s\right)
+            \right|_{s = \jmath \Omega}
+            \\
+            = 
+            \left.
+            \dfrac{1}{1 + \left( \dfrac{s}{\jmath \Omega_c}\right)^{2}}
+            \right|_{s = \jmath \Omega}
+    \end{equation}
+}
+
+Nel piano di Laplace, $H_c \left(s\right)$, in base al valore di n, avremo questi andamenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{filtro di Butterworth diversi ordini di n piano Laplace.png}
+\end{figure}  
+
+dove: 
+
+\begin{itemize}
+    \item per n pari, i poli di $H_c \left(s\right)$ non si trovano sull'asse reale, a differenza dei filtri di Butterworth per n dispari 
+    \item $\Omega_c$ è il raggio della circonferenza 
+    \item per n dispari, la distanza di ogni polo è di $\dfrac{\pi}{n}$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8}
+Ha delle implicazioni avere dei poli nell'asse reale? La circonferenza $\Omega_c$ è di raggio unitario? 
+\end{tcolorbox}
+
+Come scritto precedentemente \ref{subsec: Specifiche "in frequenza"} \nameref{subsec: Specifiche "in frequenza"} a pag \pageref{subsec: Specifiche "in frequenza"}, 
+passeremo dalle specifiche: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 1]{prototipo filtro passa basso.png}
+\end{figure}  
+
+alle seguente specifiche: 
+
+\newpage 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{filtro di Butterworth specifiche}
+\end{figure}  
+
+dove, date le specifiche $\delta_1$, $\delta_2$, $\Omega_p$, $\Omega_s$, 
+per la realizzazione di un filtro di Butterworth, sarà necessario trovare il valore di n che soddisfa le specifiche. \newline 
+
+Di conseguenza, trovato il valore di n, possiamo trovare i coefficienti di $H_c \left(s\right)$. \newline 
+
+Dall'espressione di $\abs{H_c \left(\jmath \Omega\right)}^{2}$:  
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H_c \left(\jmath \Omega\right)}^{2} 
+        = 
+        \dfrac{1}{1 + \left( \dfrac{\jmath \Omega}{\jmath \Omega_c}\right)^{2n}}
+    \end{equation}
+}
+
+si trova facilmente che le specifiche vengono soddisfatte se, ad un certo valore di n e $\Omega_c$ valgono contemporaneamente queste due relazioni: 
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{\Omega_p}{\Omega_c}
+        = 
+        \left(
+            \dfrac{\delta_1}{1 - \delta_1}
+        \right)^{\frac{1}{2n}}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{\Omega_s}{\Omega_c}
+        = 
+        \left(
+            \dfrac{1 - \delta_2}{\delta_2}
+        \right)^{\frac{1}{2n}}
+    \end{equation}
+}
+
+I valori di n e $\Omega_c$ vengono trovati per tentativi. \newline 
+
+
+\begin{tcolorbox}
+    Generalmente, in commercio, ci sono dei software che trovano i valori di n e $\Omega_c$ vengono trovati per tentativi. 
+\end{tcolorbox}
+
+I coefficienti di $H_c \left(s\right)$ si trovano analiticamente o da apposite tabelle. \newline 
+
+\newpage 
+
+\subsection{Filtri analogici di Chebyshev}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 10\\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
+
+Basato sui polinomi di Chebyshev, al variare di n, possiamo costruire i filtri analogici di Chebyshev come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{polinomio di Chebyshev al variare di n.png}
+\end{figure}  
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        T_n \left(x\right) = \cos \left[ n \cos^{-1} \left(x\right)\right]
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            T_0 \left(x\right) = 1 
+            \\
+            T_1 \left(x\right) = x 
+            \\
+            T_n \left(x\right) = 2x \cdot T_{n-1} \left(x\right) - T_{n-2} \left(x\right) \text{ per } n > 2 
+        \end{cases}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9}
+L'uso dei polinomi di Chebyshev è quello di scrivere gli n-esimi coseni come una funzione polinomiale, giusto? Servono per l'interpolazione tra due punti? 
+\end{tcolorbox}
+
+\begin{tcolorbox}
+    Se vuoi approfondire il tema sui polinomi di Chebyshev e perchè sono molto utili: 
+
+    \begin{itemize}
+        \item Chebyshev Polynomials by Physics and Math Lectures \\\url{https://www.youtube.com/watch?v=q8zGN2QwyU4&list=PL2uXHjNuf12aUiM6mgtng_mx07aB5o2zY}
+        \item Quintic Equation From Chebyshev Polynomial by blackpenredpen\\\url{https://www.youtube.com/watch?v=Sgjy1uyYNbc} 
+        \item Chebyshev methods: What are they and what can they do in practice? by QuantMinds TV\\\url{https://www.youtube.com/watch?v=FWp1X8m5XX4}
+    \end{itemize}
+\end{tcolorbox}
+
+\newpage 
+
+\subsubsection{Filtri analogici di Chebyshev di tipo I}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 11 - 12\\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
+
+I filtri analogici di Chebyshev di tipo I hanno la seguente formula in modulo: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H_c \left(\jmath \Omega\right)}^{2}
+        = 
+        \dfrac{1}{1 + \varepsilon^{2} T^{2}_{n} \left(\dfrac{\Omega}{\Omega_c}\right)}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $T^{2}_{n} \left(\dfrac{\Omega}{\Omega_c}\right)$ è l'n-esimo polinomio di Chebyshev (visto nella pagina precedente) al quadrato 
+    \item $\Omega_c$ è la frequenza di cut-off (che sarà una della specifica)
+\end{itemize}
+
+
+Due esempi di filtri di Chebyshev di tipo 1: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{filtri di Chebyshev di tipo I esempi.png}
+\end{figure}  
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10}
+Perchè ci sono due figure di filtri di Chebyshev? Perchè uno inizia da 1 e uno da $1 - \delta_1$ ?
+\end{tcolorbox}
+
+Dalle seguenti figure possiamo trarre le seguenti considerazioni: 
+
+\begin{itemize}
+    \item nella banda passante, quindi in $\Omega < \Omega_c$, l'andamento del filtro non deve essere per forza essere sinusoidale come in figura; l'importante che il modulo del filtro si trovi tra 1 e $1 -\delta_1$
+    \item ricordando che teoricamente, il filtro ideale dovrebbe essere rettangolare, nei filtri di Chebyshev di tipo I l'errore del modulo viene distribuito sulla banda passante (e questo giustifica perchè Chebyshev di tipo I è meglio di Butterworth) 
+\end{itemize}
+
+Date le specifiche $\delta_1$, $\delta_2$, $\Omega_c$ e $\Omega_s$ (dove generlmante $\delta_1$, $\delta_2$ sono dati in dB), 
+bisogna calcolarsi gli oppurtuni valori di $\varepsilon$ e n di $\abs{H_c \left(\jmath \Omega\right)}^{2}$. \newline 
+
+Dalla formula di $\abs{H_c \left(\jmath \Omega\right)}^{2}$ si deduce "facilmente" che, date le specifiche, avremo che i valori di $\varepsilon$ e n si trovino con queste formule: 
+
+{
+    \Large 
+    \begin{equation}
+        \varepsilon^{2}
+        = 
+        \dfrac{\delta_1}{1 - \delta_1}
+    \end{equation}
+}
+
+
+{
+    \Large 
+    \begin{equation}
+        n \cosh^{-1} \left(\dfrac{\Omega_s}{\Omega_c}\right)
+        = 
+        \cosh^{-1} \left[ 
+            \sqrt{
+                \dfrac{\left(1 - \delta_1\right) \left(1 - \delta_2\right) }{\delta_1 \delta_2}
+            }
+        \right]
+    \end{equation}
+}
+
+da cui si possono ricavare i valori di $\varepsilon$ e n. \newline 
+
+Proprio perchè il coseno iperbolico, cioè $\cosh$, p un calcolo complicato, generalmente i coefficienti della corrispondente funzione $H_c \left(s\right)$ si possono trovare 
+tabulati per valori di $\delta_1 = 1$ e $\Omega_c = 1$. \newline 
+
+\newpage 
+
+\subsubsection{Filtri analogici di Chebyshev di tipo II}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13\\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
+
+I filtri analogici di Chebyshev di tipo II hanno la seguente formula in modulo: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H_c \left(\jmath \Omega\right)}^{2}
+        = 
+        \dfrac{1}{1 + \dfrac{1}{\varepsilon^{2} T^{2}_{n} \left(\dfrac{\Omega_c}{\Omega}\right)}}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $T^{2}_{n} \left(\dfrac{\Omega_c}{\Omega}\right)$ è l'n-esimo polinomio di Chebyshev (visto nella pagina precedente) al quadrato 
+    \item $\Omega_c$ è la frequenza di cut-off (che sarà una della specifica)
+\end{itemize} 
+
+Un esempio di andamento del modulo di un filtro di Chebyshev di tipo II: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{filtri di Chebyshev di tipo II esempio.png}
+\end{figure}  
+
+Essendo l'equiripple presente nella stop band, quindi per $\Omega > \Omega_s$, allora l'errore del filtro di Chebyshev di tipo II si trova in questa banda. \newline 
+
+Per le specifiche, si adotta lo stesso approcio dei filtri di Tipo I di Chebyshev. \newline 
+
+\newpage 
+
+\subsection{Filtri analogici elittici}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13 - \\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
