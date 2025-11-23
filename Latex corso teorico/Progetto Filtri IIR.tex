@@ -11,7 +11,7 @@
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 2 - 3\\
-    Appunti | 2025-11-11 | pag 4   
+    Appunti | 2025-11-11 | pag 2   
 }
 
 Come scritto nelle pagine precedenti, in questo corso andremo affrontare i filtri discreti, che, essendo sistemi (tristi) lineari (o meglio LTI), 
@@ -83,7 +83,7 @@ Alla fine, si svolge una verifica delle caratteristiche ottenute: in caso contra
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 4\\
-    Appunti | 2025-11-11 | pag 4   
+    Appunti | 2025-11-11 | pag 2   
 } 
 
 Molto spesso, le specifiche vengono date in analogico, nel mondo reale, e non in digitale. \newline 
@@ -160,11 +160,11 @@ dove:
 
 \newpage 
 
-\section{Progetto di filtri IIR}
+\section{Progetto di filtri IIR} \label{sec: Progetto di filtri IIR}
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 5\\
-    Appunti | 2025-11-11 | pag 4   
+    Appunti | 2025-11-11 | pag 2   
 } 
 
 Per la progettazione di un filtro IIR, generalmente, si applicano una tra le due tecniche di progettazione: 
@@ -216,8 +216,7 @@ Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci so
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 6 - 9\\
-    Appunti | 2025-11-11 | pag 4 \\ 
-    Appunti | 2025-11-12 | pag 1  
+    Appunti | 2025-11-11 | pag 2 - 3
 } 
 
 \begin{tcolorbox}
@@ -394,7 +393,7 @@ I coefficienti di $H_c \left(s\right)$ si trovano analiticamente o da apposite t
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 10\\ 
-    Appunti | 2025-11-12 | pag 1  
+    Appunti | 2025-11-11 | pag 3  
 } 
 
 Basato sui polinomi di Chebyshev, al variare di n, possiamo costruire i filtri analogici di Chebyshev come si vede in figura: 
@@ -446,7 +445,7 @@ L'uso dei polinomi di Chebyshev è quello di scrivere gli n-esimi coseni come un
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 11 - 12\\ 
-    Appunti | 2025-11-12 | pag 1  
+    Appunti | 2025-11-11 | pag 3  
 } 
 
 I filtri analogici di Chebyshev di tipo I hanno la seguente formula in modulo: 
@@ -525,7 +524,7 @@ tabulati per valori di $\delta_1 = 1$ e $\Omega_c = 1$. \newline
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13\\ 
-    Appunti | 2025-11-12 | pag 1  
+    Appunti | 2025-11-11 | pag 3  
 } 
 
 I filtri analogici di Chebyshev di tipo II hanno la seguente formula in modulo: 
@@ -562,6 +561,303 @@ Per le specifiche, si adotta lo stesso approcio dei filtri di Tipo I di Chebyshe
 \subsection{Filtri analogici elittici}
 
 \footnote{ 
-    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13 - \\ 
-    Appunti | 2025-11-12 | pag 1  
+    Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13 - 14\\ 
+    Appunti | 2025-11-11 | pag 3 
 } 
+
+Un altra famiglia di filtri analogici, oltre a quelli precedenti, sono quelli elittici, 
+i quali hanno la seguente funzione di rete: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{H_c \left(\jmath \Omega\right)}^{2}
+        =
+        \dfrac{1}{1 + \varepsilon^{2} E^{2}_n \left(\Omega\right)} 
+    \end{equation}
+}
+
+dove $E^{2}_n \left(\Omega\right)$ è una funzione elittica Jacobiana. \newline 
+
+\begin{tcolorbox}
+    Il Jacobiano è una cosa che abbiamo già approfondito ad Analisi Matematica 2, ma per un focus maggiore, lo spiegherò meglio nelle prossime pagine. 
+\end{tcolorbox}
+
+Un esempio di undamento di un filtro analogico elittico in modulo: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{filtro analogico elittico esempio modulo.png}
+\end{figure}  
+
+A differenza dei filtri analogici precedenti, come scritto nelle note delle figure, essendo la banda di transizione molto stretta, 
+l'equiripple è sia presente in banda passante che in banda oscura. \newline 
+
+Come possiamo vedere sul piano s come diventa il filtro elittico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro analogico elittico nel piano s.png}
+\end{figure}  
+
+i poli si trovano sull'asse ellittico. \newline 
+
+\newpage 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11}
+Sotto la riga a pag 13 si riferisce ai filtri elittici? E perchè si chiamano elittici?
+\end{tcolorbox}
+
+\newpage 
+
+\section{Trasformazione da piano s a piano z}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 2\\ 
+    Appunti | 2025-11-11 | pag 4 
+} 
+
+Come scritto precedentemente \ref{sec: Progetto di filtri IIR} \nameref{sec: Progetto di filtri IIR} a pag \pageref{sec: Progetto di filtri IIR}, 
+per la progettazione dei filtri IIR si utilizzeranno, generalmente, delle tecniche di trasformazione, 
+cioè si partirà da un progetto di un filtro analogico, cioè dal piano di Laplace s, al filtro digitale, utilizzando la trasformata z nel dominio z. \newline  
+
+In altre parole, data una funzione $H_c \left(s\right)$ razionale, cioè un'equazione differenziale, bisogna trovare 
+una corrispondente funzione $H \left(z\right)$ razionale, cioè un'equazione alle differenze finite, tale che: 
+
+\begin{itemize}
+    \item mantenga il più possibile inalterata la risposta in ampiezza e fase 
+    \item mantenga la caratteristica di stabilità 
+\end{itemize}
+
+Cioè, si dovrà stabilire un oppurtuno mapping tra il piano s e il piano z, cioè tra il dominio $\Omega$ al dominio $\omega$. \newline 
+
+Per svolgere questo mapping ci sono diversi metodi disponibili. \newline 
+
+I principali (o almeno quelli che analizzeremo in questo corso) sono le seguenti: 
+
+\begin{itemize}
+    \item invarianza all'impulso, cioè si campiona la soluzione dell'equazione (cioè prende il nome di risposta impulsiva)
+    \item trasformazione bilineare, cioè si approssima l'integrale soluzione (prende il nome di metodo trapezoidale)
+\end{itemize}
+
+\newpage 
+
+\subsection{Invarianza all'impulso}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 3 - 4\\ 
+    Appunti | 2025-11-11 | pag 4 
+} 
+
+L'idea è quella di campionare la risposta impulsiva, che è la soluzione dell'equazione differenziale. \newline 
+
+Cioè passeremo dalla risposta impulsiva $h_c \left(t\right)$ del filtro analogico con t tempo continuo a $h \left[ n\right]$, in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] = h_c \left(n T\right)
+    \end{equation}
+}
+
+dove T è il periodo di campionameto. \newline 
+
+In frequenza invece avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(e^{\jmath \omega}\right)
+        = 
+        \dfrac{1}{T}
+        \sum_{k = - \infty}^{+ \infty}
+        \left. 
+            H_c \left(\jmath \Omega - k \jmath \Omega_s\right)
+        \right|_{\Omega = \frac{\omega}{T}}
+    \end{equation}
+}
+
+in cui $\Omega_s$ è la pulsazione di campionamento che vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Omega_s = \dfrac{2 \pi}{T}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Avevamo già affrontato il campionamento nel suo capitolo \ref{ch: Campionamento} \nameref{ch: Campionamento} da pag \pageref{ch: Campionamento}. \newline 
+    
+    Se non ti ricordi al volo cosa è, e tutte le considerazione fatte tra tempo e frequenza, fatti un ripasso al volo. 
+\end{tcolorbox}
+
+Come studiato in \ref{sec: Teorema di Nyquist} \nameref{sec: Teorema di Nyquist} a pag \pageref{sec: Teorema di Nyquist}, 
+se non campioniamo ad una frequenza maggiore di quella di Nyquist, possiamo avere un aliasing in frequenza come si può vedere in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Aliasing invarianza all'impulso.png}
+\end{figure}  
+
+dove: 
+
+\begin{itemize}
+    \item nella figura a sinistra è $H_c \left(\jmath \Omega \right)$ campionata a $\Omega_s$ e poi filtrata 
+    \item nella figura a destra è $H_c \left(\jmath \Omega \right)$ sotto-campionata a $\Omega_s$, cioè ad una pulsazione minore di quella Nyquist, quindi saranno presente di termini aliasing
+\end{itemize}
+
+Quindi, se $H_c \left( \jmath \Omega\right)$ è limitata in banda e la pulsazione di campionamento $\Omega_s$ è sufficientemente grande, 
+allora $H_c \left( \jmath \Omega\right)$ corrisponderà a $H \left(e^{\jmath \omega}\right)$. \newline 
+
+Ricordiamo che $H_c \left( \jmath \Omega\right)$ per essere campionata, deve essere limitata in banda. \newline 
+
+Per questo ultimo motivo, la tecnica dell'invarianza all'impulso (cioè campionare il filtro analogico) non è possibile utilizzarlo per filtri non limitati in banda, 
+cioè i filtri passa-alto ed i filtri elimina banda. \newline 
+
+Inoltre, se T periodo di campionamento è piccolo, allora $\dfrac{1}{T}$ è grande, quindi $H \left(e^{\jmath \omega}\right)$ può avere un guadagno troppo alto. \newline 
+
+\newpage 
+
+In genere si usa che: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right]
+        = 
+        T \cdot h_c \left(n T\right)
+    \end{equation}
+}
+
+allora: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left(e^{\jmath \omega}\right)
+        &=
+        T 
+        \cdot 
+        \dfrac{1}{T}
+        \sum_{k = - \infty}^{+ \infty}
+        \left. 
+            H_c \left(\jmath \Omega - k \jmath \Omega_s\right)
+        \right|_{\Omega = \frac{\omega}{T}}
+        \\
+        &=
+        \sum_{k = - \infty}^{+ \infty}
+        \left. 
+            H_c \left(\jmath \Omega - k \jmath \Omega_s\right)
+        \right|_{\Omega = \frac{\omega}{T}}
+        \end{split}
+    \end{equation}
+}
+
+Generalizzando l'espressione della risposta in frequenza, eseguendo il seguente mapping: 
+
+{
+    \Large 
+    \begin{equation}
+        \text{dominio Z }
+        \to 
+        \text{ dominio S: }
+        z = e^{sT}
+    \end{equation}
+}
+
+avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H \left(e^{\jmath \omega}\right)
+        &=
+        \sum_{k = - \infty}^{+ \infty}
+        \left. 
+            H_c \left(\jmath \Omega - k \jmath \Omega_s\right)
+        \right|_{\Omega = \frac{\omega}{T}}
+        \\
+        &\downarrow
+        \\
+        \left.
+        H \left(z\right)
+        \right|_{z = e^{sT}}
+        &=
+        \sum_{k = - \infty}^{+ \infty}
+            H_c \left(s - k \jmath \Omega_s\right)
+        \end{split}
+    \end{equation}
+}
+
+Dal piano S al Piano Z, avremo questo tipo di trasformazione: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Mapping da dominio s a dominio z.png}
+\end{figure}  
+
+dove l'asse $\jmath \Omega$ del piano S viene "wrappato" come circonferenza del cerchio unitario nel piano Z. \newline 
+
+\newpage 
+
+\begin{tcolorbox}
+    Quindi questa "semplice" sostituzione è dovuto dal Jacobiano tra i due domini. \newline 
+
+    Il Jacobiano, come avevamo studiato ad Analisi Matematica 2, fa un mapping tra due domini diversi. \newline 
+
+    Ad esempio, ad Analisi Matematica 2 avevamo utilizzato il Jacobiano per passare da coordinate cartesiane a coordinate sferiche. \newline 
+
+    Ti consiglio caldamente di visualizzare questo video: \newline 
+
+    Il Significato Geometrico dello Jacobiano: la Bellezza dietro a una formula Brutta by ClearMath\\
+    \url{https://www.youtube.com/watch?v=wOjB9IWZMQA}
+\end{tcolorbox}
+
+Questo tipo di mapping dal piano s al piano z comporta le seguenti caratteristiche: 
+
+\begin{itemize}
+    \item ogni striscia di larghezza $\dfrac{2 \pi}{T}$ dal piano s, viene mappata sull'intero piano z 
+    \item questo tipo di mapping preserva la stabilità se: 
+    {
+        \Large 
+        \begin{equation}
+            \begin{split}
+            \Re \left[ s\right] &< 0
+            \\
+            &\downarrow
+            \\
+            \abs{z} &< 1    
+            \end{split}
+        \end{equation}
+    }
+    \item se non c'è aliasing, questo tipo di mapping preserva la risposta in frequenza perchè l'asse $\jmath \Omega$ nell'intervallo $\left(\dfrac{\pi}{T}, -\dfrac{\pi}{T}\right)$ dal piano s corrisponde al cerchio unitario nel piano z
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12}
+Riguardo all'ultima frase, allora perchè nel piano S è anche blu nell'asse $\jmath \Omega$ per valori maggiori di $\dfrac{\pi}{T}$? \newline 
+
+Nel piano z è ancora blu nel cerchio unitario. 
+
+\end{tcolorbox}
+
+Ricordiamo che tutte queste considerazioni sono solo per filtri limitati in banda, che generalmente sono dei filtri passa-basso. \newline 
+
+\newpage 
+
+\subsubsection{Relazione tra funzioni di rete in s a funzioni di rete in z}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 5 - 6\\ 
+    Appunti | 2025-11-11 | pag 4 
+} 
+
+\begin{tcolorbox}
+    Ricordo che, in questo caso, non è necessario ricordarsi tutte le formule. \newline 
+
+    Per la teoria, non è necessario sapere le formule, bensì il processo perchè, come ripetiamo sempre, i calcoli, in questo corso, 
+    li fa Matlab o sono già stati fatti e messe in opportune tabelle pre-stabilite. 
+\end{tcolorbox}
+
