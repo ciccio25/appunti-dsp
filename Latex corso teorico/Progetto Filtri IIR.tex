@@ -861,3 +861,238 @@ Ricordiamo che tutte queste considerazioni sono solo per filtri limitati in band
     li fa Matlab o sono già stati fatti e messe in opportune tabelle pre-stabilite. 
 \end{tcolorbox}
 
+Siccome progetttiamo il filtro in analogici, consideriamo il caso più tipico, cioè quello di una funzione di rete $H_c \left(s\right)$ con solo poli semplici in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        H_c \left(s\right)
+        = 
+        \sum_{k = 1}^{N}
+        \dfrac{A_k}{s - s_k}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $s_k$ è il k-esimo polo di $H_c \left(s\right)$
+    \item $A_k$ è il k-esimo residuo del polo $s_k$
+\end{itemize}
+
+Allora, anti-trasformando, cioè passando dal dominio di Laplace s al dominio del tempo t, e considerando un sistema causale, 
+avremo che $H_c \left(s\right)$ nel tempo t sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H_c \left(s\right)
+        &= 
+        \sum_{k = 1}^{N}
+        \dfrac{A_k}{s - s_k}
+        \\
+        &\downarrow
+        \\
+        h_c \left(t\right)
+        &= 
+        \sum_{k = 1}^{N}
+        A_k \cdot e^{s_k t}
+        \cdot u_{-1} \left(t\right)
+        \end{split}
+    \end{equation}
+}
+
+dove $u_{-1} \left(t\right)$ è un gradino. \newline 
+
+Campionando $h_c \left(t\right)$, in modo da avere la risposta impulsiva campionata $h \left[   n\right]$, 
+avremo che (facendo i passaggi step by step): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            h \left[ n\right]
+            &= 
+            T \cdot h_c \left(n T\right)
+            \\
+            &= 
+            \sum_{k = 1}^{N}
+            T \cdot A_k e^{s_k nT} \cdot u \left[ n\right]
+            \\
+            &= 
+            \sum_{k = 1}^{N}
+            T \cdot A_k \left(e^{s_k T}\right)^{n} \cdot u \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+dove $u \left[ n\right]$ è il gradino campionato. \newline 
+
+\newpage 
+
+Trasformando in z $h \left[ n\right]$, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            h \left[ n\right]
+            &= 
+            \sum_{k = 1}^{N}
+            T \cdot A_k \left(e^{s_k T}\right)^{n} \cdot u \left[ n\right]
+            \\
+            &\downarrow
+            \\
+            H \left(z\right)
+            &= 
+            \sum_{k = 1}^{N}
+            \dfrac{T \cdot A_k}{1 - d_k z^{-1}}
+        \end{split}
+    \end{equation}
+}
+
+dove $d_k$ è il k-esimo polo che vale: 
+
+{
+    \Large 
+    \begin{equation}
+        d_k = e^{s_k T}
+    \end{equation}
+}
+
+Quindi, dopo tutte queste trasformazioni e anti-trasformazioni, notiamo che: 
+
+\begin{itemize}
+    \item $H_c \left(s\right)$ dal dominio s al dominio z $H \left(z\right)$ sono simili 
+    \item i residui di $H \left( z\right)$ sono gli stessi di $H_c \left(s\right)$ ma moltiplicati per T 
+    \item I poli di $H \left( z\right)$ sono gli stessi di $H_c \left(s\right)$ 
+    \item I k-esimo poli nel dominio s che hanno parte reale minore di zero, diventano k-esimi poli nel dominio z che si trovano all'interno del cerchio unitario 
+    \item gli zeri di $H \left(z\right)$ sono, in genere, diversi da quelli di $H_c \left(s\right)$
+\end{itemize}
+
+\begin{tcolorbox}
+Le osservazioni appena elencate sono quelle che realmente vi dovete ricordare per l'esame, non tutte le altre formule.     
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Trasformazione bilineare}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 7 - 11 \\ 
+    Appunti | 2025-11-12 | pag 1 
+} 
+Nella trasformazione bilineare l'idea è quella di approssimare numericamente l'integrale della soluzione dell'equazione: 
+
+{
+    \Large 
+    \begin{equation}
+        c_1 \cdot y^{'}_{c} \left(t\right) 
+        + 
+        c_0 \cdot y_{c} \left(t\right) 
+        =
+        d_0 \cdot x_c \left(t\right)
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $y^{'}_{c} \left(t\right)$ è la prima derivata di $y_c \left(t\right)$
+    \item $c_1$, $c_0$, $d_1$ sono costanti opportune
+\end{itemize}
+
+Allora prendendo $y^{'}_{c} \left(t\right)$, essendo la derivata di $y_c \left(t\right)$, 
+$y_c \left(t\right)$ si troverà con il processo inverso della derivata, che appunto è l'integrale. \newline 
+
+Dal punto di vista matematico, se consideriamo un tempo di inizio $t_0$ e un generico istante di tempo t, avremo che:
+
+{
+    \Large 
+    \begin{equation}
+            y_c \left(t\right)
+            = 
+            \int_{t_0}^{t}
+            y^{'}_c \left(\tau\right)
+            d \tau
+            + 
+            y_c \left(t_0\right)
+    \end{equation}
+}
+
+Se prendiamo un generico intervallo T (che prende il nome di passo di integrazione), allora possiamo svolgere l'integrale di $y_c \left(\tau\right)$ non per l'intervallo $\left[ t_0, t\right]$, 
+bensì per l'intervallo $\left[ \left(n-1\right)T, nT\right]$ dove: 
+
+\begin{itemize}
+    \item $nT$ si intende l'n-esimo istante T 
+    \item $\left(n-1\right)T$ si intende il precedente istante dell'n-esimo istante T
+\end{itemize}
+
+Allora, con questa considerazione, possiamo trosformare questo integrale come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y_c \left(t\right)
+            &= 
+            \int_{t_0}^{t}
+            y^{'}_c \left(\tau\right)
+            d \tau
+            + 
+            y_c \left(t_0\right)
+            \\
+            &\downarrow
+            \\
+            y_c \left(t\right)
+            &= 
+            \int_{\left(n - 1\right) T}^{nT}
+            y^{'}_c \left(\tau\right)
+            d \tau
+            + 
+            y_c \left(\left(n-1\right) T\right)
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+Possiamo approssimare l'andamento di una funzione qualsiasi con una retta tra due punti, come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.1]{2025-11-12 Approssimazione della funzione in una retta quindi trapezoide per integrale.png}
+\end{figure}  
+
+allora l'integrale (cioè l'area sottostante alla funzione) sarà un trapezoide. \newline 
+
+Quindi avremo questo sistema di risoluzione: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            y_c \left(nT\right) 
+            = 
+            \dfrac{T}{2}
+            \left[
+                y^{'}_c \left(nT\right)
+                +
+                y^{'}_c \left(\left(n-1\right)T\right)
+            \right]
+            +
+            y_c \left(\left(n-1\right)T\right)
+            \\
+            y^{'}_c \left(nT\right)
+            = 
+            - \dfrac{c_0}{c_1}    
+            y_c \left(nT\right)
+            +
+            \dfrac{d_0}{c_1}    
+            x_c \left(nT\right) 
+        \end{cases}
+    \end{equation}
+}
+
+che è una equazione differenziale. \newline 
