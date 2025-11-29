@@ -1096,3 +1096,340 @@ Quindi avremo questo sistema di risoluzione:
 }
 
 che è una equazione differenziale. \newline 
+
+Ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            y \left[ n\right] 
+            = 
+            y_c \left(nT\right)
+            \\
+            x \left[ n\right]
+            = 
+            x_c \left(nT\right)
+        \end{cases}
+    \end{equation}
+}
+
+si ottiene che (traslasciando i passaggi matematici) l'equazione differenziale precedente diventa: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        -
+        y \left[ n - 1\right] 
+        = 
+        \dfrac{T}{2} 
+        \cdot 
+        \left\{
+            - \dfrac{c_0}{c_1} 
+            \left(
+                y \left[ n\right] 
+                + 
+                y \left[ n - 1\right]
+            \right)
+            + 
+            \dfrac{d_0}{c_1} 
+            \left(
+                x \left[ n\right] 
+                + 
+                x \left[ n - 1\right]
+            \right)
+        \right\}
+    \end{equation}
+}
+
+cioè un'equazione alle differenze. \newline 
+
+Trasformando nel dominio z l'equazione precedente, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right)
+        = 
+        \dfrac{Y \left(z\right)}{X \left(z\right)}
+        = 
+        \dfrac{d_0}{c_1 \left(\dfrac{2}{T} \dfrac{1 - z^{-1}}{1 - z^{-1}}\right) + c_0}
+    \end{equation}
+
+} 
+
+dove T, ricordiamo, è il passo di integrazione. \newline 
+
+\newpage 
+
+Ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        s 
+        = 
+        \dfrac{2}{T} 
+        \dfrac{1 - z^{-1}}{1 + z^{-1}}
+    \end{equation}
+} 
+
+cioè: 
+
+{
+    \Large 
+    \begin{equation}
+    z 
+    = 
+    \dfrac{1 + \dfrac{T}{2s}}{1 - \dfrac{T}{2s}}        
+    \end{equation}
+}
+
+avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+    H \left(z \right) 
+    = 
+    \left.
+    H_c \left(s\right) 
+    \right|_{s 
+        = 
+        \dfrac{2}{T} 
+        \dfrac{1 - z^{-1}}{1 + z^{-1}}}   
+    \end{equation}
+    
+} 
+
+cioè il filtro progettato nel dominio z è uguale al dominio s, grazie a questo mapping non lineare 
+
+In particolare se facciamo questa sostituzione: 
+
+{
+    \Large 
+    \begin{equation}
+        z = e^{\jmath \omega}
+    \end{equation}
+}
+
+cioè consideriamo solo il cerchio unitario nel dominio z, 
+avremo che la variabile la variabile s, con il mapping scritto precedentemente, 
+sarà uguale a (considerando la parte reale nel dominio s, cioè $\sigma$, e la parte immaginaria, cioè $\Omega$), utilizzando le formule di Eulero: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            s 
+            &= \sigma + \jmath \Omega 
+            \\
+            &= 
+            \dfrac{2}{T}
+            \dfrac{1 - e^{-\jmath \omega}}{1 + e^{-\jmath \omega}} 
+            \\
+            &= 
+            \dfrac{2}{T}
+            \dfrac{e^{-\jmath \frac{\omega}{2}} \left( e^{+\jmath \frac{\omega}{2}} - e^{-\jmath \frac{\omega}{2}}\right)}{e^{-\jmath \frac{\omega}{2}} \left( e^{+\jmath \frac{\omega}{2}} + e^{-\jmath \frac{\omega}{2}}\right)} 
+            \\
+            &= 
+            \dfrac{2}{T}  
+            \dfrac{\jmath \sin \left(\dfrac{\omega}{2}\right)}{\cos \left(\dfrac{\omega}{2}\right)}
+        \end{split}
+    \end{equation}
+}
+
+Dalla formula appena scritta di s, $\dfrac{\jmath \sin \left(\dfrac{\omega}{2}\right)}{\cos \left(\dfrac{\omega}{2}\right)}$ è un contributo di s immaginario non lineare. \newline 
+
+Inoltre, sempre dala stessa formula possiamo ricavarci quanto vale $\Omega$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \Omega = \dfrac{2}{T} \tan \left(\dfrac{\omega}{2}\right)
+    \end{equation}
+} 
+
+da cui, possiamo ricavarci anche quanto vale $\omega$: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega 
+        = 
+        2 \tan^{-1} \left(\dfrac{\Omega T}{2}\right)
+    \end{equation}
+}
+
+\newpage 
+
+Dalla formula di $\omega$, possiamo graficarla in base alla variabile $\Omega$ come nel seguente grafico: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Relazione tra Omega e omega in una trasformazione bilineare.png}
+\end{figure}  
+
+Dalla seguente figura, si possono svolgere le seguenti considerazioni riguardo la trasformazione bilineare: 
+
+\begin{itemize}
+    \item tra $\omega$ e $\Omega$ non esiste una relazione lineare (in altri termini non è presente una retta nel grafico) 
+    \item si avrà una bassa distorsione per $\Omega$ basse, cioè quelle vicino a $\Omega = 0 $ perchè avremo un $\omega$ che sarà più vicino a $\abs{0}$
+    \item si avarà una alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
+\end{itemize} 
+
+Questo tipo di distosione non lineare nelle frequenze prende il nome di compressione. \newline 
+
+\begin{tcolorbox}
+Le osservazioni appena elencate sono quelle che realmente vi dovete ricordare per l'esame, non tutte le altre formule. \newpage 
+
+Le formule sono formule e lasciano il tempo che trovano. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsubsection{Mapping da piano S a piano Z}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 12 \\ 
+    Appunti | 2025-11-12 | pag 1 
+} 
+
+\begin{tcolorbox}
+    Queste elencate di seguito, sono le osservazioni da ricardare per quanto riguarda la trasformazione bilineare. 
+\end{tcolorbox}
+
+Come scritto precedentemente, eseguendo il seguente mapping: 
+
+{
+    \Large 
+    \begin{equation}
+        z = \dfrac{1 + \dfrac{T}{2} s}{1 - \dfrac{T}{2} s}
+    \end{equation}
+}
+
+dove T è il passo di integrazione, ù
+abbiamo un mapping non lineare dal piano S al piano Z come si vede dalla seguente figura dei due piani: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{trasformazione bilineare da piano S a piano Z.png}
+\end{figure}  
+
+Eseguendo questo tipo di mapping, possiamo trarre le seguenti considerazioni: 
+
+\begin{itemize}
+    \item si preserva la stabilità perchè: 
+    {
+        \Large 
+        \begin{equation}
+            \Re \left[s\right] < 0 \to \abs{z} < 1
+        \end{equation}
+    }
+    cioè se una frequenza nel dominio s si trova a sinistra del semipiano, allora nel dominio z quella stessa frequenza si trova all'interno del cerchio unitario, e quindi, nei due casi, avremo stabilità 
+    \item la trasformazione bilineare funziona sempre anche per filtri $H_c \left(s\right)$ non limitate in banda 
+    \item comprimere le frequenze in modo tale che: 
+    {
+        \Large 
+        \begin{equation}
+            \begin{split}
+            \Omega &= \pm \infty 
+            \\
+            &\downarrow 
+            \\
+            \omega &= \pm \pi
+            \end{split}
+        \end{equation}
+    } 
+    avremo che, eventuali zeri in s all'infinito, sia mappino in $\pm \pi$ nel piano z 
+    \item la trasformazione bilineare genera una compressione nella risposta in ampiezza dal dominio s al dominio z, invece genere una distorsione per quanto riguarda la risposta in fase 
+    \item la trasformazione bilineare si utilizza quando la distorsione di fase non interessa, quindi per specifiche $\omega_p$ e $\omega_s$ vanno predisposta per ottenere $\Omega_p$ e $\Omega_s$ opportune
+\end{itemize}
+
+\newpage 
+
+\section{Progetto di filtri IIR mediante tecnica di trasformazione}
+
+\footnote{ 
+    Slide del prof | 9 - Progetto Filtri IIR 2 | pag 13 - 15\\ 
+    Appunti | 2025-11-12 | pag 1  
+} 
+
+Date delle specifiche nel dominio Z, cioè in $\omega$ perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        z = e^{\jmath \omega}
+    \end{equation}
+}
+
+allora possiamo ottenere $H \left(z\right)$ passando attraverso un filtro analogico progettato in forma chiusa. \newline 
+
+Esistono diversi metodi per la progettazione di questi filtri, ma noi ne elencheremo i due principali. \newline 
+
+\textbf{Primo metodo} \newline 
+
+\begin{enumerate}
+    \item trasformazine dal dominio S al dominio Z, cioè si calcola l'inverso delle specifiche in Z
+    \item trasformazione dal dominio S al dominio S, per ottenere le specifiche del filtro passa-basso prototipo 
+    \item progetto del filtro passa-basso prototipo nel dominio S mediante approssimazione di Butterworth, o di Chebyshev o Elittica 
+    \item trasformazione dal dominio S al dominio S per ottenre il filtro passa basso 
+    \item trasformazione dal dominio S al dominio Z per ottenere il corrispondente filtro in Z 
+\end{enumerate}
+
+Questo primo metodo può essere utilizzata solo se si svolgono queste accortezze: 
+
+\begin{itemize}
+    \item Dai passi 1 a 5, il parametro T, cioè il passo di integrazione, può essere fissato arbitrariamente, ad esempio $T = 1$ 
+    \item se il filtro desiderato non è limitato in banda, quindi nei casi di filtri passa-alto e elimina banda, si può utilizzare questo metodo perchè non vale l'invarianza all'impulso \newline  
+\end{itemize}
+
+\textbf{Secondo metodo} \newline  
+
+\begin{enumerate}
+    \item trasformazione dal dominio Z al dominio Z, cioè si fa l'inverso delle specifiche in Z per ottenere le specifiche del filtro passa-basso prototipo in Z 
+    \item trasformazione dal dominio S al dominio Z, cioè si fa l'inverso delle specifiche dal passa-basso 
+    \item si progetta il filtro passa-basso nel dominio S, mediante l'approssimazione di Butterworth o di Chebyshev o Elittica 
+    \item trasformazione dal dominio S al dominio Z per ottenere il filtro passa-basso prototipo in Z 
+    \item trasformazione dal dominio Z al dominio Z per ottenre il filtro desisiderato in Z 
+\end{enumerate}
+
+Questo secondo metodo può essere utilizzata solo se si svolgono queste accortezze: 
+
+\begin{itemize}
+    \item Dai passi 1 a 5, il parametro T, cioè il passo di integrazione, può essere fissato arbitrariamente, ad esempio $T = 1$ 
+    \item si può utilizzare all'invarianza all'impulso, quindi questo metodo vale per tutti i tipi di filtri, anche quelli passa.alto ed elimina banda, ma accettando una piccola distorsione di fase 
+\end{itemize} 
+
+\newpage 
+
+Ricordiamo che la distorsione in fase è dovuto da:  
+
+{
+    \Large 
+    \begin{equation}
+        \omega 
+        = 
+        2 \tan^{-1} \left(\dfrac{\Omega T}{2}\right)
+    \end{equation}
+}
+
+quindi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Relazione tra Omega e omega in una trasformazione bilineare.png}
+\end{figure}  
+
+\begin{tcolorbox}
+    Ma tanto a noi tutti questi passaggi non interessa perchè la progettazione dei filtri, almeno per questo esame, verrà fatto con il package "filterDesigner" su Matlab. \newline 
+
+    A noi interessa sapere che Matlab, in background, fa tutti questi calcoli. 
+\end{tcolorbox}
+
+\newpage 
+
+
+
