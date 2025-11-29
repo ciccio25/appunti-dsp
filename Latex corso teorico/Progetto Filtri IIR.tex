@@ -11,7 +11,8 @@
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 2 - 3\\
-    Appunti | 2025-11-11 | pag 2   
+    Appunti | 2025-11-11 | pag 2  \\ 
+    Latex | 2025-11-23 Sera | pag 223  
 }
 
 Come scritto nelle pagine precedenti, in questo corso andremo affrontare i filtri discreti, che, essendo sistemi (tristi) lineari (o meglio LTI), 
@@ -59,10 +60,6 @@ Tipicamente, le specifiche vengono date in analogico e sono le seguenti:
 
 Per quanto riguarda la progettazione del filtro digitale, cioè $H \left(z\right)$, bisognerà svolgere queste scelte: 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
-Giusta la frase scritta? 
-\end{tcolorbox}
-
 \begin{itemize}
     \item si sceglie se una realizzazione FIR, Finite Impulse Response o risposta impulsiva finita, o una realizzazione IIR, Infinite Impulse Response o risposta impulsiva infinita 
     \begin{tcolorbox}
@@ -83,7 +80,8 @@ Alla fine, si svolge una verifica delle caratteristiche ottenute: in caso contra
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 4\\
-    Appunti | 2025-11-11 | pag 2   
+    Appunti | 2025-11-11 | pag 2  \\ 
+    Latex | 2025-11-23 Sera | pag 224  
 } 
 
 Molto spesso, le specifiche vengono date in analogico, nel mondo reale, e non in digitale. \newline 
@@ -120,15 +118,9 @@ possiamo svolgere diverse considerazioni. \newline
 Idealmente vorremmo avere un filtro in cui la banda di transizione fosse nulla perchè vorremmo avere un filtro rettangolare in frequenza, 
 ma ciò non è possibile perchè, ricordando la relazione tra il dominio del tempo e Fourier, se si ha una transizione brusca in Fourier si avrà un andamento nel tempo infinito. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
-Giusta la frase scritta? 
-\end{tcolorbox}
-
 Per questo motivo, nel filtro prototipo, quindi anche nelle specifiche, è necessario avere una banda di transizione non nulla (nella figura, quelle pulsazioni $\omega$ comprese nell'intervallo $\left[ \omega_p, \omega_s\right]$). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
-C'è un motivo per cui il modulo del filtro nella banda di transizione, almeno nella figura, è lineare? Ha a che fare con la fase?  
-\end{tcolorbox}
+Come si vede nella figura, il modulo del filtro prototipo, nella banda di transizione, deve essere, se possibile, monotona decrescente (non per forza lineare come nella figura). \newline 
 
 \newpage
 
@@ -164,7 +156,8 @@ dove:
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 5\\
-    Appunti | 2025-11-11 | pag 2   
+    Appunti | 2025-11-11 | pag 2 \\ 
+    Latex | 2025-11-23 Sera | pag 226   
 } 
 
 Per la progettazione di un filtro IIR, generalmente, si applicano una tra le due tecniche di progettazione: 
@@ -181,20 +174,8 @@ Poi, si trasforma il filtro analogico, cioè $H_c \left(s\right)$ del filtro con
 
 Il vantaggio maggiore delle tecnice di trasformazione è che, grazie alla teoria della approssimazione, si dispone di forme chiuse per il filtro analogico $H_c \left(s\right)$ (cosa che non è possibile fare nel dominio z a differenza del dominio s). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4}
-Cosa si intende per forme chiuse in s ? \newline 
-
-Da Wikipedia: \newline 
-
-In matematica, per forma chiusa può intendersi:
-\begin{itemize}
-    \item una forma differenziale chiusa, cioè tale che $d\omega = 0$ 
-    \item un'espressione chiusa, cioè definita da un numero finito di applicazioni di certe funzioni, intesa come antitesi di forma ricorsiva.  
-\end{itemize}
-
-Cioè, per quanto riguarda la progettazione dei filtri IIR e le tecniche di trasformazione, per forme chiuse si intende che non possiamo rappresentare tutti i filtri analogici $H_c \left(s\right)$ dal dominio s al dominio z, ma solo alcuni? 
-
-\end{tcolorbox}
+Per quanto riguarda la progettazione dei filtri IIR e le tecniche di trasformazione, 
+per forme chiuse si intende che non possiamo rappresentare tutti i filtri analogici $H_c \left(s\right)$ dal dominio s al dominio z, ma solo alcuni. \newline 
 
 Lo svantaggio maggiore delle tenciche di trasformazione è che si ha uno scarso controllo delle prestazione ottenuto, quindi è difficile ottimizzare $H \left(z\right)$ da $H_c \left(s\right)$. \newline 
 
@@ -206,8 +187,13 @@ I vantaggi delle tecniche dirette sono che si ha un buon controllo delle prestaz
 
 Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci sono dei problemi di convergenza degli algoritmi. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5}
-"Necessitano di calcolatori", cioè ci saranno più conti da fare? 
+\begin{tcolorbox}
+    Il fatto di svolgere tanti conti dipende dall'architettura del sistema che deve svolgere i calcoli. \newline 
+
+    Oggi giorni, i computer moderni possono svolgere tanti calcoli contemporaneamente, quindi non è un problema. \newline 
+
+    Il problema che permane è quello di ottimizzare poi il filtro finale al sistema d'uso finale (che può essere un piccolo microntrollore), 
+    ma in genere il sistema che svolge il progetto non ha un problema computazionale. 
 \end{tcolorbox}
 
 \newpage 
@@ -216,7 +202,8 @@ Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci so
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 6 - 9\\
-    Appunti | 2025-11-11 | pag 2 - 3
+    Appunti | 2025-11-11 | pag 2 - 3 \\
+    Latex | 2025-11-23 Sera | pag 227 - 228   
 } 
 
 \begin{tcolorbox}
@@ -237,8 +224,10 @@ Data la funzione del modulo del filtro analogico di Butterworth:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6}
-$\abs{H_c \left(\jmath \Omega\right)}$ al quadrato perchè si considera lo spettro di potenza per il teorema di Parseval? 
+\begin{tcolorbox}
+    $\abs{H_c \left(\jmath \Omega\right)}$ al quadrato perchè si considera lo spettro di potenza di $H_c \left(\jmath \Omega\right)$ per il teorema di Parseval. \newline 
+
+    Lo avevamo visto in \ref{teo: Teorema di Parseval} \nameref{teo: Teorema di Parseval} a pag \pageref{teo: Teorema di Parseval}. 
 \end{tcolorbox}
 
 In base al valore di n, avremo questi andamenti: 
@@ -264,12 +253,8 @@ Dalla seguente figura, si possono trarre le seguenti considerazioni:
             -3 \text{ dB}
         \end{equation}
     } 
-    \item è un filtro massimamente piatto 
+    \item è un filtro massimamente piatto, cioè, scomponendo $\abs{H_c \left(\Omega_c\right)}^{2}$ in polinomio di Taylor, le prime due derivate sono uguale a zero  
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7}
-Ha delle conseguenze e delle implicazioni sapere che è massimamente piatto?
-\end{tcolorbox}
 
 \newpage 
 
@@ -316,10 +301,6 @@ dove:
     \item $\Omega_c$ è il raggio della circonferenza 
     \item per n dispari, la distanza di ogni polo è di $\dfrac{\pi}{n}$
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8}
-Ha delle implicazioni avere dei poli nell'asse reale? La circonferenza $\Omega_c$ è di raggio unitario? 
-\end{tcolorbox}
 
 Come scritto precedentemente \ref{subsec: Specifiche "in frequenza"} \nameref{subsec: Specifiche "in frequenza"} a pag \pageref{subsec: Specifiche "in frequenza"}, 
 passeremo dalle specifiche: 
@@ -393,7 +374,8 @@ I coefficienti di $H_c \left(s\right)$ si trovano analiticamente o da apposite t
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 10\\ 
-    Appunti | 2025-11-11 | pag 3  
+    Appunti | 2025-11-11 | pag 3  \\ 
+    Latex | 2025-11-23 Sera | pag 230 
 } 
 
 Basato sui polinomi di Chebyshev, al variare di n, possiamo costruire i filtri analogici di Chebyshev come si vede in figura: 
@@ -425,12 +407,12 @@ dove:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9}
-L'uso dei polinomi di Chebyshev è quello di scrivere gli n-esimi coseni come una funzione polinomiale, giusto? Servono per l'interpolazione tra due punti? 
-\end{tcolorbox}
-
 \begin{tcolorbox}
-    Se vuoi approfondire il tema sui polinomi di Chebyshev e perchè sono molto utili: 
+    L'uso dei polinomi di Chebyshev è quello di scrivere gli n-esimi coseni come una funzione polinomiale. \newline 
+
+    Inoltre, possono servire anche per l'interpolazione tra due punti (applicazione che non vedremo in questo corso). \newline  
+    
+    Se vuoi approfondire il tema sui polinomi di Chebyshev, sul perchè sono molto utili e sulle tante sue applicazioni (ad esempio anche nella finanza quantitativa): 
 
     \begin{itemize}
         \item Chebyshev Polynomials by Physics and Math Lectures \\\url{https://www.youtube.com/watch?v=q8zGN2QwyU4&list=PL2uXHjNuf12aUiM6mgtng_mx07aB5o2zY}
@@ -445,7 +427,8 @@ L'uso dei polinomi di Chebyshev è quello di scrivere gli n-esimi coseni come un
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 11 - 12\\ 
-    Appunti | 2025-11-11 | pag 3  
+    Appunti | 2025-11-11 | pag 3 \\ 
+    Latex | 2025-11-23 Sera | pag 231   
 } 
 
 I filtri analogici di Chebyshev di tipo I hanno la seguente formula in modulo: 
@@ -474,13 +457,10 @@ Due esempi di filtri di Chebyshev di tipo 1:
     \includegraphics[scale = 0.3]{filtri di Chebyshev di tipo I esempi.png}
 \end{figure}  
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10}
-Perchè ci sono due figure di filtri di Chebyshev? Perchè uno inizia da 1 e uno da $1 - \delta_1$ ?
-\end{tcolorbox}
-
 Dalle seguenti figure possiamo trarre le seguenti considerazioni: 
 
-\begin{itemize}
+\begin{itemize} 
+    \item nella banda passante, per mantenere la simmetria, il filtro (nella figura si considera con modulo normalizzato) può partire o dal suo minimo, cioè da $1 - \delta_1$, oppure dal suo massimo, cioè 1 
     \item nella banda passante, quindi in $\Omega < \Omega_c$, l'andamento del filtro non deve essere per forza essere sinusoidale come in figura; l'importante che il modulo del filtro si trovi tra 1 e $1 -\delta_1$
     \item ricordando che teoricamente, il filtro ideale dovrebbe essere rettangolare, nei filtri di Chebyshev di tipo I l'errore del modulo viene distribuito sulla banda passante (e questo giustifica perchè Chebyshev di tipo I è meglio di Butterworth) 
 \end{itemize}
@@ -524,7 +504,8 @@ tabulati per valori di $\delta_1 = 1$ e $\Omega_c = 1$. \newline
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 1 | pag 13\\ 
-    Appunti | 2025-11-11 | pag 3  
+    Appunti | 2025-11-11 | pag 3  \\ 
+    Latex | 2025-11-23 Sera | pag 234 
 } 
 
 I filtri analogici di Chebyshev di tipo II hanno la seguente formula in modulo: 
@@ -558,6 +539,18 @@ Per le specifiche, si adotta lo stesso approcio dei filtri di Tipo I di Chebyshe
 
 \newpage 
 
+Come possiamo vedere sul piano s come diventa il filtro analogico di Tipo II di Chebyshev : 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro analogico elittico nel piano s.png}
+\end{figure}  
+
+avremo che i poli disposti sull'elisse centrati nell'origine del piano S sono i più spinti e che generano il maggior ripple (cioè maggiore oscillazione), 
+perchè si trovano vicino al cerchio unitario. \newline 
+
+\newpage 
+
 \subsection{Filtri analogici elittici}
 
 \footnote{ 
@@ -577,7 +570,7 @@ i quali hanno la seguente funzione di rete:
     \end{equation}
 }
 
-dove $E^{2}_n \left(\Omega\right)$ è una funzione elittica Jacobiana. \newline 
+dove $E^{2}_n \left(\Omega\right)$ è una funzione Jacobiana elittica (da cui prendono il nome questo tipo di filtri). \newline 
 
 \begin{tcolorbox}
     Il Jacobiano è una cosa che abbiamo già approfondito ad Analisi Matematica 2, ma per un focus maggiore, lo spiegherò meglio nelle prossime pagine. 
@@ -593,20 +586,15 @@ Un esempio di undamento di un filtro analogico elittico in modulo:
 A differenza dei filtri analogici precedenti, come scritto nelle note delle figure, essendo la banda di transizione molto stretta, 
 l'equiripple è sia presente in banda passante che in banda oscura. \newline 
 
-Come possiamo vedere sul piano s come diventa il filtro elittico: 
+Di seguito le caratteristiche principali di questi filtri: 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale = 0.4]{filtro analogico elittico nel piano s.png}
-\end{figure}  
-
-i poli si trovano sull'asse ellittico. \newline 
-
-\newpage 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11}
-Sotto la riga a pag 13 si riferisce ai filtri elittici? E perchè si chiamano elittici?
-\end{tcolorbox}
+\begin{itemize}
+    \item hanno poli e zeri (di cui questi ultimi anche sull'asse) 
+    \item hanno le migliori caratteristiche in termini di banda di transizione o di complessità (a paritò di ordine di n) 
+    \item essendo la banda di transizione piccola, l'errore viene distribuito sia sulla banda passante che quella oscura 
+    \item dati $\delta_1$, $\delta_2$, $\Omega_c$, $\Omega_s$, si calcola l'ordine n del filtro e la funzione $H_c \left(s\right)$ mediante tabelle o programmi CAD 
+    \item presentano una risposta in fase non troppo lineare, soprattutto nei dintorni della banda di transizione (ma se la fase non è importante, sono ottimi questi tipi di filtri per le applicazioni)
+\end{itemize}
 
 \newpage 
 
@@ -836,7 +824,7 @@ Questo tipo di mapping dal piano s al piano z comporta le seguenti caratteristic
     \item se non c'è aliasing, questo tipo di mapping preserva la risposta in frequenza perchè l'asse $\jmath \Omega$ nell'intervallo $\left(\dfrac{\pi}{T}, -\dfrac{\pi}{T}\right)$ dal piano s corrisponde al cerchio unitario nel piano z
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12}
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
 Riguardo all'ultima frase, allora perchè nel piano S è anche blu nell'asse $\jmath \Omega$ per valori maggiori di $\dfrac{\pi}{T}$? \newline 
 
 Nel piano z è ancora blu nel cerchio unitario. 
