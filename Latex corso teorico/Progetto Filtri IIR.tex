@@ -167,17 +167,17 @@ Per la progettazione di un filtro IIR, generalmente, si applicano una tra le due
     \item tecniche dirette (le più utilizzate per i filtri FIR)
 \end{itemize}
 
-Per tecniche di trasformazione si intende che, inizialmente, si progetta il filtro (o un suo prototipo) nel dominio di Laplce, cioè nel dominio s, 
+Per tecniche di trasformazione si intende che, inizialmente, si progetta il filtro (o un suo prototipo) nel dominio di Laplace, cioè nel dominio s, 
 cioè si progetta un filtro analogico corrispondente. \newline 
 
 Poi, si trasforma il filtro analogico, cioè $H_c \left(s\right)$ del filtro continuo in una funzione $H \left(z\right)$, cioè nel dominio discreto z, che è proprio il filtro voluto in digitale. \newline 
 
-Il vantaggio maggiore delle tecnice di trasformazione è che, grazie alla teoria della approssimazione, si dispone di forme chiuse per il filtro analogico $H_c \left(s\right)$ (cosa che non è possibile fare nel dominio z a differenza del dominio s). \newline 
+Il vantaggio maggiore delle tecniche di trasformazione è che, grazie alla teoria della approssimazione, si dispone di forme chiuse per il filtro analogico $H_c \left(s\right)$ (cosa che non è possibile fare nel dominio z a differenza del dominio s). \newline 
 
 Per quanto riguarda la progettazione dei filtri IIR e le tecniche di trasformazione, 
 per forme chiuse si intende che non possiamo rappresentare tutti i filtri analogici $H_c \left(s\right)$ dal dominio s al dominio z, ma solo alcuni. \newline 
 
-Lo svantaggio maggiore delle tenciche di trasformazione è che si ha uno scarso controllo delle prestazione ottenuto, quindi è difficile ottimizzare $H \left(z\right)$ da $H_c \left(s\right)$. \newline 
+Lo svantaggio maggiore delle tecniche di trasformazione è che si ha uno scarso controllo delle prestazione ottenuto, quindi è difficile ottimizzare $H \left(z\right)$ da $H_c \left(s\right)$. \newline 
 
 Invece per tecniche dirette, significa che si progetta il filtro direttamente nel dominio z, ponendo dei vincoli alla funzione $H \left( z\right)$. \newline 
 
@@ -192,7 +192,7 @@ Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci so
 
     Oggi giorni, i computer moderni possono svolgere tanti calcoli contemporaneamente, quindi non è un problema. \newline 
 
-    Il problema che permane è quello di ottimizzare poi il filtro finale al sistema d'uso finale (che può essere un piccolo microntrollore), 
+    Il problema che permane è quello di ottimizzare poi il filtro finale al sistema d'uso finale (che può essere un piccolo micro-controllore), 
     ma in genere il sistema che svolge il progetto non ha un problema computazionale. 
 \end{tcolorbox}
 
@@ -240,7 +240,7 @@ In base al valore di n, avremo questi andamenti:
 Dalla seguente figura, si possono trarre le seguenti considerazioni: 
 
 \begin{itemize}
-    \item tutte le funzioni n-esime sono monotonicamente decrescenti 
+    \item tutte le funzioni n-esime sono monotone decrescenti 
     \item all'aumentare di n, il filtro si avvicina al filtro rettangolare ideale 
     \item per qualsiasi valore di n, alla frequenza di cutoff $\Omega_c$: 
     {
@@ -465,7 +465,7 @@ Dalle seguenti figure possiamo trarre le seguenti considerazioni:
     \item ricordando che teoricamente, il filtro ideale dovrebbe essere rettangolare, nei filtri di Chebyshev di tipo I l'errore del modulo viene distribuito sulla banda passante (e questo giustifica perchè Chebyshev di tipo I è meglio di Butterworth) 
 \end{itemize}
 
-Date le specifiche $\delta_1$, $\delta_2$, $\Omega_c$ e $\Omega_s$ (dove generlmante $\delta_1$, $\delta_2$ sono dati in dB), 
+Date le specifiche $\delta_1$, $\delta_2$, $\Omega_c$ e $\Omega_s$ (dove generalmente $\delta_1$, $\delta_2$ sono dati in dB), 
 bisogna calcolarsi gli oppurtuni valori di $\varepsilon$ e n di $\abs{H_c \left(\jmath \Omega\right)}^{2}$. \newline 
 
 Dalla formula di $\abs{H_c \left(\jmath \Omega\right)}^{2}$ si deduce "facilmente" che, date le specifiche, avremo che i valori di $\varepsilon$ e n si trovino con queste formule: 
@@ -576,7 +576,7 @@ dove $E^{2}_n \left(\Omega\right)$ è una funzione Jacobiana elittica (da cui pr
     Il Jacobiano è una cosa che abbiamo già approfondito ad Analisi Matematica 2, ma per un focus maggiore, lo spiegherò meglio nelle prossime pagine. 
 \end{tcolorbox}
 
-Un esempio di undamento di un filtro analogico elittico in modulo: 
+Un esempio di andamento di un filtro analogico elittico in modulo: 
 
 \begin{figure}[h]
     \centering
@@ -590,7 +590,7 @@ Di seguito le caratteristiche principali di questi filtri:
 
 \begin{itemize}
     \item hanno poli e zeri (di cui questi ultimi anche sull'asse) 
-    \item hanno le migliori caratteristiche in termini di banda di transizione o di complessità (a paritò di ordine di n) 
+    \item hanno le migliori caratteristiche in termini di banda di transizione o di complessità (a parità di ordine di n) 
     \item essendo la banda di transizione piccola, l'errore viene distribuito sia sulla banda passante che quella oscura 
     \item dati $\delta_1$, $\delta_2$, $\Omega_c$, $\Omega_s$, si calcola l'ordine n del filtro e la funzione $H_c \left(s\right)$ mediante tabelle o programmi CAD 
     \item presentano una risposta in fase non troppo lineare, soprattutto nei dintorni della banda di transizione (ma se la fase non è importante, sono ottimi questi tipi di filtri per le applicazioni)
@@ -617,7 +617,7 @@ una corrispondente funzione $H \left(z\right)$ razionale, cioè un'equazione all
     \item mantenga la caratteristica di stabilità 
 \end{itemize}
 
-Cioè, si dovrà stabilire un oppurtuno mapping tra il piano s e il piano z, cioè tra il dominio $\Omega$ al dominio $\omega$. \newline 
+Cioè, si dovrà stabilire un opportuno mapping tra il piano s e il piano z, cioè tra il dominio $\Omega$ al dominio $\omega$. \newline 
 
 Per svolgere questo mapping ci sono diversi metodi disponibili. \newline 
 
@@ -648,7 +648,7 @@ Cioè passeremo dalla risposta impulsiva $h_c \left(t\right)$ del filtro analogi
     \end{equation}
 }
 
-dove T è il periodo di campionameto. \newline 
+dove T è il periodo di campionamento. \newline 
 
 In frequenza invece avremo che: 
 
@@ -849,7 +849,7 @@ Ricordiamo che tutte queste considerazioni sono solo per filtri limitati in band
     li fa Matlab o sono già stati fatti e messe in opportune tabelle pre-stabilite. 
 \end{tcolorbox}
 
-Siccome progetttiamo il filtro in analogici, consideriamo il caso più tipico, cioè quello di una funzione di rete $H_c \left(s\right)$ con solo poli semplici in cui: 
+Siccome progettiamo il filtro in analogici, consideriamo il caso più tipico, cioè quello di una funzione di rete $H_c \left(s\right)$ con solo poli semplici in cui: 
 
 {
     \Large 
@@ -1017,7 +1017,7 @@ bensì per l'intervallo $\left[ \left(n-1\right)T, nT\right]$ dove:
     \item $\left(n-1\right)T$ si intende il precedente istante dell'n-esimo istante T
 \end{itemize}
 
-Allora, con questa considerazione, possiamo trosformare questo integrale come: 
+Allora, con questa considerazione, possiamo trasformare questo integrale come: 
 
 {
     \Large 
@@ -1102,7 +1102,7 @@ Ponendo:
     \end{equation}
 }
 
-si ottiene che (traslasciando i passaggi matematici) l'equazione differenziale precedente diventa: 
+si ottiene che (tralasciando i passaggi matematici) l'equazione differenziale precedente diventa: 
 
 {
     \Large 
@@ -1230,7 +1230,7 @@ sarà uguale a (considerando la parte reale nel dominio s, cioè $\sigma$, e la 
 
 Dalla formula appena scritta di s, $\dfrac{\jmath \sin \left(\dfrac{\omega}{2}\right)}{\cos \left(\dfrac{\omega}{2}\right)}$ è un contributo di s immaginario non lineare. \newline 
 
-Inoltre, sempre dala stessa formula possiamo ricavarci quanto vale $\Omega$, cioè: 
+Inoltre, sempre dalla stessa formula possiamo ricavarci quanto vale $\Omega$, cioè: 
 
 {
     \Large 
@@ -1267,7 +1267,7 @@ Dalla seguente figura, si possono svolgere le seguenti considerazioni riguardo l
     \item si avarà una alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
 \end{itemize} 
 
-Questo tipo di distosione non lineare nelle frequenze prende il nome di compressione. \newline 
+Questo tipo di distorsione non lineare nelle frequenze prende il nome di compressione. \newline 
 
 \begin{tcolorbox}
 Le osservazioni appena elencate sono quelle che realmente vi dovete ricordare per l'esame, non tutte le altre formule. \newpage 
@@ -1285,7 +1285,7 @@ Le formule sono formule e lasciano il tempo che trovano.
 } 
 
 \begin{tcolorbox}
-    Queste elencate di seguito, sono le osservazioni da ricardare per quanto riguarda la trasformazione bilineare. 
+    Queste elencate di seguito, sono le osservazioni da ricordare per quanto riguarda la trasformazione bilineare. 
 \end{tcolorbox}
 
 Come scritto precedentemente, eseguendo il seguente mapping: 
@@ -1360,10 +1360,10 @@ Esistono diversi metodi per la progettazione di questi filtri, ma noi ne elenche
 \textbf{Primo metodo} \newline 
 
 \begin{enumerate}
-    \item trasformazine dal dominio S al dominio Z, cioè si calcola l'inverso delle specifiche in Z
+    \item trasformazione dal dominio S al dominio Z, cioè si calcola l'inverso delle specifiche in Z
     \item trasformazione dal dominio S al dominio S, per ottenere le specifiche del filtro passa-basso prototipo 
     \item progetto del filtro passa-basso prototipo nel dominio S mediante approssimazione di Butterworth, o di Chebyshev o Elittica 
-    \item trasformazione dal dominio S al dominio S per ottenre il filtro passa basso 
+    \item trasformazione dal dominio S al dominio S per ottenere il filtro passa basso 
     \item trasformazione dal dominio S al dominio Z per ottenere il corrispondente filtro in Z 
 \end{enumerate}
 
@@ -1381,7 +1381,7 @@ Questo primo metodo può essere utilizzata solo se si svolgono queste accortezze
     \item trasformazione dal dominio S al dominio Z, cioè si fa l'inverso delle specifiche dal passa-basso 
     \item si progetta il filtro passa-basso nel dominio S, mediante l'approssimazione di Butterworth o di Chebyshev o Elittica 
     \item trasformazione dal dominio S al dominio Z per ottenere il filtro passa-basso prototipo in Z 
-    \item trasformazione dal dominio Z al dominio Z per ottenre il filtro desisiderato in Z 
+    \item trasformazione dal dominio Z al dominio Z per ottenere il filtro desiderato in Z 
 \end{enumerate}
 
 Questo secondo metodo può essere utilizzata solo se si svolgono queste accortezze: 
