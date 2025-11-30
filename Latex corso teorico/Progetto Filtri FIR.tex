@@ -1,0 +1,844 @@
+\chapter{Progetti Filtri FIR}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{fir digital filter.jpg}
+\end{figure}  
+
+\newpage 
+
+\section{Progetto di filtri FIR}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 1 - 2\\
+    Appunti | 2025-11-18 | pag 1    
+}
+
+I filtri FIR, Finite Impulse Response (in Italiano, filtri a risposta impulsiva finita), rispetto agli IIR, sono filtri più semplici da progettare (proprio perchè i coefficienti del filtro sono finiti), 
+ma impiegano più tempo per elaborare il segnale di ingresso $x \left[ n\right]$. \newline 
+
+Come studiato in \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}, 
+se i filtri FIR sono simmetrici, allora il ritardo di gruppo è costante. \newline 
+
+Il ritardo di gruppo, a livello di progettazione del filtro, è una caratteristica molto positiva, ma implica che il filtro avrà bisogno del tempo per andare a regime. \newline 
+
+Come al solito, il tempo per andare a regime, chiamato anche transitorio, dipende sempre dall'applicazione in cui il filtro è applicato. \newline 
+
+Esistono diversi metodi di progettazione di un filtro FIR, ma noi ne andremo ad analizzare 4 (di cui solo i primi 2 saranno approfonditi in questo corso, gli altri 2 saranno approfonditi alla magistrale): 
+
+\begin{enumerate}
+    \item metodo delle finestre (chiamato in inglese "Windowing"), proprio perchè è basato sulle finestre, quindi semplice, poco flessibile, non ottimo 
+    \item metodo "Equiripple", grazie all'algoritmo di Parks-McClellan, è possibile progettare un filtro FIR in un modo complicato, ma flessibile e ottimo 
+    \item metodo del campionamento in frequenza, il quale è un metodo mediamente complicato, non ottimo, ma flessibile 
+    \item metodi di stima parametrica, metodo ottimo in generale ma ha complessità variabile 
+\end{enumerate} 
+
+\newpage 
+
+\section{Progetto di filtri FIR: Windowing}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 3 - 4\\
+    Appunti | 2025-11-18 | pag 1 
+}
+
+Prima di procedere con la progettazione di un filtro FIR, 
+dobbiamo svolgere alcune osservazioni in merito ai filtri in generale. \newline 
+
+La prima osservazione è che un filtro FIR, nel dominio z, ha la seguente funzione di rete: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \sum_{k = 0}^{M} 
+        b_k \cdot z^{-k}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item i coefficienti $b_k$ del filtro FIR sono M+1 
+    \item i coefficienti $b_k$ del filtro FIR sono finiti 
+    \item i coefficienti $b_k$ del filtro FIR sono i campioni della risposta impulsiva, cioè di $h \left[ n\right]$ 
+\end{itemize} 
+
+La seconda osservazione è che i filtri ideali $H_d \left(e^{\jmath \omega}\right)$, cioè quelli che hanno una finestra rettangolare in frequenza, hanno risposta impulsiva $h_d \left[ n\right]$ che è IIR, cioè infinita, 
+dovuto alle proprietà di Fourier tra tempo e frequenza. \newline 
+
+\begin{tcolorbox}
+    Il professor Franco Chiaraluce insegna in merito a questo argomento: le basi dell'esame di Teoria dei Segnali. \newline 
+
+    Senza sapere le proprietà tra tempo e frequenza, l'esame di TdS è meglio non farlo. 
+\end{tcolorbox} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
+In questo caso, cosa significa "calcolabile analiticamente (in forma chiusa)"?
+\end{tcolorbox} 
+
+Grazie a questa ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali. \newline 
+
+Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omega}\right)$ come il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        H_d \left(e^{\jmath \omega}\right) 
+        = 
+        \begin{cases}
+            1 \quad \abs{\omega} < \omega_c 
+            \\ 
+            0 \quad \text{altrove} 
+        \end{cases}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
+$\omega_c$ è la frequenza di cut-off del filtro, giusto? 
+\end{tcolorbox} 
+
+dove, graficato nel spettro $H_d \left(e^{\jmath \omega}\right)$ sarà uguale a: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.15]{finestra rettangolare in frequenza.png}
+\end{figure}  
+
+\newpage 
+
+Anti-trasformando in Fourier $H_d \left(e^{\jmath \omega}\right)$, cioè la finestra rettangolare, avremo $h_d \left[ n\right]$, 
+che vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        H_d \left(e^{\jmath \omega}\right) 
+        &= 
+        \begin{cases}
+            1 \quad \abs{\omega} < \omega_c 
+            \\ 
+            0 \quad \text{altrove} 
+        \end{cases} 
+        \\ 
+        &\downarrow 
+        \\ 
+        h_d \left[ n\right] 
+        &= 
+        \dfrac{\sin \left(\omega_c n\right)}{\pi n}
+        \end{split}
+    \end{equation}
+}
+
+In altre parole, da finestra rettangolare in Fourier, $h_d \left[ n\right]$, nel dominio n, è un sinc, come mostrato in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{Sinc nel dominio n.png}
+\end{figure} 
+
+e che quindi $h_d \left[ n\right]$ si estende per $n \in \left[ - \infty, + \infty\right]$, quindi il sinc è un filtro IIR. \newline 
+
+Allora, per non avere un filtro che si estende tra $- \infty$ e $+ \infty$, possiamo troncare $h_d \left[ n\right]$, 
+come si vede nella seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{Sinc troncato non causale.png}
+\end{figure} 
+
+Bene aver troncato $h_d \left[ n\right]$, ma rimane un filtro non causale, 
+perchè il filtro $h_d \left[ n\right]$ non parte dall'indice $n = 0$. \newline 
+
+\newpage 
+
+Per renderlo causale, basta shiftarlo (cioè ritardarlo), come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{sinc troncato e causalizzato.png}
+\end{figure} 
+
+Ora $h_d \left[ n\right]$ è un sinc, troncato e causalizzato, quindi è un filtro FIR pronto da essere utilizzato da calcolatore. \newline 
+
+Quindi in formule siamo partiti da $H_d \left(e^{\jmath \omega}\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        H_d \left(e^{\jmath \omega}\right) 
+        = 
+        \begin{cases}
+            1 \quad \abs{\omega} < \omega_c 
+            \\ 
+            0 \quad \text{altrove} 
+        \end{cases} 
+    \end{equation}
+} 
+
+Abbiamo fatto la sua anti-trasformata di Fourier: 
+
+{
+    \Large 
+    \begin{equation}
+        h_d \left[ n\right] 
+        = 
+        \dfrac{1}{2 \pi}
+        \int_{- \pi}^{+ \pi} 
+        H_d \left(e^{\jmath \omega}\right) 
+        \cdot 
+        e^{\jmath \omega n} 
+        d \omega
+    \end{equation}
+} 
+
+Una volta shiftata $h_d \left[ n\right]$ troncata per n-indici M+1, l'abbiamo traslata e fatta partire dall'indice $n = 0$, 
+per rendere $h_d \left[ n\right]$ causale. \newline 
+
+Alla fine di tutto ciò, possiamo definire la risposta impulsiva $h \left[ n\right]$ del filtro sinc, troncato e causalizzato FIR come: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] 
+        = 
+        \begin{cases}
+            h_d \left[ n\right] \quad 0 \leq n \leq M
+            \\ 
+            0 \quad \text{altrove} 
+        \end{cases}
+    \end{equation}
+}
+
+Ma, definendo una nuova finestra rettangolare nel dominio n $w \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        \begin{cases}
+            1 \quad 0 \leq n \leq M
+            \\ 
+            0 \quad \text{altrove} 
+        \end{cases}
+    \end{equation}
+}
+
+possiamo definire la risposta impulsiva del filtro $h \left[ n\right]$ anche come: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] 
+        = 
+        h_d \left[ n\right] 
+        \cdot 
+        w \left[ n\right]
+    \end{equation}
+}
+
+\newpage 
+
+\subsection{Conseguenze del Windowing}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 5 - 6\\
+    Appunti | 2025-11-18 | pag 1 - 2 
+} 
+
+Analizzando $H \left(e^{\jmath \omega}\right)$, ma questa volta con il windowing $w \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            H \left(e^{\jmath \omega}\right) 
+            &= 
+            DTFT \left[ h \left[ n\right]\right] 
+            \\
+            &= 
+            DTFT \left[ h_d \left[ n\right] \cdot w \left[ n\right]\right] 
+            \\
+            &= 
+            \dfrac{1}{2 \pi} 
+            \int_{- \pi}^{+ \pi} 
+            H_d \left(e^{\jmath \theta}\right) 
+            \cdot 
+            W \left(e^{\jmath \left( \omega - \theta\right)}\right) 
+            d \theta
+        \end{split}
+    \end{equation}
+}
+
+cioè, come abbiamo studiato nei corsi precedenti, un prodotto nel tempo, cioè $h_d \left[ n\right] \cdot w \left[ n\right]$, 
+genere una convoluzione complessa in $\omega$, cioè $\int_{- \pi}^{+ \pi} H_d \left(e^{\jmath \theta}\right) \cdot W \left(e^{\jmath \left( \omega - \theta\right)}\right) d \theta$. \newline 
+
+Poichè $H_d \left(e^{\jmath \omega}\right)$, cioè la finestra rettangolare in Fourier, è periodica, 
+allora possiamo considerare per $h_d \left[ n\right]$ i suoi coefficienti della serie di Fourier associata (e non i coefficienti della trasformata di Fourier, cioè DTFT). \newline 
+
+\begin{tcolorbox}
+    Ricordiamo al volo che la serie di Fourier viene utilizzata per segnali che sono periodici nel tempo e si estendono per $n \left[ - \infty, + \infty\right]$. \newline 
+
+    Invece le trasformate, quindi la DTFT, viene utilizzata per segnali finiti non periodici e che non si estendono per $n \left[ - \infty, + \infty\right]$. 
+\end{tcolorbox}  
+
+Quindi, svolgere il windowing (o anche deto fenestrare) singificata troncare, cioè approssimare, una serie di Fourier, come si vede in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{windowing differenza.png}
+\end{figure} 
+
+Come si vede nella figura, $H_d$ (che è in rosso) dimostra l'andamento di un filtro rettangolare ideale, 
+invece H (che è in blu) dimostra l'andamento di un filtro "rettangolare" dovuto al finestramento. \newline 
+
+Le oscillazioni, sia in banda passante che in banda oscura, sono dovute al fenomeno di Gibbs (che avevamo incontrato in \ref{subsec: Filtri passa basso ideale} \nameref{subsec: Filtri passa basso ideale} a pag \pageref{subsec: Filtri passa basso ideale}). \newline 
+
+Inoltre, le oscillazioni aumentano all'aumentare di M e sono maggiori nella banda di transizione (cioè nella discontinuita per $H_d$). \newline 
+
+Ricordiamo al volo che M+1 è la lunghezza della finestra $w \left[ n\right]$. \newline 
+
+Ma la domanda è: è necessario avvicinarsi ad un filtro ideale? \newline 
+
+La risposta è no perchè il filtro impiegherebbe troppo tempo. \newline 
+
+\newpage 
+
+Inoltre, in una finestratura abbiamo due parametri liberi per svolgere questa tecnica, che sono: 
+
+\begin{itemize}
+    \item la lunghezza della finestra, cioè quanti M+1 capioni servono al filtro FIR 
+    \item la forma della finestra (non per forza deve essere rettangolare come abbiamo fatto negli esempi precedenti)
+\end{itemize} 
+
+Considerando, per adesso e per semplicità, una finestra $w \left[ n\right]$ nel tempo rettangolare, in Fourier sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            W \left(e^{\jmath \omega}\right) 
+            &= 
+            \sum_{n = 0}^{M} 
+            w \left[ n\right] 
+            \cdot 
+            e^{- \jmath \omega n} 
+            \\
+            &= 
+            \sum_{n = 0}^{M} 
+            1 
+            \cdot 
+            e^{- \jmath \omega n} 
+            \\
+            &= 
+            \sum_{n = 0}^{M} 
+            e^{- \jmath \omega n} 
+            \\
+            &= 
+            \dfrac{1 - e^{- \jmath \omega \left(M + 1\right)}}{1 - e^{- \jmath \omega}} 
+            \\
+            &= 
+            e^{- \jmath \omega \frac{M}{2}} 
+            \cdot 
+            \dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}
+        \end{split}
+    \end{equation}
+}
+
+Cioè, la finestra rettangolare nel tempo $w \left[ n\right]$, diventa, in Fourier, un rapporto tra due seni, come mostrato in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Finestra rettangolare nel dominio n nello spettro.png}
+\end{figure} 
+
+Proprio perchè nella formula di $W \left(e^{\jmath \omega}\right) $ è presente il fatto M, 
+possiamo svolgere queste osservazioni, sapendo che l'area dei lobi è costante, all'aumentare di M: 
+
+\begin{itemize}
+    \item il lobo principale si stringe 
+    \item aumentano i lobi laterali 
+\end{itemize} 
+
+\newpage 
+
+\subsection{Esigenze lunghezza finestra}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 7\\
+    Appunti | 2025-11-18 | pag 2  
+} 
+
+La scelta della lunghezza della finestra, cioè di quanti M+1 indici deve essere lunga $w \left[ n\right]$ nel dominio n (la cui trasformata di Fourier è $W \left(e^{\jmath \omega}\right)$), 
+è cruciale perchè al variare di M si possono fare queste seguenti osservazioni: 
+
+\begin{itemize}
+    \item $w \left[ n\right]$ corta implica minore complessità del filtro 
+    \item $W \left(e^{\jmath \omega}\right)$ stretta implica minore distorsione nel filtro finale $H \left(e^{\jmath \omega}\right)$
+\end{itemize}
+
+\begin{tcolorbox}
+    La scelta della lunghezza della finestra è un alto problema ingegneristico che prende il nome di "la coperta è corta" (come al solito), o come dicono gli economisti "non c'è budget". 
+\end{tcolorbox}
+
+Come abbiamo scritto precedentemente, il filtro finale $H \left(e^{\jmath \omega}\right)$ sarà la convoluzione tra il filtro ideale rettangolare $H_d \left(e^{\jmath \omega}\right)$ e la trasformata della finestra $W \left(e^{\jmath \omega}\right)$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{windowing convoluzione esempio 1.png}
+\end{figure} 
+
+Invece, aumetando M possiamo avere il seguente caso: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Windowing con M maggiore.png}
+\end{figure} 
+
+possiamo notare che: 
+
+\begin{itemize}
+    \item la banda di transizione dipende dalla larghezza del main lobe, quindi dal fattore M 
+    \item il ripple dipende dall'ampiezza dei lobi laterali, in inglese sidelobes (ma generalmente i sidelobes non sono importanti perchè sono in banda oscura, l'importante che abbiano un'ampiezza minore delle specifiche)
+\end{itemize} 
+
+\newpage 
+
+\subsection{Elenco delle finestre principali}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 8 - 12\\
+    Appunti | 2025-11-18 | pag 2  
+} 
+
+Siccome si vuole scegliere una finesta $w \left[ n\right]$ tale che in Fourier $W \left(e^{\jmath \omega}\right)$ abbia dei lobi laterali più bassi, 
+allora è possibile azzerando dolcemente gli estremi della finestra. \newline 
+
+A questo punto, siccome l'area sotto alla finestra è costante in tutti i lobi, il lobo principale è più largo. \newline 
+
+Grazie a questo principio, negli anni diversi studiosi hanno proposto diverse finestre, 
+che sono nulla fuori dalla lunghezza della finestra stessa. \newline 
+
+Di seguito le finestre $w \left[ n\right]$ più utilizzati nell'ambito DSP. \newline 
+
+\textbf{Rettangolare} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] = 0 \quad \text{ per } 0 \leq n \leq M
+    \end{equation}
+}
+
+\textbf{Bartlett} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        \begin{cases}
+            \dfrac{2 n}{M} \quad \text{ per } 0 \leq n \leq \dfrac{M}{2} 
+            \\ 
+            2 - \dfrac{2 n}{M} \quad \text{ per }\dfrac{M}{2} \leq n \leq M 
+        \end{cases}
+    \end{equation}
+}
+
+\textbf{Hanning} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        0.5 - 0.5 \cos \left(\dfrac{2 \pi n}{M}\right) 
+        \quad \text{ per } 0 \leq n \leq M
+    \end{equation}
+}
+
+\textbf{Hamming} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        0.54 - 0.46 \cos \left(\dfrac{2 \pi n}{M}\right) 
+        \quad \text{ per } 0 \leq n \leq M
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Sembrano simili, ma Hammming con le m, questa invece è Hanning con le n: sono due finestre diverse.  
+\end{tcolorbox} 
+
+\textbf{Blackman} \newline 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        0.42 - 0.5 \cos \left(\dfrac{2 \pi n}{M}\right) + 0.08 \cos \left(\dfrac{4 \pi n}{M}\right) 
+        \quad \text{ per } 0 \leq n \leq M
+    \end{equation}
+}
+
+\newpage 
+
+Da un punto di vista grafico, le varie finistre $w \left[ n\right]$ appena elencate hanno questo andamento (considerando le curve come continue e non discrete come dovrebbero essere realmente): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre rettangoli come curve continue.png}
+\end{figure} 
+
+Come possiamo visuallizare dalla figura, tutte le finestre $w \left[ n\right]$ sono simmetriche rispetto all'indice n $\dfrac{M}{2}$ (e questa è una carattersitica molto importante nella progettazione dei filtri FIR). \newline 
+
+Ora andiamo a confrontarle in Fourier. \newline 
+
+Di seguito lo spettro di una finestra rettangolare: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre rettangolare nello spettro.png}
+\end{figure} 
+
+dove la larghezza del lobo principale $ \Delta \omega $ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        = 
+        \dfrac{4 \pi}{M + 1}
+    \end{equation}
+}
+
+\newpage 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4}
+$ \Delta \omega $ è corretto che il lobo principale? 
+\end{tcolorbox} 
+
+L'attenuazione minima di una finestra rettangolare generalmente si misura in decibel, cioè in dB, ed è di almeno 21 dB. \newline 
+
+ Nella figura è indicato -13 dB, ma in realtà, in una finestra rettangolare, si considera il suo magnitude-squared: ecco perchè -21 dB. \newline 
+ 
+Invece, una finestra di Bartlet triangolare ha il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre bartlett triangolare nello spettro.png}
+\end{figure} 
+
+dove la larghezza del lobo principale $ \Delta \omega $ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        = 
+        \dfrac{8 \pi}{M + 1}
+    \end{equation}
+}
+
+L'attenuazione minima di una finestra Bartlett triangolare è di almeno 25 dB. \newline 
+
+\begin{tcolorbox}
+Questa è l'unica finestra in cui anche nella figura è indicata l'attenuazione in magnitude-squarred.     
+\end{tcolorbox}
+
+Confrontando una finestra rettangolare con una finestra di Bartlett rettangolare, avremo un'attenuazione maggiore minima all'estremo del lobo principale 
+(-25 dB è un'attuazione maggiore rispetto ai -21 dB), ma a discapito un'allargamento del lobo principale $\Delta \omega $ (si passa da $\dfrac{4 \pi}{M + 1}$ a $\dfrac{8 \pi}{M + 1}$ ). \newline 
+
+\newpage 
+
+Invece, una finestra di Hanning ha il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre hanning nello spettro.png}
+\end{figure} 
+
+dove la larghezza del lobo principale $ \Delta \omega $ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        = 
+        \dfrac{8 \pi}{M}
+    \end{equation}
+}
+
+L'attenuazione minima di una finestra di Hanning è di almeno 44 dB. \newline  
+
+Invece, una finestra di Hamming ha il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre hamming nello spettro.png}
+\end{figure} 
+
+dove la larghezza del lobo principale $ \Delta \omega $ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        = 
+        \dfrac{8 \pi}{M}
+    \end{equation}
+}
+
+L'attenuazione minima di una finestra di Hanning è di almeno 53 dB. \newline  
+
+Confrontando una finestra di Hanning con una finestra di Hamming, avremo un'attenuazione maggiore minima all'estremo del lobo principale per una finestra di Hanning 
+(-53 dB è un'attuazione maggiore rispetto ai -44 dB), con la stessa larghezza del lobo principale $\Delta \omega $ (che è di $\dfrac{8 \pi}{M}$ ). \newline  
+
+L'ultima, ma non per importanza, abbiamo la finestra Blackman, che ha il seguente andamento nello spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{finestre blackman nello spettro.png}
+\end{figure} 
+
+dove la larghezza del lobo principale $ \Delta \omega $ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega 
+        = 
+        \dfrac{12 \pi}{M}
+    \end{equation}
+}
+
+L'attenuazione minima di una finestra di Hanning è di almeno 74 dB. \newline  
+
+Rispetto alle finestre elencate, la Hamming è la migliore finestra per quanto riguarda l'attenuazione, proprio perchè attenua di 74 dB, 
+ma è quella che ha una larghezza maggiore del lobo principale. \newline 
+
+\newpage 
+
+\subsection{Caratteristiche del metodo Windowing}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 13 \\
+    Appunti | 2025-11-18 | pag 2  
+} 
+
+\begin{tcolorbox}
+Queste sono le considerazioni che realmente è necessario memorizzare per l'esame.     
+\end{tcolorbox}
+
+Dopo tutte queste spiegazioni, come mostrato dalla seguente figura:     
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{metodo windowing scelta della finestra.png}
+\end{figure} 
+
+dove: 
+
+\begin{itemize}
+    \item $H_d \left(e^{\jmath \omega}\right)$ è il filtro ideale 
+    \item $H \left(e^{\jmath \omega}\right)$ è il filtro realizzato con tecnica windowing 
+    \item $W \left(e^{\jmath \omega}\right)$ è la finestra troncata 
+\end{itemize} 
+
+Quando si utilizza la tecnica Windowing per la progettazione di un filtro FIr bisogna ricordarsi delle seguente caratteristiche di questa tecnica: 
+
+\begin{itemize}
+    \item la largezza della banda di transione è inversamente proporzionale ad M e dipende dal tipo di finestra (cioè se si usa una finestra rettangolare, p una di Bartlett, o una Hanning, ecc..) 
+    \item il ripple, cioè l'attenuazione minima in banda oscura, dipende solo dal tipo di finestra, e non dall'M scelto  
+\end{itemize} 
+
+Riassumendo, nella tecnica Windowing, una volta scelta la finestra, si calcola $\Delta \omega$, da cui poi si può ricavare il coefficiente M. \newline 
+
+\newpage 
+
+\subsection{Finestre di Kaiser}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 14 - 15 \\
+    Appunti | 2025-11-18 | pag 2 - 3
+}  
+
+Kaiser nel 1974 ha proposto una famiglia flessibile di finestre di tipo sub-ottimo, cioè in cui la maggior parte del'energia si trova nel lobo principale per una data ampiezza di picco 
+del lobo laterale più vicino. \newline 
+
+La finestra di Kaiser ha la seguente formula: 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] 
+        = 
+        \dfrac{
+            I_0 \left[ 
+                \beta 
+                \cdot 
+                \sqrt{
+                    1 
+                    - 
+                    \left[ 
+                        \dfrac{n - \alpha}{\alpha}
+                    \right]^{2}
+                }
+            \right]
+        }{I_0 \left[ \beta\right]}
+    \end{equation}
+}
+
+
+dove: 
+
+\begin{itemize}
+    \item $\alpha$ è un parametro e vale $\alpha = \dfrac{M}{2}$ 
+    \item la finestra $w \left[ n\right]$ si estende per gli indici $0 \leq n \leq M$ 
+    \item $\beta$ è un parametro 
+    \item $I_0 \left[ \cdot\right]$ è la funzione di Bessel modificata di ordine zero del primo tipo 
+\end{itemize}
+
+
+\begin{tcolorbox}
+    La formula di Kaiser va ricordata per l'esame. \newline 
+
+    La funzione di Bessel l'avevamo già studiata nel corso di Campi Elettromagnetici, ma per un breve ripasso al volo: 
+
+    \begin{itemize}
+        \item Project IV: Bessel Functions and their Zeros | Lecture 47 | Numerical Methods for Engineers by Jeffrey Chasnov\\\url{https://www.youtube.com/watch?v=NoblEFn49sw} 
+        \item Modified Bessel Functions by ICMEStudio\\\url{https://www.youtube.com/watch?v=_X03zgkOX0c}
+    \end{itemize}
+
+\end{tcolorbox}
+
+La formula di $w \left[ n\right]$ ha due gradi di libertà che sono $\beta$ e M. \newline 
+
+Come si vede dalla seguente figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{finestra di Kaiser.png}
+\end{figure} 
+
+\newpage 
+
+Se il valore di $\beta$ aumenta, avremo che: 
+
+\begin{itemize}
+    \item si allarga il lobo principale 
+    \item si abbassano i lovi laterali (e se il valore di $\beta$ è nullo, allora $w \left[ n\right]$ diventa una finestra rettangolare ideale)
+\end{itemize} 
+
+Invece, all'aumentare di M: 
+
+\begin{itemize}
+    \item si stringe il lovo principale 
+    \item l'altezza dei lovi laterali non cambia 
+\end{itemize} 
+
+In genere, con le finestre di Kaiser, si sceglie prima il valore di $\beta$ piuttosto che il valore di M 
+perchè il valore di $\beta$ sceglie il tipo di finestra da utilizzare. \newline 
+
+\newpage 
+
+\subsubsection{Metodo di Kaiser}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 16\\
+    Appunti | 2025-11-18 | pag 2
+}  
+
+Il metodo di Kaiser è un metodo empirico, quindi senza dimostrazione matematica ma trovata per tentativi, 
+il quale permette di calcolare i coefficienti di M e $\beta$, e quindi progettare il filtro attaverso le specifiche $\omega_p$, $\omega_s$ e $\delta$ senza il calcolo della larghezza del lobo principale $\Delta \omega$. \newline 
+
+Il metodo di Kaiser sono le due seguenti forumule empiriche: 
+
+{
+    \Large 
+    \begin{equation}
+        \beta 
+        = 
+        \begin{cases}
+        0.1102 \cdot \left(A - 8.7\right) 
+        \quad \text{ per } A > 50 
+        \\
+        0.5842 \cdot \left(A - 21\right)^{0.4} + 0.07886 \cdot \left( A - 21\right)    
+        \quad \text{ per } 21 \leq A \leq 50 
+        \\
+        0  
+        \quad \text{ per } A < 21
+        \end{cases}
+    \end{equation}
+} 
+
+{
+    \Large 
+    \begin{equation}
+        M 
+        = 
+        \dfrac{A - 8}{2.285 \cdot \left(\omega_s - \omega_p\right)}
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item il valore di M è calcolato con una incertezza di $\pm 2$ 
+    \item A è il ripple al quadrato in dB e vale: 
+    {
+        \Large 
+        \begin{equation}
+            A = - 20 \cdot \log_{10} \left(\delta\right)
+        \end{equation}
+    }
+\end{itemize}
+
+\begin{tcolorbox}
+    Ai fini dell'esame, non dobbiamo ricordare le formule di $\beta$ e M, ma dobbiamo solo ricaordarci che $\beta$ varia per 3 range di A e M lega le specifiche senza calcolarsi il lobo principale. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Conclusioni sul metodo windowing}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 1 | pag 17 \\
+    Appunti | 2025-11-18 | pag 3 
+}  
+
+Dopo tutta questa spiegazione dettagliata sul metodo Windowing per la progettazione dei filtri FIR, 
+possiamo trarre le seguenti considerazioni. \newline 
+
+Dato una qualsiasi finestra, possiamo dire che: 
+
+\begin{itemize}
+    \item il ripple $\delta$ nella banda passante e nella banda oscura è lo stesso e dipende dal tipo di finestra 
+    \item la largezza della banda di transizione è la stessa per ogni transizione e non dipende dal tipo di finestra e dalla lunghezza del filtro 
+\end{itemize} 
+
+\newpage 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
