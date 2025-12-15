@@ -1307,7 +1307,7 @@ si ottiene:
 \subsection{Algoritmo di Parks-McClellan (1972)}
 
 \footnote{ 
-    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 10 - 11\\
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 10 - 12\\
     Appunti | 2025-11-19 | pag 2  
 }
 
@@ -1417,4 +1417,141 @@ Dalla formula di $E \left(\omega\right)$ possiamo svolgere le seguenti considera
     \item l'errore massimo pesato nelle due bande è per $\delta = \delta_2 $
     \item non c'è nessuna condizione per la banda di transizione, cioè per per $\omega_p \leq \abs{\omega}  \leq \omega_s$ 
 \end{itemize} 
+
+\newpage 
+
+L'algoritmo di Parks-McClellan riformula il problema in termini di approssimazione polinomiale; 
+in altre, parole, permette di calcolare la DFT come un polinomio, in particolare un polinomio di Chebyshev 
+(che avevamo afforntato in precedenza con \ref{subsec: Filtri analogici di Chebyshev} \nameref{subsec: Filtri analogici di Chebyshev} a pag \pageref{subsec: Filtri analogici di Chebyshev}). \newline 
+
+Tralasciando le dimostrazioni ed i passaggi matematici, 
+grazie ai polinomio di Chebyshev, possiamo approssimare la funzione "errore di approssimazione" $E \left(\omega\right)$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        E \left(\omega\right) 
+        = 
+        W \left(\omega\right) 
+        \cdot 
+        \left[ 
+            H_d \left(e^{\jmath \omega}\right) 
+            - 
+            P \left(x\right)
+        \right]_{x = \cos(\omega)}
+    \end{equation}
+}
+
+dove $P \left(x\right)$ è il polinomio di Chebyshev. \newline 
+
+Per massimizzare la funzione "errore di approssimazione", che a sua volta è approssimata, per massimizzarla è necessario applicarlo il Teorema dell'alternanza. 
+
+\newpage 
+
+\subsubsection{Teorema dell'alternanza}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 12 - 15\\
+    Appunti | 2025-11-19 | pag 2  
+}
+
+\begin{tcolorbox}
+    Questo teorema è da sapere per l'esame, senza il formalismo matematico. 
+\end{tcolorbox}
+
+Di seguito il teorema dell'alternanza. \newline 
+
+Dato: 
+
+{
+    \Large 
+    \begin{equation}
+        E \left(\omega\right) 
+        = 
+        W \left(\omega\right) 
+        \cdot 
+        \left[ 
+            H_d \left(e^{\jmath \omega}\right) 
+            - 
+            P \left(x\right)
+        \right]_{x = \cos(\omega)}
+    \end{equation}
+} 
+
+la condizione necessaria e sufficiente affinchè il $P \left(x\right)$ sia il solo polinomio che minimizza il valore massimo di $\abs{E \left(\omega\right)}$, 
+è che $E \left(\omega\right)$ abbiamo almeno $\left(L + 2\right)$ alternanze nell'intervallo di definizione di $E \left(\omega\right)$, 
+cioè esistano $\omega_1 < \omega_2 < \dots < \omega_{L+2}$ punti, tali che: 
+
+{
+    \Large 
+    \begin{equation}
+        E \left(\omega_i\right) 
+        = 
+        - E \left(\omega_{i+1}\right)
+        = 
+        \max \abs{E \left(\omega\right)} 
+        \text{ per } 
+        i = 1, \dots, \left(L+1\right)
+    \end{equation}
+}
+
+Per il filtro passa-basso di tipo I, si ha dunque che ci devono essere almeno $\left(L + 2\right)$ punti di estremo negli intervalli chiusi $0 < \abs{\omega} < \omega_p$ e $\omega_s < \abs{\omega} < \pi$ 
+come si vede nella seguente figura (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{filtro fir LPF Equiripple.png}
+\end{figure} 
+
+\newpage 
+
+\subsubsection{Passi algoritmo di Parks-McClellan}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 16\\
+    Appunti | 2025-11-19 | pag 2  
+}
+
+\begin{tcolorbox}
+    Questi passaggi bisogna saperli a memoria per l'esame. 
+\end{tcolorbox}
+
+Di seguito i passi dell'algoritmo di Parks-McClellan. \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{passi algoritmo Parks-McClellan.png}
+\end{figure} 
+
+\newpage 
+
+\subsection{Considerazioni finali dei filtri FIR Equiripple}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 18\\
+    Appunti | 2025-11-19 | pag 2  
+}
+
+Di seguito le considerazioni finali riguardo ai filtri FIR Equiripple: 
+
+\begin{itemize}
+    \item scegliere un valore di M adeguato in base all'utilizzo, se possibile un M più piccolo possibile 
+    \item il caso "extraripple" porta a prestazioni migliori, ma si ottiene solo con particolari combinazioni di L, $\omega_p$, $\omega_s$ e K 
+    \item per i filtri passa-basso e passa-alto vale la seguente relazione empirica di Kaiser: 
+    {
+        \Large 
+        \begin{equation}
+            M 
+            \approx 
+            \dfrac{
+                10 \cdot \log_{10} \left(\delta_1 \cdot \delta_2\right) - 13 
+            }{
+                2.324 \cdot \left(\omega_s - \omega_p\right)
+            }
+        \end{equation}
+    }
+    \item per i filtri multibanda, ci sono ancora almeno $\left(L + 2\right)$ estremi, ma non è necessario che siano solo nelle bande passanti e oscura
+\end{itemize}
+
+\newpage 
 
