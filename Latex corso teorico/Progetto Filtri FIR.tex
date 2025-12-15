@@ -580,7 +580,7 @@ L'attenuazione minima di una finestra di Hanning è di almeno 44 dB. \newline
 
 Invece, una finestra di Hamming ha il seguente spettro: 
 
-\begin{figure}[h]
+\begin{figure}[h] \label{fig: finestra di Hamming}
     \centering
     \includegraphics[scale = 0.4]{finestre hamming nello spettro.png}
 \end{figure} 
@@ -749,7 +749,7 @@ perchè il valore di $\beta$ sceglie il tipo di finestra da utilizzare. \newline
 
 \newpage 
 
-\subsubsection{Metodo di Kaiser}
+\subsubsection{Metodo di Kaiser} \label{subsubsec: Metodo di Kaiser}
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 1 | pag 16\\
@@ -826,19 +826,595 @@ Dato una qualsiasi finestra, possiamo dire che:
 
 \newpage 
 
+\subsection{Tipi di finestre "a catalogo"}
 
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 2 - 3 \\
+    Appunti | 2025-11-18 | pag 3 
+}  
 
+Se volessimo progettare un filtro FIR di tipo I o di tipo II potremmo utilizzare questi tipi di finestre "a catalogo" con i seguenti valori: 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{tipi di finestre caratteristiche.png}
+\end{figure} 
 
+Consideriamo solo filtri FIR di tipo I o di tipo II perchè i filtri di tipo III e di tipo IV, come studiato in 
+\ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}, 
+questi due ultimi non sono simmetrici, quindi perdono la simmetria del sinc. \newline 
 
+Confrontando la precedente tabella con la seguente figura (con note): 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{errore delle finestre.png}
+\end{figure} 
 
+notiamo che le finestre Kaiser sono più raffinate rispetto alle altre finestre, cioè si avvicinano di più alla finestra ideale rispetto alle altre finestre. \newline 
 
+\newpage 
 
+\subsubsection{Esempio di progettazione di filtri FIR}
 
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 4 - 5 \\
+    Appunti | 2025-11-18 | pag 3 
+}  
 
+Consideriamo un esempio di progettazione di un filtro con i calcoli fatti "carta e penna", senza filterDesigner di Matlab o altri programmi. \newline 
 
+Di seguito la richiesta. \newline 
 
+Progettare il filtro passa-banda in figura: 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Filtro passa-banda FIR esempio.png}
+\end{figure} 
 
+con un'attenuazione minima in banda oscura di 50 dB e bande di transizione inferiori a 0.05 (f). \newline 
+
+Sapendo che la frequenza $f_{c1}$ e $f_{c2}$ valgono, rispettivamente: 
+
+{
+    \Large 
+    \begin{equation}
+        f_{c1} = 0.2 \text{ Hz} 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        f_{c2} = 0.3 \text{ Hz} 
+    \end{equation}
+}
+
+Allora le pulsazioni di taglio sono, rispettivamente: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \omega_{c1} &= 2 \pi f_{c1} 
+            \\
+            &= 2 \pi \cdot 0.2 
+            \\
+            &= 1.25 
+        \end{split} 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \omega_{c2} &= 2 \pi f_{c2} 
+            \\
+            &= 2 \pi \cdot 0.3 
+            \\
+            &= 1.88
+        \end{split} 
+    \end{equation}
+}
+
+La larghezza delle bande di transizioni, che sono uguali sia a destra che a sinistra, valgono: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \Delta \omega 
+        &= 
+        \omega_{s1} - \omega_{p1} 
+        = 
+        \omega_{s2} - \omega_{p2} 
+        \\
+        &= 
+        2 \pi \cdot 0.05 
+        \\
+        &= 
+        0.31 
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+Siccome il progetto ci permette di scegliere un'attenuazione minima, significa che possiamo scegliere qualsiasi finestra che noi vogliamo, 
+l'importante che rispecchino le specifiche. \newline 
+
+Considerando una finestra di Hamming, come scritto in \ref{fig: finestra di Hamming} \nameref{fig: finestra di Hamming} a pag \pageref{fig: finestra di Hamming}: 
+
+{
+    \Large 
+    \begin{equation}
+        \Delta \omega = \dfrac{8 \pi}{M}
+    \end{equation}
+}
+
+scrivendo la formula inversa, possiamo scrivere che il valore di M vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            M 
+            &= \dfrac{8 \pi}{\Delta \omega} 
+            \\
+            &= \dfrac{8 \pi}{0.31} 
+            \\
+            &\approx 82  
+        \end{split} 
+    \end{equation}
+}
+
+La finestra di Hamming con $M = 82$ rispetta le specifiche del progetto perchè ha un'attenuazione minima di 53 dB. \newline 
+
+Invece, considerando una finestra Kaiser, come scritto in \ref{subsubsec: Metodo di Kaiser} \nameref{subsubsec: Metodo di Kaiser} a pag \pageref{subsubsec: Metodo di Kaiser}, 
+data un'attenuazione da specifica di A uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        A = 50 \text{ dB}
+    \end{equation}
+}
+
+abbiamo che il valore di $\beta$ (essendo A nell'intervallo $21 \leq A \leq 50$) è di: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \beta 
+            &= 
+            0.5842 \cdot \left(A - 21\right)^{0.4} + 0.07886 \cdot \left( A - 21\right) 
+            \\
+            &= 
+            0.5842 \cdot \left(50 - 21\right)^{0.4} + 0.07886 \cdot \left( 50 - 21\right) 
+            \\
+            &= 
+            0.5842 \cdot \left(29\right)^{0.4} + 0.07886 \cdot \left( 29\right) 
+            \\
+            &= 
+            4.53
+        \end{split}
+    \end{equation}
+}
+
+Sempre dallo stesso metodo di Kaiser, possiamo calcolarci il valore di M, che è di: 
+
+{
+    \Large 
+    \begin{equation} 
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+        M 
+        &= 
+        \dfrac{A - 8}{2.285 \cdot \left(\omega_s - \omega_p\right)} 
+        \\
+        &= 
+        \dfrac{A - 8}{2.285 \cdot \Delta \omega} 
+        \\ 
+        &= 
+        \dfrac{50 - 8}{2.285 \cdot 0.31} 
+        \\
+        &= 
+        60  
+        \end{split}
+    \end{equation}
+} 
+
+\newpage 
+
+Dalle formule precedenti, considerando le formule date come filtri passa-basso, si può ricavare i valori di M e della finestra $w \left[ n\right]$ per un filtro passa banda 
+con risposta impulsiva $h_d \left[ n\right]$. \newline 
+
+Si noti che, in Fourier, avremo che la risposta del filtro passa-banda $H_d \left(e^{\jmath \omega}\right)$ è di: 
+
+{
+    \Large 
+    \begin{equation}
+        H_d \left(e^{\jmath \omega}\right) 
+        = 
+        H_{LP2} \left(e^{\jmath \omega}\right) 
+        - 
+        H_{LP1} \left(e^{\jmath \omega}\right) 
+    \end{equation}
+}
+
+in cui: 
+
+\begin{itemize}
+    \item $H_{LP2} \left(e^{\jmath \omega}\right)$ è un filtro passa-basso con pulsazione di taglio a $\omega_{c2}$ 
+    \item $H_{LP1} \left(e^{\jmath \omega}\right)$ è un filtro passa-basso con pulsazione di taglio a $\omega_{c1}$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5}
+Nella slide c'è scritto: "$H_{LP1} \left(e^{\jmath \omega}\right)$ è un filtro passa-basso con pulsazione di taglio a $\omega_{c2}$". \newline 
+
+In realtà è $\omega_{c1}$ e non $\omega_{c2}$, giusto?
+\end{tcolorbox}
+
+Anti-trasformando $H_d \left(e^{\jmath \omega}\right)$, avremo che la risposta impulsiva $h_d \left[ n\right]$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        h_d \left[ n\right]
+        = 
+        2 \dfrac{\sin \left(\omega_{c2} n\right)}{\pi n} 
+        - 
+        2 \dfrac{\sin \left(\omega_{c1} n\right)}{\pi n} 
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6}
+Perchè l'anti-trasfrormata è proprio $h_d \left[ n\right]$? Mi sono perso qualcosa? 
+\end{tcolorbox}
+
+Se consideriamo un filtro a "fase zero", quindi non causale, avremo che la sua risposta impulsiva $h \left[ n\right]$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n \right] 
+        = 
+        h_d \left[ n\right]
+        \cdot 
+        w \left[ n + \dfrac{M}{2}\right]
+        \text{ per } 
+        n = - \dfrac{M}{2}, \dots, 0, \dots, + \dfrac{M}{2}  
+    \end{equation}
+} 
+
+Invece, se consideriamo un filtro a fase lineare, quindi causale ma con ritardo di gruppo pari a $\dfrac{M}{2}$, avremo che la sua risposta impulsiva $h \left[ n\right]$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] 
+        = 
+        h_d \left[ n - \dfrac{M}{2}\right] 
+        \cdot 
+        w \left[ n\right]
+        \text{ per } 
+        n = 0, \dots, M 
+    \end{equation}
+}
+
+dove per $w \left[ n\right]$ è la finestra scelta. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7}
+Quindi i due $h \left[ n\right]$ della slide sono i filtri FIR di tipo III e IV? \newline 
+
+È $h \left[ n\right]$ a fase zero o $h_d \left[ n\right]$? Stesso discorso per il filtro a fase lineare. 
+\end{tcolorbox}
+
+Grazie alle due espressioni di $h \left[ n\right]$, abbiamo dimostrato che, con la tecnica windowing, si possono progettare dei filtri sono a fase lineare. \newline  
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8}
+Ultima frase: perchè? Mi sono perso qualcosa? 
+\end{tcolorbox}
+
+\newpage 
+
+\section{Progetto di filtri FIR: Equiripple}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 7 - 9\\
+    Appunti | 2025-11-19 | pag 1 
+}
+
+Come studiato nel capitolo precedente relatico alla progettazione dei filtri IIR, 
+con la tecnica windowing, si vuole progettare un filtro FIR in cui, come gli IIR: 
+
+\begin{itemize}
+    \item l'errore di approssimazione è concentrato nei dintorni della discontinuità 
+    \item il ripple nelle 2 bande è uguale 
+    \item si vuole distribuire l'errore in frequenza 
+    \item permettere di avere ripple diverso nelle bande 
+\end{itemize} 
+
+Quindi, considerando il filtro FIR progettato in equiripple (in figura quello celeste) ed il filtro ideale (in figura quello in rosso): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Filtro realizzato rispetto a quello ideale.png}
+\end{figure} 
+
+come il  caso IIR, dobbiamo consierare le specifiche come si vede nel sequente schema (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro specifiche con note.png}
+\end{figure} 
+
+\newpage 
+
+Questo tipo di filtro viene definito come filtro FIR equiripple perchè: 
+
+\begin{itemize}
+    \item l'errore viene distribuito nelle 2 bande uniformemente 
+    \item a parità di M, si ottengono prestazioni migliori 
+    \item il filtro è ottimo, nel senso che si minimizza l'errore massimo, cioè il valore massimo del ripple  
+\end{itemize} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9}
+Negli appunti ho scritto "criterio ottimale o criterio Chebichev". \newline 
+
+Il fatto che "il filtro è ottimo, nel senso che si minimizza l'errore massimo, cioè il valore massimo del ripple" è un criterio ottimale? 
+\end{tcolorbox} 
+
+Considerando sempre dei filtri a fase lineare generalizzata, come scritto in \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10}
+Consideriamo i filtri a fase lineare generalizzzata proprio perchè hanno fase lineare e ritardo di gruppo costante? \newline 
+
+La simmetria è garantita dalla fase lineare generalizzata? 
+\end{tcolorbox} 
+
+Se consideriamo un filtro a fase lineare generalizzata di tipo I non causale avremo che, per un M pari, il filtro sarà simmetrico ed a "fase zero", quindi: 
+
+{
+    \Large 
+    \begin{equation}
+        h \left[ n\right] 
+        = 
+        h \left[ -n\right]
+        \text{  per M pari}
+    \end{equation}
+}
+
+Allora, se poniamo: 
+
+{
+    \Large 
+    \begin{equation}
+        L = \dfrac{M}{2}
+    \end{equation}
+}
+
+abbiamo che la trasformata di Fourier di $h \left[ n\right]$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            H  \left(e^{\jmath \omega}\right) 
+            &= 
+            \sum_{- L}^{+ L} 
+            h \left[ n\right]
+            \cdot 
+            e^{- \jmath \omega n} 
+            \\
+            &= 
+            h \left[ 0\right] 
+            + 
+            \sum_{n = 1}^{+L} 
+            2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
+        \end{split}
+    \end{equation}
+}
+
+L'espressione: 
+
+{
+    \Large 
+    \begin{equation}
+        H  \left(e^{\jmath \omega}\right) 
+        = 
+        h \left[ 0\right] 
+        + 
+        \sum_{n = 1}^{+L} 
+        2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
+    \end{equation}
+} 
+
+prende il nome di DCT (Discrete Compressed Transform). \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11}
+A lezione ho scritto che la  DCT sta per Discrete Compressed Transform, ma online ho trovato che DCT sta per Discrete Cosine Transform. \newline 
+
+Lei lo ha espresso come Compressed, proprio perchè come scritta nella descrizione di \url{https://it.wikipedia.org/wiki/Trasformata_discreta_del_coseno#/media/File:Dandelion_clock_quarter_dft_dct.png}, 
+le informazioni si trovano a bassa frequenza? 
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+    La DCT è un algoritmo impiegamento principalmente per la compressione e viene utilizzato, in particolare, nella compressione JPEG. \newline 
+
+    Se vuoi approfondire cosa è la DCT, ti consiglio queste pagine: 
+    
+    \begin{itemize}
+        \item Trasformata discreta del coseno by Wikipedia \\\url{https://it.wikipedia.org/wiki/Trasformata_discreta_del_coseno} 
+        \item Discrete Cosine Transform by Matlab\\\url{https://it.mathworks.com/help/images/discrete-cosine-transform.html}
+    \end{itemize}    
+
+    Invece, in formato video: 
+
+    \begin{itemize}
+        \item The Unreasonable Effectiveness of JPEG: A Signal Processing Approach by Reducible \\\url{https://youtu.be/0me3guauqOU?si=pnXh2Z05c2IDiPgi} 
+        \item The Discrete Cosine Transform is magic! by theosib \\\url{https://youtu.be/QSBcLImmL4g?si=wC3RAIjKen9AaxB2} 
+        \item JPEG DCT, Discrete Cosine Transform (JPEG Pt2)- Computerphile by Computerphile \\ \url{https://youtu.be/Q2aEzeMDHMA?si=5znc_gvA77ldVHwy}
+    \end{itemize}
+\end{tcolorbox}
+
+Rispetto alla DFT, la DCT ha solo parti reali e non esiste il contributo delle parti immaginari. \newline 
+
+Il problema della DCT è trovare una risposta impulsiva $h \left[ n\right]$ affinchè risppetti le speecifiche: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            \abs{1 - H \left(e^{\jmath \omega}\right)} \leq \delta_1 
+            &\text{ per } 
+            0 \leq \abs{\omega} \leq \omega_p 
+            \\
+            \quad
+            \\
+            \abs{H \left(e^{\jmath \omega}\right)} \leq \delta_2 
+            &\text{ per } 
+            \omega_s \leq \abs{\omega} \leq \pi 
+        \end{cases}
+    \end{equation}
+}
+
+Esistono vari metodi per trovare $h \left[ n\right]$: il più noto è l'algoritmo di Parks-McClellan (che verrà spiegato senza dimostrazione). \newline 
+
+Fissati i seguenti valori: 
+
+\begin{itemize}
+    \item L 
+    \item $\omega_p$ 
+    \item $\omega_s$ 
+    \item $\dfrac{\delta_1}{\delta_2}$
+\end{itemize}
+
+si ottiene: 
+
+\begin{itemize}
+    \item la funzione $h \left[ n\right]$ per i valori di $n = 0, \dots, L$ 
+    \item i valori di $\delta_1$ e $\delta_2$
+\end{itemize}
+
+\newpage 
+
+\subsection{Algoritmo di Parks-McClellan (1972)}
+
+\footnote{ 
+    Slide del prof | 10 - Progetto Filtri FIR 2 | pag 10 - 11\\
+    Appunti | 2025-11-19 | pag 2  
+}
+
+Data la seguente funzione di $E \left(\omega\right)$, che prende il nome di funzione "errore di approssimazione": 
+
+{
+    \Large 
+    \begin{equation}
+        E \left(\omega\right) 
+        = 
+        W \left( \omega\right) 
+        \cdot 
+        \left[ 
+            H_d \left(e^{\jmath \omega}\right) 
+            - 
+            H \left(e^{\jmath \omega}\right) 
+        \right]
+    \end{equation}
+}
+
+in cui: 
+
+\begin{itemize}
+    \item $W \left(\omega\right)$ è la funzione peso 
+    \item $H_d \left(e^{\jmath \omega}\right)$ è la risposta in frequenza desiderata 
+    \item $H \left(e^{\jmath \omega}\right)$ è la risposta del filtro in progetto 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12}
+Essendo $E \left(\omega\right)$, essa varierà in base alla pulsazione $\omega$, giusto? 
+\end{tcolorbox} 
+
+$W \left(\omega\right)$, $H_d \left(e^{\jmath \omega}\right)$ e $H \left(e^{\jmath \omega}\right)$ sono tutte funzioni reali e sono definite nella banda passante e nella banda oscura, 
+ma non nella banda di transizione. \newline 
+
+Si calcola $h \left[ n\right]$ per $n = 0, \dots, L$ affinchè: 
+
+{
+    \Large 
+    \begin{equation}
+        \max{\left| E \left(\omega\right) \right|_{\text{banda passante e banda oscura}}} 
+    \end{equation}
+}
+
+sia minimo, utilizzando o il criterio MINMAX o il criterio di Chebyshev. \newline 
+
+Nel caso di un filtro passa-basso precedente in cui: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 13}
+Per "precedente" si intende quello a pag 9 delle slide, quindi filtro a fase lineare generalizzata di tipo I non causale con M pari, simmetrico e fase zero? 
+\end{tcolorbox} 
+
+{
+    \Large 
+    \begin{equation}
+        K = \dfrac{\delta_1}{\delta_2}
+    \end{equation}
+} 
+
+avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di approssimazione" $E \left(\omega\right)$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        E \left(\omega\right) 
+        =
+        \begin{cases}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environmen
+        \dfrac{1}{K} 
+        \cdot 
+        \left[
+            1 
+            - 
+            \left(
+                h \left[ 0\right] 
+                + 
+                \sum_{n = 1}^{L} 
+                2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
+            \right)
+        \right] 
+        &\text{ per} 0 \leq \abs{\omega} \leq \omega_p
+        \\
+        \quad
+        \\
+        1 
+        \cdot 
+        \left[
+            0 
+            - 
+            \left(
+                h \left[ 0\right] 
+                + 
+                \sum_{n = 1}^{L} 
+                2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
+            \right)
+        \right] 
+         &\text{ per} \omega_s \leq \abs{\omega} \leq \pi
+        \end{cases}
+    \end{equation}
+} 
+
+Dalla formula di $E \left(\omega\right)$ possiamo svolgere le seguenti considerazioni: 
+
+\begin{itemize}
+    \item $E \left(\omega\right)$ dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè è presente il termine moltiplicativo $\dfrac{1}{K}$ nell'intervallo $0 \leq \abs{\omega} \leq \omega_p$, cioè nella banda passante   
+    \item $E \left(\omega\right)$ non dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè non è presente il termine K nell'intervallo $\omega_s \leq \abs{\omega} \leq \pi$, cioè nella banda oscuura 
+    \item l'errore massimo pesato nelle due bande è per $\delta = \delta_2 $
+    \item non c'è nessuna condizione per la banda di transizione, cioè per per $\omega_p \leq \abs{\omega}  \leq \omega_s$ 
+\end{itemize} 
 
