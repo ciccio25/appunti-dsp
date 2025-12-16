@@ -1,0 +1,61 @@
+\chapter{Implementazione Filtri FIR e IIR}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{Signal_flow_graph_for_a_digital_IIR_Biquad.png}
+\end{figure}  
+
+\newpage 
+
+\section{Ripasso degli argomenti precedenti}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 2 - 4\\
+    Appunti | 2025-11-25 | pag 2 
+} 
+
+Prima di descrivere degli SFG (Signal Flow Graph) è necessario svolgere un piccolo ripasso degli argomenti precedenti. \newline 
+
+Come studiato in \ref{sec: Sistemi LTI descritti da equazioni alle differenze} \nameref{sec: Sistemi LTI descritti da equazioni alle differenze} a pag \pageref{sec: Sistemi LTI descritti da equazioni alle differenze} 
+ed in \ref{sec: Funzioni di Rete} \nameref{sec: Funzioni di Rete} a pag \pageref{sec: Funzioni di Rete}, 
+una funzione $H \left(z\right)$ razionale corrisponde ad un'equazione lineare alle differenze finita a coefficienti costanti. \newline 
+
+Per questa classe di funzioni è possibile individuae 3 blocchi funzionali: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{blocchi funzionali.png}
+\end{figure}  
+
+Come studiato ad Elettrotecnica per i circuiti reali, anche qui a DSP, data la stessa equazione, sono possibili diverse realizzazioni circuitali. \newline 
+
+Le caratteristiche da ricercare sono: 
+
+\begin{itemize}
+    \item minima complessità perchè, per un calcolatore, meno conti si fanno e meglio è  
+    \item minima sensibilità al troncamento, cioè circuiti più robusti alla quantizzazione 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 14}
+"minima sensibilità al troncamento, cioè circuiti più robusti alla quantizzazione", giusto? 
+\end{tcolorbox}
+
+\newpage  
+
+\section{Signal Flow Graph}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 5 - 6\\
+    Appunti | 2025-11-25 | pag 2  
+} 
+
+Come studiato ad Elettrotecnica, useremo i grafi per rappresentare le equazioni, quindi i circuiti. \newline 
+
+Ma, a differenza di Elettrotecnica dove i grafi sono bidirezionali, cioè lo stesso ramo può essere percorso in tutti i due i versi, 
+negli SFG (Signal Flow Graph) i grafi sono unidirezionali. \newline 
+
+Non solo: ad Elettrotecnica ogni ramo conteneva due informazioni, cioè tensione e corrente, invece qui ogni ramo contiene solo un'informazione. \newline 
+
+
+
+
