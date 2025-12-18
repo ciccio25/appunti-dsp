@@ -53,6 +53,85 @@ negli SFG (Signal Flow Graph) i grafi sono unidirezionali. \newline
 
 Non solo: ad Elettrotecnica ogni ramo conteneva due informazioni, cioè tensione e corrente, invece qui ogni ramo contiene solo un'informazione. \newline 
 
+Gli SFG, generalmente, sono rappresentati nel dominio Z e le operazioni sono implicitamente istantanee. \newline 
+
+
+Ricordando da \ref{sec: Proprietà della trasformata-z} \nameref{sec: Proprietà della trasformata-z} a pag \pageref{sec: Proprietà della trasformata-z}, 
+che, data una sequenza $x \left[ n\right]$ ed un ritardo $n_0$, la sua rispettiva trasformata z vale: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n - n_0\right] 
+        \leftrightarrow
+        z^{- n_0} X \left( z\right)
+    \end{equation}
+}
+
+Se il ritardo $n_0$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        n_0 = 1
+    \end{equation}
+}
+
+allora avremo che, l'elemento di ritardo nel dominio n è equivalente al prodtto per $z^{-1}$. \newline 
+
+Infatti: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        x \left[ n - 1\right] 
+        \leftrightarrow
+        Y \left(z\right)
+        =
+        z^{- 1} X \left( z\right)
+    \end{equation}
+}
+
+Quindi, gli elementi che comporranno negli SFG saranno: 
+
+\begin{itemize}
+    \item somma di variabili 
+    \item prodotto per costante (l'arco sarà un ramo pesato), eventualmente per un ritardo $z^{-n_0}$
+\end{itemize}
+
+Un esempio grafico di SFG: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Esempio di SFG 1.png}
+\end{figure}
+
+È necessario inserire i ritardi negli archi perchè, se consideriamo i grafi senza ritardi, l'SFG non sarà computabile come si vede nel seguente SGF in cui non sono presenti dei ritardi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Esempio SFG non computabile.png}
+\end{figure}
+
+\newpage 
+
+Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Esempio SFG computabile.png}
+\end{figure}
+
+\newpage 
+
+\section{Strutture per filtri IIR}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 11 - 12\\
+    Appunti | 2025-11-25 | pag 2  
+} 
 
 
 
