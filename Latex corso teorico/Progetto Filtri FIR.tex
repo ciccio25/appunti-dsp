@@ -78,7 +78,7 @@ dovuto alle proprietà di Fourier tra tempo e frequenza. \newline
 Grazie a questa ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali calcolandoli analiticamente (in forma chiusa). \newline 
 
 \begin{tcolorbox}
-Calcolarsi i filtri in forma chiusa si intende che si calcoleranno analiticamente dei filtri, che saranno poi ottimizzati attraverso delle tecniche di ottmizzazione      
+Calcolarsi i filtri in forma chiusa si intende che si calcoleranno analiticamente dei filtri, che saranno poi ottimizzati attraverso delle tecniche di ottimizzazione      
 \end{tcolorbox}
 
 Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omega}\right)$ come il seguente: 
@@ -284,7 +284,7 @@ allora possiamo considerare per $h_d \left[ n\right]$ i suoi coefficienti della 
     Invece le trasformate, quindi la DTFT, viene utilizzata per segnali finiti non periodici e che non si estendono per $n \left[ - \infty, + \infty\right]$. 
 \end{tcolorbox}  
 
-Quindi, svolgere il windowing (o anche deto fenestrare) singificata troncare, cioè approssimare, una serie di Fourier, come si vede in figura: 
+Quindi, svolgere il windowing (o anche detto finestrare) significa troncare, cioè approssimare, una serie di Fourier, come si vede in figura: 
 
 \begin{figure}[h]
     \centering
@@ -309,7 +309,7 @@ La risposta è no perchè il filtro impiegherebbe troppo tempo. \newline
 Inoltre, in una finestratura abbiamo due parametri liberi per svolgere questa tecnica, che sono: 
 
 \begin{itemize}
-    \item la lunghezza della finestra, cioè quanti M+1 capioni servono al filtro FIR 
+    \item la lunghezza della finestra, cioè quanti M+1 campioni servono al filtro FIR 
     \item la forma della finestra (non per forza deve essere rettangolare come abbiamo fatto negli esempi precedenti)
 \end{itemize} 
 
@@ -390,7 +390,7 @@ Come abbiamo scritto precedentemente, il filtro finale $H \left(e^{\jmath \omega
     \includegraphics[scale = 0.35]{windowing convoluzione esempio 1.png}
 \end{figure} 
 
-Invece, aumetando M possiamo avere il seguente caso: 
+Invece, aumentando M possiamo avere il seguente caso: 
 
 \begin{figure}[h]
     \centering
@@ -414,7 +414,7 @@ possiamo notare che:
     Latex | 2025-12-16 Mattino | pag 259 
 } 
 
-Siccome si vuole scegliere una finesta $w \left[ n\right]$ tale che in Fourier $W \left(e^{\jmath \omega}\right)$ abbia dei lobi laterali più bassi, 
+Siccome si vuole scegliere una finestra $w \left[ n\right]$ tale che in Fourier $W \left(e^{\jmath \omega}\right)$ abbia dei lobi laterali più bassi, 
 allora è possibile azzerando dolcemente gli estremi della finestra. \newline 
 
 A questo punto, siccome l'area sotto alla finestra è costante in tutti i lobi, il lobo principale è più largo. \newline 
@@ -497,7 +497,7 @@ Da un punto di vista grafico, le varie finistre $w \left[ n\right]$ appena elenc
     \includegraphics[scale = 0.4]{finestre rettangoli come curve continue.png}
 \end{figure} 
 
-Come possiamo visuallizare dalla figura, tutte le finestre $w \left[ n\right]$ sono simmetriche rispetto all'indice n $\dfrac{M}{2}$ (e questa è una carattersitica molto importante nella progettazione dei filtri FIR). \newline 
+Come possiamo visualizzare dalla figura, tutte le finestre $w \left[ n\right]$ sono simmetriche rispetto all'indice n $\dfrac{M}{2}$ (e questa è una caratteristica molto importante nella progettazione dei filtri FIR). \newline 
 
 Ora andiamo a confrontarle in Fourier. \newline 
 
@@ -550,7 +550,7 @@ Questa è l'unica finestra in cui anche nella figura è indicata l'attenuazione 
 \end{tcolorbox}
 
 Confrontando una finestra rettangolare con una finestra di Bartlett rettangolare, avremo un'attenuazione maggiore minima all'estremo del lobo principale 
-(-25 dB è un'attuazione maggiore rispetto ai -21 dB), ma a discapito un'allargamento del lobo principale $\Delta \omega $ (si passa da $\dfrac{4 \pi}{M + 1}$ a $\dfrac{8 \pi}{M + 1}$ ). \newline 
+(-25 dB è un'attuazione maggiore rispetto ai -21 dB), ma a discapito un allargamento del lobo principale $\Delta \omega $ (si passa da $\dfrac{4 \pi}{M + 1}$ a $\dfrac{8 \pi}{M + 1}$ ). \newline 
 
 \newpage 
 
@@ -666,7 +666,7 @@ Riassumendo, nella tecnica Windowing, una volta scelta la finestra, si calcola $
     Appunti | 2025-11-18 | pag 2 - 3
 }  
 
-Kaiser nel 1974 ha proposto una famiglia flessibile di finestre di tipo sub-ottimo, cioè in cui la maggior parte del'energia si trova nel lobo principale per una data ampiezza di picco 
+Kaiser nel 1974 ha proposto una famiglia flessibile di finestre di tipo sub-ottimo, cioè in cui la maggior parte dell'energia si trova nel lobo principale per una data ampiezza di picco 
 del lobo laterale più vicino. \newline 
 
 La finestra di Kaiser ha la seguente formula: 
@@ -730,14 +730,14 @@ Se il valore di $\beta$ aumenta, avremo che:
 
 \begin{itemize}
     \item si allarga il lobo principale 
-    \item si abbassano i lovi laterali (e se il valore di $\beta$ è nullo, allora $w \left[ n\right]$ diventa una finestra rettangolare ideale)
+    \item si abbassano i lobi laterali (e se il valore di $\beta$ è nullo, allora $w \left[ n\right]$ diventa una finestra rettangolare ideale)
 \end{itemize} 
 
 Invece, all'aumentare di M: 
 
 \begin{itemize}
-    \item si stringe il lovo principale 
-    \item l'altezza dei lovi laterali non cambia 
+    \item si stringe il lobo principale 
+    \item l'altezza dei lobi laterali non cambia 
 \end{itemize} 
 
 In genere, con le finestre di Kaiser, si sceglie prima il valore di $\beta$ piuttosto che il valore di M 
@@ -753,9 +753,9 @@ perchè il valore di $\beta$ sceglie il tipo di finestra da utilizzare. \newline
 }  
 
 Il metodo di Kaiser è un metodo empirico, quindi senza dimostrazione matematica ma trovata per tentativi, 
-il quale permette di calcolare i coefficienti di M e $\beta$, e quindi progettare il filtro attaverso le specifiche $\omega_p$, $\omega_s$ e $\delta$ senza il calcolo della larghezza del lobo principale $\Delta \omega$. \newline 
+il quale permette di calcolare i coefficienti di M e $\beta$, e quindi progettare il filtro attraverso le specifiche $\omega_p$, $\omega_s$ e $\delta$ senza il calcolo della larghezza del lobo principale $\Delta \omega$. \newline 
 
-Il metodo di Kaiser sono le due seguenti forumule empiriche: 
+Il metodo di Kaiser sono le due seguenti formule empiriche: 
 
 {
     \Large 
@@ -798,7 +798,7 @@ dove:
 \end{itemize}
 
 \begin{tcolorbox}
-    Ai fini dell'esame, non dobbiamo ricordare le formule di $\beta$ e M, ma dobbiamo solo ricaordarci che $\beta$ varia per 3 range di A e M lega le specifiche senza calcolarsi il lobo principale. 
+    Ai fini dell'esame, non dobbiamo ricordare le formule di $\beta$ e M, ma dobbiamo solo ricordarci che $\beta$ varia per 3 range di A e M lega le specifiche senza calcolarsi il lobo principale. 
 \end{tcolorbox}
 
 \newpage 
@@ -817,7 +817,7 @@ Dato una qualsiasi finestra, possiamo dire che:
 
 \begin{itemize}
     \item il ripple $\delta$ nella banda passante e nella banda oscura è lo stesso e dipende dal tipo di finestra 
-    \item la largezza della banda di transizione è la stessa per ogni transizione e non dipende dal tipo di finestra e dalla lunghezza del filtro 
+    \item la larghezza della banda di transizione è la stessa per ogni transizione e non dipende dal tipo di finestra e dalla lunghezza del filtro 
 \end{itemize} 
 
 \newpage 
@@ -1113,7 +1113,7 @@ Inoltre, grazie alla tecnica windowing, se si finestra in modo causale, signific
     Latex | 2025-12-16 Mattino | pag 272 
 }
 
-Come studiato nel capitolo precedente relatico alla progettazione dei filtri IIR, 
+Come studiato nel capitolo precedente relativo alla progettazione dei filtri IIR, 
 con la tecnica windowing, si vuole progettare un filtro FIR in cui, come gli IIR: 
 
 \begin{itemize}
@@ -1130,7 +1130,7 @@ Quindi, considerando il filtro FIR progettato in equiripple (in figura quello ce
     \includegraphics[scale = 0.35]{Filtro realizzato rispetto a quello ideale.png}
 \end{figure} 
 
-come il  caso IIR, dobbiamo consierare le specifiche come si vede nel sequente schema (con note): 
+come il  caso IIR, dobbiamo considerare le specifiche come si vede nel seguente schema (con note): 
 
 \begin{figure}[h]
     \centering
@@ -1214,7 +1214,7 @@ prende il nome di DCT (Discrete Cosine Transform). \newline
 \newpage 
 
 \begin{tcolorbox}
-    La DCT è un algoritmo impiegamento principalmente per la compressione e viene utilizzato, in particolare, nella compressione JPEG. \newline 
+    La DCT è un algoritmo impiegato principalmente per la compressione e viene utilizzato, in particolare, nella compressione JPEG. \newline 
 
     Se vuoi approfondire cosa è la DCT, ti consiglio queste pagine: 
     
@@ -1234,7 +1234,7 @@ prende il nome di DCT (Discrete Cosine Transform). \newline
 
 Rispetto alla DFT, la DCT ha solo parti reali e non esiste il contributo delle parti immaginari. \newline 
 
-Il problema della DCT è trovare una risposta impulsiva $h \left[ n\right]$ affinchè risppetti le speecifiche: 
+Il problema della DCT è trovare una risposta impulsiva $h \left[ n\right]$ affinchè rispetti le specifiche: 
 
 {
     \Large 
@@ -1378,7 +1378,7 @@ Dalla formula di $E \left(\omega\right)$ possiamo svolgere le seguenti considera
 
 \begin{itemize}
     \item $E \left(\omega\right)$ dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè è presente il termine moltiplicativo $\dfrac{1}{K}$ nell'intervallo $0 \leq \abs{\omega} \leq \omega_p$, cioè nella banda passante   
-    \item $E \left(\omega\right)$ non dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè non è presente il termine K nell'intervallo $\omega_s \leq \abs{\omega} \leq \pi$, cioè nella banda oscuura 
+    \item $E \left(\omega\right)$ non dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè non è presente il termine K nell'intervallo $\omega_s \leq \abs{\omega} \leq \pi$, cioè nella banda oscura 
     \item l'errore massimo pesato nelle due bande è per $\delta = \delta_2 $
     \item non c'è nessuna condizione per la banda di transizione, cioè per per $\omega_p \leq \abs{\omega}  \leq \omega_s$ 
 \end{itemize} 
@@ -1515,7 +1515,7 @@ Di seguito le considerazioni finali riguardo ai filtri FIR Equiripple:
             }
         \end{equation}
     }
-    \item per i filtri multibanda, ci sono ancora almeno $\left(L + 2\right)$ estremi, ma non è necessario che siano solo nelle bande passanti e oscura
+    \item per i filtri multi-banda, ci sono ancora almeno $\left(L + 2\right)$ estremi, ma non è necessario che siano solo nelle bande passanti e oscura
 \end{itemize}
 
 \newpage 
