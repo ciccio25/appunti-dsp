@@ -635,7 +635,8 @@ I principali (o almeno quelli che analizzeremo in questo corso) sono le seguenti
 
 \footnote{ 
     Slide del prof | 9 - Progetto Filtri IIR 2 | pag 3 - 4\\ 
-    Appunti | 2025-11-11 | pag 4 
+    Appunti | 2025-11-11 | pag 4 \\
+    Latex | 2025-12-16 Mattino | pag 238 
 } 
 
 L'idea è quella di campionare la risposta impulsiva, che è la soluzione dell'equazione differenziale. \newline 
@@ -825,12 +826,8 @@ Questo tipo di mapping dal piano s al piano z comporta le seguenti caratteristic
     \item se non c'è aliasing, questo tipo di mapping preserva la risposta in frequenza perchè l'asse $\jmath \Omega$ nell'intervallo $\left(\dfrac{\pi}{T}, -\dfrac{\pi}{T}\right)$ dal piano s corrisponde al cerchio unitario nel piano z
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
-Riguardo all'ultima frase, allora perchè nel piano S è anche blu nell'asse $\jmath \Omega$ per valori maggiori di $\dfrac{\pi}{T}$? \newline 
-
-Nel piano z è ancora blu nel cerchio unitario. 
-
-\end{tcolorbox}
+Se un punto nel piano s è $\Re \left[ s\right] > 0$, allora nel piano z corrisponderà ad un punto fuori dal cerchio unitario: 
+se sarà presente, il filtro progettato nel piano s, non sarà stabile nel piano z. \newline 
 
 Ricordiamo che tutte queste considerazioni sono solo per filtri limitati in banda, che generalmente sono dei filtri passa-basso. \newline 
 

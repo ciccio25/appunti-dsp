@@ -39,7 +39,8 @@ Esistono diversi metodi di progettazione di un filtro FIR, ma noi ne andremo ad 
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 1 | pag 3 - 4\\
-    Appunti | 2025-11-18 | pag 1 
+    Appunti | 2025-11-18 | pag 1 \\ 
+    Latex | 2025-12-16 Mattino | pag 251 
 }
 
 Prima di procedere con la progettazione di un filtro FIR, 
@@ -74,11 +75,11 @@ dovuto alle proprietà di Fourier tra tempo e frequenza. \newline
     Senza sapere le proprietà tra tempo e frequenza, l'esame di TdS è meglio non farlo. 
 \end{tcolorbox} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
-In questo caso, cosa significa "calcolabile analiticamente (in forma chiusa)"?
-\end{tcolorbox} 
+Grazie a questa ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali calcolandoli analiticamente (in forma chiusa). \newline 
 
-Grazie a questa ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali. \newline 
+\begin{tcolorbox}
+Calcolarsi i filtri in forma chiusa si intende che si calcoleranno analiticamente dei filtri, che saranno poi ottimizzati attraverso delle tecniche di ottmizzazione      
+\end{tcolorbox}
 
 Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omega}\right)$ come il seguente: 
 
@@ -95,11 +96,9 @@ Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omeg
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
-$\omega_c$ è la frequenza di cut-off del filtro, giusto? 
-\end{tcolorbox} 
+dove $\omega_c$ è la frequenza di cut-off del filtro desiderato. \newline 
 
-dove, graficato nel spettro $H_d \left(e^{\jmath \omega}\right)$ sarà uguale a: 
+Graficato nello spettro, $H_d \left(e^{\jmath \omega}\right)$ avrà il seguente andamento: 
 
 \begin{figure}[h]
     \centering
@@ -411,7 +410,8 @@ possiamo notare che:
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 1 | pag 8 - 12\\
-    Appunti | 2025-11-18 | pag 2  
+    Appunti | 2025-11-18 | pag 2 \\ 
+    Latex | 2025-12-16 Mattino | pag 259 
 } 
 
 Siccome si vuole scegliere una finesta $w \left[ n\right]$ tale che in Fourier $W \left(e^{\jmath \omega}\right)$ abbia dei lobi laterali più bassi, 
@@ -520,10 +520,6 @@ dove la larghezza del lobo principale $ \Delta \omega $ vale:
 }
 
 \newpage 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4}
-$ \Delta \omega $ è corretto che il lobo principale? 
-\end{tcolorbox} 
 
 L'attenuazione minima di una finestra rettangolare generalmente si misura in decibel, cioè in dB, ed è di almeno 21 dB. \newline 
 
@@ -855,11 +851,12 @@ notiamo che le finestre Kaiser sono più raffinate rispetto alle altre finestre,
 
 \newpage 
 
-\subsubsection{Esempio di progettazione di filtri FIR}
+\subsubsection{Esempio di progettazione di filtri FIR} \label{subsubsec: Esempio di progettazione di filtri FIR}
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 2 | pag 4 - 5 \\
-    Appunti | 2025-11-18 | pag 3 
+    Appunti | 2025-11-18 | pag 3 \\ 
+    Latex | 2025-12-16 Mattino | pag 270 
 }  
 
 Consideriamo un esempio di progettazione di un filtro con i calcoli fatti "carta e penna", senza filterDesigner di Matlab o altri programmi. \newline 
@@ -1053,12 +1050,6 @@ in cui:
     \item $H_{LP1} \left(e^{\jmath \omega}\right)$ è un filtro passa-basso con pulsazione di taglio a $\omega_{c1}$
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5}
-Nella slide c'è scritto: "$H_{LP1} \left(e^{\jmath \omega}\right)$ è un filtro passa-basso con pulsazione di taglio a $\omega_{c2}$". \newline 
-
-In realtà è $\omega_{c1}$ e non $\omega_{c2}$, giusto?
-\end{tcolorbox}
-
 Anti-trasformando $H_d \left(e^{\jmath \omega}\right)$, avremo che la risposta impulsiva $h_d \left[ n\right]$ sarà uguale a: 
 
 {
@@ -1072,9 +1063,7 @@ Anti-trasformando $H_d \left(e^{\jmath \omega}\right)$, avremo che la risposta i
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6}
-Perchè l'anti-trasfrormata è proprio $h_d \left[ n\right]$? Mi sono perso qualcosa? 
-\end{tcolorbox}
+perchè l'anti-trasformata di una finestra rettangolare è proprio un sinc. \newline 
 
 Se consideriamo un filtro a "fase zero", quindi non causale, avremo che la sua risposta impulsiva $h \left[ n\right]$ sarà uguale a: 
 
@@ -1108,17 +1097,11 @@ Invece, se consideriamo un filtro a fase lineare, quindi causale ma con ritardo 
 
 dove per $w \left[ n\right]$ è la finestra scelta. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7}
-Quindi i due $h \left[ n\right]$ della slide sono i filtri FIR di tipo III e IV? \newline 
+Grazie alle due espressioni di $h \left[ n\right]$, abbiamo dimostrato che, con la tecnica windowing, si possono progettare dei filtri sono a fase lineare perchè si mantiene la simmetria. \newline  
 
-È $h \left[ n\right]$ a fase zero o $h_d \left[ n\right]$? Stesso discorso per il filtro a fase lineare. 
-\end{tcolorbox}
+Inoltre, grazie alla tecnica windowing, se si finestra in modo causale, significa anche ritardare, avendo così un ritardo di gruppo costante. \newline 
 
-Grazie alle due espressioni di $h \left[ n\right]$, abbiamo dimostrato che, con la tecnica windowing, si possono progettare dei filtri sono a fase lineare. \newline  
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8}
-Ultima frase: perchè? Mi sono perso qualcosa? 
-\end{tcolorbox}
+È possibile lo stesso procedimento anche per un filtro di tipo II. \newline 
 
 \newpage 
 
@@ -1126,7 +1109,8 @@ Ultima frase: perchè? Mi sono perso qualcosa?
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 2 | pag 7 - 9\\
-    Appunti | 2025-11-19 | pag 1 
+    Appunti | 2025-11-19 | pag 1 \\ 
+    Latex | 2025-12-16 Mattino | pag 272 
 }
 
 Come studiato nel capitolo precedente relatico alla progettazione dei filtri IIR, 
@@ -1160,24 +1144,14 @@ Questo tipo di filtro viene definito come filtro FIR equiripple perchè:
 \begin{itemize}
     \item l'errore viene distribuito nelle 2 bande uniformemente 
     \item a parità di M, si ottengono prestazioni migliori 
-    \item il filtro è ottimo, nel senso che si minimizza l'errore massimo, cioè il valore massimo del ripple  
+    \item il filtro è ottimo, nel senso che si minimizza l'errore massimo, cioè il valore massimo del ripple (questo significa ottimizzare)  
 \end{itemize} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9}
-Negli appunti ho scritto "criterio ottimale o criterio Chebichev". \newline 
+Considerando sempre dei filtri a fase lineare generalizzata, come scritto in \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}, 
+perchè hanno fase lineare e ritardo di gruppo costante e la simmetria è garantita dalla fase lineare generalizzata. \newline 
 
-Il fatto che "il filtro è ottimo, nel senso che si minimizza l'errore massimo, cioè il valore massimo del ripple" è un criterio ottimale? 
-\end{tcolorbox} 
-
-Considerando sempre dei filtri a fase lineare generalizzata, come scritto in \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10}
-Consideriamo i filtri a fase lineare generalizzzata proprio perchè hanno fase lineare e ritardo di gruppo costante? \newline 
-
-La simmetria è garantita dalla fase lineare generalizzata? 
-\end{tcolorbox} 
-
-Se consideriamo un filtro a fase lineare generalizzata di tipo I non causale avremo che, per un M pari, il filtro sarà simmetrico ed a "fase zero", quindi: 
+Se consideriamo un filtro a fase lineare generalizzata di tipo I (ma potremmp anche considerare dei filtri di tipo II, III, IV, i passaggi sarebbero identici) 
+non causale avremo che, per un M pari, il filtro sarà simmetrico ed a "fase zero", quindi: 
 
 {
     \Large 
@@ -1235,14 +1209,9 @@ L'espressione:
     \end{equation}
 } 
 
-prende il nome di DCT (Discrete Compressed Transform). \newline 
+prende il nome di DCT (Discrete Cosine Transform). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11}
-A lezione ho scritto che la  DCT sta per Discrete Compressed Transform, ma online ho trovato che DCT sta per Discrete Cosine Transform. \newline 
-
-Lei lo ha espresso come Compressed, proprio perchè come scritta nella descrizione di \url{https://it.wikipedia.org/wiki/Trasformata_discreta_del_coseno#/media/File:Dandelion_clock_quarter_dft_dct.png}, 
-le informazioni si trovano a bassa frequenza? 
-\end{tcolorbox} 
+\newpage 
 
 \begin{tcolorbox}
     La DCT è un algoritmo impiegamento principalmente per la compressione e viene utilizzato, in particolare, nella compressione JPEG. \newline 
@@ -1308,7 +1277,8 @@ si ottiene:
 
 \footnote{ 
     Slide del prof | 10 - Progetto Filtri FIR 2 | pag 10 - 12\\
-    Appunti | 2025-11-19 | pag 2  
+    Appunti | 2025-11-19 | pag 2 \\ 
+    Latex | 2025-12-16 Mattino | pag 274  
 }
 
 Data la seguente funzione di $E \left(\omega\right)$, che prende il nome di funzione "errore di approssimazione": 
@@ -1336,9 +1306,7 @@ in cui:
     \item $H \left(e^{\jmath \omega}\right)$ è la risposta del filtro in progetto 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12}
-Essendo $E \left(\omega\right)$, essa varierà in base alla pulsazione $\omega$, giusto? 
-\end{tcolorbox} 
+quindi il valore di $E \left(\omega\right)$ non sarà costante, bensì varierà in base alla pulsazione $\omega$. \newline 
 
 $W \left(\omega\right)$, $H_d \left(e^{\jmath \omega}\right)$ e $H \left(e^{\jmath \omega}\right)$ sono tutte funzioni reali e sono definite nella banda passante e nella banda oscura, 
 ma non nella banda di transizione. \newline 
@@ -1354,11 +1322,8 @@ Si calcola $h \left[ n\right]$ per $n = 0, \dots, L$ affinchè:
 
 sia minimo, utilizzando o il criterio MINMAX o il criterio di Chebyshev. \newline 
 
-Nel caso di un filtro passa-basso precedente in cui: 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 13}
-Per "precedente" si intende quello a pag 9 delle slide, quindi filtro a fase lineare generalizzata di tipo I non causale con M pari, simmetrico e fase zero? 
-\end{tcolorbox} 
+Nel caso di un filtro passa-basso precedente visto in \ref{subsubsec: Esempio di progettazione di filtri FIR} \nameref{subsubsec: Esempio di progettazione di filtri FIR} a pag \pageref{subsubsec: Esempio di progettazione di filtri FIR}, 
+cioè un filtro di tipo I non causale con M pari ed a fase lineare generalizzata, quindi simmetrico ed a fase zero, in cui: 
 
 {
     \Large 
@@ -1388,7 +1353,7 @@ avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di appr
                 2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
             \right)
         \right] 
-        &\text{ per} 0 \leq \abs{\omega} \leq \omega_p
+        &\text{ per } 0 \leq \abs{\omega} \leq \omega_p
         \\
         \quad
         \\
@@ -1404,7 +1369,7 @@ avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di appr
                 2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
             \right)
         \right] 
-         &\text{ per} \omega_s \leq \abs{\omega} \leq \pi
+         &\text{ per } \omega_s \leq \abs{\omega} \leq \pi
         \end{cases}
     \end{equation}
 } 
