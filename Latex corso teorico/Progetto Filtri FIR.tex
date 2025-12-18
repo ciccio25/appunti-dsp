@@ -22,7 +22,8 @@ se i filtri FIR sono simmetrici, allora il ritardo di gruppo è costante. \newli
 
 Il ritardo di gruppo, a livello di progettazione del filtro, è una caratteristica molto positiva, ma implica che il filtro avrà bisogno del tempo per andare a regime. \newline 
 
-Come al solito, il tempo per andare a regime, chiamato anche transitorio, dipende sempre dall'applicazione in cui il filtro è applicato. \newline 
+Come al solito, il tempo per andare a regime, chiamato anche transitorio, dipende sempre dall'applicazione in cui il filtro è applicato: 
+un filtro impiegato nell'audio avrà un transitorio diverso rispetto ad un filtro impiegato nelle telecomunicazioni. \newline 
 
 Esistono diversi metodi di progettazione di un filtro FIR, ma noi ne andremo ad analizzare 4 (di cui solo i primi 2 saranno approfonditi in questo corso, gli altri 2 saranno approfonditi alla magistrale): 
 
@@ -160,7 +161,7 @@ Per renderlo causale, basta shiftarlo (cioè ritardarlo), come si vede in figura
     \includegraphics[scale = 0.8]{sinc troncato e causalizzato.png}
 \end{figure} 
 
-Ora $h_d \left[ n\right]$ è un sinc, troncato e causalizzato, quindi è un filtro FIR pronto da essere utilizzato da calcolatore. \newline 
+Ora $h_d \left[ n\right]$ è un sinc, troncato e causalizzato, quindi è un filtro FIR pronto da essere utilizzato dal calcolatore. \newline 
 
 Quindi in formule siamo partiti da $H_d \left(e^{\jmath \omega}\right)$: 
 
@@ -211,7 +212,7 @@ Alla fine di tutto ciò, possiamo definire la risposta impulsiva $h \left[ n\rig
     \end{equation}
 }
 
-Ma, definendo una nuova finestra rettangolare nel dominio n $w \left[ n\right]$: 
+Ma, definendo una nuova finestra rettangolare $w \left[ n\right]$ nel dominio n: 
 
 {
     \Large 
@@ -302,7 +303,7 @@ Ricordiamo al volo che M+1 è la lunghezza della finestra $w \left[ n\right]$. \
 
 Ma la domanda è: è necessario avvicinarsi ad un filtro ideale? \newline 
 
-La risposta è no perchè il filtro impiegherebbe troppo tempo. \newline 
+La risposta è no, perchè il filtro impiegherebbe troppo tempo. \newline 
 
 \newpage 
 
@@ -380,7 +381,7 @@ La scelta della lunghezza della finestra, cioè di quanti M+1 indici deve essere
 \end{itemize}
 
 \begin{tcolorbox}
-    La scelta della lunghezza della finestra è un alto problema ingegneristico che prende il nome di "la coperta è corta" (come al solito), o come dicono gli economisti "non c'è budget". 
+    La scelta della lunghezza della finestra è un altro problema ingegneristico che prende il nome di "la coperta è corta" (come al solito), o come dicono gli economisti "non c'è budget". 
 \end{tcolorbox}
 
 Come abbiamo scritto precedentemente, il filtro finale $H \left(e^{\jmath \omega}\right)$ sarà la convoluzione tra il filtro ideale rettangolare $H_d \left(e^{\jmath \omega}\right)$ e la trasformata della finestra $W \left(e^{\jmath \omega}\right)$: 
@@ -419,7 +420,7 @@ allora è possibile azzerando dolcemente gli estremi della finestra. \newline
 
 A questo punto, siccome l'area sotto alla finestra è costante in tutti i lobi, il lobo principale è più largo. \newline 
 
-Grazie a questo principio, negli anni diversi studiosi hanno proposto diverse finestre, 
+Grazie a questo principio, negli anni, diversi studiosi hanno proposto diverse finestre, 
 che sono nulla fuori dalla lunghezza della finestra stessa. \newline 
 
 Di seguito le finestre $w \left[ n\right]$ più utilizzati nell'ambito DSP. \newline 
@@ -473,7 +474,7 @@ Di seguito le finestre $w \left[ n\right]$ più utilizzati nell'ambito DSP. \new
 }
 
 \begin{tcolorbox}
-    Sembrano simili, ma Hammming con le m, questa invece è Hanning con le n: sono due finestre diverse.  
+    Sembrano simili, ma Hammming è con la m, questa invece è Hanning è con le n: sono due finestre diverse.  
 \end{tcolorbox} 
 
 \textbf{Blackman} \newline 
@@ -497,7 +498,7 @@ Da un punto di vista grafico, le varie finistre $w \left[ n\right]$ appena elenc
     \includegraphics[scale = 0.4]{finestre rettangoli come curve continue.png}
 \end{figure} 
 
-Come possiamo visualizzare dalla figura, tutte le finestre $w \left[ n\right]$ sono simmetriche rispetto all'indice n $\dfrac{M}{2}$ (e questa è una caratteristica molto importante nella progettazione dei filtri FIR). \newline 
+Come possiamo visualizzare dalla figura, tutte le finestre $w \left[ n\right]$ sono simmetriche rispetto all'indice $n = \dfrac{M}{2}$ (questa è una caratteristica molto importante nella progettazione dei filtri FIR). \newline 
 
 Ora andiamo a confrontarle in Fourier. \newline 
 
@@ -648,14 +649,14 @@ dove:
     \item $W \left(e^{\jmath \omega}\right)$ è la finestra troncata 
 \end{itemize} 
 
-Quando si utilizza la tecnica Windowing per la progettazione di un filtro FIr bisogna ricordarsi delle seguente caratteristiche di questa tecnica: 
+Quando si utilizza la tecnica Windowing per la progettazione di un filtro FIR bisogna ricordarsi delle seguente caratteristiche di questa tecnica: 
 
 \begin{itemize}
-    \item la largezza della banda di transione è inversamente proporzionale ad M e dipende dal tipo di finestra (cioè se si usa una finestra rettangolare, p una di Bartlett, o una Hanning, ecc..) 
+    \item la largezza della banda di transione è inversamente proporzionale ad M e dipende dal tipo di finestra (cioè se si usa una finestra rettangolare, è una di Bartlett, o una Hanning, ecc..) 
     \item il ripple, cioè l'attenuazione minima in banda oscura, dipende solo dal tipo di finestra, e non dall'M scelto  
 \end{itemize} 
 
-Riassumendo, nella tecnica Windowing, una volta scelta la finestra, si calcola $\Delta \omega$, da cui poi si può ricavare il coefficiente M. \newline 
+Riassumendo, nella tecnica Windowing, una volta scelta la finestra, si calcola $\Delta \omega$, cioè la larghezza del lobo principale, da cui poi si può ricavare il coefficiente M. \newline 
 
 \newpage 
 
@@ -755,7 +756,7 @@ perchè il valore di $\beta$ sceglie il tipo di finestra da utilizzare. \newline
 Il metodo di Kaiser è un metodo empirico, quindi senza dimostrazione matematica ma trovata per tentativi, 
 il quale permette di calcolare i coefficienti di M e $\beta$, e quindi progettare il filtro attraverso le specifiche $\omega_p$, $\omega_s$ e $\delta$ senza il calcolo della larghezza del lobo principale $\Delta \omega$. \newline 
 
-Il metodo di Kaiser sono le due seguenti formule empiriche: 
+Il metodo di Kaiser comprende le due seguenti formule empiriche: 
 
 {
     \Large 
@@ -951,7 +952,7 @@ Considerando una finestra di Hamming, come scritto in \ref{fig: finestra di Hamm
     \end{equation}
 }
 
-scrivendo la formula inversa, possiamo scrivere che il valore di M vale: 
+Scrivendo la formula inversa, possiamo scrivere che il valore di M vale: 
 
 {
     \Large 
@@ -1097,11 +1098,11 @@ Invece, se consideriamo un filtro a fase lineare, quindi causale ma con ritardo 
 
 dove per $w \left[ n\right]$ è la finestra scelta. \newline 
 
-Grazie alle due espressioni di $h \left[ n\right]$, abbiamo dimostrato che, con la tecnica windowing, si possono progettare dei filtri sono a fase lineare perchè si mantiene la simmetria. \newline  
+Grazie alle due espressioni di $h \left[ n\right]$, abbiamo dimostrato che, con la tecnica windowing, si possono progettare dei filtri che sono a fase lineare perchè si mantiene la simmetria. \newline  
 
 Inoltre, grazie alla tecnica windowing, se si finestra in modo causale, significa anche ritardare, avendo così un ritardo di gruppo costante. \newline 
 
-È possibile lo stesso procedimento anche per un filtro di tipo II. \newline 
+È possibile svolgere lo stesso procedimento anche per un filtro di tipo II. \newline 
 
 \newpage 
 
@@ -1150,7 +1151,7 @@ Questo tipo di filtro viene definito come filtro FIR equiripple perchè:
 Considerando sempre dei filtri a fase lineare generalizzata, come scritto in \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}, 
 perchè hanno fase lineare e ritardo di gruppo costante e la simmetria è garantita dalla fase lineare generalizzata. \newline 
 
-Se consideriamo un filtro a fase lineare generalizzata di tipo I (ma potremmp anche considerare dei filtri di tipo II, III, IV, i passaggi sarebbero identici) 
+Se consideriamo un filtro a fase lineare generalizzata di tipo I (ma potremmo anche considerare dei filtri di tipo II, III, IV, i passaggi sarebbero identici) 
 non causale avremo che, per un M pari, il filtro sarà simmetrico ed a "fase zero", quindi: 
 
 {
@@ -1377,8 +1378,8 @@ avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di appr
 Dalla formula di $E \left(\omega\right)$ possiamo svolgere le seguenti considerazioni: 
 
 \begin{itemize}
-    \item $E \left(\omega\right)$ dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè è presente il termine moltiplicativo $\dfrac{1}{K}$ nell'intervallo $0 \leq \abs{\omega} \leq \omega_p$, cioè nella banda passante   
-    \item $E \left(\omega\right)$ non dipende dal valore K, quindi sia di $\delta_1$ e $\delta_2$ perchè non è presente il termine K nell'intervallo $\omega_s \leq \abs{\omega} \leq \pi$, cioè nella banda oscura 
+    \item $E \left(\omega\right)$ dipende dal valore K, quindi sia da $\delta_1$ e $\delta_2$ perchè è presente il termine moltiplicativo $\dfrac{1}{K}$ nell'intervallo $0 \leq \abs{\omega} \leq \omega_p$, cioè nella banda passante   
+    \item $E \left(\omega\right)$ non dipende dal valore K, quindi sia da $\delta_1$ e $\delta_2$ perchè non è presente il termine K nell'intervallo $\omega_s \leq \abs{\omega} \leq \pi$, cioè nella banda oscura 
     \item l'errore massimo pesato nelle due bande è per $\delta = \delta_2 $
     \item non c'è nessuna condizione per la banda di transizione, cioè per per $\omega_p \leq \abs{\omega}  \leq \omega_s$ 
 \end{itemize} 
@@ -1409,7 +1410,7 @@ grazie ai polinomio di Chebyshev, possiamo approssimare la funzione "errore di a
 
 dove $P \left(x\right)$ è il polinomio di Chebyshev. \newline 
 
-Per massimizzare la funzione "errore di approssimazione", che a sua volta è approssimata, per massimizzarla è necessario applicarlo il Teorema dell'alternanza. 
+Per massimizzare la funzione "errore di approssimazione", che a sua volta è approssimata, è necessario applicare il Teorema dell'alternanza. 
 
 \newpage 
 
