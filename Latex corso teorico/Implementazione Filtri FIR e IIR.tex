@@ -129,9 +129,373 @@ Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il se
 \section{Strutture per filtri IIR}
 
 \footnote{ 
-    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 11 - 12\\
-    Appunti | 2025-11-25 | pag 2  
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 11 - 16, pag 8\\
+    Appunti | 2025-11-25 | pag 2 - 3  
 } 
 
+Come scritto precedentemente, siccome si considerano gli SFG (Signal Flow Graph) come strutture instantaneee, 
+allora, la condizione necessaria per gli SFG è che ci sia almeno un ciclo di ritardo. \newline 
 
+Usualmente, per l'uscita di un filtro $y \left[ n\right]$ si usa la seguente convenzione nel dominio n: 
+
+{
+    \Large 
+    \begin{equation}
+            y \left[ n\right] 
+            = 
+            \sum_{k = 1}^{N} 
+            a_k \cdot y \left[ n - k\right]
+            +
+            \sum_{k = 0}^{N} 
+            b_k \cdot x \left[ n - k\right]
+    \end{equation}
+}
+
+in cui, nel dominio z, l'SFG, quindi il filtro $H \left(z\right)$, sarà rappresentato nella seguente maniera: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left[z\right]
+        = 
+        \dfrac{
+            \sum_{k = 0}^{N} 
+            b_k \cdot z^{-k}
+        }{
+            1 
+            -
+            \sum_{k = 1}^{N} 
+            a_k \cdot z^{-k}
+        } 
+        \text{ con } 
+        a_0 = 1
+    \end{equation}
+}
+
+Esistono diverse forme di struttura SFG per rappresentare dei filtri IIR: di seguito un elenco di quelle principali. \newline 
+
+\textbf{Forma diretta I} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{Forma Diretta I filtri IIR.png}
+\end{figure}
+
+Possiamo svolgere due osservazioni in merito alla seguente struttura: 
+
+\begin{itemize}
+    \item tutte le maglie hanno almeno un elemento di ritardo (cioè $z^{-1}$) 
+    \item la forma diretta realizza prima gli zeri e poi i poli 
+    \item l'SFG è uni-direzionale, parte da sinistra con la sequenza di ingrezzo $x \left[ n\right]$ ed ha in uscita, a destra dell'SFG, la sequenza $y \left[ n\right]$
+\end{itemize} 
+
+Grazie alla proprietà di trasposizione degli SFG (cioè che si può scambiare l'ingresso con l'uscita e viceversa e rovesciare tutte le frecce degli archi senza alterare la $H \left(z\right)$), 
+dalla forma diretta I, possiamo introdurre la forma diretta I trasposta. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
+La proprietà di trasposizione degli SFG è valida solo perchè abbiamo a che fare con funzioni di rete $H \left(z\right)$ lineari? \newline 
+
+Nel caso di filtro non lineare, non varrebbe questa proprietà, giusto? 
+\end{tcolorbox}
+
+\newpage 
+
+\textbf{Forma diretta I trasposta} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{Forma Diretta I trasposta filtri IIR.png}
+\end{figure}
+
+Possiamo svolgere le seguenti osservazioni: 
+
+\begin{itemize}
+    \item la forma diretta I trasposta è, come dice il nome, la forma diretta I in cui l'SFG, grazie alla proprietà di trasposizione, è stato cambiato di verso 
+    \item la forma diretta traspostta realizza prima i poli e poi gli zeri \newline 
+\end{itemize}
+
+\textbf{Forma diretta II o Canonica} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Forma diretta II Filtri IIR con note.png}
+\end{figure}
+
+Come scritto nelle note della figura, la forma diretta II è una struttura da valutare se si vuole ottimizzare il filtro mettendo dei ritardi condivisi. \newline 
+
+\textbf{Forma diretta II trasposta} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Forma diretta II trasposta Filtri IIR con note.png}
+\end{figure}
+
+Grazie alla proprietà di trasposizione, dalla forma diretta II si può realizzare la forma diretta II trasposta scambiando i versi dell'SFG. \newline 
+
+\newpage 
+
+\textbf{Forma in cascata} \newline 
+
+La funzione di rete può essere fattorizzata e riscritta come segue: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        A \cdot 
+        \dfrac{
+            \prod_{k = 1}^{M_1} 
+            \left(1 - c_{k}^{'} z^{-1}\right)
+            \prod_{k = 1}^{M_2} 
+            \left(1 - c_{k}^{''} z^{-1}\right)
+            \left(1 - c_{k}^{''*} z^{-1}\right)
+        }{
+            \prod_{k = 1}^{N_1} 
+            \left(1 - d_{k}^{'} z^{-1}\right)
+            \prod_{k = 1}^{N_2} 
+            \left(1 - d_{k}^{''} z^{-1}\right)
+            \left(1 - d_{k}^{''*} z^{-1}\right)
+        }
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $ \left(1 - d_{k}^{''*} z^{-1}\right)$ è il complesso coniugato di $\left(1 - d_{k}^{''} z^{-1}\right)$ 
+    \item $\left(1 - c_{k}^{''*} z^{-1}\right)$ è il complesso coniugato di $\left(1 - c_{k}^{''} z^{-1}\right)$
+\end{itemize}
+
+Scrivere in questa forma $H \left(z\right)$ permette di avere i seguenti vantaggi: 
+
+\begin{itemize}
+    \item libertà realizzativa, in particolare sulla scelta delle sezioni e dell'ordine 
+    \item robustezza numerica 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
+Robustezza numerica perchè, essendoci tanti termini in $H \left(z\right)$, il singolo elemento che compone la funzione di rete influisce poco su tutta la funziona di rete? \newline 
+
+Quindi, di conseguenza, avremo una robustezza numerica? 
+\end{tcolorbox} 
+
+Ma, in generale, se si realizza una forma in cascata, si cerca di utilizzerare non termini del primo ordine, cioè $z^{-1}$, 
+bensì $z^{-2}$, come si nota nella seguente formulazione di $H \left(z\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \prod_{k = 1}^{N_s} 
+        \dfrac{
+            b_{0k} + b_{1k} z^{-1} + b_{2k} z^{-1}
+        }{
+            1 - a_{1k} z^{-1} + a_{2k} z^{-1}
+        }
+    \end{equation}
+}
+
+in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        N_s = \text{trunc} \left(\dfrac{N + 1}{2}\right)
+    \end{equation}
+} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
+"trunc" perchè si prende la parte intera della frazione? \newline 
+
+Inoltre, si prende la metà grazie alle proprietà di simmetria di $H \left(z\right)$? 
+\end{tcolorbox} 
+
+Un esempio di forma in cascata del secondo ordine con forma diretta II canonica (con note): 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Forma in cascata del secondo ordine filtri IIR esempio note.png}
+\end{figure}
+
+\newpage 
+
+\textbf{Forma parallela} \newline 
+
+La funzione di rete può essere sviluppata in frazioni parziali: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \sum_{k = 0}^{M - N}
+        C_k z^{-k} 
+        + 
+        \sum_{k = 1}^{N_1} 
+        \dfrac{A_k}{1 - d_{k}^{'} z^{-1}}
+        +
+        \sum_{k = 1}^{N_1} 
+        \dfrac{B_k \left(1 - e_k z^{-1}\right)}{\left( 1 - d_{k}^{''} z^{-1}\right)\left( 1 - d_{k}^{''*} z^{-1}\right)} 
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $M \geq N$ 
+    \item $h \left[ n\right]$ è reale, ha poli semplici e complessi coniugati
+\end{itemize}
+
+Usualmente, nella forma parallela, si utilizza termini del secondo ordine. \newline 
+
+Questo tipo di forma, permette di avere i seguenti vantaggi: 
+
+\begin{itemize}
+    \item libertà realizzativa, in particolare la scelta delle sezioni 
+    \item è parallelizzabile, quindi molto utili, ad esempio, nelle schede grafiche 
+\end{itemize} 
+
+Un esempio di struttura in forma parallela: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{forma parallela esempio filtro IIR.png}
+\end{figure} 
+
+\newpage 
+
+\section{Strutture per filtri FIR}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 19 - 22\\
+    Appunti | 2025-11-25 | pag 3  
+} 
+
+I filtri FIR, cioè i filtri a risposta impulsiva finita, sono casi particolari delle strutture IIR, 
+ma più importanti nella pratica. \newline 
+
+Quindi passeremo da: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left[z\right]
+        = 
+        \dfrac{
+            \sum_{k = 0}^{N} 
+            b_k \cdot z^{-k}
+        }{
+            1 
+            -
+            \sum_{k = 1}^{N} 
+            a_k \cdot z^{-k}
+        } 
+        \text{ con } 
+        a_0 = 1
+    \end{equation}
+} 
+
+al caso di $H \left(z\right)$ per i FIR che vale: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \sum_{k = 0}^{M} 
+        b_k \cdot z^{-k}
+    \end{equation}
+}
+
+I FIR, rispetto agli IIR, sono dei filtri in cui la media è pesata (cioè in inglese moving average). \newline 
+
+Di seguito un elenco di strutture per filtri FIR. \newline 
+
+\textbf{Forma diretta (Tapped Delay Line - TDL)} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{TDL per filtri FIR.png}
+\end{figure} 
+
+\textbf{Forma diretta trasposta} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{forma diretta trasposta per filtri FIR.png}
+\end{figure} 
+
+\textbf{Forma diretta in cascata} \newline 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{forma in cascata per filtri FIR.png}
+\end{figure} 
+
+Osservando le seguenti strutture dei filtri FIR, possiamo svolgere le seguenti considerazioni: 
+
+\begin{itemize}
+    \item rispetto ai filtri IIR, la forma parallela non esiste per i filtri FIR perchè, non essendoci i poli, non è possibile applicare il teorema dei residui 
+    \item gli SFG dei filtri FIR non cotengono cicli o frecce in direzione opposte, e questa è la condizione sufficiente per un SFG di un FIR
+\end{itemize} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4} 
+    "gli SFG dei filtri FIR non cotengono cicli o frecce in direzione opposte" cioè nei FIR non ci sono le retroazioni, giusto? 
+\end{tcolorbox} 
+
+Non ci occupiamo quasi mai della fase, ma la condizione di simmetria o anti-simmetria dei coefficienti è sufficiente per avere fase lineare generalizzare, cioè ritardo di gruppo costante. \newline 
+
+Questa simmetria può essere sfruttata per semplificare la struttura dei filtri con un conseguente risparmio di circa la metà dei moltiplicatori, cioè dei k-esimi coefficienti $b_k$. \newline 
+
+
+Ad esempio, per un fitro FIR I, che avrà questa formulazione matematica: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        \sum_{k = 0}^{\frac{M}{2} - 1} 
+        b_k \left[ x  \left[ n-k\right] + x \left[n - M + k \right]\right]
+        + 
+        b_{\frac{M}{2}} x  \left[ n- \dfrac{M}{2}\right] 
+    \end{equation}
+}
+
+con un esempio di strutta: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro FIR I con note struttura.png}
+\end{figure} 
+
+Invece, per un fitro FIR II, che avrà questa formulazione matematica: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        \sum_{k = 0}^{\frac{M- 1}{2}} 
+        b_k \left[ x  \left[ n-k\right] + x \left[n - M + k \right]\right] 
+    \end{equation}
+}
+
+con un esempio di strutta: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro FIR II struttura.png}
+\end{figure} 
+
+\newpage 
+
+\section{Implementazioni digitali}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 2 - 6\\
+    Appunti mancanti   
+} 
 
