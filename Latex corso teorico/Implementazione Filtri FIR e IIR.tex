@@ -126,7 +126,7 @@ Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il se
 
 \newpage 
 
-\section{Strutture per filtri IIR}
+\section{Strutture per filtri IIR} \label{sec: Strutture per filtri IIR}
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 11 - 16, pag 8\\
@@ -498,4 +498,440 @@ con un esempio di strutta:
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 2 - 6\\
     Appunti mancanti   
 } 
+
+Le strutture viste in precedenza vengono usualmente implementate mediante circuiti digitali, 
+progettati appositamente o programmabili, e presentano, pertanto, problemi di quantizzazione, che comporta ad una precisione finita. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5} 
+"circuiti digitali programmabili" ad esempio attraverso gli FPGA? 
+\end{tcolorbox} 
+
+Avevamo già affrontato i problemi di quantizzazione precedentemente in \ref{subsec: Conversione D/A reale} \nameref{subsec: Conversione D/A reale} a pag \pageref{subsec: Conversione D/A reale}. \newline 
+
+In parole povere (e senza ritornare indietro nelle pagine precedenti), i problemi di quantizzazione esistono perchè nel mondo reale la grandezza fisica, come ad esempio una tensione, ha infiniti valori, 
+invece un circuito digitale, grazie alla quantizzazione, può interpretare le grandezze fisiche reali attraverso una sua rappresentazione finita, e quindi con finiti valori: da ciò nasce un errore di quantizzazione, che è la differenza tra il valore reale e il valore quantizzato. \newline 
+
+\begin{tcolorbox}
+    Prima di approfondire il tema della rappresentazioni dei numeri nei circuiti digitali, ti consiglio di guardare i seguenti video: 
+
+    \begin{itemize}
+        \item computers suck at division (a painful discovery) by Low Level \\\url{https://youtu.be/ssDBqQ5f5_0?si=NfVkwva6Uww6qjaz} 
+        \item How Computers perform Division by Serious Electrical Engineering \\\url{https://youtu.be/WyBsPfhlC2M?si=tTkUh6_f_3fzq_31}
+    \end{itemize}
+
+    Perchè vedere dei video sulle divisioni? Perchè è il caso più complicato che un calcolatore possa compiere (e non è una cosa scontata come pensi). 
+\end{tcolorbox} 
+
+Il circuito digitale può rappresentare il valore quatizzato con due tipi di rappresentazione: 
+
+\begin{itemize}
+    \item virgola mobile (in inglese floating point) 
+    \item virgola fissa (in inglese fixed point)
+\end{itemize} 
+
+Il caso più complicato è quello della rappresentazione in virgola movile perchè vengono utilizzati tre elementi per rappresentare un numero: 
+
+\begin{itemize}
+    \item segno 
+    \item mantissa 
+    \item esponente 
+\end{itemize}
+
+Per quanto riguarda la quantizzazione, mantiene una grande dinamica ed un piccolo rumore di quantizzazione. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6} 
+Cosa si intende per "grande dinamica"? Cioè con pochi elementi (cioè segno, mantissa ed esponente) si possono rappresentare tanti valori? 
+\end{tcolorbox}  
+
+L'IEEE (l'ente standardizzatore di riferimento), grazie allo standard IEEE 754, permette, ad esempio, i seguenti formati in virgola mobile: 
+
+\begin{itemize}
+    \item 32 bit, o anche chiamata come singola precisione 
+    \item 64 bit, o anche chiamata come dobbia precisione 
+\end{itemize} 
+
+\newpage 
+
+Come si visualizza dalla seguente schermata: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 1.5]{IEEE754.png}
+\end{figure} 
+
+il formato a 64 bit, cioè quello a doppia precisione, ha un errore minore rispetto al formato a 32 bit, cioè quello a singola precisione, 
+al costo di gestire più bit. \newline 
+
+Invece, al posto di utilizzare una rappresentazione a virgola mobile, si può utilizzare un formato a virgola fissa (in inglese fixed point). \newline 
+
+Il formato a virgola fissa è meno costoso e più veloce rispetto al formato a virgola mobile ed è formato dai seguenti elementi: 
+
+\begin{itemize}
+    \item segno 
+    \item grandezza 
+    \item complemento 
+\end{itemize}
+
+A sua volta, il complemento può essere a: 
+
+\begin{itemize}
+    \item complemento a 1 (in inglese 1's complement) 
+    \item complemento a 2 (in inglese 2's complement), che è il formato più utilizzato 
+\end{itemize} 
+
+Per un numero rappresentato con B+1 bit, la rappresentazione complemento a 2 risulta: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \hat{x} \left[ n\right] 
+            &= 
+            Q_{B} \left[ x\right] 
+            \\
+            &= 
+            X_{m} 
+            \cdot 
+            \left(
+                -b_{0} 
+                + 
+                \sum_{i = 1}^{B} 
+                b_{i} 
+                \cdot 
+                2^{-i}
+            \right) 
+            \\
+            &= 
+            X_{m} \cdot \hat{x}_{B}
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\hat{x} \left[ n\right]$ è la sequenza contenente i valori quantizzati 
+    \item $Q_{B} \left[ x\right]$ è l'operatore di quantizzazione 
+    \item $X_{m}$ è il valore massimo della sequenza quantizzata $x \left[ n\right]$ 
+    \item $-b_{0}$ è il segno della sequenza, quindi se positiva o negativa 
+    \item $\hat{x}_{B}$ è il b-esimo bit della sequenza $\hat{x} \left[ n\right] $ 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7} 
+"$X_{m}$ è il valore massimo della sequenza quantizzata $x \left[ n\right]$", giusto? \newline 
+
+$x \left[ n\right]$ possiamo considerarla la sequenza campionata? \newline 
+
+"$\hat{x}_{B}$ è il b-esimo bit della sequenza $\hat{x} \left[ n\right] $", giusto? 
+\end{tcolorbox}  
+
+Se consideriamo la sequenza $\hat{x} \left[ n\right]$ compresa tra due massimi, il cui valore assoluto $\abs{X_{M}}$ è uguale: 
+
+{
+    \Large 
+    \begin{equation}
+        - X_{M} \leq \hat{x} \left[ n\right] \leq + X_{M}
+    \end{equation}
+}
+
+in cui il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro, la consideriamo come: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8} 
+"il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro" è giusto? 
+\end{tcolorbox}  
+
+{
+    \Large 
+    \begin{equation}
+        \Delta = X_{m} \cdot 2^{-B}
+    \end{equation}
+}
+
+allora avremo che l'errore è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        e = Q_{b} \left[ x\right] - x \left[ n\right]
+    \end{equation}
+} 
+
+in cui l'arrotondamento è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        - \dfrac{\Delta}{2} 
+        < 
+        e
+        <
+        + \dfrac{\Delta}{2} 
+    \end{equation}
+}
+
+invece il troncamento vale: 
+
+{
+    \Large 
+    \begin{equation}
+        -\Delta 
+        < 
+        e
+        <
+        0 
+    \end{equation}
+}
+
+Dal punto di vista grafico, la funzione arrotondamento avrà il seguente andamento: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{arrotondamento a complemento a 2.png}
+\end{figure} 
+
+invece il troncamento avrà il seguente andamento: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{troncamento a complemento a 2.png}
+\end{figure} 
+
+Quindi, come visualizzato e scritto nelle formule, la quantizzazione è un'operazione non lineare. \newline 
+
+Durante il calcolo della quantizzazione, si può ricorrere in overflow, cioè la generazione di numeri più grandi di quelli rappresentabili con il numero di bit a disposizione. \newline  
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9} 
+Nella slide c'è scritto "Durante il calcolo". Per calcolo si intende calcolo della quantizzazione? 
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+    Dal punto di vista elettronico ed implementativo, andare in overflow è una tecnica molto utile perchè le risorse sono limitate, ma se si tratta di sicurezza è un problema enorme (banale, ma è la base delle falle di sicurezza moderne). \newline 
+
+    Un po' di video in merito: 
+
+    \begin{itemize}
+        \item Buffer Overflow by Aaron Yoo \\\url{https://youtu.be/AD-iXWANggo?si=aQEGLJbm9mFAsQqa} 
+        \item why do hackers love strings? by Low Level \\\url{https://youtu.be/fjMrDDj47E8?si=AYCqc-ZEkSckA2HZ}
+        \item exploiting buffer overflows is too simple. (do it with me) by Low Level \\\url{https://youtu.be/C630ttQlyhI?si=yuxfvGrBRN2qQP5U} 
+    \end{itemize}
+\end{tcolorbox}
+
+Sono possibili 2 strategie: 
+
+\begin{itemize}
+    \item Wrap around (chiamato anche natuale), che ha il seguente andamento: 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{wrap around grafico.png}
+    \end{figure} 
+    perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, ritorna al valore minimo (in figura da 011 a 100)
+    \item Saturazione, che ha il seguente andamento: 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{saturazione grafico.png}
+    \end{figure}  
+    perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, rimane a quel valore (in figura da 011 rimane 011)
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10} 
+La tenica wrap around è utilizzata negli ADC Sigma Delta, giusto? \newline 
+
+Nella slide c'è scritto: "nel caso wrap around, con la rappresentazione in complemento a 2, gli overlflow verificatisi nei calcoli intermedi non danno luogo ad errori se il risultato finale ricade nel range rappresentabile": che significa? 
+\end{tcolorbox} 
+
+L'effetto della quantizzazione deve essere valutato guardando all'interno del sistema digitale. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11} 
+Dalla slide: "L'effetto della quantizzazione deve essere valutato guardando all'interno del sistema digitale". \newline 
+
+Perchè, essendo la quantizzazione un'operazione non lineare che crea un errore di quantizzazione, e che quindi differenzia il valore reale dal valore rappresentato, 
+il cicuito digitale è quello che creerà più errori (aka più danni se progettato male)? 
+
+\end{tcolorbox} 
+
+Ad esempio, considerando un sistema del $1^{\circ}$, avremo il seguente schema: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.3]{sistema del primo ordine quantizzatore.png}
+\end{figure} 
+
+Come si nota dallo schema, questo è il caso ideale senza quantizzazione, quindi ha precisione infinita perchè non c'è errore di quantizzazione, e non è presente aliasing. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12} 
+"precisione infinita" perchè, non essendoci la quantizzazione, l'errore di quantizzazione non esiste quindi precisione infinita e no aliasing? \newline 
+
+Inoltre, essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR, giusto? 
+\end{tcolorbox} 
+
+Andando invece per un modello più completo: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.3]{sistema del primo ordine con 3 quantizzatori.png}
+\end{figure} 
+
+come evidenziato in giallo nella figura, sono presenti 3 quantizzatori ideali, dove: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 13} 
+"come evidenziato in giallo nella figura, sono presenti 3 quantizzatori" giusto? 
+\end{tcolorbox} 
+
+
+{
+    \Large 
+    \begin{equation}
+        \hat{a} = Q_{B_{m}} \left[ a\right]
+    \end{equation}
+}
+
+allora non avremo aliasing, la precisione sarà finita perchè quantizzatore limita i valori che può quantizzatore. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 14} 
+Perchè non abbiamo aliasing? E la precisione finita è dovuta al quantizzatore che limita i valori possibili? 
+\end{tcolorbox} 
+
+Questo rappresentato è un circuito non lineare dinamico, ma è un modello completo di quello che accade in un circito digitale reale. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 15} 
+Dinamico perchè ogni singolo quantizzatore ha un contributo diverso? 
+\end{tcolorbox} 
+
+Invece, se consideriamo un modello semplificato del precedente, avremo il seguente schema: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 0.3]{sistema del primo ordine con 3 errori di quantizzazione.png}
+\end{figure} 
+
+in cui, al posto dei quantizzatori, è presente l'errore di quantizzazione (segnato in giallo). \newline 
+
+In questo tipo di circuito avremo che non è presente l'aliasing, la precisione è finita e non è presente un overlflow. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 16} 
+"No overflow" si considera in tutti e 3 i circuiti elencati?  
+\end{tcolorbox} 
+
+Questo è un circuito non lineare con rumore: questo tipo di modello, dove è presente l'aggiunta di rumore, è sufficiente per molte applicazioni. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 17} 
+In questi casi si considera solo errore di quantizzazione, non altri tipi di rumore? 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Quantizzazione dei coefficienti}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 7 - 8\\
+    Appunti mancanti   
+} 
+
+Considerando un circuito IIR generico, avremo che la funzione di rete $H \left(z\right)$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        H \left(z\right) 
+        = 
+        \dfrac{
+            \sum_{k = 0}^{M}
+            b_k \cdot z^{-k}
+        }{
+            1 - \sum_{k = 1}^{N} a_k \cdot z^{-1} 
+        }
+    \end{equation}
+}
+
+in cui la precisione del filtro è infinita. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 18} 
+"Precisione infinita" perchè il filtro si estende nel tempo fino ad infinito? $+ \infty$
+\end{tcolorbox} 
+
+Invece, considerando i coefficienti quantizzati, avremo che la nuova funzione di rete non sarà $H \left(z\right)$, bensì: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{H} \left(z\right) 
+        = 
+        \dfrac{
+            \sum_{k = 0}^{M}
+            \hat{b_k} \cdot z^{-k}
+        }{
+            1 - \sum_{k = 1}^{N} \hat{a_k} \cdot z^{-1} 
+        }
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 19} 
+Perchè abbiamo dei coefficienti quantizzati in un filtro? 
+\end{tcolorbox} 
+
+Kaiser nel 1966 ha dimostrato che, a causa della quantizzazione, i poli e gli zeri del sistema $H \left(z\right)$ si spostano. \newline 
+
+Proprio perchè i poli e gli zeri di $\hat{H} \left(z\right)$ sono quelli di $H \left(z\right) $ ma spostati, allora la risposta del circuito totale cambia. \newline 
+
+\newpage 
+
+\subsubsection{Quantizzazione dei coefficienti - filtri IIR}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 9 - 10\\
+    Appunti mancanti   
+} 
+
+Per quanto riguarda i filtri IIR, gli zeri ed i poli quantizzati hanno un contributo differente rispetto alle strutture scelte come avevamo studiato precedentemente in \ref{sec: Strutture per filtri IIR} \nameref{sec: Strutture per filtri IIR} a pag \pageref{sec: Strutture per filtri IIR}. \newline 
+
+Riportando al volo le strutture in forme dirette per gli IIR: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{Forma Diretta I filtri IIR.png}
+    \includegraphics[scale = 0.35]{Forma diretta II Filtri IIR.png}
+\end{figure}
+
+e le rispettive trasposte, ogni coefficiente muove tutti i poli o tutti gli zeri, quindi questi tipi di struttura sono molto sensibili alla quantizzazione, specialmente per filtri a banda stretta. \newline 
+
+Invece, per quanto riguarda la forma in cascata: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{Filtro in cascata di ordine II IIR.png}
+\end{figure}
+
+ogni coppia di poli e zeri è realizzata indipendemente alle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
+
+Per quanto riguarda la forma parallela: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{forma parallela esempio filtro IIR solo grafo.png}
+\end{figure} 
+
+ogni coppia di poli è realizzata indipendent dalle altre, ma gli zeri sono realizzati implicitamente e quindi, 
+sensibili alla quantizzazione di ogni sezione. \newline 
+
+Grazie a questa caratteristica elencata, in genere la struttura parallela è, in genere, meno sensibile alla quantizzazione rispetto alle forme dirette. \newline 
+
+\newpage 
+
+\subsubsection{Quantizzazione dei coefficienti - filtri FIR}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 11 - 13\\
+    Appunti mancanti   
+} 
+
+
+
+
+
+
+
+
+
+
 
