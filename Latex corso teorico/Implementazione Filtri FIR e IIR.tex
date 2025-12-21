@@ -366,7 +366,7 @@ Un esempio di struttura in forma parallela:
 
 \newpage 
 
-\section{Strutture per filtri FIR}
+\section{Strutture per filtri FIR} \label{sec: Strutture per filtri FIR}
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 19 - 22\\
@@ -496,8 +496,12 @@ con un esempio di strutta:
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 2 - 6\\
-    Appunti mancanti   
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 39:00 - 1:10:15   
 } 
+
+\begin{tcolorbox}
+Il video della Lezione CADSP Martedì 29 Novembre 2022 è disponibile nel Learn. Rimando alla videolezione perchè quel giorno ero occupato per un seminario su Matlab, molto carino sugli SDR.      
+\end{tcolorbox}
 
 Le strutture viste in precedenza vengono usualmente implementate mediante circuiti digitali, 
 progettati appositamente o programmabili, e presentano, pertanto, problemi di quantizzazione, che comporta ad una precisione finita. \newline 
@@ -543,14 +547,14 @@ Per quanto riguarda la quantizzazione, mantiene una grande dinamica ed un piccol
 Cosa si intende per "grande dinamica"? Cioè con pochi elementi (cioè segno, mantissa ed esponente) si possono rappresentare tanti valori? 
 \end{tcolorbox}  
 
+\newpage 
+
 L'IEEE (l'ente standardizzatore di riferimento), grazie allo standard IEEE 754, permette, ad esempio, i seguenti formati in virgola mobile: 
 
 \begin{itemize}
     \item 32 bit, o anche chiamata come singola precisione 
     \item 64 bit, o anche chiamata come dobbia precisione 
 \end{itemize} 
-
-\newpage 
 
 Come si visualizza dalla seguente schermata: 
 
@@ -612,14 +616,14 @@ dove:
 
 \begin{itemize}
     \item $\hat{x} \left[ n\right]$ è la sequenza contenente i valori quantizzati 
-    \item $Q_{B} \left[ x\right]$ è l'operatore di quantizzazione 
+    \item $Q_{B} \left[ x\right]$ è l'operatore (non lineare) di quantizzazione, che ha quantizzato la sequenza $x \left[ n\right]$ 
     \item $X_{m}$ è il valore massimo della sequenza quantizzata $x \left[ n\right]$ 
     \item $-b_{0}$ è il segno della sequenza, quindi se positiva o negativa 
     \item $\hat{x}_{B}$ è il b-esimo bit della sequenza $\hat{x} \left[ n\right] $ 
 \end{itemize}
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7} 
-"$X_{m}$ è il valore massimo della sequenza quantizzata $x \left[ n\right]$", giusto? \newline 
+"$X_{m}$ è il valore massimo della sequenza campionata $x \left[ n\right]$", giusto? \newline 
 
 $x \left[ n\right]$ possiamo considerarla la sequenza campionata? \newline 
 
@@ -648,7 +652,9 @@ in cui il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro, 
     \end{equation}
 }
 
-allora avremo che l'errore è uguale a: 
+perchè $2^{-B}$ sono i valori massimi che si possono rappresentare dopo la quantizzazione. \newline 
+
+Allora avremo che l'errore è uguale a: 
 
 {
     \Large 
@@ -682,6 +688,10 @@ invece il troncamento vale:
         0 
     \end{equation}
 }
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 22} 
+Quindi spetta a noi se decidere se svolgere un arrotondamento o un troncamento ?
+\end{tcolorbox} 
 
 Dal punto di vista grafico, la funzione arrotondamento avrà il seguente andamento: 
 
@@ -759,11 +769,14 @@ Ad esempio, considerando un sistema del $1^{\circ}$, avremo il seguente schema:
 
 Come si nota dallo schema, questo è il caso ideale senza quantizzazione, quindi ha precisione infinita perchè non c'è errore di quantizzazione, e non è presente aliasing. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12} 
-"precisione infinita" perchè, non essendoci la quantizzazione, l'errore di quantizzazione non esiste quindi precisione infinita e no aliasing? \newline 
+Essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR che prende il nome anche di integratore. \newline 
 
-Inoltre, essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR, giusto? 
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12} 
+"precisione infinita" perchè, non essendoci la quantizzazione, l'errore di quantizzazione non esiste quindi precisione infinita e no aliasing? 
+
 \end{tcolorbox} 
+
+\newpage 
 
 Andando invece per un modello più completo: 
 
@@ -772,12 +785,15 @@ Andando invece per un modello più completo:
 \includegraphics[scale = 0.3]{sistema del primo ordine con 3 quantizzatori.png}
 \end{figure} 
 
-come evidenziato in giallo nella figura, sono presenti 3 quantizzatori ideali, dove: 
+come evidenziato in giallo nella figura, sono presenti 3 quantizzatori, dove:
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 13} 
-"come evidenziato in giallo nella figura, sono presenti 3 quantizzatori" giusto? 
-\end{tcolorbox} 
+\begin{itemize}
+    \item $Q_{Bi}$ è il quantizzatore del segnale di ingresso campionato $x_c \left(t\right)$ 
+    \item $Q_{Bm}$ è il quantizzatore del segnale elaborato dalla retroazione 
+    \item $Q_{Bo}$ è il quantizzatore del segnale in uscita 
+\end{itemize}
 
+Inoltre abbiamo che il coefficiente a di $H \left(z\right)$ non sarà uguale ad a in $\hat{H} \left(z\right)$, bensì una sua versione quantizzata, quindi: 
 
 {
     \Large 
@@ -786,7 +802,7 @@ come evidenziato in giallo nella figura, sono presenti 3 quantizzatori ideali, d
     \end{equation}
 }
 
-allora non avremo aliasing, la precisione sarà finita perchè quantizzatore limita i valori che può quantizzatore. \newline 
+Con questa implementazione non avremo aliasing, la precisione sarà finita perchè quantizzatore limita i valori che può quantizzatore. \newline 
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 14} 
 Perchè non abbiamo aliasing? E la precisione finita è dovuta al quantizzatore che limita i valori possibili? 
@@ -805,7 +821,11 @@ Invece, se consideriamo un modello semplificato del precedente, avremo il seguen
 \includegraphics[scale = 0.3]{sistema del primo ordine con 3 errori di quantizzazione.png}
 \end{figure} 
 
-in cui, al posto dei quantizzatori, è presente l'errore di quantizzazione (segnato in giallo). \newline 
+in cui, al posto dei quantizzatori, è presente l'errore di quantizzazione (segnato in giallo), molto più semplice perchè calcolato statisticamente. \newline 
+
+\begin{tcolorbox}
+    Si cercherà di utilizzare la statistica del rumore, piuttosto che impiegare dei circuiti non lineari. 
+\end{tcolorbox} 
 
 In questo tipo di circuito avremo che non è presente l'aliasing, la precisione è finita e non è presente un overlflow. \newline 
 
@@ -825,7 +845,7 @@ In questi casi si considera solo errore di quantizzazione, non altri tipi di rum
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 7 - 8\\
-    Appunti mancanti   
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:10:15 - 1:13:25  
 } 
 
 Considerando un circuito IIR generico, avremo che la funzione di rete $H \left(z\right)$ è uguale a: 
@@ -880,7 +900,7 @@ Proprio perchè i poli e gli zeri di $\hat{H} \left(z\right)$ sono quelli di $H 
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 9 - 10\\
-    Appunti mancanti   
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:13:25 - 1:18:25  
 } 
 
 Per quanto riguarda i filtri IIR, gli zeri ed i poli quantizzati hanno un contributo differente rispetto alle strutture scelte come avevamo studiato precedentemente in \ref{sec: Strutture per filtri IIR} \nameref{sec: Strutture per filtri IIR} a pag \pageref{sec: Strutture per filtri IIR}. \newline 
@@ -895,6 +915,8 @@ Riportando al volo le strutture in forme dirette per gli IIR:
 
 e le rispettive trasposte, ogni coefficiente muove tutti i poli o tutti gli zeri, quindi questi tipi di struttura sono molto sensibili alla quantizzazione, specialmente per filtri a banda stretta. \newline 
 
+Quindi è, possibilmente, da evitare questa struttura (a meno che non lavoriamo con la virgola mobile). \newline 
+
 Invece, per quanto riguarda la forma in cascata: 
 
 \begin{figure}[h]
@@ -903,6 +925,8 @@ Invece, per quanto riguarda la forma in cascata:
 \end{figure}
 
 ogni coppia di poli e zeri è realizzata indipendemente alle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
+
+Quindi, la useremo sempre, specialmente se lavoriamo con numeri fissi. \newline 
 
 Per quanto riguarda la forma parallela: 
 
@@ -914,6 +938,8 @@ Per quanto riguarda la forma parallela:
 ogni coppia di poli è realizzata indipendent dalle altre, ma gli zeri sono realizzati implicitamente e quindi, 
 sensibili alla quantizzazione di ogni sezione. \newline 
 
+È una via di mezzo tra le due strutture precedenti. \newline 
+
 Grazie a questa caratteristica elencata, in genere la struttura parallela è, in genere, meno sensibile alla quantizzazione rispetto alle forme dirette. \newline 
 
 \newpage 
@@ -921,9 +947,109 @@ Grazie a questa caratteristica elencata, in genere la struttura parallela è, in
 \subsubsection{Quantizzazione dei coefficienti - filtri FIR}
 
 \footnote{ 
-    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 11 - 13\\
-    Appunti mancanti   
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 11 - 13, 8\\
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:18:25 - 1:24:40    
 } 
+
+Non avendo poli i filtri FIR, la quantizzazione dei coefficienti provoca lo spostamento degli zeri da $H \left(z\right)$ a $\hat{H} \left(z\right)$: 
+
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \hat{H} \left(z\right) 
+            &= 
+            \sum_{k = 0}^{M} 
+            \hat{b_k} \cdot z^{-k}
+            \\
+            &= 
+            \sum_{k = 0}^{M} 
+            \left(b_k + \Delta \cdot b_k\right)
+            \cdot z^{-k} 
+            \\
+            &= 
+            H \left(z\right) 
+            + 
+            \Delta \cdot H \left(z\right)
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\hat{H} \left(z\right)$ è $H \left(z\right)$ quantizzato 
+    \item $\hat{b_k}$ è il k-esimo coefficiente $b_k$ quantizzato 
+    \item $\left(b_k + \Delta \cdot b_k\right)$ è l'errore di quantizzazione 
+    \item $\Delta \cdot H \left(z\right)$ è l'effetto della quantizzazione 
+\end{itemize}
+
+Ricordando le \ref{sec: Strutture per filtri FIR} \nameref{sec: Strutture per filtri FIR} a pag \pageref{sec: Strutture per filtri FIR}, 
+nella forma diretta come la seguente:  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{TDL per filtri FIR.png}
+\end{figure} 
+
+In questo tipo di strutture, ci saranno dei problemi su $\hat{H} \left(z\right)$ se gli zeri sono strettamente raggruppati. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 20} 
+Per "filtri raggruppati" si intende che si trovano vicino nel piano z come si vede a pag 13 della slide? 
+\end{tcolorbox} 
+
+Per quanto riguarda i filtri a fase lineare, è facile garantire la linearità della fase grazie alla simmetria del filtro. \newline 
+
+Proprio perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{H} \left(z\right) 
+        = 
+        H \left(z\right) 
+        + 
+        \Delta \cdot H \left(z\right) 
+    \end{equation}
+}
+
+la relazione tra gli zeri si mantiene indipendente dalll'impatto della quantizzazione. \newline 
+
+\newpage 
+
+Come negli IIR, anche per i FIR sceglieremo le strutture a casacate come il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{forma in cascata per filtri FIR.png}
+\end{figure} 
+
+grazie alla struttura in cascata, è assai robusta alla quantizzazione perchè ogni sezione è indipendente dalle oltre;  
+ma il problema è (come al solito) garantire la fase lineare al filtro. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 21} 
+Nella slide c'è scritto "zeri in coppie reciproce e zeri in coppie coniugate quindi blocchi del $4^{\circ}$ ordine". \newline 
+
+Quale è il nesso? Bisogna progettare la rete $H \left(z\right)$ in modo che abbia zeri in coppie coniugate reciproche o coniugate solo per garantire la linearità di fase dopo la quantizzazione, quindi il filtro diventa più complicato perchè avremo dei blocchi del quarto ordine, giusto? 
+\end{tcolorbox} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 23} 
+Rispiegazione di pag 13 tutta 
+\end{tcolorbox} 
+
+Il FIR è molto più robusto dell'IIR, per quanto riguarda la quantizzazione. \newline 
+
+\newpage 
+
+\subsection{Rumore di Quantizzazione}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 14 - 15\\
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:24:45 - 1:35:50     
+} 
+
 
 
 
