@@ -492,7 +492,7 @@ con un esempio di strutta:
 
 \newpage 
 
-\section{Implementazioni digitali}
+\section{Implementazioni digitali} \label{sec: Implementazioni digitali}
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 2 - 6\\
@@ -1043,21 +1043,537 @@ Il FIR è molto più robusto dell'IIR, per quanto riguarda la quantizzazione. \n
 
 \newpage 
 
-\subsection{Rumore di Quantizzazione}
+\subsection{Rumore di Quantizzazione} \label{subsec: Rumore di Quantizzazione}
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 14 - 15\\
     Video Lezione CADSP Martedì 29 Novembre 2022 | 1:24:45 - 1:35:50     
 } 
 
+Ricordando che i circuiti che progettiamo applicano una equazione alle differenze del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right] 
+        = 
+        \sum_{k = 1}^{N} 
+        a_k \cdot y \left[ n - k\right] 
+        + 
+        \sum_{k = 1}^{M} 
+        b_k \cdot x \left[ n - k\right] 
+    \end{equation}
+}
+
+allora avremo che, per risumulare il circuito reale, $y \left[ n\right]$ non sarà uguale a quello progettato, bensì: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{y} \left[ n\right] 
+        = 
+        Q_{b} \left[ y \left[ n\right]\right]
+    \end{equation}
+}
+
+cioè, nella realtà, l'uscita del circuito progettato $y \left[ n\right]$ sarà quantizzato. \newline 
+
+Allora, considerando il modello più semplice di quantizzazione, avremo che $\hat{y} \left[ n\right]$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+         \setlength{\jot}{10pt} % affecting the line spacing in the environment
+    \begin{split}
+        \hat{y} \left[ n\right] 
+        &= 
+        Q_{b} \left[ y \left[ n\right]\right] 
+        \\
+        &= 
+        Q_b 
+        \left[ 
+        \sum_{k = 1}^{N} 
+        a_k \cdot y \left[ n - k\right] 
+        + 
+        \sum_{k = 1}^{M} 
+        b_k \cdot x \left[ n - k\right] 
+        \right] 
+        \\
+        &= 
+        \sum_{k = 1}^{N} 
+        Q_b 
+        \left[ 
+        a_k \cdot y \left[ n - k\right] 
+        \right]
+        + 
+        \sum_{k = 1}^{M} 
+        Q_b 
+        \left[ 
+        b_k \cdot x \left[ n - k\right]
+        \right] 
+        \\
+        &\downarrow
+        \\
+        \hat{y} \left[ n\right] 
+        &= 
+        \sum_{k = 1}^{N} 
+        \left( 
+        a_k \cdot \hat{y} \left[ n - k\right] 
+        + 
+        e_{a_k} \left[ n\right]
+        \right)
+        + 
+        \sum_{k = 1}^{M} 
+        \left( 
+        b_k \cdot \hat{x} \left[ n - k\right]
+        + 
+        e_{b_k} \left[ n\right]
+        \right) 
+    \end{split}
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $\hat{y} \left[ n\right]$ è la sequenza in uscita al circuito $y \left[ n\right]$ quantizzata 
+    \item $\hat{x} \left[ n\right]$ è la sequenza in ingresso al circuito $x \left[ n\right]$ quantizzata 
+    \item $e_{a_k} \left[ n\right]$ è il contributo di errore al k-esimo coefficiente alla sequenza di uscita $\hat{y} \left[ n - k\right]$
+    \item $e_{b_k} \left[ n\right]$ è il contributo di errore al k-esimo coefficiente alla sequenza di ingresso $\hat{x} \left[ n - k\right]$
+\end{itemize}
+
+Quindi $\hat{y} \left[ n\right]$ è, grazie a queste semplificazioni, un circuito lineare MISO (Multiple Input Single Output, cioè, in italiano molteplici ingressi, singola uscita). \newline 
+
+Inoltre, dalla formula di $\hat{y} \left[ n\right]$ notiamo che, essendoci una moltiplicazione tra i k-esimo coefficiente ed una sequenza, avremo sempre un errore di quantizzazione, sia in ingresso che in uscita. \newline 
+
+\newpage 
+
+Oltre al modello semplifcato, dobbiamo svolgere le seguenti ipotesi (che sono fortemente semplificative e non rispecchiano tanto la realtà, ma sono facili per svolgere delle considerazioni iniziali sulla quantizzazione): 
+
+\begin{itemize}
+    \item le somme sono senza overflow 
+    \item se B è il numero di bit, allora i prodotti quantizzati saranno da $2B + 1$ a $B+1$ 
+    \item i k-esimi contributi di errori dovuti alla quantizzazione, chiamati anche errori di quantizzazioni, le ipotizziamo come bianchi, quindi stazionati, con distribuzione uniforme nell'intervallo di quantizzazione, e incorrelati fra loro e con gli ingressi 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 24}
+Per incorrelati, si intende che gli errori di quantizzazione sono indipendenti? 
+\end{tcolorbox}
 
 
+Soffermandoci sul k-esimo errore, e come scritto precedentemente in \ref{sec: Implementazioni digitali} \nameref{sec: Implementazioni digitali} a pag \pageref{sec: Implementazioni digitali}, 
+in base alla funzione di quantizzazione scelta $Q_b \left[ x\right]$, possiamo svolgere o un arrotondamento o un troncamento. \newline 
 
+Se si utilizza una funzione di quantizzazione di arrotondamento, e che quindi applica la sequente relazione a gradini: 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{arrotondamento a complemento a 2.png}
+\end{figure} 
 
+abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le sequenti carattersitiche: 
 
+{
+    \Large 
+    \begin{equation}
+        - \dfrac{1}{2} \cdot 2^{-B}
+        <
+        e \left[ n\right] 
+        <
+        + \dfrac{1}{2} \cdot 2^{-B} 
+    \end{equation}
+} 
 
+di conseguenza le altre caratteristiche del rumore $e \left[ n\right]$ sono le seguenti: 
 
+{
+    \Large 
+    \begin{equation}
+        m_e = 0
+    \end{equation}
+} 
 
+{
+    \Large 
+    \begin{equation}
+        \sigma_{e}^{2} 
+        = 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
 
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+        \phi_{cc} \left[ m\right]
+        &= 
+        \sigma_{e}^{2} \cdot \delta \left[ m\right] 
+        +
+        m_{e}^{2} 
+        \\
+        &=
+        \sigma_{e}^{2} \cdot \delta \left[ m\right]
+        \end{split}
+    \end{equation}
+}
+
+dove $m_e$ è la media dell'errore $e \left[ n\right]$, $\sigma_{e}^{2}$ è la varianza e $\phi_{cc} \left[ m\right]$ è l'autocorrelazione. \newline 
+
+\newpage 
+
+Se si utilizza una funzione di quantizzazione di troncamento, e che quindi applica la sequente relazione a gradini: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{troncamento a complemento a 2.png}
+\end{figure} 
+
+abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le sequenti carattersitiche: 
+
+{
+    \Large 
+    \begin{equation}
+        - 2^{-B}
+        <
+        e \left[ n\right] 
+        \leq
+        0 
+    \end{equation}
+} 
+
+di conseguenza le altre caratteristiche del rumore $e \left[ n\right]$ sono le seguenti: 
+
+{
+    \Large 
+    \begin{equation}
+        m_e 
+        =
+         - \dfrac{2^{-B}}{2}
+    \end{equation}
+} 
+
+{
+    \Large 
+    \begin{equation}
+        \sigma_{e}^{2} 
+        = 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \phi_{cc} \left[ m\right]
+        = 
+        \sigma_{e}^{2} \cdot \delta \left[ m\right] 
+        +
+        m_{e}^{2} 
+    \end{equation}
+}
+
+dove $m_e$ è la media dell'errore $e \left[ n\right]$, $\sigma_{e}^{2}$ è la varianza e $\phi_{cc} \left[ m\right]$ è l'autocorrelazione. \newline 
+
+Confrontando l'arrotondamento e il troncamento, visto che gli intervalli sono differenti, nonostante la varianza sia uguale, 
+hanno una media diversa: di conseguenza l'autocorrelazione sarà diversa anche essa, perchè l'autocorrelazione dipende la media. \newline 
+
+Inoltre, ricordando dal Teorema di Parseval la relazione tra varianza e potenza  \ref{teo: Teorema di Parseval} \nameref{teo: Teorema di Parseval} a pag \pageref{teo: Teorema di Parseval}, 
+più è bassa la varanza e più sarà la potenza emessa dal circuito progettato. \newline 
+
+\newpage 
+
+\subsubsection{L'effetto del rumore di quantizzazione nei filtri IIR e FIR}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 16 - 22\\
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:01:30 - 1:22:00      
+} 
+
+\textbf{Filtro IIR in forma diretta I }\newline 
+
+Considerando un filtro IIR in forma diretta I del secondo ordine (ma che può essere esteso ad un filtro all'N-esimo ordine ), avremo che: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta I.png}
+\end{figure} 
+
+per linearità dei grafi e dei nodi, tutti i contributi di errore si sommano allo stesso nodo di $e_{T} \left[ n\right]$, che varrà: 
+
+{
+    \Large 
+    \begin{equation}
+        e_{T} \left[ n\right] 
+        = 
+        e_{b_0} \left[ n\right] 
+        + 
+        e_{b_1} \left[ n\right]
+        +
+        e_{b_2} \left[ n\right] 
+        + 
+        e_{a_1} \left[ n\right]
+        +
+        e_{a_2} \left[ n\right]
+    \end{equation}
+}
+
+Sapendo che la varianza di un singolo contributo di errore $e \left[ n\right]$ è di: 
+
+{
+    \Large 
+    \begin{equation}
+        \sigma_{e}^{2} 
+        = 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
+
+allora la varianza dell'errore sommato $e_{T} \left[ n\right]$, cioè $\sigma_{T}^{2}$, vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \sigma_{T}^{2} 
+        = 
+        \left( M+1+N\right)
+        \cdot 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
+
+dove M sono gli zeri e gli N sono i poli. \newline 
+
+\newpage 
+
+Considerando, per adesso, solo il circuito semplificato: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta I semplificato.png}
+\end{figure} 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 25}
+Nel video il prof dice che: "siccome è presente solo un errore $e_{T} \left[ n\right]$, allora $x \left[ n\right]$ non viene processato": in che senso? 
+\end{tcolorbox}
+
+è possibile scrivere che l'uscita del filtro quantizzata $\hat{y} \left[ n\right]$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{y} \left[ n\right] 
+        = 
+        y \left[ n\right] + e_y \left[ n\right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 26}
+Quindi questa nuova formula di $\hat{y} \left[ n\right]$ è ulteriormente peggiorativa perchè ci sono i contributi di $e_y \left[ n\right]$? \newline 
+
+Quindi il grafo appena messo, non corrisponde alla formula di $\hat{y} \left[ n\right]$, giusto? 
+\end{tcolorbox}
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        e_y \left[ n\right] 
+        = 
+        \sum_{k = 1}^{N} 
+        a_{k} \cdot e_{y} \left[ n - k\right] 
+        + 
+        e_{T} \left[ n\right]
+    \end{equation}
+}
+
+cioè, $e_y \left[ n\right]$ è il contributo di errore di quantizzazione dei poli e l'uscita del filtro $y \left[ n\right]$ è l'uscita senza errore di quantizzazione. \newline 
+
+Quindi, dalla formula di $e_{y} \left[ n\right]$, il rumore in uscita dal filtro è la somma dei singoli rumori di quantizzazione filtrata dalla parte a soli poli. \newline 
+
+Come scritto in \ref{subsec: Rumore di Quantizzazione} \nameref{subsec: Rumore di Quantizzazione} a pag \pageref{subsec: Rumore di Quantizzazione} e concentrandosi solo sul rumore $e_{y} \left[ n\right]$, 
+avremo che le altre carattersitiche legate a $e_{y} \left[ n\right]$ valgono, senza dimostrazione: 
+
+{
+    \Large 
+    \begin{equation}
+        m_{e_y} 
+        = 
+        m_{e_T} \cdot \sum_{n = - \infty}^{+ \infty} h_a \left[ n\right]
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $m_{e_T}$ è la media $e_T \left[ n\right]$ 
+    \item $m_{e_y}$ è la media $e_y \left[ n\right]$
+    \item $h_a \left[ n\right]$ è la risposta impulsiva della parte a soli poli 
+\end{itemize} 
+
+{
+    \Large 
+    \begin{equation}
+        P_{e_y} \left(\omega\right) 
+        = 
+        \abs{H_a \left(e^{\jmath \omega}\right)}^{2} 
+        \cdot 
+        P_{e_T} \left(\omega\right)
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $H_a \left(e^{\jmath \omega}\right)$ è la trasformata di Fourier di $h_a \left[ n\right]$, cioè la risposta impulsiva della parte a soli poli 
+    \item $P_{e_T} \left(\omega\right)$ è la potenza in Fourier di $e_T \left[ n\right]$
+    \item $P_{e_y} \left(\omega\right)$ è lo spettro in Fourier di $e_y \left[ n\right]$  
+\end{itemize}
+
+{
+    \Large 
+    \begin{equation}
+        \sigma_{e_y}^{2} 
+        = 
+        \dfrac{1}{2 \pi} 
+        \int_{- \pi}^{+ \pi}
+        P_{e_y} \left(\omega\right) d\omega
+    \end{equation}
+}
+
+dove $\sigma_{e_y}^{2}$ è la varianza di $e_y \left[ n\right]$. \newline 
+
+Ricordando che, per i nostri scopi, la funzione di quantizzazione per $e_T \left[ n\right]$ è quella di arrotondamento dove: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        m_{e_T} = 0 
+        \\
+        P_{e_T} \left(\omega\right) = \sigma_{T}^{2}   
+        \end{cases}
+    \end{equation}
+}
+
+Allora per $e_y \left[ n\right]$ saranno uguali a: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{20pt} % affecting the line spacing in the environment
+        \begin{cases}
+            m_{e_y} = 0 
+            \\
+            P_{e_y} = \sigma_{T}^{2} \cdot \abs{H_a \left(e^{\jmath \omega}\right)}^{2}
+            \\
+            \sigma_{e_y}^{2} = \dfrac{\sigma_{T}^{2}}{2 \pi} \int_{- \pi}^{+ \pi} \abs{H_a \left(e^{\jmath \omega}\right)}^{2} d\omega
+        \end{cases}
+    \end{equation}
+} 
+
+\textbf{Filtro IIR in forma diretta II }\newline 
+
+Come abbiamo svolto con il filtro FIR IIR in forma diretta I, possiamo raggruppare i diversi contributi di errori di quantizzazione in uno, 
+come mostrato nel seguente schema di sostituzione: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta II.png}
+\end{figure} 
+
+dove però, rispetto al caso dei filtri FIR IIR in forma diretta I, in questo caso abbiamo due contributi di errori totali: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            e_{a} \left[ n\right] = e_{a_1} \left[ n\right] + e_{a_2} \left[ n\right]
+            \\ 
+            e_{b} \left[ n\right] = e_{b_0} \left[ n\right] + e_{b_1} \left[ n\right] + e_{b_2} \left[ n\right]
+        \end{cases}
+    \end{equation}
+}
+
+Ne consegue che in uscita avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{y} \left[ n\right] = y \left[ n\right] + e_{y} \left[ n\right]
+    \end{equation}
+}
+
+in cui: 
+
+{
+    \Large 
+    \begin{equation}
+        e_{y} \left[ n\right] 
+        = 
+        e_{b} \left[ n\right] 
+        + 
+        \sum_{k = - \infty}^{+ \infty} 
+        h \left[ k\right] \cdot e_{a} \left[ n - k\right]
+    \end{equation}
+}
+
+dove $h \left[ k\right]$ è la risposta impulsiva del filtro. \newline 
+
+Applicando la quantizzazione in cui si applica l'arrotondamento, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        m_{e_y} = 0 
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        P_{e_y} \left(\omega\right) 
+        = 
+        \left\{
+            N \cdot \abs{H \left(e^{\jmath \omega}\right)}^{2} 
+            + 
+            \left(M + 1\right)
+        \right\} 
+        \cdot 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
+
+{
+    \Large 
+    \begin{equation}
+        \sigma_{e_y}^{2} 
+        = 
+        \left\{
+            N \cdot \sum_{n = - \infty}^{+ \infty} \abs{h \left[ n\right]}^{2} + \left(M + 1\right)
+        \right\}
+        \cdot 
+        \dfrac{2^{-2B}}{12}
+    \end{equation}
+}
+
+dove $H \left(e^{\jmath \omega}\right)$ è la risposta in frequenza del filtro. \newline 
+
+È possibile ridurre notevolmente il rumore di quantizzazione utilizzando un "accumulatore a doppia precisione", cioè $2B + 1$ bit, 
+in modo da quantizzare solo alla fine del ciclo di accumulazione. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 27}
+Cioè, come abbiene il processo di accumulatore a doppia precisione? 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Scaling}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 23 - 27\\
+    Appunti | 2025-11-26 | pag 1   
+} 
 
