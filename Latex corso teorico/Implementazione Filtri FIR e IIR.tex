@@ -1565,7 +1565,7 @@ dove $H \left(e^{\jmath \omega}\right)$ è la risposta in frequenza del filtro. 
 in modo da quantizzare solo alla fine del ciclo di accumulazione. \newline 
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 27}
-Cioè, come abbiene il processo di accumulatore a doppia precisione? 
+Cioè, come avviene il processo di accumulatore a doppia precisione? 
 \end{tcolorbox} 
 
 \newpage 
@@ -1573,7 +1573,430 @@ Cioè, come abbiene il processo di accumulatore a doppia precisione?
 \subsection{Scaling}
 
 \footnote{ 
-    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 23 - 27\\
-    Appunti | 2025-11-26 | pag 1   
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 23 - 26\\
+    Appunti | 2025-11-26 | pag 1 \\ 
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:22:00 - 1:42:50         
 } 
+
+Le analisi svolte nelle pagine precedenti sono state svolte ipotizzando che si ha un'assenza, o una possibilità molto bassa, di overflow. \newline 
+
+Per ridurre l'occorrenza di overflow, si può scalare le grandezze in maniera opportuna: in inglese, la scalatura prende il nome di scaling. \newline 
+
+Esistono diversi metodi per svolgere lo scaling: in questo capitolo ne verranno citati solo 3. \newline 
+
+\textbf{Prima soluzione per lo Scaling} \newline 
+
+Sia $w_{i} \left[ n\right]$ il segnale in un certo nodo i e $h_{i} \left[ n\right]$ è la risposta impulsiva tra l'ingresso l'ingresso $x \left[ n\right]$ e questo nodo. \newline 
+
+Definiamo $w_{i} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        w_{i} \left[ n\right] 
+        = 
+        \sum_{k = -\infty}^{+ \infty} 
+        x \left[ x - k\right]
+        \cdot 
+        h_{i} \left[ k\right]
+    \end{equation}
+}
+
+cioè la convoluzione tra il segnale di ingresso $x \left[ n\right]$ e la risposta impulsiva del filtro $h_{i} \left[ n\right]$ fino a quel i-esimo nodo. \newline 
+
+Adesso consideriamo il valore assoluto di $w_{i} \left[ n\right]$, cioè $\abs{w_{i} \left[ n\right]}$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{w_{i} \left[ n\right]}
+        = 
+        \abs{
+            \sum_{k = -\infty}^{+ \infty} 
+            x \left[ x - k\right]
+            \cdot 
+            h_{i} \left[ k\right]
+        }
+    \end{equation}
+}
+
+Se $x_{\text{max}}$ è il valore massimo assoluto che può assumere la sequenza di ingresso $x \left[ n\right]$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] \leq x_{\text{max}} \quad \forall n  
+    \end{equation}
+}
+
+allora risulta che: 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{w_{i} \left[ n\right]} 
+        \leq 
+        x_{\text{max}} 
+        \cdot
+        \sum_{k = -\infty}^{+ \infty} 
+        \abs{h_{i} \left[ k\right]}    
+    \end{equation}
+}
+
+Per una rappresntazione tipica a complemento a 2, avremo che: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 28}
+Da \url{https://it.wikipedia.org/wiki/Complemento_a_due} si utilizza il complento a due perchè c'è un'unica rappresentazione dello zero ed è più facile fare i conti per un circuito se sono rappresentati dei numeri con segno? 
+\end{tcolorbox} 
+
+{
+    \Large 
+    \begin{equation}
+        \abs{w_i \left[ n\right]} < 1
+    \end{equation}
+}
+
+di conseguenza, avremo una disuguaglianza triangolare del tipo:
+
+{
+    \Large 
+    \begin{equation}
+       \abs{w_{i} \left[ n\right]} 
+        \leq 
+        x_{\text{max}} 
+        \cdot
+        \sum_{k = -\infty}^{+ \infty} 
+        \abs{h_{i} \left[ k\right]}    
+        < 
+        1  
+    \end{equation}
+}
+
+che, semplificata, sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{max} < \dfrac{1}{\sum_{k = -\infty}^{+ \infty} \abs{h_{i} \left[ k\right]}} 
+        \quad 
+        \forall i
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 29}
+Siccome nell'equazione appena scritta abbiamo $\forall i$ significa che ogni nodo del circuito deve rispettare questa relazione? 
+\end{tcolorbox} 
+
+Si può utilizzare un fattore di scalatura S, tale che: 
+
+{
+    \Large 
+    \begin{equation}
+        S \cdot x_{max}
+        < 
+        \dfrac{1}{
+            \max_{i} \left[ \sum_{k = - \infty}^{+ \infty} \abs{h_{i} \left[ k\right]}\right]
+        }
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 30}
+    Con la dicitura $\max_{i} \left[ \sum_{k = - \infty}^{+ \infty} \abs{h_{i} \left[ k\right]}\right]$ si intende che si definisce un unico valore massimo per tutti i nodi i-esimi del circuito? 
+\end{tcolorbox} 
+
+Spesso, però, questo metodo è troppo conservativo perchè, se al denominatore è presente il fattore $\max_{i} \left[ \sum_{k = - \infty}^{+ \infty} \abs{h_{i} \left[ k\right]}\right]$, 
+significa che il rapporto è il più piccolo, quindi è l'$x_{\text{max}}$ più piccolo da considerare, cioè il peggiore su cui svolgere lo scaling perchè il fattore di scala S sarà il più piccolo anche esso. \newline 
+
+Di conseguenza, questo metodo di scaling è troppo conservativo, quindi si preferisce di utilizzare un altro metodo. \newline 
+
+\textbf{Seconda soluzione per lo Scaling} \newline 
+
+Un possibile approcio alternativo rispetto a quello precedente è quello di modellare il segnale come segnale a banda stretta. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 31}
+    Con la dicitura "modella il segnale come segnale a banda stretta" si intende che il segnale $x \left[ n\right]$ può essere qualsiasi o che $x \left[ n\right]$ deve avere banda stretta in Foruier?  
+\end{tcolorbox}
+
+Data una sequenza di ingresso $x \left[ n\right]$ del tipo: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right] 
+        = 
+        x_{\text{max}} \cdot \cos \left[ \omega_0 n\right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 32}
+    $\omega_0$ è la pulsazione fondamentale della sequenza $x \left[ n\right]$ ? 
+\end{tcolorbox}
+
+Allora possiamo definire all'i-esimo nodo $w_{i} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        w_{i} \left[ n\right] 
+        = 
+        x_{\text{max}} 
+        \cdot 
+        \abs{H_{i} \left(e^{\jmath \omega_0}\right)}
+        \cdot 
+        \cos \left[ \omega_0 n + \sphericalangle  H_{i} \left(e^{\jmath \omega_0}\right)\right]
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 33}
+    $\omega_0$ è la pulsazione fondamentale della sequenza $x \left[ n\right]$ ? 
+\end{tcolorbox}
+
+in cui: 
+
+\begin{itemize}
+    \item $H_{i} \left(e^{\jmath \omega_0}\right)$ è la trasformata di Fourier di $h_{i} \left[ n\right]$ all'i-esimo nodo 
+    \item $h_{i} \left[ n\right]$ è la risposta impulsiva del filtro dall'ingresso fino all'i-esimo ndo 
+    \item $\sphericalangle  H_{i} \left(e^{\jmath \omega_0}\right)$ è la fase di $H_{i} \left(e^{\jmath \omega_0}\right)$
+\end{itemize} 
+
+Per un segnale generico $x \left[ n\right]$, per evitare l'overflow, deve valore che: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 34}
+Cosa si intende per un segnale generico? 
+\end{tcolorbox}
+
+{
+    \Large 
+    \begin{equation}
+        \max_{\abs{\omega} \leq \pi}
+        \left[
+            \abs{H_{i} \left(e^{\jmath \omega}\right)} 
+            \cdot 
+            x_{\text{max}}
+        \right]
+        < 
+        1 
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 35}
+Questa condizione deve valere per tutti gli i-esimi nodi? 
+\end{tcolorbox} 
+
+Pertanto, il fattore di scala S diventa il seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        S \cdot x_{\text{max}}
+        < 
+        \dfrac{1}{
+            \max_{i, \abs{\omega} \leq \pi}
+            \abs{H_{i} \left(e^{\jmath \omega}\right)}
+        }
+    \end{equation}
+}
+
+Questo tipo di approcio è meno conservativo rispetto al precedente perchè, abbiamo fissato un unico valore $x_{\text{max}}$ per tutte le pulsazioni $\omega$:  
+in teoria, per essere più conservativi,dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. 
+
+\textbf{Terza soluzione per lo Scaling} \newline 
+
+Un terzo approccio allo Scaling è sfruttare l'energia di ogni nodo. \newline 
+
+Grazie al Teorema Parseval visto in \ref{teo: Teorema di Parseval} \nameref{teo: Teorema di Parseval} pag \pageref{teo: Teorema di Parseval}, e applicando una disuguaglianza triangolare come abbiamo svolto prima, 
+possiamo scrivere che, per un qualsiasi i-esimo nodo:
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \sum_{n = - \infty}^{+ \infty}
+            \abs{w_{i} \left[ n\right]}^{2}
+            &= 
+            \dfrac{1}{2 \pi}
+            \cdot 
+            \int_{- \pi}^{+ \pi}
+            \abs{
+                W \left(e^{\jmath \omega}\right)
+            }^{2}
+            d\omega
+            \\
+            &=
+            \dfrac{1}{2 \pi}
+            \cdot 
+            \int_{- \pi}^{+ \pi}
+            \abs{
+                H_{i} \left(e^{\jmath \omega}\right)
+                \cdot
+                X \left(e^{\jmath \omega}\right)
+            }^{2}
+            d\omega
+            \leq 
+            \\
+            &\leq
+            \int_{- \pi}^{+ \pi}
+            \abs{
+                H_{i} \left(e^{\jmath \omega}\right)
+            }^{2}
+            d\omega
+            \cdot 
+            \sum_{n = -\infty}^{+ \infty} 
+            \abs{x \left[ n\right]}^{2}
+            \\
+            &\leq 
+            \sum_{n = -\infty}^{+ \infty} 
+            \abs{x \left[ n\right]}^{2}
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 37}
+Questa relazione vale sempre o deve valere in questo caso? 
+\end{tcolorbox} 
+
+dove però l'$x \left[ n\right]$ in $\int_{- \pi}^{+ \pi}
+            \abs{
+                H_{i} \left(e^{\jmath \omega}\right)
+            }^{2}
+            d\omega
+            \cdot 
+            \sum_{n = -\infty}^{+ \infty} 
+            \abs{x \left[ n\right]}^{2}
+            $ può essere applicato un fattore moltiplicato di scala S. \newline 
+
+Il fattore di scala S, per avere la condizione: 
+
+{
+    \Large 
+    \begin{equation}
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{w_{i} \left[ n\right]}^{2}
+        \leq
+        S \cdot
+        \sum_{n = - \infty}^{+ \infty}
+        \abs{x \left[ n\right]}^{2}
+    \end{equation}
+}
+
+deve valere: 
+
+{
+    \Large 
+    \begin{equation}
+        S^{2} 
+        \leq 
+        \dfrac{1}{
+            \dfrac{1}{2 \pi}
+            \cdot 
+            \int_{- \pi}^{+ \pi}
+            \abs{H_{i} \left(e^{\jmath \omega}\right)}^{2} d\omega
+        }
+        = 
+        \dfrac{1}{
+            \sum_{n = - \infty}^{+ \infty}
+            \abs{h_{i} \left[ n\right]}^{2}
+        } 
+        \quad \forall i
+    \end{equation}
+}
+
+Riguardo a questa soluzione di Scaling si possono svolgere le seguenti considerazioni: 
+
+\begin{itemize}
+    \item la scalatura è quadratica perchè compare un $S^{2}$
+    \item nella relazione della scelta del fattore di scala al quadrato, cioè $S^{2}$, non compare, rispetto ai casi precedenti, un fattore $x_{\text{max}}$, quindi è meno conservativo 
+\end{itemize}
+
+Utilizzando questo metodo, localmente potremmo avere overflow, ma globalmente non lo avremo. \newline 
+
+\newpage 
+
+\subsubsection{Considerazioni reali sullo scaling}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 27\\
+    Appunti | 2025-11-26 | pag 1 \\ 
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:42:50 - 1:44:35   
+} 
+
+Nella realtà, non occorre considerare tutti i nodi del circuito, ma solo quelli che rappresentano le somme totali, che sono i nodi più critici. \newline 
+
+Ad esempio nella forma diretta I: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.75]{scaling nella forma diretta I.png}
+\end{figure} 
+
+visto che quello segnato è il nodo critico, allora lo scaling può essere effettuato sui coefficienti $b_k$ e occorre solo controllare un solo nodo. \newline 
+
+Invece, per quanto riguarda la forma diretta II: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{scaling nella forma diretta II.png}
+\end{figure} 
+
+la scalatura viene fatta direttamente sulla sequenza di ingresso $x \left[ n\right]$ e, a differenza della forma diretta I, qui bisogna controllare 2 nodi. \newline 
+
+Ultime considerazioni riguardo allo scaling: 
+
+\begin{itemize}
+    \item lo scaling peggiora \textbf{SEMPRE} il rapporto S/N (Segnale Rumore) all'uscita del filtro: inoltre, l'SNR peggiora per poli vicini al cerchio unitario 
+    \item è possiile ridurre (o eliminare), in altre parole rendere più robusto il filtro, il problema dell'overflow utilizzando un accumulatore "a doppia precsione", dotato di "bit di guardia" 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 38}
+Cosa è il bit accumulatore e cosa sono i bit di guardia, quelli vicini all'overflow? \newline 
+
+Inoltre, avere una memoria a doppia precisione spesso non è possibile nei microcontrollori perchè le operazioni da svolgere devono essere facili e veloci, giusto? 
+\end{tcolorbox} 
+
+\newpage 
+
+\subsection{Realizzazioni Fixed-Point}
+
+\footnote{ 
+    Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 28 - 29\\
+    Appunti | 2025-11-26 | pag 1 \\ 
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:44:35 - 1:48:22     
+} 
+
+Per quanto riguarda questo corso, i circuiti che abbiamo studiato sono realizzati in fixed-point (cioè a virgola fissa) perchè sono i più facili da realizzare. \newline 
+
+Di seguito una "lista della spesa" (aka cosa fare) per quanto riguarda la realizzazione dei filtri a fixed-point. \newline 
+
+\textbf{Filtri IIR} \newline 
+
+\begin{itemize}
+    \item non utilizzare le forme dirette 
+    \item utilizzare, se possibile, accumulatori con molti bit (ma questo non è detto che è possibile, visto la memoria molto limitata dei microcontrollori)
+    \item utilizzare le forme in cascata e parallela 
+    \item scegliere le sezioni secondo quanto scoperto dal ricercatore Jacksin nel 1986: 
+    \begin{itemize}
+        \item accoppiare poli vicini al cerchio unitario con gli zeri che giacciono il più vicino possibile 
+        \item ripetere finchè tutti i poli sono stati accoppiati 
+        \item ordinare le sezioni del secondo ordine così ottenute in ordine di vicinanza dei poli al cerchio unitario, crescente oppure decrescente 
+        \item ricordare che i poli vicini al cerchio sono più "dannosi" e che il danno diminuisce se vengono accoppiati a zeri molto vicini perchè i poli compensano gli zeri  
+    \end{itemize}
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 39}
+Cosa si intende per poli accoppiati? \newline 
+
+Inoltre, queste considerazioni di Jackson sono empiriche come quelle di Khaiser? 
+\end{tcolorbox} 
+
+\textbf{Filtri FIR} \newline 
+
+\begin{itemize}
+    \item si piò utilizzare la forma diretta, soprattutto se i filtri sono a fase lineare 
+    \item utilizzare se possibile, accumulatori a molti bit 
+    \item per la forma a cascata, l'ordine delle sezioni non è particolarmente importante 
+\end{itemize}
+
+\newpage 
+
 
