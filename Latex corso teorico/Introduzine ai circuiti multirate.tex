@@ -1,0 +1,439 @@
+\chapter{Introduzione ai circuiti multirate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{applicazione dei circuiti multirate.png}
+\end{figure}  
+
+\newpage 
+
+\section{Circuiti Multi-rate: cosa sono}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 2 \\
+    Appunti | 2025-11-26 | pag 1 
+}
+
+Per circuiti multi-rate, si intende che sono dei circuiti in cui la sequenza di ingresso $x \left[ n\right]$ viene campionata in più frequenze di campionamento. \newline 
+
+Nell'ambito DSP, in inglese, "rate" significa frequenza di campionamento, "multi-rate" significa multi-frequenze di campionamento, quindi più frequenze di campionamento allo stesso tempo. \newline 
+
+In questo caso, il multirate viene fatto direttamente in digitale, senza passare in analogico e senza ri-campionare il segnale $x \left(t\right)$ nel tempo t, attraverso due processi: 
+
+\begin{itemize}
+    \item decimazione 
+    \item interpolazione 
+\end{itemize}
+
+\newpage 
+
+\subsection{Decimazione e sottocampionamento}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 2 - 6\\
+    Appunti | 2025-11-26 | pag 1 - 2 \\ 
+    Appunti | 2025-12-03 | pag 1 
+}
+
+Nell'ambito DSP, sottocampionamenare non significa decimare, ma il sottocampionamento fa parte della decimazione. \newline 
+
+Da un punto di vista grafico, sotto-campionare signfica svolgere questo: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{sottocampionare esempio.png}
+\end{figure}  
+
+cioè, sotto-campionare significa prendere un campione ogni M campioni (nella figura $M = 3$). \newline 
+
+Da un punto di vista matematico, la relazione tra la sequenza sottocampionata $x_{d} \left[ n\right]$ rispetto alla sequenza da sottocampionare $x \left[ n\right]$ è la seguente: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{d} \left[ n\right] 
+        = 
+        x \left[ n \cdot M\right]
+        \quad 
+        M \in \mathbb{N}
+    \end{equation}
+}
+
+Definiamo $x_{l} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{l} \left[ n\right] 
+        = 
+        x \left[ n\right]
+        \cdot 
+        \dfrac{1}{M} 
+        \cdot 
+        \sum_{k = 0}^{M - 1}
+        e^{+ \frac{2 \pi}{M} n k}
+        = 
+        \begin{cases}
+            x \left[ n\right] 
+            &\quad 
+            \text{per } 
+            n = 0, \pm M, \dots 
+            \\
+            0 
+            &\quad 
+            \text{altrove}
+        \end{cases}
+    \end{equation}
+} 
+
+dove: 
+
+\begin{itemize}
+    \item $e^{+ \frac{2 \pi}{M} }$ è un twiddle 
+    \item viene portato a 0 i campioni che variano tanto 
+\end{itemize}
+
+Da $x_{l} \left[ n\right]$, e facendo la trasfromata-z, possiamo ricavarci $X_{d} \left(z\right)$, cioè la trasformata-z di $x_{d} \left[ n\right]$, come (senza dimostrazione): 
+
+{
+    \Large 
+    \begin{equation}
+        X_{d} \left(z\right) 
+        = 
+        \dfrac{1}{M} 
+        \cdot 
+        \sum_{k = 0}^{M -1} 
+        X \left(
+            z^{\frac{1}{M}} \cdot e^{- \jmath \frac{2 \pi}{M} k}
+        \right)
+    \end{equation}
+}
+
+Dalla trasformata-z, possiamo ricavarci la DTFT di $x_{d} \left[ n\right]$ ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        z = e^{\jmath \omega}
+    \end{equation}
+}
+
+e quindi da $X_{d} \left(z\right)$, avremo $X_{d} \left(e^{\jmath \omega}\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        X_{d} \left(e^{\jmath \omega}\right) 
+        = 
+        \dfrac{1}{M} 
+        \cdot 
+        \sum_{k = 0}^{M -1} 
+        X \left(
+            e^{\jmath \frac{\omega}{M} - \frac{2 \pi}{M} k}
+        \right)
+    \end{equation}
+}
+
+da cui possiamo svolgere le seguente osservazioni: 
+
+\begin{itemize}
+    \item non è presente $e^{\jmath \omega}$, bensì $e^{\frac{\jmath \omega}{M}}$, quindi lo spettro di $X_{d} \left(e^{\jmath \omega}\right)$ sarà "stretachato" rispetto a quello di $X \left(e^{\jmath \omega}\right)$  
+    \item in $X_{d} \left(e^{\jmath \omega}\right)$, ci saranno le somme delle repliche di $X \left(e^{\jmath \omega}\right)$, ma stretchate 
+\end{itemize}
+
+Da un punto di vista grafico, lo spettro sarà modificato in questa maniera step-by-step: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{sottocampionamento nello spettro.png}
+\end{figure} 
+
+Possiamo schematizzare un decimatore tipico con il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{Decimatore tipico schema a blocchi.png}
+\end{figure} 
+
+e non avremo aliasing se la pulsazione di taglio $\omega_{x}$ del filtro passa-basso è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega_{x}
+        < 
+        \dfrac{\pi}{M}
+    \end{equation}
+}
+
+Questo decimatore è in digitale e non è presente nessun componente analogico. \newline 
+
+Il problema del decimatore, come visto negli spettri precedenti, è che il segnale viene ridotto di un fattore M (ma non è un problema perchè è un fattore di scala). \newline 
+
+\newpage 
+
+Il filtro passa-basso, prima del decmatore, è preventivo ma non necessario, utile per prevenire l'aliasing, come vediamo da questi due casi di esempio: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro passa-basso nel decimatore.png}
+\end{figure} 
+
+\newpage 
+
+\subsection{Interpolazione e sovracampionamento}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 8 - 11\\ 
+    Appunti | 2025-12-03 | pag 1 - 2
+}
+
+Come il caso del sottocampionamento, interpolare non significa sovracampionare, ma il sovracampionamento è parte dell'interpolazione. \newline 
+
+Da un punto di vista grafico, se abbiamo una sequenza $x \left[ n\right]$ da sovracampionare, la sequenza $x_{i} \left[ n\right]$ sarà la sequenza sovracampionata: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{sequenza sovracampionata esempio.png}
+\end{figure} 
+
+Da un punto di vista matematico, dato $L \in \mathbb{N}$, sovracampionare significa questo: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{l} \left[ n\right]
+        = 
+        \begin{cases}
+            x \left[ \dfrac{n}{L}\right] &\quad \text{per } n = 0, \pm L, \pm 2L, \dots 
+            \\
+            0 &\quad \text{altrove }
+        \end{cases}
+    \end{equation}
+}
+
+cioè, ogni multiplo di L, si prende un valore dalla sequenza $x \left[ n\right]$ e per gli altri valori non multipli di L, si aggiungono degli zeri. \newline 
+
+Aggiungere gli zeri non significa fare zero-padding: sono due cose separate che giustificheremo fra poco perchè. \newline 
+
+Analizzando la trasformata-z di $x_{l} \left[ n\right]$, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X_{l} \left(z\right)
+            &= 
+            \sum_{n = -\infty}^{+ \infty}
+            x \left[ \dfrac{n}{L}\right]
+            \cdot 
+            z^{-n}
+            \\
+            &= 
+            \sum_{m = -\infty}^{+ \infty}
+            x \left[m\right]
+            \cdot
+            \left(
+                z^{L}
+            \right)^{-m} 
+            \\
+            &= 
+            X \left(Z^{L}\right)
+        \end{split}
+    \end{equation}
+}
+
+dove si è posto m i multipli di $\dfrac{n}{L}$. \newline 
+
+Quindi abbiamo dimostrato che, ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        z = e^{\jmath \omega}
+    \end{equation}
+}
+
+abbiamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        X_{l} \left(e^{\jmath \omega}\right)
+        = 
+        X \left(e^{\jmath \omega L}\right)
+    \end{equation}
+}
+
+\newpage 
+
+cioè, lo spettro di $X \left(e^{\jmath \omega L}\right)$ è uguale a $X \left(e^{\jmath \omega L}\right)$, ma cambia solo la base delle pulsazione, come si può visualizzare dalla seguente immagine: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{spetro del segnale sovracampionato base diversa.png}
+\end{figure} 
+
+Di seguito la dimostrazione degli spettri step-by-step per quanto riguarda l'interpolazione: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.55]{interpolazione nello spettro step-by-step con note.png}
+\end{figure} 
+
+Ci saranno dei contributi in alta frequenza in $X_{l} \left(e^{\jmath \omega}\right)$ perchè $x_{l} \left[ n\right]$ varierà più velocemente nel tempo. \newline 
+
+\newpage 
+
+Grazie al sovracampionamento, si può svolgere l'interpolazione con il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{interplazione shema classico.png}
+\end{figure} 
+
+Rispetto al caso precedente, qui il filtro passa-basso è necessario perchè elimina le replice di $X_{l} \left(e^{\jmath \omega}\right)$. \newline 
+
+Il filtro passa-basso anti-imaging utilizzato nell'interpolazione ha il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{filtro anti'imaging per l'interpolazione.png}
+\end{figure} 
+
+Rispetto al filtro passa-basso del decimatore, il filtro passa-basso nell'interpolatore lavorare a pulsazione maggiore, cioè la pulsazione di taglio $\omega_x$ è di: 
+
+{
+    \Large 
+    \begin{equation}
+        \omega_x < \dfrac{\pi}{L}
+    \end{equation}
+}
+
+Inoltre, il guadagno L del filtro anti-imaging si impone, usualmente, per compensare il fattore $\dfrac{1}{M}$ della decimazione. \newline 
+
+Il problema più grosso della decimazione e dell'interpolazione è che si può farlo solo per un fattore intero. \newline 
+
+\begin{tcolorbox}
+    Questa ultima frase è molto importante. 
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Decimazione e interpolazione non intere}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 12 - 13\\ 
+    Appunti | 2025-12-03 | pag 2
+}
+
+Proprio perchè la decimazione e l'interpolazione può essere fatta solo per fattori interi di M e L, 
+allora, se si vuole fare una decimazione o un'interpolazione intera è necessario utilizzarli insieme, come potete vedere nel seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{decimazione e interpolazione non intera schema con note.png}
+\end{figure} 
+
+In base ai valori di L e M si possono svolgere: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            M > L \quad &\text{Decimazione non intera} 
+            \\
+            L > M \quad &\text{Interpolazione non intera}
+        \end{cases}
+    \end{equation}
+}
+
+Si interpola e poi si decima sempre perchè, se facessimo il processo inverso, potremmo perdere del contenuto informazione del segnale iniziale $x \left[ n\right]$. \newline 
+
+Un esempio numerico: si può fare una decimazione non intera, passando da un audio campionato a 8 KHz a 6KHz. \newline 
+
+Quindi sceglieremo: 
+
+{
+    \Large 
+    \begin{equation}
+    L = 3      
+    \end{equation}
+} 
+
+perchè: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            f_{i} 
+            &= f_{c} \cdot L 
+            \\
+            &= 8 \text{ KHz } \cdot 3 
+            \\
+            &= 24 \text{ KHz }
+        \end{split}  
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $f_{i}$ è la frequenza di $x_{i} \left[ n\right]$
+    \item $f_{c}$ è la frequenza di $x \left[ n\right]$
+\end{itemize}
+
+\newpage 
+
+Poi scegliendo: 
+
+{
+    \Large 
+    \begin{equation}
+        M = 4
+    \end{equation}
+}
+
+avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            f_{l} 
+            &= \dfrac{f_{i}}{M} 
+            \\
+            &= \dfrac{24}{4} \text{ KHz }  
+            \\
+            &= 6 \text{ KHz }
+        \end{split}  
+    \end{equation}
+}
+
+dove $f_{l}$ è la frequenza di $x{'} \left[ n\right]$. \newline 
+
+\newpage 
+
+\section{Decimatori per segnali passa-banda}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 15, 17 - 18\\
+    Appunti | 2025-12-03 | pag 3 \\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 21:25 - 45:05   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
