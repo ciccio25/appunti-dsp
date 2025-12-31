@@ -27,7 +27,7 @@ In questo caso, il multirate viene fatto direttamente in digitale, senza passare
 
 \newpage 
 
-\subsection{Decimazione e sottocampionamento}
+\subsection{Decimazione e sottocampionamento} \label{subsec: Decimazione e sottocampionamento}
 
 \footnote{ 
     Slide del prof | 12 - Introduzione ai circuiti multirate | pag 2 - 6\\
@@ -181,10 +181,10 @@ Il filtro passa-basso, prima del decmatore, è preventivo ma non necessario, uti
 
 \newpage 
 
-\subsection{Interpolazione e sovracampionamento}
+\subsection{Interpolazione e sovracampionamento} \label{subsec: Interpolazione e sovracampionamento}
 
 \footnote{ 
-    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 8 - 11\\ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 8 - 11, 15\\ 
     Appunti | 2025-12-03 | pag 1 - 2
 }
 
@@ -318,6 +318,42 @@ Il problema più grosso della decimazione e dell'interpolazione è che si può f
     Questa ultima frase è molto importante. 
 \end{tcolorbox}
 
+Nell'interpolazione, il filtro anti-imaging può essere realizzato con tecniche semplici come il zero-order hold e il linear interpolation. \newline 
+
+L'interpolazione di tipo zero-oder hold non fa altro che ripetere lo stesso valore della sequenza di ingresso $x \left[ n\right]$ per L volte. \newline 
+
+Questo può essere ottenuto facendo la connvoluzione tra $x_{l}$, quindi la sequenza $x \left[ n\right]$ sovracampionata, e la risposta impulsiva $h_{\text{zoh}} \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        h_{\text{zoh}} \left[ n\right] 
+        = 
+        \delta \left[ n - 1\right] 
+        + 
+        \dots 
+        +
+        \delta \left[ n - L + 1\right]  
+    \end{equation}
+}
+
+L'interpolazione lineare si ottiene tramite un sistema a risposta impulsiva: 
+
+{
+    \Large 
+    \begin{equation}
+        h_{\text{zoh}} \left[ n\right] 
+        = 
+        \begin{cases}
+            1 - \dfrac{\abs{n}}{L} \quad &\abs{n} \leq L -1 
+            \\
+            0 \quad &\text{altrove}
+        \end{cases}
+    \end{equation}
+}
+
+Questa risposta impulsiva è non casuale ed ha ritardo di gruppo nullo, come la risposta dell'interpolatore a banda-limitata ideale. \newline 
+
 \newpage 
 
 \subsection{Decimazione e interpolazione non intere}
@@ -418,10 +454,662 @@ dove $f_{l}$ è la frequenza di $x{'} \left[ n\right]$. \newline
 \section{Decimatori per segnali passa-banda}
 
 \footnote{ 
-    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 15, 17 - 18\\
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 17 - 18\\
     Appunti | 2025-12-03 | pag 3 \\
-    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 21:25 - 45:05   
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 32:35 - 45:05   
 }
+
+Piuttosto che decimare nel modo classico come abbiamo studiato precedentemente in \ref{subsec: Decimazione e sottocampionamento} \nameref{subsec: Decimazione e sottocampionamento} a pag \pageref{subsec: Decimazione e sottocampionamento}: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{Decimatore tipico schema a blocchi.png}
+\end{figure} 
+
+si può, direttamente, sottocampionare al limite di Nyquist per decimare un segnale $x \left[ n\right]$, se abbiamo a che fare con un segnale $X \left(e^{\jmath \omega}\right)$ in banda limitata come il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{sequenza di ingresso a banda limitata.png}
+\end{figure} 
+
+in particolare: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            \abs{H \left(e^{\jmath \omega}\right)} \neq 0
+            \\
+            \dfrac{\pi}{2} < \abs{\omega} < \pi
+        \end{cases} 
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Il sotto-campionamento per decimare il segnale, in questo corso, lo vediamo in digitale perchè abbiamo a che fare con le sequenze digitali, 
+    ma, possiamo sotto-campionare per decimare il segnale anche in analogico. 
+\end{tcolorbox}
+
+Si sotto-campionerà con aliasing, quindi con delle repliche in teoria indesiderate, ma può essere utilizzato a nostro favore. \newline 
+
+\begin{tcolorbox}
+    Come dicono i programmmatori: "it's not a bug, it's a feature". 
+\end{tcolorbox}
+
+Nel nostro caso di esempio, decimando per: 
+
+{
+    \Large 
+    \begin{equation}
+        M = 2
+    \end{equation}
+} 
+
+\newpage 
+
+si ottiene il sequente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{segnale sotto-campionato.png}
+\end{figure} 
+
+dove, apparentemente, il contenuto informativo da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$, ma le porzioni di spettro si sono "spostate" in questa maniera: 
+
+{
+    \Large 
+    \begin{equation}
+         \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \left[ + \dfrac{\pi}{2}, \pi\right] &\to \left[ - \dfrac{\pi}{2}, 0\right] 
+            \\
+            \left[ - \pi, - \dfrac{\pi}{2}\right] &\to \left[ 0, + \dfrac{\pi}{2}\right] 
+        \end{split}
+    \end{equation}
+}
+
+Invece, per quanto riguarda le repliche, avremo che da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$, le porzioni di spettro si sono "spostate" in questa maniera:
+
+{
+    \Large 
+    \begin{equation}
+         \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \left[ + \pi, +\dfrac{3}{2} \pi\right] &\to \left[ + \dfrac{\pi}{2}, \pi\right] 
+            \\
+            \left[ - \dfrac{3}{2} \pi, - \pi, \right] &\to \left[ - \pi, - \dfrac{\pi}{2}\right] 
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Tecnicamente dovremmo dire che gli spetti da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ gli spettri non si spostato, bensì danno un contributo, ma noi diremo che si spostano per semplicità. 
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 40}
+Quindi stiamo decimando per campionare sotto al limite di Nyquist o è come se campionassimo sotto al limite di Nyquist ? 
+\end{tcolorbox}
+
+$X_{d} \left(e^{\jmath \omega}\right)$ ora non ha buchi in frequenza rispetto a $X \left(e^{\jmath \omega}\right)$. \newline
+
+In questo caso l'aliasing da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ non distorce lo spettro, bensì lo va a completare. \newline 
+
+Inoltre, in $X_{d} \left(e^{\jmath \omega}\right)$, lo spettro si è invertito: per evitare questo effetto basta utilizzare la sequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        x^{'} \left[ n\right]
+        = 
+        x \left[ n\right] \cdot \left(-1\right)^{n}
+    \end{equation}
+}
+
+invece che $x \left[ n\right]$. \newline 
+
+Nello spettro (e senza dimostrazione), significa fare uno shift di $+ \pi$ a $X_{d} \left(e^{\jmath \omega}\right)$. \newline 
+
+In generale se: 
+
+\begin{itemize}
+    \item $x \left[ n\right]$ è a banda limitata 
+    \item $\abs{X \left(e^{\jmath \omega}\right)} \neq 0$ solo per $k \cdot \dfrac{\pi}{M} < \abs{\omega} < \left(k + 1\right) \cdot \dfrac{\pi}{M} $
+    \item con M intero e k uno dei seguenti valori: $\left\{ 0, 1, \dots, M -1\right\}$
+\end{itemize}
+
+è possibile decimare di un fattore M. \newline 
+
+Inolte, per quanto riguarda il fattore k: 
+
+\begin{itemize}
+    \item per k pari, si ottiene la sequenza desiderata 
+    \item per k dispari, si ottiene la sequenza invertita 
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 41}
+Questa simmetria di k è dovuta alla simmetria del coseno e del seno ? 
+\end{tcolorbox}
+
+Poichè, in generale, il segnale non è a banda strettamente limitata, la struttura del decimatore tipico è la seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.25]{decimatore tipico per segnali passa banda.png}
+\end{figure} 
+
+Il problema che si intercorre con questo tipo di sistema è la non idealità del filtro passa-banda (cioè che non un filtro reale non è ripido nello spettro, sarà più smussato quindi ci saranno dei componenti non indesiderati che creerà aliasing) 
+e le limitazioni del segnale nello spettro, cioè che deve essere $\abs{X \left(e^{\jmath \omega}\right)} \neq 0$ solo per $k \cdot \dfrac{\pi}{M} < \abs{\omega} < \left(k + 1\right) \cdot \dfrac{\pi}{M} $. \newline 
+
+\newpage 
+
+\section{Interpolatori per segnali passa-banda}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 19 - 21\\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 45:05 - 50:25 
+}
+
+Quello che abbiamo svolto per il decimatore, lo possiamo anche fare per l'interpolatore. \newline 
+
+Piuttosto che usare il seguente schema visto in \ref{subsec: Interpolazione e sovracampionamento} \nameref{subsec: Interpolazione e sovracampionamento} a pag \pageref{subsec: Interpolazione e sovracampionamento}: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{interplazione shema classico.png}
+\end{figure} 
+
+per quanto riguarda un segnale $x \left[ n\right]$ passa-banda, useremo il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{interpolatore per segnale passa-banda classico schema.png}
+\end{figure} 
+
+La sequenza $x_{i} \left[ n\right]$ è sovra-campionata di un fattore L ed ha una nuova banda compresa tra: 
+
+{
+    \Large 
+    \begin{equation}
+        k \cdot \dfrac{\pi}{L}
+        <
+        \abs{\omega} 
+        <
+        \left(k + 1\right) \cdot \dfrac{\pi}{L}
+        \quad 
+        \text{ per } k \in \left\{ 0, 1, \dots, L - 1\right\}
+    \end{equation}
+}
+
+tale che: 
+
+\begin{itemize}
+    \item se k è pari, lo spettro passa-banda di $\abs{X_{i} \left(e^{\jmath \omega}\right)}$ ha la stessa forma di quello di $\abs{X \left(e^{\jmath \omega}\right)}$
+    \item se k è dispari, lo spettro passa-banda di $\abs{X_{i} \left(e^{\jmath \omega}\right)}$ ha la stessa forma di quello di $\abs{X \left(e^{\jmath \omega}\right)}$, ma è invertito
+\end{itemize}
+
+Come il caso dei decimatori per segnali passa-banda, anche per gli interpolatori passa-banda c'è il problema della non idealità del filtro passa-banda, e che quindi in $\abs{X_{i} \left(e^{\jmath \omega}\right)}$ ci saranno degli elementi spuri, 
+e questo tipo di interpolatore è limitato per segnali del tipo $ k \cdot \dfrac{\pi}{L} < \abs{\omega} < \left(k + 1\right) \cdot \dfrac{\pi}{L}$. \newline 
+
+Di seguito un caso di esempio. \newline 
+
+Consideriamo di avere una sequenza $x \left[ n\right]$, in cui lo spettro $\abs{X \left(e^{\jmath \omega}\right)}$ è il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{segnale da interpolare nello spettro.png}
+\end{figure} 
+
+\newpage 
+
+e facendo l'interpolazione di un fattore $L = 3$, avremo il seguente spettro: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{segnale interpolato esempio.png}
+\end{figure} 
+
+utilizzando l'interpolatore classico, avremo un filtro passa-basso che può solo selezionare solo la seguente porzione dello spettro di $\abs{X_{e} \left(e^{\jmath \omega}\right)}$: 
+
+{
+    \Large 
+    \begin{equation}
+        0 
+        <
+        \abs{\omega} 
+        <
+        \dfrac{\pi}{L}
+        \quad 
+        \text{ per } L = 3 
+    \end{equation}
+}
+
+Invece con un filtro passa-banda, da $\abs{X_{e} \left(e^{\jmath \omega}\right)}$ possiamo ricavarci i seguenti spettri. \newline 
+
+Se k è dipari, avremo il seguente spettro dopo il filtro-passa banda: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{passa banda interpolatore k dispari esempio.png}
+\end{figure} 
+
+cioè viene presa la porzione: 
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{\pi}{3} 
+        <
+        \abs{\omega} 
+        <
+        \dfrac{2}{3} \pi 
+    \end{equation}
+}
+
+e quindi lo spettro di $\abs{X_{e} \left(e^{\jmath \omega}\right)}$ è invertito rispetto a $\abs{X \left(e^{\jmath \omega}\right)}$. \newline 
+
+Se k è pari, avremo il seguente spettro dopo il filtro-passa banda: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{passa banda interpolatore k pari esempio.png}
+\end{figure} 
+
+cioè viene presa la porzione: 
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{2}{3} \pi 
+        <
+        \abs{\omega} 
+        <
+        \pi 
+    \end{equation}
+}
+
+e quindi lo spettro di $\abs{X_{e} \left(e^{\jmath \omega}\right)}$ è lo stesso di $\abs{X \left(e^{\jmath \omega}\right)}$. \newline 
+
+\newpage 
+
+\section{Circuiti per Interpolazione/Decimazione}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 22 - 23\\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 1:02:50 - 1:05:45 
+}
+
+Prima di introdurre i circuiti polifase (che spiegheremo dopo perchè sono molto utili), 
+è necessario rifare i blocchi base che ci saranno necessari per realizzarli. \newline 
+
+I componenti sono: 
+
+\begin{itemize}
+    \item down-sampler (sotto-campionatore) 
+    \item up-sampler (sovra-campionatore)
+    \item filtro 
+\end{itemize}
+
+e sono tutti componenti lineari. \newline 
+
+Il sottocampionatore, come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{sottocampionatore schema.png}
+\end{figure} 
+
+e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ m\right]
+            &= 
+            x \left[ M \cdot m\right]
+            \\
+            &\updownarrow
+            \\
+            Y \left(e^{\jmath \omega}\right)
+            &= 
+            \dfrac{1}{M}
+            \cdot 
+            \sum_{k = 0}^{M -1}
+            X \left(e^{\jmath \frac{\omega - 2 \pi k}{M}}\right)
+        \end{split}
+    \end{equation}
+}
+
+Il sovracampionatore, come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{sovracampionatore schema.png}
+\end{figure} 
+
+e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ m\right]
+            &= 
+            \begin{cases}
+            x \left[ \dfrac{m}{L}\right] \quad &\text{per } m = 0, \pm L, \pm 2L, \dots 
+            \\
+            0 \quad &\text{altrove}    
+            \end{cases}
+            \\
+            &\updownarrow
+            \\
+            Y \left(e^{\jmath \omega}\right)
+            &= 
+            X \left(e^{\jmath \omega L}\right)
+        \end{split}
+    \end{equation}
+}
+
+\newpage 
+
+Il filtro lineare, come in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{sovracampionatore schema.png}
+\end{figure} 
+
+e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ n\right]
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ k\right]
+            \cdot 
+            x \left[ n - k\right]
+            \\
+            &\updownarrow
+            \\
+            Y \left(e^{\jmath \omega}\right)
+            &= 
+            H \left(e^{\jmath \omega}\right)
+            \cdot
+            X \left(e^{\jmath \omega}\right)
+        \end{split}
+    \end{equation}
+}
+
+Questi tre componenti "base" vengono spesso usati nelle seguenti configurazioni tipiche: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{configurazioni tipiche nei circuiti polifase.png}
+\end{figure} 
+
+dove, partendo dall'alto verso il basso, avremo: 
+
+\begin{itemize}
+    \item il decimatore 
+    \item l'interpolatore 
+    \item il resempler (il racampionatore), la configurazione più utilizzata rispetto a tutte le altre 
+\end{itemize}
+
+Il filtro $H \left(z\right)$ opera sempre alla frequenza (in inglese rate) più alto, e quindi, significa, che deve lavorare più velocemente. \newline 
+
+Per molte applicazioni, questo è un problema. \newline 
+
+A causa di questo problema, è necessario trovare una soluzione. \newline 
+
+\newpage 
+
+\subsection{Filtri polifase - Interpolatore}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 24 - 28\\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 1:05:45 - 1:32:05 
+}
+
+Affinchè il filtro $H \left(z\right)$ possa operare ad una frequenza minore, sono molto utili gli interpolatori come il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{interpolatore L intero.png}
+\end{figure} 
+
+dove si considera L un numero intero. \newline 
+
+Allora avremo in uscita $y \left[ m\right]$, ipotizzando $H \left(z\right)$ un filtro IIR, la seguente sequenza: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ m\right]
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ m - k\right]
+            \cdot 
+            w \left[ k\right]
+            \\
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ m - k\right]
+            \cdot 
+            x \left[ \dfrac{k}{L}\right]
+            \quad 
+            \dfrac{k}{L} \in \mathbb{N}
+        \end{split}
+    \end{equation}
+}
+
+Gli indici di $x \left[ n\right]$, $w \left[ k\right]$ e $y \left[ m\right]$ sono indici differenti perchè sono a rate (velocità in italiano) differente. \newline 
+
+Tralasciando la dimostrazione (che potete vedere nelle slide ma è facolativa) e ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+            i = < m >_{L}
+            \\
+            P_{i} \left[ n\right] = h \left[ n \cdot L + i \right]
+            \quad 
+            \text{ per }
+            i = 0, 1, \dots, L-1
+        \end{cases}
+    \end{equation}
+}
+
+dove con la dicitura $< m >_{L}$ si intende m modulo L, cioè il resto intero della divisione tra m e L, 
+possiamo riscrivere $y \left[ m\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            y \left[ m\right]
+            &= 
+            \sum_{k = - \infty}^{+ \infty}
+            h \left[ m - k\right]
+            \cdot 
+            x \left[ \dfrac{k}{L}\right]
+            \quad 
+            \dfrac{k}{L} \in \mathbb{N}
+            \\
+            &\downarrow
+            \\
+            y \left[ m\right]
+            &= 
+            \sum_{n = - \infty}^{+ \infty} 
+            P_{i} \left[ n\right] \cdot x \left[ \left[ \dfrac{m}{L}\right] - n\right] 
+            \quad 
+            \text{ per }
+            i = 0, 1, \dots, L-1
+        \end{split}
+    \end{equation}
+}
+Quindi l'uscita dipende dipende dal fattore m, perchè a sua volta dipende la risposta impulsiva del filtro scelto. \newline 
+
+Questa forma di $y \left[ m\right]$ prende il nome di decomposizione polifase. \newline 
+
+\newpage 
+
+Non avremo più un filtro, bensì più filtri come si vede nel seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{decomposizione polofase.png}
+\end{figure} 
+
+cioè un banco filtri che dipendono non più dall'indice n della sequenza di ingresso $x \left[ n\right]$, 
+bensì dall'indice i, che è modulo tra l'indice m L del sovra-campionatore. \newline 
+
+
+Ogni i-esimo filtro lavorerà ad un rate più basso rispetto ad L ed avrà una risposta in frequenza più bassa. \newline 
+
+Ogni blocchetto i-esimo $z^{-i}$, è, nel tempo, un contributo di ritardo. \newline 
+
+Riguardo alla decomposizione polifase, possiamo svolgere le seguenti osservazioni: 
+
+\begin{itemize}
+    \item da un campione di $x \left[ n\right]$, avremo L campioni in $y \left[ m\right]$
+    \item ogni filtro contribuisce a campioni diversi di $y \left[ m\right]$, in particolare: 
+    {
+        \Large 
+        \begin{equation}
+            \begin{split}
+                y \left[ n \cdot L\right] &= y_{0} \left[ n\right] \quad \text{per } n = 0, \pm 1, \pm 2, \dots 
+                \\
+                y \left[ n \cdot L + 1\right] &= y_{1} \left[ n\right] \quad \text{per } n = 0, \pm 1, \pm 2, \dots 
+                \\
+                \dots
+                \\
+                y \left[ n \cdot i\right] &= y_{i} \left[ n\right] \quad \text{per } n = 0, \pm 1, \pm 2, \dots \text{ per } i = 0, \pm 1, \pm 2, \dots, L - 1
+            \end{split}
+        \end{equation}
+    }
+    \item rispetto alla struttura originale, ora i filtri lavorano alla frequenza più bassa 
+    \item si ha una riduzione del carico compitazionale complessivo di un fattore L (ma avremo bisogno di L filtri)
+\end{itemize}
+
+\newpage 
+
+In "analogico", la struttura polifase può essere interpretata con i commutatori: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{filtro polifase commutatori.png}
+\end{figure} 
+
+dove le "commutazione" avvengono in senso anti-orario. \newline 
+
+Con questo tipo di interpretazione, non avremo più dei filtri IIR, bensì dei filtri FIR che vengono scelte dal commutatore. \newline 
+
+I filtri i-esimi $P_{i} \left[ n\right]$, sono i filtri che sono ricavati decimando $H \left(z\right)$: quindi abbiamo sempre $H \left(z\right)$, ma composto da L filtri, che poi vengono sommati. \newline 
+
+I sotto-filtri sono più semplici da realizzare perchè sono lunghi $\dfrac{m}{L}$, e quindi più corti rispetto al filtro originale. \newline 
+
+Una spiegazione intuitiva è la seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{divisione dei filtri nei circuiti polifase.png}
+\end{figure} 
+
+Inoltre, la divisione dei filltri evita di fare le somme per i valori nulli, ritardando i campioni opportunamente. \newline 
+
+\newpage 
+
+Un altro tipo di interpretazione del filtro polifase è il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro polifase ciclostazionario.png}
+\end{figure} 
+
+cioè che, ad ogni indice n-esimo di $x \left[ n\right]$, il filtro utilizza ciclicamente lo stesso filtro, che cambia i valori ciclicamente: questa è la base dei filtri a tempo variante. \newline 
+
+Un esempio di filtro a tempo-variante: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{filtro FIR a tempo variante.png}
+\end{figure} 
+
+cioè un filtro in cui i suoi coefficienti $P_{i} \left[ n\right]$ cambiano ogni intervallo. \newline 
+
+\newpage 
+
+\subsection{Filtri polifase - Decimatore}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 29\\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 1:32:05 - 1:36:10  
+}
+
+Come l'interpolatore con il filtro polifase, possiamo fare lo stesso procedimento anche nel decimatore, 
+a differenza che, nel decimatore, prima si ha il filtro e poi il sotto-campionatore. \newline 
+
+Un esempio di interpretazione polifase del decimatore: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35 ]{filtro polifase decimatore.png}
+\end{figure} 
+
+dove, è presente anche qui il commutatore che gira in senso anti-orario. \newline 
+
+Come il caso degli interpolatori polifase, anche qui gli i-esimi filtri $P_{i} \left[ n\right]$ lavorano alla frequenza più bassa. \newline 
+
+Anche come gli interpolatori polifase, anche nei decimatori si possono utilizzare altre strutture, si possono costrutire dei filtri a tempo variante. \newline 
+
+\newpage 
+
+\section{Conversione A/D - D/A}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 32 - 34\\
+    Apputi | 2025-12-09 | pag 1 \\
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 1:36:10 - 1:51:22 \\ 
+    Video Lezione CADSP Lunedì 14 Dicembre 2022 | 00:06 - 7:10
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
