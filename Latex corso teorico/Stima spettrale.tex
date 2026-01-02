@@ -1,0 +1,322 @@
+\chapter{Stima spettrale}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{SpettrogrammaVocaliAeI.jpg}
+\end{figure}  
+
+\newpage 
+
+\section{Stima dello spettro}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 2 \\
+    Appunti | 2025-12-09 | pag 1  
+}
+
+\begin{tcolorbox}
+    La stima dello spettro è quello che realmente faremo SEMPRE perchè i segnali analogici reali sono infiniti (o di lunghezza molto lunga rispetto alla memoria finita del calcolatore). \newline 
+    
+    Mi dispiace che ho dovuto scrivere più di 300 pagine per arrivare a questo punto, ma è stato doveroso perchè ci servono delle basi per capire cosa faremo realmente: 
+    è come studiare e passare l'esame di Analisi Matematica 1, per poi utilizzare, ogni giorno, massimo le somme, sottrazioni, divisioni, moltiplicazioni e approssimazioni. \newline 
+    
+    Questo è il primo "vero" capitolo di DSP, su cui si basa anche l'esame finale, specialmente la prova su Matlab. \newline  
+
+    Buona lettura e buono studio. 
+\end{tcolorbox}
+
+In molte applicazioni si è interessati al calcolo dello spettro di un segnale campionato, in particolare si vuole fare una stima dello spettro di densità di energia o lo spettro di densità di potenza. \newline 
+
+Si parla di stima dello spettro e non di spettro reale perchè, nella realtà, avendo a che fare con segnali casuali, non possiamo conoscere a priori il segnale, e quindi il massmo che possiamo fare è stimarlo. \newline 
+
+Inoltre si parla di stima perchè le sequenze hanno una durata che può essere: 
+
+\begin{itemize}
+    \item finita 
+    \item infinita (o molto lunga per le risorse limitate)
+\end{itemize}
+
+Andiamo ad affrontare queste due casistiche nel dettaglio. \newline 
+
+\newpage 
+
+\subsection{Sequenze di durata finita}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 2 - 3\\
+    Appunti | 2025-12-09 | pag 1 - 2  
+}
+
+Consideriamo di avere una sequenza $x \left[ n\right]$ di lunghezza finita, e che quindi ha tutti i valori di $x \left[ n\right]$ per $n = 0, \dots, N-1$. \newline 
+
+Allora, per ogni valore di n, possiamo calcolarci il suo spettro $X \left[ k\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ k\right]
+        = 
+        \left.
+            X \left(e^{\jmath \omega}\right)
+        \right|_{\omega = \frac{2 \pi}{k} \cdot k}
+        \quad 
+        \text{ per }
+        k = 0, \dots, N - 1
+    \end{equation}
+}
+
+In questo caso particolare, la FFT fornisce N campioni equispaziati sul cerchio unitario della corrispondente DTFT (senza errori). \newline 
+
+Si noti che, essendo la sequenza $x \left[ n\right]$ finita, non calcoleremo la DTFT, bensì la DFT: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X \left(e^{\jmath \omega}\right) 
+            &= 
+            \sum_{n = - \infty}^{+ \infty} 
+            x \left[ n\right]
+            \cdot 
+            e^{- \jmath \omega n}
+            \\
+            &= 
+            \sum_{n = 0}^{N + 1} 
+            x \left[ n\right]
+            \cdot 
+            e^{- \jmath \omega n} 
+            \quad 
+            \text{ per }
+            \abs{\omega} < \pi
+        \end{split}
+    \end{equation}
+}
+
+La funzione $X \left(e^{\jmath \omega}\right)$ è una funzione calcolabile analitcamente perchè la sequenza è di durata finita. \newline 
+
+Questo è il caso ideale e non saremmo mai in grado di calcolare analitcamente la funzione $X \left(e^{\jmath \omega}\right)$. \newline 
+
+Come studiato in \ref{ch: FFT} \nameref{ch: FFT} da pag \pageref{ch: FFT}, la FFT è uno strumento molto utile per calcolare la DFT di $x \left[ n\right]$. \newline 
+
+Per avere un campionamento più fitto, nella DFT basta fare uno zero padding, ma nella realtà questo caso non sarà possibile farlo. \newline 
+
+\newpage 
+
+\subsection{Sequenze di durata infinita}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 4 - 8\\
+    Appunti | 2025-12-09 | pag 2  
+}
+
+Questo è il caso di tutte le sequenze molto lunghe o di cui si conosce solo un breve tratto. \newline 
+
+La DTFT di $x \left[ n\right]$, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left(e^{\jmath \omega}\right)
+        = 
+        \sum_{n = - \infty}^{+ \infty} 
+        x \left[ n\right]
+        \cdot 
+        e^{-\jmath \omega n}
+    \end{equation}
+}
+
+non si può calcolare direttamente perchè i valori n-esimi sono infiniti (la sommatoria si svolge nell'intervallo $\left[ - \infty, + \infty\right]$). \newline 
+
+Quindi, l'idea è quella di troncare la sequenza $x \left[ n\right]$ alla lunghezza L, utilizzando una finsitra, proprio come abbiamo studiato in \ref{sec: Progetto di filtri FIR: Windowing} \nameref{sec: Progetto di filtri FIR: Windowing} da pag \pageref{sec: Progetto di filtri FIR: Windowing}, 
+ma questa volta non per la risposta impulsiva dei filtri, bensì troncare direttamente la sequenza $x \left[ n\right]$. \newline 
+
+Oltre al troncamente, dobbiamo considerare il caso più semplice, cioè quella di una sequenza $x \left[ n\right]$ stazionaria. \newline 
+
+\begin{tcolorbox}
+    La stazionarietà l'avevamo studiata anche nel corso di Teoria dei segnali con il prof. Franco Chiaraluce, ma per un breve ripasso al volo di cosa si intende per stazionarietà: \newline 
+
+    Processo stazionario - Wikipedia\\
+    \url{https://it.wikipedia.org/wiki/Processo_stazionario}
+\end{tcolorbox}
+
+Il troncamento implica un prodotto tra $x \left[ n\right]$ (di lunghezza infinita) e la finestra $w \left[ n\right]$ (di lunghezza finita). \newline 
+
+Da questo momento in poi, non consideremo più $x \left[ n\right]$ di lunghezza infinita, bensì la sua stima $\hat{x} \left[ n\right]$: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x} \left[ n\right] 
+        = 
+        x \left[ n\right]
+        \cdot 
+        w \left[ n\right]
+    \end{equation}
+}
+
+e la finestra $w \left[ n\right]$ deve essere sempre non nullo. \newline 
+
+Calcoliamo $\hat{X} \left(e^{\jmath \omega}\right)$, che è la stima di $X \left(e^{\jmath \omega}\right)$: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \hat{X} \left(e^{\jmath \omega}\right)
+            &= 
+            \sum_{n = - \infty}^{+ \infty} 
+            \hat{x} \left[ n\right]
+            \cdot 
+            e^{-\jmath \omega n}
+            \\
+            &= 
+            \sum_{n = - \infty}^{+ \infty} 
+            x \left[ n\right]
+            \cdot
+            w \left[ n\right] 
+            \cdot
+            e^{-\jmath \omega n}
+            \\
+            &= 
+            \sum_{n = 0}^{L - 1} 
+            x \left[ n\right]
+            \cdot
+            w \left[ n\right] 
+            \cdot
+            e^{-\jmath \omega n}
+        \end{split}
+    \end{equation}
+}
+
+Poichè $\hat{x} \left[ n\right]$ è di durata finita, di lunghezza L, $\hat{X} \left(e^{\jmath \omega}\right)$ non sarà la DTFT, bensì la DFT a N punti: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \hat{X} \left[ k\right]
+            &= 
+            \left.
+            \hat{X} \left(e^{\jmath \omega}\right)
+            \right|_{\omega = \frac{2 \pi}{N} \cdot k}
+            \\
+            &= 
+            \sum_{n = 0}^{L - 1} 
+            x \left[ n\right]
+            \cdot
+            w \left[ n\right] 
+            \cdot
+            e^{-\jmath \frac{2\pi}{N} n k} 
+            \quad 
+            \text{ per }
+            k = 0, \dots, N - 1
+        \end{split}
+    \end{equation}
+}
+
+Affinchè la formula di $\hat{X} \left[ k\right]$ sia valida, occorre che: 
+
+{
+    \Large 
+    \begin{equation}
+        N \geq L
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 42}
+Nella slide, c'è scritto "corrisponde a zero pading nei casi N > L". Cioè, dobbiamo fare zero padding se N non è maggiore a L? 
+\end{tcolorbox}
+
+Siccome abbiamo fatto una finestratura, quindi un prodotto nel dominio n, grazie alle proprietà tra tempo e Fourier, 
+abbiamo che avremo a che fare con una convoluzione nello spettro, cioè valgono queste relazioni: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            \hat{x} \left[ n\right]
+            &= 
+            x \left[ n\right]
+            \cdot 
+            w \left[ n\right]
+            \\
+            &\updownarrow 
+            \\
+            \hat{X} \left(e^{\jmath \omega}\right)
+            &= 
+            \dfrac{1}{2 \pi}
+            \cdot 
+            \int_{- \pi}^{+ \pi}
+            X \left(e^{\jmath \theta}\right)
+            \cdot 
+            W \left(e^{\jmath \left(\omega - \theta\right)}\right)
+            d \theta
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 43}
+Siccome nel mondo DSP non esistono integrali, se volessimo fare i precisini,in realtà $\hat{X} \left(e^{\jmath \omega}\right)$ è una stima di una stima di $X \left(e^{\jmath \omega}\right)$ ?
+\end{tcolorbox}
+
+Come studiato nel capitolo della progettazione dei filtri, possiamo decidere una tra le seguenti finestre studiate in \ref{subsec: Elenco delle finestre principali} \nameref{subsec: Elenco delle finestre principali} a pag \pageref{subsec: Elenco delle finestre principali}, 
+cioè possiamo scegliere una tra le seguenti finestre: 
+
+\begin{itemize}
+    \item rettangolare 
+    \item Bartlett 
+    \item Hamming 
+    \item Hanning 
+    \item Kaiser 
+\end{itemize}
+
+\newpage 
+
+Ma, siccome noi valuteremo una stima di $\hat{X} \left(e^{\jmath \omega}\right)$, perchè non useremo gli integrali bensì una sommatria, allora, il fatto di avere dei valori finiti, 
+può dare problemi per la localizzazione di picchi o di punti particolari, come visto in questa figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{granulostià esempio.png}
+\end{figure}  
+
+Questo problema prende il nome di granulosità. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 44}
+Spiegazione della slide e con quale forma d'onda è stata fatta la convoluzione la finestra. 
+\end{tcolorbox}
+
+Come nela caso della progettazione dei filtri FIR, possiamo considerare i seguenti parametri, detti anche gradi di libertà, per la finestra $w \left[ n\right]$: 
+
+\begin{itemize}
+    \item la lunghezza della finestra L, aumentando la lunghezza della finestra, nella DFT avremo un lobo principarle più stretto 
+    \item il tipo di finestra, quindi la forma della finestra, perchè attenuazioni dei lobi laterali alta implica un lobo principale più largo 
+    \item la lunghezza della DFT (e quindi della FFT) in modo tale che $N > L$, perchè maggiore è N e minore è la granulosità 
+\end{itemize}
+
+\newpage 
+
+\subsubsection{Problemi della stima di una sequenza infinita}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 9\\
+    Appunti | 2025-12-09 | pag 2  
+}
+
+La stima dello spettro $\abs{X \left(e^{\jmath \omega}\right)}^{2}$ di un segnale $x \left[ n\right]$, che è stazionario, deterministico e di lunghezza incognita mediante la DFT, 
+a partire dalla conoscenza di L campioni del segnale, pone i seguenti problemi: 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 45}
+Come fa ad essere $x \left[ n\right]$ deterministico? Perchè la DFT viene fatta "off-line"? 
+\end{tcolorbox}
+
+\begin{itemize}
+    \item risoluzione, cioè la distanza d in frequenza tra due sinusoidi, che dipende da L e dal tipo di finestra 
+    \item leakage, la presenza dei lobi laterali che distorcono lo spettro 
+    \item granulosità, cioè l'effetto del campionamento in frequenza dovuto alla DFT; si può ridurre con zero padding, ma comporta problemi computazioni e dipende da N 
+    \item precisione finita, dovuta al rumore nello spettro 
+\end{itemize}
+
+\newpage 
+
+
