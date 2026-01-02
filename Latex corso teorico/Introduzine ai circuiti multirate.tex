@@ -1079,6 +1079,387 @@ Anche come gli interpolatori polifase, anche nei decimatori si possono utilizzar
     Video Lezione CADSP Lunedì 14 Dicembre 2022 | 00:06 - 7:10
 }
 
+Come già abbiamo studiato in \ref{ch: Campionamento} \nameref{ch: Campionamento} da pag \pageref{ch: Campionamento}, e come abbiamo studiato nei corsi di Teoria di segnali e Telecomunicazioni con il prof. Franco Chiaraluce, 
+e approfondirete nel dettaglio con la prof.ssa Spinsante nel corso di Misure elettroniche il prossimo semestre, per quanto riguarda la conversione da analogico a digitale consideriamo questo schema a blocchi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35 ]{conversione ad ipotesi semplificativa.png}
+\end{figure} 
+
+dove: 
+
+\begin{itemize}
+    \item si suppone il caso più semplice, cioè tutti i componenti ed i segnali lineari 
+    \item $x_c \left(t\right)$ è il segnale in analogico da campionare 
+    \item data una frequenza di campioamento $F_s$, e quindi dove il suo inverso è il tempo di campionamento $T_s$, $x \left[ n\right]$ è il segnale campionato idealmente: 
+    {
+        \Large 
+        \begin{equation}
+            x \left[ n\right] = x_c \left[ n \cdot T_s\right]
+        \end{equation}
+    }
+    \item $e \left[ n\right]$ è il rumore di quantizzazione 
+    \item $\hat{x} \left[ n\right]$ è il segnale convertito realmente 
+\end{itemize}
+
+Se consideriamo il convertitore analogico-digitale a $B + 1$ bit e che l'intervallo di conversione è $\left[ -v, +v\right]$ abbiamo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        1 \text{ LSB } = \Delta = \dfrac{2 \cdot}{2^{B + 1}} 
+        \\    
+        \abs{e} \leq \dfrac{\Delta}{2}
+        \end{cases}
+        \quad 
+        \text{se }
+        \abs{x_{c} \left(t\right)} \leq v + \dfrac{\Delta}{2}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item 1 LSB si intente il Least Significant Bit, cioè il bit meno significante 
+    \item $\Delta$ è la differenza che ci sono tra due valori nel convertitore 
+    \item $\abs{e}$ è l'errore di quantizzazione all'interno del singolo intervallo $\Delta$
+\end{itemize}
+
+Se si fanno tutte le ipotesi semplificative scritte precedentemente, che non sono sempre valide nella reltà ma è un primo passo per inziare a capire il fenomeno reale, 
+allora la conversione analogico-reale non è un processo statico, bensì statistico perchè nella realtà non sapremo dove il valore reale entrarà nel "bin" (cestino in inglese, per intendere a quale valore finito verrà assegnato il valore reale analogico). \newline 
+
+\begin{tcolorbox}
+    Per adesso credete a quello che scrivo, ma nel corso della prof.ssa Susanna Spinsante di Miusre Elettroniche, andrete molto più nel dettaglio di queste slide: praticamente la conversione analogico-digitale è 3/4 del corso che affronterete il prossimo semestre. 
+\end{tcolorbox}
+
+\newpage  
+
+Come abbiamo studiato nel corso di Teoria di Segnali, avendo a che fare con fenomeni statistici, dovremo utilizzare gli strumenti della statistica. \newline 
+
+Quindi considerando l'errore di quantizzazione $e \left[ n\right]$ un processo casuale stazionario, incorrelato con la sequenza quantizzata $x \left[ n\right]$, 
+con la funzione di densità di probabilità uniforme nell'intervallo $\pm \dfrac{\Delta}{2}$ e con caratteristiche di rumore bianco, 
+avremo che la varianza di $e \left[ n\right]$, cioè $\sigma_{e}^{2}$ sarà uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \sigma_{e}^{2}
+        &= 
+        \dfrac{\Delta^{2}}{12} 
+        \\
+        &=
+        \left(\dfrac{v}{2^{B}}\right)^{2}
+        \cdot 
+        \dfrac{1}{12}
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    Formalmente, come studiato nel corso di telecomunicazioni, le variabili statistiche come $e \left[ n\right]$ dovrebbe essere in maiuscolo, cioè $E \left[ n\right]$, 
+    ma noi in questo corso le scriveremo in minuscolo. \newline 
+
+    Inoltre, i passaggi matematici statistici saranno saltati perchè non sono materia approfondita di questo corso. 
+\end{tcolorbox}
+
+Allora, se $x_{c} \left(t\right) $ è un processo casuale bianco con potenza $\sigma_{x}^{2}$ allora avremo che il rapporto segnale rumore in db in uscità sarà di: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \left(\dfrac{S}{N}\right)_{dB}
+            &= 
+            10 \cdot \log_{10} \left(\dfrac{\sigma_{x}^{2}}{\sigma_{e}^{2}}\right)
+            \\
+            &= 
+            10 \cdot \log_{10} \left(\dfrac{\sigma_{x}^{2}}{v^{2}}\right)
+            + 10.8 + 6.02 \cdot B
+        \end{split}
+    \end{equation}
+}
+
+Da questa formula di $\left(\dfrac{S}{N}\right)_{dB}$, possiamo notare che, all'aumentare di ogni bit B, il rapporto segnale-rumore aumenta di circa 6 dB in più. \newline 
+
+\begin{tcolorbox}
+    Nella realtà, aggiungere o cambiare un convertitore analogico-digitale non è possibile nella maggior parte dei casi, ma può essere utile per progettare il dispositivo e per confrontare gli ADC in commercio, in base alle specifiche. 
+\end{tcolorbox}
+
+Ma, siccome spesso non possiamo avere dei bit elevati, dopo la conversione analogico-digitale, $x_{c} \left(t\right)$ viene decimato in un opportuno $\hat{x} \left[ n\right]$. \newline 
+
+Invece, nella maggior parte dei casi, piuttoso che aumentare il numero dei bit, si cerca di aumentare la frequenza di campionamento $F_s$ nel convertitore analogico-digitale a frequenze superiodi di Nyquist per migliora il rapporto segnale-rumore. \newline 
+
+\newpage 
+
+Confrontando i casi in cui si utilizzano delle frequenze di camponamento diverse e confrontando gli spettri dei segnali: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{Confronto tra non campionare e invece sovra-campionare.png}
+\end{figure} 
+
+dove, nella figura a sinistra abbiamo una frequenza di campionamento $F_s$ uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        F_s 
+        =
+        2 \cdot F_{x}
+    \end{equation}
+}
+
+$F_s$, la frequenza di campionamento, è la frequenza di Nyquist perchè è almeno il doppio di $F_{x}$, che è la frequenza maggiore del segnale $x_{c} \left(t\right)$. \newline 
+
+
+Invece, nella figura a destra, si è utilizzata la seguente frequenza di campionamento $F_{s}$: 
+
+{
+    \Large 
+    \begin{equation}
+        F_{s} 
+        = 
+        2 \cdot \left(2 \cdot F_x\right)
+    \end{equation}
+}
+
+cioè, il doppio della frequenza di Nyquist. \newline 
+
+Nelle due figure, in blu è segnato $P_{x} \left(\omega\right)$, che è lo spettro del segnale $x_{c} \left(t\right)$, 
+invece, in rosso è segnato $P_{e} \left(\omega\right)$, che è lo spettro del rumore (ipotizzato bianco, quindi a spettro piatto). \newline 
+
+Confrontando le due figure, notiamo che, se si utilizza un filtro passa-basso dopo la conversione, grazie ad un filtro digitale, si ha che nella banda utile $\left[ - \dfrac{\pi}{2}, + \dfrac{\pi}{2}\right]$, 
+la potenza del segnale di $x_{c} \left(t\right)$, cioè $P_{x} \left(\omega\right)$, rimarrà la stessa, 
+mentre quella del rumore $e \left[ n\right]$, cioè $P_{e} \left(\omega\right)$, grazie al sovra-campionamento, è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \sigma_{e \left(BU\right)}^{2}
+            &= 
+            \sigma_{e}^{2}
+            \cdot 
+            \dfrac{\pi}{2 \pi}
+            \\
+            &= 
+            \sigma_{e}^{2}
+            \cdot 
+            \dfrac{2 \cdot F_{x}}{F_{s}}
+            \\
+            &= 
+            \dfrac{\sigma_{e}^{2}}{2}
+        \end{split}
+    \end{equation}
+}
+
+Quindi, grazie al sovra-campionamento, il rumore bianco $P_{e} \left(\omega\right)$ si è "spalmanto" lungo la banda (che graie al sovra-campionamento è maggiore), 
+quindi, nel filtro passa-basso, si avrà la metà del rumore all'interno della banda utile. \newline 
+
+In generale, per un fattore $2^{S}$ di sovra-campionamento, abbiamo che il rapporto segnale-rumore in uscità sarà di: 
+
+{
+    \Large 
+    \begin{equation}
+        \left(\dfrac{S}{N}\right)_{dB}
+        \approx 
+        10 \cdot \log_{10} \left(\sigma_{x}^{2}\right)
+        - 
+        10 \cdot \log_{10} \left(\sigma_{e}^{2}\right)
+        + 
+        3.01 \cdot S
+    \end{equation}
+}
+
+Grazie a questa formula $\left(\dfrac{S}{N}\right)_{dB}$, notiamo che, al raddoppiare della frequenza di campionamento $F_{s}$, 
+si ha un guadagno di $\left(\dfrac{S}{N}\right)_{dB}$ di circa 3 dB, cioè di $\dfrac{1}{2}$ bit. \newline 
+
+Grazie a tutte queste osservazione, possiamo trarre le seguenti informazioni: 
+
+\begin{itemize}
+    \item il filtro digitale deve lavorare con una precisioe di bit superiore del convertitore analogico-digitale e del convertitore digitale-analogico 
+    \item l'uso del sovra-campionamento migliora le prestazioni dei filtri analogici anti-aliasing e anti-imaging perchè, come si vede dalla seguente figura:  
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale = 0.8]{sovra campionamento nello spettro e confronto.png}
+    \end{figure} 
+    il sovra-campionamento crea dei buchi in frequenza, che permettono di realizzare dei filtri con banda di transizione più morbida (perchè nella realtà, la banda di transizione non sarà così ripida come nella figura a destra) 
+    \item solo dopo la conversione analogico-digitale, è possibile decimare perchè la decimazione è un'operazione in cui si perde delle informazioni rispetto alla sequenza originale, quindi è necessario decimare per bene
+\end{itemize}
+
+
+Per questi motivi, i tipici convertitori a sovracampionamento sono i seguenti: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{convertitori a sovracampionamento tipici.png}
+\end{figure} 
+
+dove, dall'alto versione il basso: 
+
+\begin{itemize}
+    \item è il tipico convertitore analogico-digitale 
+    \item è il tipico convertitore digitale-analogico 
+\end{itemize}
+
+\newpage 
+
+\subsection{Conversione A/D Noise shaping}
+
+\footnote{ 
+    Slide del prof | 12 - Introduzione ai circuiti multirate | pag 35 - 37\\
+    Apputi | 2025-12-09 | pag 1 
+}
+
+Come abbiamo visto precedentemente, lo spettro del segnale $x_{c} \left(t\right)$, cioè $P_{x} \left(\omega\right)$ rimane lo stesso, 
+mentre quello che cambia sarà lo spettro del rumore di quantizzazione $e \left[ n\right]$, cioè $P_{e} \left(\omega\right)$. \newline 
+
+Grazie alla "modellazione" del rumore, sono stati ideati e progettati i convertitori noise shaping (dall'inglese sagomatori del rumore), 
+proprio come si vede dalla seguente figura di confronto: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{spettro dei noise shaping.png}
+\end{figure} 
+
+$P_{e} \left(\omega\right)$ non è più piatto, bensì, come si vede nella figura a destra, il rumore avrà una distribuzione differente, dove, nella porzione di frequenza utile, 
+il rumore è minimo. \newline 
+
+Di seguito uno schema di un modulatore sigma-delta del primo ordine: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{modulatore sigma delta del primo ordine.png}
+\end{figure} 
+
+dove, facendo la trasformata-z, l'uscita $y \left[ n\right]$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        Y \left(z\right) 
+        = 
+        X \left(z \right) 
+        \cdot 
+        z^{-1}
+        + 
+        E \left(z\right)
+        \cdot 
+        \left(1 - z^{-1}\right)
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    I passaggi passo-passo non sono stati fatti perchè non sono utili a questo corso. 
+\end{tcolorbox}
+
+dove: 
+
+\begin{itemize}
+    \item $Y \left(z\right)$ è la trasformata z dell'uscita del convertitore $y \left[ n\right]$ 
+    \item $X \left(z\right)$ è la trasformata z dell'ingresso del convertitore $x \left[ n\right]$
+    \item $z^{-1}$ è un contributo di ritardo 
+    \item $\left(1 - z^{-1}\right)$ è una derivata del primo ordine 
+    \item $E \left(z\right)$ è la trasformata z dell'errore di quantizzazione $e \left[ n\right]$ 
+\end{itemize}
+
+Dalla formula di $Y \left(z\right)$ possiamo trarre le seguenti osservazioni: 
+
+\begin{itemize}
+    \item il segnale $x \left[ n\right]$ viene solo ritardato perchè $X \left(z\right)$ è moltiplicato per $z^{-1}$
+    \item il rumore di quantizzazione può essere filtrato con un filtro FIR $\left(1 - z^{-1}\right)$, che è un filtro passa-alto 
+\end{itemize}
+
+\newpage 
+
+In uscita, dell'ADC Sigma-Delta, avremo che $y \left[ n\right]$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        y \left[ n\right]
+        = 
+        x \left[ n - 1\right]
+        + 
+        e \left[ n\right]
+        - 
+        e \left[ n - 1\right]
+    \end{equation}
+}
+
+Grazie al filtro passa-basso, il rapporto segnale-rumore è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \left(\dfrac{S}{N}\right)_{dB}
+        \approx 
+        10 \cdot \log_{10} \left(\sigma_{x}^{2}\right)
+        - 
+        10 \cdot \log_{10} \left(\sigma_{e}^{2}\right)
+        -
+        10 \cdot \log_{10} \left(\dfrac{\pi^{2}}{3}\right) 
+        +
+        9.03 \cdot S
+    \end{equation}
+}
+
+cioè, al raddoppio di frequenza di campionamento, si guadagna circa $1.5$ bit. \newline 
+
+Oppure, piuttosto che calcolarci noi l'SNR, si utilizzano le seguenti tabelle: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{fattore di miglioramente sigma delta.png}
+\end{figure} 
+
+Come si può notare dalla tabella, all'aumentare del fattore di oversampling S, il noise shaping aumenta, quindi il rumore diminuisce nella banda utile. \newline 
+
+Generalizzando il Delta-Sigma, possiamo introdurre i convertitori noise shaping, che sono realizzati a più stadi. \newline 
+
+Un esepio di un convertitore a più stadi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{struttura a più stadi convertitori noise shaping.png}
+\end{figure} 
+
+Come in precedenza, l'uscita del convertitore $y \left[ n\right]$ viene decimata, come si vede nella seguente struttura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{decimazione dell'uscita.png}
+\end{figure} 
+
+e, grazie a strutture efficienti, come ad esempio i circuiti polifasi, si possono avere dei guadagni notevoli con: 
+
+{
+    \Large 
+    \begin{equation}
+        M = 64 \to 13 \text{ bit}
+    \end{equation}
+}
+
+Le stesse considerazioni fatte per i convertitori analogici-digitali noise shaping, si possono fare per i convertitori digitali-analogici. \newline 
+
+I problemi, come abbiamo studiato nei circuiti multirate, sono sempre gli stessi: 
+
+\begin{itemize}
+    \item linearità 
+    \item velocità 
+    \item precisione 
+\end{itemize}
+
+\newpage 
+
+
+
+
 
 
 
