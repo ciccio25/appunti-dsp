@@ -600,7 +600,7 @@ In modo analogo, si può definire lo spettro densità di potenza incrociata tra 
 
 \newpage 
 
-\section{Stima dello spettro dei segnali random}
+\section{Stima dello spettro dei segnali random} \label{sec: Stima dello spettro dei segnali random}
 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 16\\
@@ -694,3 +694,208 @@ Piuttosto che calcolarci la potenza $P_{xx} \left(\omega\right)$ attraverso l'au
 
 l'idea è quella di stimare $P_{xx} \left(\omega\right)$ senza calcolarsi l'autocorrelazione $\phi_{xx} \left[ n\right]$. \newline 
 
+Grazie all'economista Shuster nel 1809 (quindi molto prima che esistesse il DSP come materia di studio), si è riusciti a calcolare, da $x \left[ n\right]$ la sua potenza, 
+quindi $P_{xx} \left(\omega\right)$, ma con il modulo al quadrato. \newline 
+
+Prima di calcolarsi $\abs{P_{xx} \left(\omega\right)}^{2}$, bisogna calcolarsi la DTFT di $x \left[ n\right]$, che in questo caso non è una sequenza deterministica, bensì casuale. \newline 
+
+\textbf{Calcolo della DTFT} \newline 
+
+Dato un segnale causale (in inglese random) $x \left[ n\right]$, che si estende per $n \in \left[ - \infty, + \infty\right]$, consideriamo $\hat{x} \left[ n\right]$ un intervallo ristretto noto di $x \left[ n\right]$, tale che: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x} \left[ n\right]
+        \neq 0 
+        \quad 
+        \text{ per }
+        n = 0, \dots, Q - 1 
+    \end{equation}
+}
+
+dove Q sono i punti di realizzazione. \newline 
+
+Allora si può dire che: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x} \left[ n\right]
+        = 
+        x \left[ n\right] \cdot w \left[ n\right]
+    \end{equation}
+}
+
+dove $w \left[ n\right]$ è una finestra (di qualsiasi tipo, rettangolare, Blachman, ecc...), tale che: 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right]
+        \neq 0 
+        \quad 
+        \text{ per }
+        n = 0, \dots, Q - 1 
+    \end{equation}
+}
+
+Allora, possiamo scrivere che la DTFT di $\hat{x} \left[ n\right]$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \hat{X} \left(e^{\jmath \omega}\right)
+            &= 
+            \sum_{n = - \infty}^{+ \infty}
+            \hat{x} \left[ n\right]
+            \cdot 
+            e^{\jmath \omega n}
+            \\
+            &= 
+            \sum_{n = 0}^{Q - 1}
+            x \left[ n\right] \cdot w \left[ n\right]
+            \cdot 
+            e^{\jmath \omega n}
+        \end{split}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
+TO-DO: Inserire delle immagini dei segnali che rappresentano una finestratura 
+\end{tcolorbox} 
+
+\newpage 
+
+\textbf{Stima dello spettro} \newline 
+
+Grazie a $\hat{X} \left(e^{\jmath \omega}\right)$, si può assumere come stima della potenza di $x \left[ n\right]$ il valore di $\hat{P}_{PE}$: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{P}_{PE} \left(\omega\right)
+        = 
+        \dfrac{1}{Q} \cdot \abs{\hat{X} \left(e^{\jmath \omega}\right)}^{2}
+    \end{equation}
+}
+
+$\hat{P}_{PE}$ prende il nome di periodogramma, che è la stima dell'autocorrelazione di $x \left[ n\right]$, cioè la stima di $P_{xx} \left(\omega\right)$. \newline 
+
+\textbf{Considerazioni sulla stima dello spettro} \newline 
+
+La formula di $ \hat{P}_{PE}$ non è priorio la DTFT di $x \left[ n\right]$, ma, 
+sotto-ipotesi che $x \left[ n\right]$ è stazionaria e reale, allora, grazie alle proprietà tra tempo e Fourier, sicuramente la trasformata di Fourier di $x \left[ n\right]$, cioè $X \left(e^{\jmath \omega}\right)$, 
+è positiva e pari, quindi di conseguenza anche il suo spettro di potenza lo è. \newline 
+
+Per definizione e anti-trasformando, avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
+            \abs{\hat{X} \left(e^{\jmath \omega}\right) }^{2} 
+            &= 
+            \hat{X} \left(e^{\jmath \omega}\right)
+            \cdot 
+            \hat{X}^{*} \left(e^{\jmath \omega}\right)
+            \\
+            &\updownarrow
+            \\
+            c_{xx} \left[ m\right]
+            &=
+            \hat{x} \left[ n\right]
+            *
+            \hat{x}^{*} \left[ -n\right] 
+            \\
+            &= 
+            \dots
+            \\
+            &= 
+            \sum_{n = 0}^{Q - 1} 
+            w^{*} \left[ n\right] 
+            \cdot 
+            x^{*} \left[ n\right]
+            \cdot 
+            w \left[ n + m\right]
+            \cdot 
+            x \left[ n + m\right]
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item $\hat{X}^{*} \left(e^{\jmath \omega}\right)$ è il coniugato di $\hat{X} \left(e^{\jmath \omega}\right)$ 
+    \item $\hat{x} \left[ n\right] * \hat{x} \left[ -n\right]$ è l'auto-convoluzione di $x \left[ n\right]$, che, per definizione, è $c_{xx} \left[ m\right]$, cioè l'autocorrelazione aperiodica 
+    \item $c_{xx} \left[ m\right]$ non dipende più dall'indice n, bensì dall'indice m, che prende il nome di leg (dall'inglese, letteralmente gamba) 
+\end{itemize}
+
+\begin{tcolorbox}
+    Alcuni passaggi sono stati saltati, anche perchè non è lo scopo di questo esame fare i passaggi matematici: l'importante è il concetto di quello che si sta facendo. 
+\end{tcolorbox}
+
+Siccome $x \left[ n\right]$ è reale e positiva, allora $c_{xx} \left[ m\right]$ è simmetrica, quindi possiamo estendere $c_{xx} \left[ m\right]$ per valori di m: 
+
+{
+    \Large 
+    \begin{equation}
+        - \left(Q - 1\right)
+        \leq 
+        m 
+        \leq 
+        \left(Q - 1\right)
+    \end{equation}
+}
+
+\newpage 
+
+Con tutte queste considerazioni, 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \hat{P}_{PE} \left(\omega\right)
+        &= 
+        \dfrac{1}{Q} \cdot \abs{\hat{X} \left(e^{\jmath \omega}\right)}^{2}
+        \\
+        &\downarrow
+        \\
+        \hat{P}_{PE} \left(\omega\right)
+        &= 
+        \dfrac{1}{Q} 
+        \cdot 
+        \sum_{m = - \left(Q - 1\right)}^{+ \left(Q - 1\right)}
+        c_{xx} \left[ m\right]
+        \cdot 
+        e^{- \jmath \omega m}
+        \end{split}
+    \end{equation}
+}
+
+Come avevamo accennato in \ref{sec: Stima dello spettro dei segnali random} \nameref{sec: Stima dello spettro dei segnali random} a pag \pageref{sec: Stima dello spettro dei segnali random}, 
+una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(\omega\right)$, che è la stima di $P_{xx} \left(\omega\right)$ è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        E \left[ \hat{P}_{PE} \left(\omega\right)\right]
+        = 
+        \dfrac{1}{2 \pi Q}
+        \cdot 
+        \int_{- pi}^{+ \pi}
+        P_{xx} \left(\theta\right)
+        \cdot 
+        \abs{W \left(e^{\jmath \left(\omega - \theta\right)}\right)}^{2}
+        d \theta
+    \end{equation}
+}
+
+\begin{tcolorbox}
+    I passaggi sono scritti nella slide del prof, ma io l'ho saltata perchè la dimostrazione è facoltativa. 
+\end{tcolorbox}
