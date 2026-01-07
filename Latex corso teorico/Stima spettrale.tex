@@ -677,7 +677,7 @@ All'aumentare del numero di campioni conosciuti di $x \left[ n\right]$, la stima
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 17 - 21\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 2:00:55  -  
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 2:00:55  - 02:18:00 
 }
 
 Piuttosto che calcolarci la potenza $P_{xx} \left(\omega\right)$ attraverso l'autocorrelazione $\phi_{xx} \left[ n\right]$: 
@@ -830,7 +830,7 @@ Per definizione e anti-trasformando, avremo che:
 dove: 
 
 \begin{itemize}
-    \item $\hat{X}^{*} \left(e^{\jmath \omega}\right)$ è il coniugato di $\hat{X} \left(e^{\jmath \omega}\right)$ 
+    \item $\hat{X}^{*} \left(e^{\jmath \omega}\right)$ è il complesso coniugato di $\hat{X} \left(e^{\jmath \omega}\right)$ 
     \item $\hat{x} \left[ n\right] * \hat{x} \left[ -n\right]$ è l'auto-convoluzione di $x \left[ n\right]$, che, per definizione, è $c_{xx} \left[ m\right]$, cioè l'autocorrelazione aperiodica 
     \item $c_{xx} \left[ m\right]$ non dipende più dall'indice n, bensì dall'indice m, che prende il nome di leg (dall'inglese, letteralmente gamba) 
 \end{itemize}
@@ -888,7 +888,7 @@ una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left
         = 
         \dfrac{1}{2 \pi Q}
         \cdot 
-        \int_{- pi}^{+ \pi}
+        \int_{- \pi}^{+ \pi}
         P_{xx} \left(\theta\right)
         \cdot 
         \abs{W \left(e^{\jmath \left(\omega - \theta\right)}\right)}^{2}
@@ -928,7 +928,7 @@ Si può dimostrare (cioè non lo dimostreremo) che, affinchè la stima sia asint
         \end{equation}
 } 
 
-dobbiamo far tendere il valore $Q$ a infinito, in modo che la finestra diventi una Delta di Dirac, cioè: 
+dobbiamo far tendere il valore $Q$ a infinito, in modo che la finestra diventi una Delta di Dirac: 
 
 {
     \Large 
@@ -951,6 +951,10 @@ dobbiamo far tendere il valore $Q$ a infinito, in modo che la finestra diventi u
         \end{cases}
     \end{equation}
 }
+
+cioè una non polarizzazione asintotica. \newline 
+
+\newpage 
 
 Grazie al teorema di Parseval, ne consegue che: 
 
@@ -1022,7 +1026,7 @@ Rispiegazione, anche grafica, di quello che cè scrito nella slide 21.
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 22 - 23\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  02:18:00 - 02:23:00    
 }
 
 Si può ottenere una stima consistente mediante una tecnica. \newline 
@@ -1063,7 +1067,7 @@ dove R indica gli indici di overlap, che generalmente, è uguale:
 
 Si possono utilizzare qualasiasi valori di R, ma quello del 50 \% di overlap, cioè $R = \dfrac{M}{2}$, è un valore standard (come si vede nella figura di esempio). \newline 
 
-Il meotodo di Bartlett ci permette di calcolare lo spettro di $\hat{x} \left[ n\right]$ come: 
+Il meotodo di Bartlett (chiamato anche metodo di Weltch) ci permette di calcolare lo spettro di $\hat{x} \left[ n\right]$ come: 
 
 {
     \Large 
@@ -1118,7 +1122,7 @@ Ricordo che, essendo nel mondo DSP, lo spettro non è formato da linee continue,
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 24\\
     Appunti | 2025-12-16 | pag 2\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:05:45 - 00:08:55   
 }
 
 Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato: 
@@ -1167,7 +1171,7 @@ Come studiato in \ref{ch: Progetti Filtri FIR} \nameref{ch: Progetti Filtri FIR}
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 26 - 28 \\
     Appunti | 2025-12-16 | pag 2\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:24:40 - 0:32:50  
 }
 
 Nella realtà non avremo mai a che fare con segnali stazionari, bensì con segnali non stazionari. \newline 
@@ -1203,7 +1207,10 @@ In questo tipo di segnale stazionario, non è possibile definire uno spettro, be
 
 L'idea è quella di calcolare lo spettro di un breve segmento del segnale e considerare questo lo "spettro istantaneo" del segnale al tempo corrispondente al segmento considerato. \newline 
 
-Il segmento deve essere abbastanza corto da poter considerare "stazionario" il segnale in esso. \newline 
+Il segmento deve essere abbastanza corto da poter considerare "stazionario" il segnale in esso: 
+ad esempio, per il parlato umano si può considerare un segnale stazionario per 20 ms. \newline 
+
+Grazie a questa momentanea stazionarietà, si possono utilizzare gli strumenti stazionario ai segnali non stazionari. \newline 
 
 Quindi, in parole povere, è quello di campionare lo spettro nel tempo. \newline 
 
@@ -1269,7 +1276,7 @@ Confrontando lo spettrogramma tra una nota di un piano e di un parlato, notiamo 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 29 - 30 \\
     Appunti | 2025-12-16 | pag 2\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:43:20 - 00:56:00    
 }
 
 Considerando un segmento di segnale $x \left[ n\right]$, lo si vuole moltiplicare per un'opportuna sequenza $w \left[ n\right]$ che prende il nome di finestra. \newline 
@@ -1297,6 +1304,8 @@ dove:
     \item $\omega$ è una variabile continua 
 \end{itemize}
 
+In questo caso, la finestra $w \left[ m\right]$ rimane ferma e viene shiftata la sequenza $x \left[ n\right]$. \newline 
+
 La STFT può anche essere definita come: 
 
 {
@@ -1306,9 +1315,7 @@ La STFT può anche essere definita come:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 55}
-Sono tutte e due delle STFT ma in una viene fatta la convoluzione da sinistra verso destra, mentre l'altra da destra a sinistra, giusto? 
-\end{tcolorbox}
+dove è la finestra $w \left[ m\right]$ che viene shiftata ed il segnale $x \left[ m\right]$ rimane fermo. \newline 
 
 Le due STFT sono legate dalla seguente relazione: 
 
@@ -1318,6 +1325,8 @@ Le due STFT sono legate dalla seguente relazione:
         \hat{X} \left[ n, \omega\right) =  e^{- \jmath \omega n} \cdot X \left[ n, \omega\right) 
     \end{equation}
 }
+
+cioè differiscono per un termine di fase. \newline 
 
 Rispetto alla DTFT che avevamo studiato in \ref{sec: Trasformata di Fourier di Segnali Discreti} \nameref{sec: Trasformata di Fourier di Segnali Discreti} a pag \pageref{sec: Trasformata di Fourier di Segnali Discreti}, 
 questa volta la STFT non dipende solo dalla pulsazione $\omega$, bensì anche dall'n-esimo indice n. \newline 
@@ -1349,7 +1358,7 @@ Inoltre, nella formula della trasformazione inversa, l'integrale non è più tra
 \end{tcolorbox}
 
 
-da cui: 
+da cui, se $w \left[ n\right] \neq 0$: 
 
 {
     \Large 
@@ -1432,12 +1441,13 @@ La Short Time Fourier può essere interpretata come un'operazione di filtraggio 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 31 - 33 \\
     Appunti | 2025-12-16 | pag 2 - 3\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:56:00 - 01:08:25 
 }
 
 Se la finestra $w \left[ n\right]$ è una sequenza di lunghezza finita (che lo deve essere per forza sennò non la potremmo inserire in un calcolatore), allora è possibili utilizzare la DFT e quindi l'algoritmo FFT. \newline 
 
-Campionando nel tempo abbiamo che la STFT diventa: 
+Restringegndo ai casi in cui volessimo campionare un segnale $x \left[ n\right]$ (in modo da avere pulsazioni $\omega$ limitati, quindi filtri limitati), 
+avremo che, campionando nel tempo $x \left[ n\right]$ abbiamo che la STFT diventa: 
 
 {
     \Large 
@@ -1469,6 +1479,7 @@ dove:
     \item L è la lunghezza della finestra $w \left[ n\right]$
     \item N è la lunghezza della FFT 
     \item le relazioni sono valide se $N \geq L$, altrimenti svolgere zero padding (opportunamente)
+    \item la sommatoria, rispetto alla formula della STFT è limitata e non si estende per infinito 
 \end{itemize} 
 
 Questa formula del campionamento nel tempo della STFT è molto utile perchè permette di scrivere infiniti filtri $\omega$ in filtri discretizzati (quindi limitati) che dipendono da una variabile discreta, 
@@ -1554,6 +1565,7 @@ dove:
     \item il filtro con $k = 0$ è un filtro passa-basso 
     \item i filtri con $0 < k < \left(N - 1 \right)$ sono dei filtri passa-banda
     \item il filtro per $k = \left(N - 1 \right)$ è un filtro passa-alto 
+    \item i filtri sono k-esimi e non infiniti, come nella definizione di STFT  
 \end{itemize}
 
 Siccome il k-esimo filtro $h_{k} \left[ n\right]$ dipende dalla tipo di finestra scelta $w \left[ n\right]$ (esempio: rettangolare, Bartlett, ecc...), 
@@ -1565,6 +1577,21 @@ Oltre alla STFT diretta, è possibile svolgere la STFT inversa con il seguente s
     \centering
     \includegraphics[scale = 0.35]{STFT inversa filtri.png}
 \end{figure} 
+
+dove: 
+
+{
+    \Large 
+    \begin{equation}
+        \left.
+        e^{\jmath \frac{2 \pi}{N} k m}
+        \right|_{m = 0}
+        = 
+        1
+    \end{equation}
+}
+
+quindi, nel grafico a blocchi, consideriamolo come se non ci fosse. \newline 
 
 \newpage 
 
