@@ -675,7 +675,7 @@ All'aumentare del numero di campioni conosciuti di $x \left[ n\right]$, la stima
 \section{Periodogramma}
 
 \footnote{ 
-    Slide del prof | 13 - Stima spettrale | pag 17 - 24\\
+    Slide del prof | 13 - Stima spettrale | pag 17 - 21\\
     Appunti | 2025-12-16 | pag 1\\
     Video Lezione CADSP Lunedì 12 Dicembre 2022 | 2:00:55  -  
 }
@@ -879,7 +879,7 @@ Con tutte queste considerazioni,
 }
 
 Come avevamo accennato in \ref{sec: Stima dello spettro dei segnali random} \nameref{sec: Stima dello spettro dei segnali random} a pag \pageref{sec: Stima dello spettro dei segnali random}, 
-una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(\omega\right)$, che è la stima di $P_{xx} \left(\omega\right)$ è uguale a: 
+una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(\omega\right)$ ( che è la stima di $P_{xx} \left(\omega\right)$ )  è uguale a: 
 
 {
     \Large 
@@ -898,4 +898,375 @@ una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left
 
 \begin{tcolorbox}
     I passaggi sono scritti nella slide del prof, ma io l'ho saltata perchè la dimostrazione è facoltativa. 
+\end{tcolorbox} 
+
+dove: 
+
+\begin{itemize}
+    \item $P_{xx} \left(\theta\right)$ è lo spettro vero di $x \left[ n\right]$ 
+    \item $W \left(e^{\jmath \omega} \right)$ è la trasformata di Fourier della finestra $w \left[ n\right]$ utilizzata 
+\end{itemize}
+
+Quindi il valore atteso della stima, cioè $E \left[ \hat{P}_{PE} \left(\omega\right)\right]$, 
+è pari alla convoluzione tra lo spettro "vero", cioè $P_{xx} \left(\theta\right)$,  ed il quadrato del modulo della DTFT della finestra, cioè $\abs{W \left(e^{\jmath \omega }\right)}^{2}$, che è lo spettro di densità di energia. \newline 
+
+È una convoluzione perchè $P_{xx} \left(\theta\right)$, in $E \left[ \hat{P}_{PE} \left(\omega\right)\right]$, non è semplicemente moltiplicato per $\abs{W \left(e^{\jmath \omega }\right)}^{2}$, 
+bensì è moltiplicato per $\abs{W \left(e^{\jmath \left(\omega - \theta\right)}\right)}^{2}$. \newline 
+
+Si può dimostrare (cioè non lo dimostreremo) che, affinchè la stima sia asintoticamente non polatizzata, cioè:
+
+ {
+        \Large 
+        \begin{equation}
+            \text{valore atteso} 
+            = 
+            P_{xx} \left(\omega\right)
+            \to 
+            E \left[ \hat{P}_{xx} \left(\omega\right)\right] 
+            = 
+            P_{xx} \left(\omega\right)
+        \end{equation}
+} 
+
+dobbiamo far tendere il valore $Q$ a infinito, in modo che la finestra diventi una Delta di Dirac, cioè: 
+
+{
+    \Large 
+    \begin{equation}
+        \dfrac{1}{2 \pi Q}
+        \cdot 
+        \int_{- \pi}^{+ \pi} 
+        \abs{W \left(e^{\jmath \omega}\right)}^{2} 
+        d \omega 
+        = 
+        1
+        \quad
+        \text{ se } 
+        \begin{cases}
+            Q \to + \infty 
+            \\ 
+            W \left(e^{\jmath \omega}\right) \to \delta \left(\omega\right) 
+            \\
+            \abs{\omega} < \pi
+        \end{cases}
+    \end{equation}
+}
+
+Grazie al teorema di Parseval, ne consegue che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        \dfrac{1}{2 \pi Q}
+        \cdot 
+        \int_{- \pi}^{+ \pi} 
+        \abs{W \left(e^{\jmath \omega}\right)}^{2} 
+        d \omega 
+        &= 
+        1
+        \\
+        &\updownarrow
+        \\
+        \dfrac{1}{Q}
+        \cdot 
+        \sum_{n = 0}^{Q - 1}  
+        \left(w \left[ n\right]\right)^{2}
+        &= 
+        1
+        \end{split}
+    \end{equation}
+}
+
+e questo è il vincolo della finestra $w \left[ n\right]$. \newline 
+
+Grazie a questa dimostrazione, vale sempre questa proprietà: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{cases}
+        P_{xx} \left(\omega\right) \geq 0 \text{ sempre }
+        \\
+        \abs{W \left(e^{\jmath \omega}\right)}^{2} \geq 0 \text{ sempre }    
+        \end{cases}
+        \to 
+        \hat{P}_{PE} \left(\omega\right) \geq 0 \text{ sempre } 
+    \end{equation}
+}
+
+o, scritta in parole estese, siccome sia lo spettro vero di $x \left[ n\right]$, cioè $P_{xx} \left(\omega\right)$, e lo spettro al quadrato della finestra $w \left[ n\right]$ utilizzata, cioè $\abs{W \left(e^{\jmath \omega}\right)}^{2}$, sono sempre positivi, 
+allora anche la stima dello spettro, cioè $\hat{P}_{PE} \left(\omega\right)$, sarà sempre positiva. \newline 
+
+Dall'osservazione per cui i campioni a lag elevato dall'autocorrelazione aperiodica, risultato dalla somma di pochi prodotti, si può dedurre che la varianza della stima di $\hat{P}_{PE} \left(\omega\right)$ è molto grande. \newline 
+
+Si può dimostrare che: 
+
+{
+    \Large 
+    \begin{equation}
+        \text{ varianza di } \hat{P}_{PE } \approxeq P_{xx}^{2} \left(\omega\right)
+    \end{equation}
+}
+
+Pertanto la stima tramite Periodogramma è, in generale, non costintente. \newline 
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 52}
+Rispiegazione, anche grafica, di quello che cè scrito nella slide 21. 
 \end{tcolorbox}
+
+\newpage 
+
+\subsection{Metodo di Bartlett}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 22 - 23\\
+    Appunti | 2025-12-16 | pag 1\\
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+}
+
+Si può ottenere una stima consistente mediante una tecnica. \newline 
+
+Non si parlerà più di periodogramma, bensì di periogram averaging (cioè dall'inglese periodogramma pesato dalla media). \newline 
+
+Data una sequenza $\hat{x} \left[ n\right]$ lunga Q, la si vuole suddividere in diversi segmenti parzialmente sovrapposti, in modo da stimare lo spettro di questi segmenti e mediarli. \newline 
+
+Graficamente, avremo il seguente caso: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{periodogram averaging in pratica.png}
+\end{figure}  
+
+La r-esima sotto-sequenza di $\hat{x} \left[ n\right]$, cioè $\hat{x}_{e} \left[ n\right]$, è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{x}_{e} \left[ n\right] 
+        = 
+        \hat{x} \left[ n + r \cdot R\right]
+        \quad 
+        \text{ per }
+        n = 0, \dots, M - 1
+    \end{equation}
+}
+
+dove R indica gli indici di overlap, che generalmente, è uguale: 
+
+{
+    \Large 
+    \begin{equation}
+        R = \dfrac{M}{2}
+    \end{equation}
+}
+
+Si possono utilizzare qualasiasi valori di R, ma quello del 50 \% di overlap, cioè $R = \dfrac{M}{2}$, è un valore standard (come si vede nella figura di esempio). \newline 
+
+Il meotodo di Bartlett ci permette di calcolare lo spettro di $\hat{x} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{P}_{PE}^{\left(A\right)} \left(\omega\right) 
+        = 
+        \dfrac{1}{K} 
+        \cdot 
+        \sum_{r = 0}^{K - 1}
+        \hat{P}_{PEr} \left(\omega\right)
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item K è il numero delle sotto-sequenze (chiamate anche finestre) 
+    \item $\hat{P}_{PEr}$ è lo spettro stimato del segmento $\hat{x}_{r} \left[ n\right]$
+    \item $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$ è lo spettro stimato di $\hat{x} \left[ n\right]$ attraverso il metodo di Bartlett 
+\end{itemize}
+
+Dalla formula di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, possiamo notare che: 
+
+\begin{itemize}
+    \item se M aumenta, allora K diminuisce (cioè avremo poche finestre, ma che ognuna sarà molto lunga)
+    \item se R diminuisce, allora K aumenta (cioè le finestre sono molto correlate)
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 53}
+Se le finestre sono molto correlate, significa che le finestre sono molto corte, giusto? 
+\end{tcolorbox}
+
+Grazie al meotodo di Bartlett, possiamo scegliere riguardo alla finestra la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
+
+Più overlap esiste tra le finestre, minore sarà la risuluzione perchè le finestre sono più corte, ma avranno più varianza: è un trade-off. \newline 
+
+Di seguito degli esempi di periodigrammi pesati, attraverso il periodigram averaging con diverse finestre e overlap: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{average periodogram con diverse lunghezze di finestre e overlap.png}
+\end{figure} 
+
+\begin{tcolorbox}
+Ricordo che, essendo nel mondo DSP, lo spettro non è formato da linee continue, bensì da numeri, quindi lo spettro dei grafici è una semplice interpolazione tra punti.     
+\end{tcolorbox}
+
+\newpage 
+
+\subsection{Sommario Periodogramma} \label{subsec: Sommario Periodogramma}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 24\\
+    Appunti | 2025-12-16 | pag 2\\
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+}
+
+Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato: 
+
+\begin{itemize}
+    \item data una sequenza molto lunga (ideallmente infinita) $x \left[ n\right]$, si ottengono Q punti per formare la sequenza $\hat{x} \left[ n\right]$
+    \item si suddivide $\hat{x} \left[ n\right]$ in K segmenti lunghi M punti e sovrapposti di $M - R$ punti dove: 
+    \begin{itemize}
+        \item se si vuole avere una bassa varianza, allora dovremo scegliere un M piccolo 
+        \item se si vuole avere un'alta varianza varianza, allora dovremo scegliere un M grande 
+    \end{itemize}
+    \item si moltiplica la sotto-sequenza r-esima $\hat{x}_{r} \left[ n\right]$ per la finestra scelta $w \left[ n\right]$ e si calcola la DFT (quindi si svolge la FFT) ad N punti dove $N \geq M$ (quindi si fa zero padding ove necessario) 
+    \item si calcola la stima di $P_{xx} \left(\omega\right)$, cioè lo spettro di $x \left[ n\right]$ che si estende per $n \in \left[ - \infty, + \infty\right]$, come media, cioè:
+    {
+        \Large 
+        \begin{equation}
+            \hat{P}_{PE}^{\left(A\right)} \left(\omega\right)
+            = 
+            \dfrac{1}{K} 
+            \cdot 
+            \sum_{r = 0}^{K - 1}
+            \hat{P}_{PEr} \left(\omega\right)
+        \end{equation}
+    }
+    dove $\hat{P}_{PEr} \left(\omega\right)$ è la stima dello spettro della r-esima $\hat{x}_{r} \left[ n\right]$
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 54}
+La finestra che possiamo scegliere per svolgere la FFT può essere qualsiasi (i.e. rettangolare, Bartlet, ecc...), giusto?
+\end{tcolorbox}
+
+L'algoritmo di Weltch prende anche il nome di periodogramma mediato: è un metodo diretto sui dati senza stimare l'autocorrelazione. \newline 
+
+Come studiato in \ref{ch: Progetti Filtri FIR} \nameref{ch: Progetti Filtri FIR} da pag \pageref{ch: Progetti Filtri FIR}, la scelta della finestra $w \left[ n\right]$ va svolta opportunamente in base alle seguenti caratteristiche: 
+
+\begin{itemize}
+    \item risoluzione 
+    \item leakege in base al tipo di finestra 
+    \item granulosità ini base al valore di N
+\end{itemize}
+
+\newpage 
+
+\section{Stima spettrale di segnali non stazionari}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 26 - 28 \\
+    Appunti | 2025-12-16 | pag 2\\
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+}
+
+Nella realtà non avremo mai a che fare con segnali stazionari, bensì con segnali non stazionari. \newline 
+
+I segnali stazionari sono segnali che hanno caratteristiche che non variano nel tempo, invece i segnali non stazionari hanno caratteristiche che variano nel tempo. \newline 
+
+Un esempio di segnale non stazionario è il chirp lineare, che ha la seguente formula: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \sin \left[\left(\omega_0 \cdot n\right) \cdot n\right]
+    \end{equation}
+}
+
+Nel tempo ha il seguente andamento: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{linear chirp nel tempo.png}
+\end{figure} 
+
+ma nello spettro avremo in impulso che varierà ad un multiplo di $\omega_0$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.2]{spettro a tempo variante del linear chirp.png}
+\end{figure} 
+
+In questo tipo di segnale stazionario, non è possibile definire uno spettro, bensì è necessario definire uno spettro a tempo variante. \newline 
+
+L'idea è quella di calcolare lo spettro di un breve segmento del segnale e considerare questo lo "spettro istantaneo" del segnale al tempo corrispondente al segmento considerato. \newline 
+
+Il segmento deve essere abbastanza corto da poter considerare "stazionario" il segnale in esso. \newline 
+
+Quindi, in parole povere, è quello di campionare lo spettro nel tempo. \newline 
+
+Come studiato per i segnali stazionari con il periodogramma in \ref{subsec: Sommario Periodogramma} \nameref{subsec: Sommario Periodogramma} a pag \pageref{subsec: Sommario Periodogramma}, 
+applichiamo l'algoritmo di Weltch ma ai segnali non stazionari. \newline 
+
+\newpage 
+
+Come prima, considerando $x \left[ n\right]$ una sequenza molto lunga (idealmente lunga infinita), 
+prendiamo una porzione, che a sua volta sarà diviso in M porzioni tale che: 
+
+{
+    \Large 
+    \begin{equation}
+        x_{r} \left[ n\right]
+        = 
+        x \left[ n + r \cdot R\right]
+        \cdot 
+        w \left[ n\right]
+        \quad 
+        \text{ per }
+        n = 0, \dots, M - 1
+    \end{equation}
+}
+
+come si può vedere in figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{periodogram averaging in pratica.png}
+\end{figure}  
+
+I vari segmenti $x_{r} \left[ n\right]$ si sovrappongono di $M - R$ punti. \newline 
+
+Se $\hat{P}_{x_{r} x_{r}} \left(\omega\right)$ di $P_{xx} \left(\omega, n\right)$ allora: 
+
+\begin{itemize}
+    \item $P_{x_{0} x_{0}} \left(\omega\right)$ è la stima dello spettro istantaneo a $n = 0$
+    \item $P_{x_{1} x_{1}} \left(\omega\right)$ è la stima dello spettro istantaneo a $n = 1$ 
+    \item $\dots$
+    \item $P_{x_{r} x_{r}} \left(\omega\right)$ è la stima dello spettro istantaneo a $n = r \cdot R$
+\end{itemize}
+
+Tutto questo processo, prende il nome di "Short time spectrum analysis", cioè svolgere una DTFT direttamente sulla porzione di $x \left[ n\right]$. \newline 
+
+Se viene utilizzata la DTFT, si chiama Short Time Fourier Transform (o STFM). \newline 
+
+Da un punto di vista grafico, non useremo più il periodogramma, ma lo spettrogramma, come i seguenti esempi: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{spettrogrammi di una piano e di un parlato.png}
+\end{figure}  
+
+Nello spettrogramma, nelle ascisse c'è il tempo, mentre nelle ordinate ci sono le frequenze. \newline 
+
+Confrontando lo spettrogramma tra una nota di un piano e di un parlato, notiamo che il parlato è decisamente più variabile rispetto alla singola nota del piano ed ha più informazioni ad alta frequenza. \newline 
+
+\newpage 
+
+
+
+
+
+
+
