@@ -1233,7 +1233,7 @@ come si può vedere in figura:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.35]{periodogram averaging in pratica.png}
+    \includegraphics[scale = 0.3]{periodogram averaging in pratica.png}
 \end{figure}  
 
 I vari segmenti $x_{r} \left[ n\right]$ si sovrappongono di $M - R$ punti. \newline 
@@ -1255,7 +1255,7 @@ Da un punto di vista grafico, non useremo più il periodogramma, ma lo spettrogr
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.3]{spettrogrammi di una piano e di un parlato.png}
+    \includegraphics[scale = 0.35]{spettrogrammi di una piano e di un parlato.png}
 \end{figure}  
 
 Nello spettrogramma, nelle ascisse c'è il tempo, mentre nelle ordinate ci sono le frequenze. \newline 
@@ -1264,9 +1264,309 @@ Confrontando lo spettrogramma tra una nota di un piano e di un parlato, notiamo 
 
 \newpage 
 
+\subsection{Short-Time Fourier Transform}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 29 - 30 \\
+    Appunti | 2025-12-16 | pag 2\\
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+}
+
+Considerando un segmento di segnale $x \left[ n\right]$, lo si vuole moltiplicare per un'opportuna sequenza $w \left[ n\right]$ che prende il nome di finestra. \newline 
+
+Un esempio di finestra rettangolare $w \left[ n\right]$: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{finestra rettangolare per STFT.png}
+\end{figure}  
+
+allora si può definire la Short-Time Fourier Transform (o STFT) come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ n, \omega\right) = \sum_{m = - \infty}^{+ \infty} x \left[ n + m\right] \cdot w \left[ m\right] \cdot e^{- \jmath \omega m}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item n è una variabile discreta 
+    \item $\omega$ è una variabile continua 
+\end{itemize}
+
+La STFT può anche essere definita come: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ n, \omega\right) = \sum_{m = - \infty}^{+ \infty} x \left[ m\right] \cdot w \left[ m - n\right] \cdot e^{- \jmath \omega m}
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 55}
+Sono tutte e due delle STFT ma in una viene fatta la convoluzione da sinistra verso destra, mentre l'altra da destra a sinistra, giusto? 
+\end{tcolorbox}
+
+Le due STFT sono legate dalla seguente relazione: 
+
+{
+    \Large 
+    \begin{equation}
+        \hat{X} \left[ n, \omega\right) =  e^{- \jmath \omega n} \cdot X \left[ n, \omega\right) 
+    \end{equation}
+}
+
+Rispetto alla DTFT che avevamo studiato in \ref{sec: Trasformata di Fourier di Segnali Discreti} \nameref{sec: Trasformata di Fourier di Segnali Discreti} a pag \pageref{sec: Trasformata di Fourier di Segnali Discreti}, 
+questa volta la STFT non dipende solo dalla pulsazione $\omega$, bensì anche dall'n-esimo indice n. \newline 
+
+Oltre alla STFT diretta, è possibile definire la trasformazione inversa come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n + m\right] \cdot w \left[ m\right] 
+        = 
+        \dfrac{1}{2 \pi}
+        \cdot 
+        \int_{0}^{2 \pi}
+        X \left[n , \omega\right) 
+        \cdot 
+        e^{\jmath \omega m} 
+        d \omega
+        \quad 
+        \text{ per }
+        - \infty < m < + \infty
+    \end{equation}
+}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 56}
+Siccome la trasformazione inversa dipende da m, significa che per ogni m dovremmo definire una trasformazione inversa, giusto? \newline 
+
+Inoltre, nella formula della trasformazione inversa, l'integrale non è più tra $\left[ - \pi, + \pi\right]$ perchè non è detto che lo spettr sia simmetrico, giusto? 
+\end{tcolorbox}
 
 
+da cui: 
 
+{
+    \Large 
+    \begin{equation}
+        x \left[ n\right]
+        = 
+        \dfrac{1}{2 \pi \cdot w \left[ m = 0\right]}
+        \cdot 
+        \int_{0}^{2 \pi}
+        X \left[ n, \omega\right) d \omega
+    \end{equation}
+}
+
+Dalla formula della STFT, ponendo: 
+
+{
+    \Large 
+    \begin{equation}
+        r = n + m
+    \end{equation}
+}
+
+avremo che: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left[ n, \omega\right) 
+        &= 
+        \sum_{m = - \infty}^{+ \infty} x \left[ n + m\right] \cdot w \left[ m\right] \cdot e^{- \jmath \omega m}  
+        \\
+        &\downarrow
+        \\
+        X \left[ n, \omega\right) &= \sum_{r = - \infty}^{+ \infty} x \left[ r\right] \cdot w \left[ - \left( n - r\right)\right] \cdot e^{- \jmath \omega \left(n - r\right)}  
+        \end{split}
+    \end{equation}
+}
+
+Definendo la sequenza complessa $h_{\omega} \left[ n\right]$ come: 
+
+{
+    \Large 
+    \begin{equation}
+        h_{\omega} \left[ n\right] = w \left[ - n\right] \cdot e^{\jmath \omega n} 
+    \end{equation}
+}
+
+cioè una finestra $w \left[ n\right]$ che dipende dalla pulsazione $\omega$, possiamo riscrivere la STFT come: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+        X \left[ n, \omega\right) &= \sum_{r = - \infty}^{+ \infty} x \left[ r\right] \cdot w \left[ - \left( n - r\right)\right] \cdot e^{- \jmath \omega \left(n - r\right)}  
+        \\
+        &\updownarrow
+        \\
+        X \left[ n, \omega\right) &= h_{\omega} \left[ n\right] * x \left[ n\right]
+        \end{split}
+    \end{equation}
+}
+
+cioè la SFTT è una convoluzione per una finestra $h_{\omega} \left[ n\right]$ e la sequenza $x \left[ n\right]$. \newline 
+
+Essendo $h_{\omega} \left[ n\right]$ dipendente dalla pulsazione $\omega$, avremo che, in una STFT, ci sarà una convoluzione con la sequenza $x \left[ n\right]$ per ogni pulsazione $\omega$. \newline 
+
+In altre parole, ci sarà un banco filtri per ogni pulsazione $\omega$. \newline 
+
+\begin{tcolorbox}
+    Come al solito, non è necessario ricordarsi tutte le formule, solo le considerazioni. 
+\end{tcolorbox}
+
+La Short Time Fourier può essere interpretata come un'operazione di filtraggio del segnale $x \left[ n\right]$ con un filtro di risposta impulsiva $h_{\omega} \left[ n\right]$ dipendente dalla pulsazione considerata. \newline 
+
+\newpage 
+
+\subsubsection{Campionamento nel tempo ed in frequenza}
+
+\footnote{ 
+    Slide del prof | 13 - Stima spettrale | pag 31 - 33 \\
+    Appunti | 2025-12-16 | pag 2 - 3\\
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  -  
+}
+
+Se la finestra $w \left[ n\right]$ è una sequenza di lunghezza finita (che lo deve essere per forza sennò non la potremmo inserire in un calcolatore), allora è possibili utilizzare la DFT e quindi l'algoritmo FFT. \newline 
+
+Campionando nel tempo abbiamo che la STFT diventa: 
+
+{
+    \Large 
+    \begin{equation}
+        \begin{split}
+            X \left[ n, k\right] 
+            &= 
+            \left.
+            X \left[ n , \omega\right)
+            \right|_{\omega = \frac{2 \pi}{N} k}
+            \\
+            &= 
+            \sum_{m = 0}^{L - 1}
+            x \left[ n + m\right]
+            \cdot 
+            w \left[ m\right]
+            \cdot 
+            e^{- \jmath \frac{2 \pi }{N} k m}
+            \quad 
+            \text{ per }
+            0 \leq k \leq \left(N - 1\right)
+        \end{split}
+    \end{equation}
+}
+
+dove: 
+
+\begin{itemize}
+    \item L è la lunghezza della finestra $w \left[ n\right]$
+    \item N è la lunghezza della FFT 
+    \item le relazioni sono valide se $N \geq L$, altrimenti svolgere zero padding (opportunamente)
+\end{itemize} 
+
+Questa formula del campionamento nel tempo della STFT è molto utile perchè permette di scrivere infiniti filtri $\omega$ in filtri discretizzati (quindi limitati) che dipendono da una variabile discreta, 
+cioè k. \newline 
+
+Oltre a campionare nel tempo, con la STFT si pul campionare in frequenza come: 
+
+{
+    \Large 
+    \begin{equation}
+        x \left[ n + m\right]
+        \cdot 
+        w \left[ m\right] 
+        = 
+        \dfrac{1}{M}
+        \cdot 
+        \sum_{k = 0}^{N - 1}
+        X \left[ n, k\right]
+        \cdot 
+        e^{\jmath \frac{2 \pi}{N} k m}
+        \quad 
+        \text{ per }
+        0 \leq m \leq \left(N - 1\right)
+    \end{equation}
+}
+
+Come per il campionamento nel tempo, anche per il campionamento in frequenza abbiamo m-esimi filtri e non infiniti filtri che dipendono da $\omega$. \newline 
+
+Se la finestra $w \left[ n\right]$ è: 
+
+{
+    \Large 
+    \begin{equation}
+        w \left[ n\right] \neq 0 
+        \quad
+        \text{ per }
+        0 \leq n \leq \left(L - 1\right)
+    \end{equation}
+}
+
+cioè la finestra $w \left[ n\right]$ è una sequenza causale, allora il campionamento nel tempo di una STFT è uguale a: 
+
+{
+    \Large 
+    \begin{equation}
+        X \left[ n, k\right]
+        = 
+        h_{k} \left[ n\right] * x \left[ n\right]
+        \quad
+        \text{ per }
+        0 \leq k \leq \left(N - 1\right)
+    \end{equation}
+}
+
+in cui $h_{k} \left[ n\right]$ vale: 
+
+{
+    \Large 
+    \begin{equation}
+        h_{k} \left[ n\right]
+        = 
+        w \left[ - n\right]
+        \cdot 
+        e^{\jmath \frac{2 \pi}{N} kn}
+    \end{equation}
+}
+
+cioè il k-esimo filtro $h_{k} \left[ n\right]$ è un filtro non causale (e che dipendono dal Twiddle $e^{\jmath \frac{2 \pi}{N} kn}$). \newline 
+
+\newpage 
+
+Da un punto di vista realizzativo, fare la STFT campionata nel tempo, se abbiamo una finestra causale, singifica avere un bbaco filtri come il seguente: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{banco filtri.png}
+\end{figure} 
+
+dove: 
+
+\begin{itemize}
+    \item i k-esimi segnali in uscita dai filtri sono complessi perchè la risposta impulsiva del k-esimo filtro è complessa 
+    \item il filtro con $k = 0$ è un filtro passa-basso 
+    \item i filtri con $0 < k < \left(N - 1 \right)$ sono dei filtri passa-banda
+    \item il filtro per $k = \left(N - 1 \right)$ è un filtro passa-alto 
+\end{itemize}
+
+Siccome il k-esimo filtro $h_{k} \left[ n\right]$ dipende dalla tipo di finestra scelta $w \left[ n\right]$ (esempio: rettangolare, Bartlett, ecc...), 
+quest'ultimo influirà sulla risposta impulsiva del k-esimo filtro. \newline 
+
+Oltre alla STFT diretta, è possibile svolgere la STFT inversa con il seguente schema: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{STFT inversa filtri.png}
+\end{figure} 
+
+\newpage 
 
 
 
