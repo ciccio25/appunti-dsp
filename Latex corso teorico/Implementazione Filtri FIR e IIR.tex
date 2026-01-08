@@ -130,7 +130,8 @@ Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il se
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 11 - 16, pag 8\\
-    Appunti | 2025-11-25 | pag 2 - 3  
+    Appunti | 2025-11-25 | pag 2 - 3 \\
+    Latex | 2026-01-07 Pomeriggio | pag 285, 287 
 } 
 
 Come scritto precedentemente, siccome si considerano gli SFG (Signal Flow Graph) come strutture instantaneee, 
@@ -192,10 +193,13 @@ Possiamo svolgere due osservazioni in merito alla seguente struttura:
 Grazie alla proprietà di trasposizione degli SFG (cioè che si può scambiare l'ingresso con l'uscita e viceversa e rovesciare tutte le frecce degli archi senza alterare la $H \left(z\right)$), 
 dalla forma diretta I, possiamo introdurre la forma diretta I trasposta. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 1}
-La proprietà di trasposizione degli SFG è valida solo perchè abbiamo a che fare con funzioni di rete $H \left(z\right)$ lineari? \newline 
+\begin{tcolorbox}
+La proprietà di trasposizione degli SFG è valida solo perchè abbiamo a che fare con funzioni di rete $H \left(z\right)$ lineari. \newline 
 
-Nel caso di filtro non lineare, non varrebbe questa proprietà, giusto? 
+Questa proprietà non è detto che sia valida nei circuiti non lineari. \newline 
+
+In generale, nei circuiti non lineari, la proprietà di trasposizione non è valida. 
+    
 \end{tcolorbox}
 
 \newpage 
@@ -274,13 +278,10 @@ Scrivere in questa forma $H \left(z\right)$ permette di avere i seguenti vantagg
     \item robustezza numerica 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 2}
-Robustezza numerica perchè, essendoci tanti termini in $H \left(z\right)$, il singolo elemento che compone la funzione di rete influisce poco su tutta la funziona di rete? \newline 
+La robustezza numerica nella forma in cascata è possibile perchè il singolo elemento che compone la funzione di rete influisce solo sulla sezione del secondo ordine per cui è stata progetta, 
+quindi l'impatto del singolo polo o  zero è locale e non globale. \newline 
 
-Quindi, di conseguenza, avremo una robustezza numerica? 
-\end{tcolorbox} 
-
-Ma, in generale, se si realizza una forma in cascata, si cerca di utilizzerare non termini del primo ordine, cioè $z^{-1}$, 
+Proprio per questo motivo, in generale, se si realizza una forma in cascata, si cerca di utilizzerare non termini del primo ordine, cioè $z^{-1}$, 
 bensì $z^{-2}$, come si nota nella seguente formulazione di $H \left(z\right)$: 
 
 {
@@ -306,11 +307,9 @@ in cui:
     \end{equation}
 } 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 3}
-"trunc" perchè si prende la parte intera della frazione? \newline 
+dove con la dicitura "trunc" si intende che si prende la divisione $\dfrac{N + 1}{2}$ e si prende l'intero arrotondato per difetto. \newline 
 
-Inoltre, si prende la metà grazie alle proprietà di simmetria di $H \left(z\right)$? 
-\end{tcolorbox} 
+Facciamo questa operazione per la scelta del valore $N_2$ perchè vogliamo sapere quante sezioni del secondo ordine ci servono. \newline 
 
 Un esempio di forma in cascata del secondo ordine con forma diretta II canonica (con note): 
 
@@ -370,7 +369,8 @@ Un esempio di struttura in forma parallela:
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 1 | pag 19 - 22\\
-    Appunti | 2025-11-25 | pag 3  
+    Appunti | 2025-11-25 | pag 3 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 290 
 } 
 
 I filtri FIR, cioè i filtri a risposta impulsiva finita, sono casi particolari delle strutture IIR, 
@@ -441,9 +441,7 @@ Osservando le seguenti strutture dei filtri FIR, possiamo svolgere le seguenti c
     \item gli SFG dei filtri FIR non cotengono cicli o frecce in direzione opposte, e questa è la condizione sufficiente per un SFG di un FIR
 \end{itemize} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 4} 
-    "gli SFG dei filtri FIR non cotengono cicli o frecce in direzione opposte" cioè nei FIR non ci sono le retroazioni, giusto? 
-\end{tcolorbox} 
+In altre parole, nei FIR non ci sono le retroazioni come negli IIR. \newline 
 
 Non ci occupiamo quasi mai della fase, ma la condizione di simmetria o anti-simmetria dei coefficienti è sufficiente per avere fase lineare generalizzare, cioè ritardo di gruppo costante. \newline 
 
@@ -496,7 +494,8 @@ con un esempio di strutta:
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 2 - 6\\
-    Video Lezione CADSP Martedì 29 Novembre 2022 | 39:00 - 1:10:15   
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 39:00 - 1:10:15 \\
+    Latex | 2026-01-07 Pomeriggio | pag 291, 293 - 297      
 } 
 
 \begin{tcolorbox}
@@ -506,9 +505,17 @@ Il video della Lezione CADSP Martedì 29 Novembre 2022 è disponibile nel Learn.
 Le strutture viste in precedenza vengono usualmente implementate mediante circuiti digitali, 
 progettati appositamente o programmabili, e presentano, pertanto, problemi di quantizzazione, che comporta ad una precisione finita. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 5} 
-"circuiti digitali programmabili" ad esempio attraverso gli FPGA? 
-\end{tcolorbox} 
+\begin{tcolorbox}
+Un esempio di circuiti digitali programmabili sono gli FPGA (Field Programmable Gate Array). \newline 
+
+Una piccola introduzione su cosa sono gli FPGA e perchè sono utili: 
+
+\begin{itemize}
+    \item What's an FPGA? by Charles Clayton\\\url{https://www.youtube.com/watch?v=iHg0mmIg0UU}
+    \item Introduzione alle FPGA: Cosa sono e come funzionano? Guida alle FPGA in Italiano [2021] by Projecto\\\url{https://www.youtube.com/watch?v=ZPzoR3cMciU}
+\end{itemize}
+
+\end{tcolorbox}
 
 Avevamo già affrontato i problemi di quantizzazione precedentemente in \ref{subsec: Conversione D/A reale} \nameref{subsec: Conversione D/A reale} a pag \pageref{subsec: Conversione D/A reale}. \newline 
 
@@ -543,11 +550,8 @@ Il caso più complicato è quello della rappresentazione in virgola movile perch
 
 Per quanto riguarda la quantizzazione, mantiene una grande dinamica ed un piccolo rumore di quantizzazione. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 6} 
-Cosa si intende per "grande dinamica"? Cioè con pochi elementi (cioè segno, mantissa ed esponente) si possono rappresentare tanti valori? 
-\end{tcolorbox}  
-
-\newpage 
+Per grande dinamica si intende che un segnale può variare di intensità, ed il suo intervallo di intensità è molto elevato: 
+prendendo per esempio il suono di un microfono da una batteria, possiamo avere un suono molto debole (quasi flebile) ad un suono molto alto. \newline   
 
 L'IEEE (l'ente standardizzatore di riferimento), grazie allo standard IEEE 754, permette, ad esempio, i seguenti formati in virgola mobile: 
 
@@ -615,20 +619,12 @@ Per un numero rappresentato con B+1 bit, la rappresentazione complemento a 2 ris
 dove: 
 
 \begin{itemize}
-    \item $\hat{x} \left[ n\right]$ è la sequenza contenente i valori quantizzati 
+    \item $\hat{x} \left[ n\right]$ è la sequenza contenente i valori quantizzati (e quindi è anche la sequenza quantizzata da $x \left[ n\right]$) 
     \item $Q_{B} \left[ x\right]$ è l'operatore (non lineare) di quantizzazione, che ha quantizzato la sequenza $x \left[ n\right]$ 
     \item $X_{m}$ è il valore massimo della sequenza quantizzata $x \left[ n\right]$ 
     \item $-b_{0}$ è il segno della sequenza, quindi se positiva o negativa 
-    \item $\hat{x}_{B}$ è il b-esimo bit della sequenza $\hat{x} \left[ n\right] $ 
+    \item $\hat{x}_{B}$ è la sequenza di bit per rappresentare $\hat{x} \left[ n\right] $ 
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 7} 
-"$X_{m}$ è il valore massimo della sequenza campionata $x \left[ n\right]$", giusto? \newline 
-
-$x \left[ n\right]$ possiamo considerarla la sequenza campionata? \newline 
-
-"$\hat{x}_{B}$ è il b-esimo bit della sequenza $\hat{x} \left[ n\right] $", giusto? 
-\end{tcolorbox}  
 
 Se consideriamo la sequenza $\hat{x} \left[ n\right]$ compresa tra due massimi, il cui valore assoluto $\abs{X_{M}}$ è uguale: 
 
@@ -641,10 +637,6 @@ Se consideriamo la sequenza $\hat{x} \left[ n\right]$ compresa tra due massimi, 
 
 in cui il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro, la consideriamo come: 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 8} 
-"il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro" è giusto? 
-\end{tcolorbox}  
-
 {
     \Large 
     \begin{equation}
@@ -654,7 +646,7 @@ in cui il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro, 
 
 perchè $2^{-B}$ sono i valori massimi che si possono rappresentare dopo la quantizzazione. \newline 
 
-Allora avremo che l'errore è uguale a: 
+Dal passo $\Delta$, possiamo calcolarci l'errore all'interno del passo, che è uguale a: 
 
 {
     \Large 
@@ -689,33 +681,32 @@ invece il troncamento vale:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 22} 
-Quindi spetta a noi se decidere se svolgere un arrotondamento o un troncamento ?
-\end{tcolorbox} 
+In base alla scelta implementativa della quantizzazione, spetterà a noi decidere se si svolge un arrotondamento o un troncamento al segnale campionata. \newline 
 
 Dal punto di vista grafico, la funzione arrotondamento avrà il seguente andamento: 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.2]{arrotondamento a complemento a 2.png}
+    \includegraphics[scale = 0.15]{arrotondamento a complemento a 2.png}
 \end{figure} 
 
 invece il troncamento avrà il seguente andamento: 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.2]{troncamento a complemento a 2.png}
+    \includegraphics[scale = 0.15]{troncamento a complemento a 2.png}
 \end{figure} 
 
-Quindi, come visualizzato e scritto nelle formule, la quantizzazione è un'operazione non lineare. \newline 
+Quindi, come visualizzato e scritto nelle formule, la quantizzazione è un'operazione non lineare (cioè banalmente non è una retta graficamente parlando). \newline 
+
+\newpage 
 
 Durante il calcolo della quantizzazione, si può ricorrere in overflow, cioè la generazione di numeri più grandi di quelli rappresentabili con il numero di bit a disposizione. \newline  
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 9} 
-Nella slide c'è scritto "Durante il calcolo". Per calcolo si intende calcolo della quantizzazione? 
-\end{tcolorbox} 
-
 \begin{tcolorbox}
+
+    Con la dicitura "durante il calcolo" si intende i calcoli (tra cui somme, prodotti, sottrazioni, ecc..) vengono fatte tutte nel circuito digitale e con le rispettive rappresentazioni scelte. \newline  
+
     Dal punto di vista elettronico ed implementativo, andare in overflow è una tecnica molto utile perchè le risorse sono limitate, ma se si tratta di sicurezza è un problema enorme (banale, ma è la base delle falle di sicurezza moderne). \newline 
 
     Un po' di video in merito: 
@@ -731,36 +722,37 @@ Sono possibili 2 strategie:
 
 \begin{itemize}
     \item Wrap around (chiamato anche natuale), che ha il seguente andamento: 
+    
     \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.2]{wrap around grafico.png}
     \end{figure} 
+    
     perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, ritorna al valore minimo (in figura da 011 a 100)
+    
     \item Saturazione, che ha il seguente andamento: 
+    
     \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.2]{saturazione grafico.png}
     \end{figure}  
+    
     perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, rimane a quel valore (in figura da 011 rimane 011)
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 10} 
-La tenica wrap around è utilizzata negli ADC Sigma Delta, giusto? \newline 
+\newpage 
 
-Nella slide c'è scritto: "nel caso wrap around, con la rappresentazione in complemento a 2, gli overlflow verificatisi nei calcoli intermedi non danno luogo ad errori se il risultato finale ricade nel range rappresentabile": che significa? 
-\end{tcolorbox} 
+La tecnica "wrap around" è utilizzata negli ADC moderni, come l'ADC Sigma Delta. \newline
 
-L'effetto della quantizzazione deve essere valutato guardando all'interno del sistema digitale. \newline 
+Sotto opportune ipotesi, e senza dimostrazione, la tenica "wrap around" con la rappresentazione in complemento a 2, 
+gli overflow verificatati nei calcoli intermedi non danno luogo ad errori se il risultato finale ricade nel range rappresentabile. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 11} 
-Dalla slide: "L'effetto della quantizzazione deve essere valutato guardando all'interno del sistema digitale". \newline 
+In altre parole, nel wrap around, sotto opportune ipotesi, ricominciando da capo la quantizzazione, non ci sono problemi di quantizzazione. \newline 
 
-Perchè, essendo la quantizzazione un'operazione non lineare che crea un errore di quantizzazione, e che quindi differenzia il valore reale dal valore rappresentato, 
-il cicuito digitale è quello che creerà più errori (aka più danni se progettato male)? 
+L'effetto della quantizzazione deve essere valutato guardando all'interno del sistema digitale, 
+perchè è proprio il circuito digitale che svolge le eleborazioni dei segnali (e quindi sarà quello che "creerà più danni"). \newline 
 
-\end{tcolorbox} 
-
-Ad esempio, considerando un sistema del $1^{\circ}$, avremo il seguente schema: 
+Ad esempio, considerando un sistema del $1^{\circ}$ ordine, avremo il seguente schema: 
 
 \begin{figure}[h]
 \centering
@@ -769,14 +761,9 @@ Ad esempio, considerando un sistema del $1^{\circ}$, avremo il seguente schema:
 
 Come si nota dallo schema, questo è il caso ideale senza quantizzazione, quindi ha precisione infinita perchè non c'è errore di quantizzazione, e non è presente aliasing. \newline 
 
-Essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR che prende il nome anche di integratore. \newline 
+Si considera, per adesso, una precisazione infinita perchè, nel circuito, non è presente un quantizzatore, quindi non esiste l'errore di quantizzazione. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 12} 
-"precisione infinita" perchè, non essendoci la quantizzazione, l'errore di quantizzazione non esiste quindi precisione infinita e no aliasing? 
-
-\end{tcolorbox} 
-
-\newpage 
+Inoltre, essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR che prende il nome anche di integratore. \newline 
 
 Andando invece per un modello più completo: 
 
@@ -802,17 +789,13 @@ Inoltre abbiamo che il coefficiente a di $H \left(z\right)$ non sarà uguale ad 
     \end{equation}
 }
 
-Con questa implementazione non avremo aliasing, la precisione sarà finita perchè quantizzatore limita i valori che può quantizzatore. \newline 
+Ipotizzando che il campionatore e il ricostritutore non creano aliasing, 
+la precisione sarà finita perchè il quantizzatore limita i valori che può quantizzatore. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 14} 
-Perchè non abbiamo aliasing? E la precisione finita è dovuta al quantizzatore che limita i valori possibili? 
-\end{tcolorbox} 
+Questo rappresentato è un circuito non lineare dinamico perchè è presente un fattore di memoria;  
+inoltre, questo tipo di modellazione permette di visualizzare meglio cosa accade in un circito digitale reale. \newline 
 
-Questo rappresentato è un circuito non lineare dinamico, ma è un modello completo di quello che accade in un circito digitale reale. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 15} 
-Dinamico perchè ogni singolo quantizzatore ha un contributo diverso? 
-\end{tcolorbox} 
+\newpage 
 
 Invece, se consideriamo un modello semplificato del precedente, avremo il seguente schema: 
 
@@ -827,17 +810,16 @@ in cui, al posto dei quantizzatori, è presente l'errore di quantizzazione (segn
     Si cercherà di utilizzare la statistica del rumore, piuttosto che impiegare dei circuiti non lineari. 
 \end{tcolorbox} 
 
-In questo tipo di circuito avremo che non è presente l'aliasing, la precisione è finita e non è presente un overlflow. \newline 
+In questo tipo di circuito avremo che non è presente l'aliasing, la precisione è finita e non è presente l'overlflow. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 16} 
-"No overflow" si considera in tutti e 3 i circuiti elencati?  
-\end{tcolorbox} 
+Questo è un circuito lineare con rumore: questo tipo di modello, dove è presente l'aggiunta di rumore, è sufficiente per molte applicazioni. \newline 
 
-Questo è un circuito non lineare con rumore: questo tipo di modello, dove è presente l'aggiunta di rumore, è sufficiente per molte applicazioni. \newline 
+Il fatto che questa modellazione è lineare, ci permette di modellizzare un processo non lineare, che è la quantizzazione, come un circuito lineare perchè presente solo somme e prodotti. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 17} 
-In questi casi si considera solo errore di quantizzazione, non altri tipi di rumore? 
-\end{tcolorbox} 
+In questi casi, si è solo considerato solo errore di quantizzazione, non altri tipi di rumore (come quello quello termico che abbiamo incontrato nel corso di telecomunicazioni). \newline 
+
+Negli ultimi 2 circuiti visualizzati abbiamo ipotizzato che non ci fosse l'overflow: 
+in caso di overflow, bisogna svolgere ulteriori considerazioni (che in questo corso non svolgiamo). \newline 
 
 \newpage 
 
@@ -845,7 +827,8 @@ In questi casi si considera solo errore di quantizzazione, non altri tipi di rum
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 7 - 8\\
-    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:10:15 - 1:13:25  
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:10:15 - 1:13:25 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 298     
 } 
 
 Considerando un circuito IIR generico, avremo che la funzione di rete $H \left(z\right)$ è uguale a: 
@@ -864,13 +847,9 @@ Considerando un circuito IIR generico, avremo che la funzione di rete $H \left(z
     \end{equation}
 }
 
-in cui la precisione del filtro è infinita. \newline 
+in cui la precisione del filtro è infinita, perchè la funzione di rete $H \left(z\right)$ progettata "carta e penna" è ideale. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 18} 
-"Precisione infinita" perchè il filtro si estende nel tempo fino ad infinito? $+ \infty$
-\end{tcolorbox} 
-
-Invece, considerando i coefficienti quantizzati, avremo che la nuova funzione di rete non sarà $H \left(z\right)$, bensì: 
+Invece, considerando i coefficienti quantizzati (che è quello che accade in un circuiti digitale reale), avremo che la nuova funzione di rete non sarà $H \left(z\right)$, bensì: 
 
 {
     \Large 
@@ -886,9 +865,7 @@ Invece, considerando i coefficienti quantizzati, avremo che la nuova funzione di
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 19} 
-Perchè abbiamo dei coefficienti quantizzati in un filtro? 
-\end{tcolorbox} 
+dove i coefficienti k-esimi $\hat{b_k}$ e $\hat{a_k}$ sono quantizzati, dovuti al quantizzatore (o ai quantizzatori). \newline 
 
 Kaiser nel 1966 ha dimostrato che, a causa della quantizzazione, i poli e gli zeri del sistema $H \left(z\right)$ si spostano. \newline 
 
@@ -900,7 +877,8 @@ Proprio perchè i poli e gli zeri di $\hat{H} \left(z\right)$ sono quelli di $H 
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 9 - 10\\
-    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:13:25 - 1:18:25  
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:13:25 - 1:18:25  \\
+    
 } 
 
 Per quanto riguarda i filtri IIR, gli zeri ed i poli quantizzati hanno un contributo differente rispetto alle strutture scelte come avevamo studiato precedentemente in \ref{sec: Strutture per filtri IIR} \nameref{sec: Strutture per filtri IIR} a pag \pageref{sec: Strutture per filtri IIR}. \newline 
@@ -948,7 +926,8 @@ Grazie a questa caratteristica elencata, in genere la struttura parallela è, in
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 11 - 13, 8\\
-    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:18:25 - 1:24:40    
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:18:25 - 1:24:40 \\
+    Latex | 2026-01-07 Pomeriggio | pag 301 - 302         
 } 
 
 Non avendo poli i filtri FIR, la quantizzazione dei coefficienti provoca lo spostamento degli zeri da $H \left(z\right)$ a $\hat{H} \left(z\right)$: 
@@ -996,9 +975,7 @@ nella forma diretta come la seguente:
 
 In questo tipo di strutture, ci saranno dei problemi su $\hat{H} \left(z\right)$ se gli zeri sono strettamente raggruppati. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 20} 
-Per "filtri raggruppati" si intende che si trovano vicino nel piano z come si vede a pag 13 della slide? 
-\end{tcolorbox} 
+Per zeri raggruppati, si intende che nel piano z si trovano vicini. \newline 
 
 Per quanto riguarda i filtri a fase lineare, è facile garantire la linearità della fase grazie alla simmetria del filtro. \newline 
 
@@ -1029,11 +1006,9 @@ Come negli IIR, anche per i FIR sceglieremo le strutture a casacate come il segu
 grazie alla struttura in cascata, è assai robusta alla quantizzazione perchè ogni sezione è indipendente dalle oltre;  
 ma il problema è (come al solito) garantire la fase lineare al filtro. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 21} 
-Nella slide c'è scritto "zeri in coppie reciproce e zeri in coppie coniugate quindi blocchi del $4^{\circ}$ ordine". \newline 
+Avendoci a che fare con poli e zeri complessi e coniugati, non avremo a che fare con strutture del secondo ordine come visto negli IIR, bensì con una funzione di rete del quarto ordine. \newline 
 
-Quale è il nesso? Bisogna progettare la rete $H \left(z\right)$ in modo che abbia zeri in coppie coniugate reciproche o coniugate solo per garantire la linearità di fase dopo la quantizzazione, quindi il filtro diventa più complicato perchè avremo dei blocchi del quarto ordine, giusto? 
-\end{tcolorbox} 
+In questa maniera, si permette di mantenere la lineartità di fase. \newline 
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 23} 
 Rispiegazione di pag 13 tutta 
@@ -1047,7 +1022,8 @@ Il FIR è molto più robusto dell'IIR, per quanto riguarda la quantizzazione. \n
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 14 - 15\\
-    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:24:45 - 1:35:50     
+    Video Lezione CADSP Martedì 29 Novembre 2022 | 1:24:45 - 1:35:50 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 304        
 } 
 
 Ricordando che i circuiti che progettiamo applicano una equazione alle differenze del tipo: 
@@ -1156,10 +1132,7 @@ Oltre al modello semplifcato, dobbiamo svolgere le seguenti ipotesi (che sono fo
     \item i k-esimi contributi di errori dovuti alla quantizzazione, chiamati anche errori di quantizzazioni, le ipotizziamo come bianchi, quindi stazionati, con distribuzione uniforme nell'intervallo di quantizzazione, e incorrelati fra loro e con gli ingressi 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 24}
-Per incorrelati, si intende che gli errori di quantizzazione sono indipendenti? 
-\end{tcolorbox}
-
+Per incorrelati, si intende che gli errori sono indipendenti. \newline 
 
 Soffermandoci sul k-esimo errore, e come scritto precedentemente in \ref{sec: Implementazioni digitali} \nameref{sec: Implementazioni digitali} a pag \pageref{sec: Implementazioni digitali}, 
 in base alla funzione di quantizzazione scelta $Q_b \left[ x\right]$, possiamo svolgere o un arrotondamento o un troncamento. \newline 
@@ -1288,7 +1261,8 @@ più è bassa la varanza e più sarà la potenza emessa dal circuito progettato.
 
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 16 - 22\\
-    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:01:30 - 1:22:00      
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:01:30 - 1:22:00 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 307, 309       
 } 
 
 \textbf{Filtro IIR in forma diretta I }\newline 
@@ -1354,10 +1328,6 @@ Considerando, per adesso, solo il circuito semplificato:
     \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta I semplificato.png}
 \end{figure} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 25}
-Nel video il prof dice che: "siccome è presente solo un errore $e_{T} \left[ n\right]$, allora $x \left[ n\right]$ non viene processato": in che senso? 
-\end{tcolorbox}
-
 è possibile scrivere che l'uscita del filtro quantizzata $\hat{y} \left[ n\right]$ vale: 
 
 {
@@ -1368,12 +1338,6 @@ Nel video il prof dice che: "siccome è presente solo un errore $e_{T} \left[ n\
         y \left[ n\right] + e_y \left[ n\right]
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 26}
-Quindi questa nuova formula di $\hat{y} \left[ n\right]$ è ulteriormente peggiorativa perchè ci sono i contributi di $e_y \left[ n\right]$? \newline 
-
-Quindi il grafo appena messo, non corrisponde alla formula di $\hat{y} \left[ n\right]$, giusto? 
-\end{tcolorbox}
 
 dove: 
 
@@ -1390,6 +1354,8 @@ dove:
 }
 
 cioè, $e_y \left[ n\right]$ è il contributo di errore di quantizzazione dei poli e l'uscita del filtro $y \left[ n\right]$ è l'uscita senza errore di quantizzazione. \newline 
+
+Partendo da $y \left[ n\right]$ ideale, $\hat{y} \left[ n\right]$ in uscita dal filtro reale è peggiorativa. \newline 
 
 Quindi, dalla formula di $e_{y} \left[ n\right]$, il rumore in uscita dal filtro è la somma dei singoli rumori di quantizzazione filtrata dalla parte a soli poli. \newline 
 
@@ -1564,9 +1530,12 @@ dove $H \left(e^{\jmath \omega}\right)$ è la risposta in frequenza del filtro. 
 È possibile ridurre notevolmente il rumore di quantizzazione utilizzando un "accumulatore a doppia precisione", cioè $2B + 1$ bit, 
 in modo da quantizzare solo alla fine del ciclo di accumulazione. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 27}
-Cioè, come avviene il processo di accumulatore a doppia precisione? 
-\end{tcolorbox} 
+Per processo di accumulatore a doppia precisione si intende che, per avere un rapporto segnale-rumore più elevato tra ingresso e uscita del filtro, 
+si utilizza una memoria interna, per fare tutti i calcoli, a doppia precisione (quindi grande $2 B + 1$), ma, prima dell'uscita, si decima la sequenza. \newline 
+
+\begin{tcolorbox}
+    Il fatto di inserire una memoria a doppia precisione dipende sempre del dispositivo e dal progetto che abbiamo a che fare. 
+\end{tcolorbox}
 
 \newpage 
 
