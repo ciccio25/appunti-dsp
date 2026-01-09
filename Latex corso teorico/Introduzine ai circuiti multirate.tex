@@ -14,7 +14,7 @@
     Appunti | 2025-11-26 | pag 1 
 }
 
-Per circuiti multi-rate, si intende che sono dei circuiti in cui la sequenza di ingresso $x \left[ n\right]$ viene campionata in più frequenze di campionamento. \newline 
+Per circuiti multi-rate, si intendono dei circuiti in cui la sequenza di ingresso $x \left[ n\right]$ viene campionata in più frequenze di campionamento. \newline 
 
 Nell'ambito DSP, in inglese, "rate" significa frequenza di campionamento, "multi-rate" significa multi-frequenze di campionamento, quindi più frequenze di campionamento allo stesso tempo. \newline 
 
@@ -384,7 +384,7 @@ In base ai valori di L e M si possono svolgere:
     \end{equation}
 }
 
-Si interpola e poi si decima sempre perchè, se facessimo il processo inverso, potremmo perdere del contenuto informazione del segnale iniziale $x \left[ n\right]$. \newline 
+Si interpola e poi si decima sempre perchè, se facessimo il processo inverso, potremmo perdere del contenuto informativo del segnale iniziale $x \left[ n\right]$. \newline 
 
 Un esempio numerico: si può fare una decimazione non intera, passando da un audio campionato a 8 KHz a 6KHz. \newline 
 
@@ -596,7 +596,7 @@ Poichè, in generale, il segnale non è a banda strettamente limitata, la strutt
     \includegraphics[scale = 0.25]{decimatore tipico per segnali passa banda.png}
 \end{figure} 
 
-Il problema che si intercorre con questo tipo di sistema è la non idealità del filtro passa-banda (cioè che non un filtro reale non è ripido nello spettro, sarà più smussato quindi ci saranno dei componenti non indesiderati che creerà aliasing) 
+Il problema che si intercorre con questo tipo di sistema è la non idealità del filtro passa-banda (cioè che non un filtro reale non è ripido nello spettro, sarà più smussato quindi ci saranno dei componenti non indesiderati che creeranno aliasing) 
 e le limitazioni del segnale nello spettro, cioè che deve essere $\abs{X \left(e^{\jmath \omega}\right)} \neq 0$ solo per $k \cdot \dfrac{\pi}{M} < \abs{\omega} < \left(k + 1\right) \cdot \dfrac{\pi}{M} $. \newline 
 
 \newpage 
@@ -857,7 +857,7 @@ dove, partendo dall'alto verso il basso, avremo:
     \item il resempler (il racampionatore), la configurazione più utilizzata rispetto a tutte le altre 
 \end{itemize}
 
-Il filtro $H \left(z\right)$ opera sempre alla frequenza (in inglese rate) più alto, e quindi, significa, che deve lavorare più velocemente. \newline 
+Il filtro $H \left(z\right)$ opera sempre alla frequenza (in inglese rate) più alta, e quindi, significa, che deve lavorare più velocemente. \newline 
 
 Per molte applicazioni, questo è un problema. \newline 
 
@@ -881,7 +881,7 @@ Affinchè il filtro $H \left(z\right)$ possa operare ad una frequenza minore, so
 
 dove si considera L un numero intero. \newline 
 
-Allora avremo in uscita $y \left[ m\right]$, ipotizzando $H \left(z\right)$ un filtro IIR, la seguente sequenza: 
+Ipotizzando $H \left(z\right)$ un filtro IIR, allora avremo in uscita $y \left[ m\right]$, la seguente sequenza: 
 
 {
     \Large 
@@ -905,7 +905,7 @@ Allora avremo in uscita $y \left[ m\right]$, ipotizzando $H \left(z\right)$ un f
     \end{equation}
 }
 
-Gli indici di $x \left[ n\right]$, $w \left[ k\right]$ e $y \left[ m\right]$ sono indici differenti perchè sono a rate (velocità in italiano) differente. \newline 
+Gli indici di $x \left[ n\right]$, $w \left[ k\right]$ e $y \left[ m\right]$ sono indici differenti perchè sono a rate (velocità in italiano) differenti. \newline 
 
 Tralasciando la dimostrazione (che potete vedere nelle slide ma è facoltativa) e ponendo: 
 
@@ -1030,7 +1030,7 @@ Un altro tipo di interpretazione del filtro polifase è il seguente:
     \includegraphics[scale = 0.4]{filtro polifase ciclostazionario.png}
 \end{figure} 
 
-cioè che, ad ogni indice n-esimo di $x \left[ n\right]$, il filtro utilizza ciclicamente lo stesso filtro, che cambia i valori ciclicamente: questa è la base dei filtri a tempo variante. \newline 
+cioè che, ad ogni n-esimo indice di $x \left[ n\right]$, il filtro utilizza ciclicamente lo stesso filtro, che cambia i valori ciclicamente: questa è la base dei filtri a tempo variante. \newline 
 
 Un esempio di filtro a tempo-variante: 
 
@@ -1078,7 +1078,7 @@ Anche come gli interpolatori polifase, anche nei decimatori si possono utilizzar
 }
 
 Come già abbiamo studiato in \ref{ch: Campionamento} \nameref{ch: Campionamento} da pag \pageref{ch: Campionamento}, e come abbiamo studiato nei corsi di Teoria di segnali e Telecomunicazioni con il prof. Franco Chiaraluce, 
-e approfondirete nel dettaglio con la prof.ssa Spinsante nel corso di Misure elettroniche il prossimo semestre, per quanto riguarda la conversione da analogico a digitale consideriamo questo schema a blocchi: 
+e approfondirete nel dettaglio con la prof.ssa Spinsante nel corso di Misure elettroniche il prossimo semestre, per quanto riguarda la conversione da analogico a digitale, consideriamo questo schema a blocchi: 
 
 \begin{figure}[h]
     \centering
@@ -1120,7 +1120,7 @@ Se consideriamo il convertitore analogico-digitale a $B + 1$ bit e che l'interva
 dove: 
 
 \begin{itemize}
-    \item 1 LSB si intente il Least Significant Bit, cioè il bit meno significante 
+    \item 1 LSB si intende il Least Significant Bit, cioè il bit meno significante 
     \item $\Delta$ è la differenza che ci sono tra due valori nel convertitore 
     \item $\abs{e}$ è l'errore di quantizzazione all'interno del singolo intervallo $\Delta$
 \end{itemize}
@@ -1420,7 +1420,7 @@ Come si può notare dalla tabella, all'aumentare del fattore di oversampling S, 
 
 Generalizzando il Delta-Sigma, possiamo introdurre i convertitori noise shaping, che sono realizzati a più stadi. \newline 
 
-Un esepio di un convertitore a più stadi: 
+Un esempio di un convertitore a più stadi: 
 
 \begin{figure}[h]
     \centering
