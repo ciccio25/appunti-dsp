@@ -93,7 +93,7 @@ dove:
     \item viene portato a 0 i campioni che variano tanto 
 \end{itemize}
 
-Da $x_{l} \left[ n\right]$, e facendo la trasfromata-z, possiamo ricavarci $X_{d} \left(z\right)$, cioè la trasformata-z di $x_{d} \left[ n\right]$, come (senza dimostrazione): 
+Da $x_{l} \left[ n\right]$, e facendo la trasformata-z, possiamo ricavarci $X_{d} \left(z\right)$, cioè la trasformata-z di $x_{d} \left[ n\right]$, come (senza dimostrazione): 
 
 {
     \Large 
@@ -172,7 +172,7 @@ Il problema del decimatore, come visto negli spettri precedenti, è che il segna
 
 \newpage 
 
-Il filtro passa-basso, prima del decmatore, è preventivo ma non necessario, utile per prevenire l'aliasing, come vediamo da questi due casi di esempio: 
+Il filtro passa-basso, prima del decimatore, è preventivo ma non necessario, utile per prevenire l'aliasing, come vediamo da questi due casi di esempio: 
 
 \begin{figure}[h]
     \centering
@@ -292,7 +292,7 @@ Grazie al sovracampionamento, si può svolgere l'interpolazione con il seguente 
     \includegraphics[scale = 0.4]{interplazione shema classico.png}
 \end{figure} 
 
-Rispetto al caso precedente, qui il filtro passa-basso è necessario perchè elimina le replice di $X_{l} \left(e^{\jmath \omega}\right)$. \newline 
+Rispetto al caso precedente, qui il filtro passa-basso è necessario perchè elimina le repliche di $X_{l} \left(e^{\jmath \omega}\right)$. \newline 
 
 Il filtro passa-basso anti-imaging utilizzato nell'interpolazione ha il seguente spettro: 
 
@@ -322,7 +322,7 @@ Nell'interpolazione, il filtro anti-imaging può essere realizzato con tecniche 
 
 L'interpolazione di tipo zero-oder hold non fa altro che ripetere lo stesso valore della sequenza di ingresso $x \left[ n\right]$ per L volte. \newline 
 
-Questo può essere ottenuto facendo la connvoluzione tra $x_{l}$, quindi la sequenza $x \left[ n\right]$ sovracampionata, e la risposta impulsiva $h_{\text{zoh}} \left[ n\right]$: 
+Questo può essere ottenuto facendo la convoluzione tra $x_{l}$, quindi la sequenza $x \left[ n\right]$ sovracampionata, e la risposta impulsiva $h_{\text{zoh}} \left[ n\right]$: 
 
 {
     \Large 
@@ -509,7 +509,7 @@ Nel nostro caso di esempio, decimando per:
 
 \newpage 
 
-si ottiene il sequente spettro: 
+si ottiene il seguente spettro: 
 
 \begin{figure}[h]
     \centering
@@ -684,7 +684,7 @@ utilizzando l'interpolatore classico, avremo un filtro passa-basso che può solo
 
 Invece con un filtro passa-banda, da $\abs{X_{e} \left(e^{\jmath \omega}\right)}$ possiamo ricavarci i seguenti spettri. \newline 
 
-Se k è dipari, avremo il seguente spettro dopo il filtro-passa banda: 
+Se k è dispari, avremo il seguente spettro dopo il filtro-passa banda: 
 
 \begin{figure}[h]
     \centering
@@ -907,7 +907,7 @@ Allora avremo in uscita $y \left[ m\right]$, ipotizzando $H \left(z\right)$ un f
 
 Gli indici di $x \left[ n\right]$, $w \left[ k\right]$ e $y \left[ m\right]$ sono indici differenti perchè sono a rate (velocità in italiano) differente. \newline 
 
-Tralasciando la dimostrazione (che potete vedere nelle slide ma è facolativa) e ponendo: 
+Tralasciando la dimostrazione (che potete vedere nelle slide ma è facoltativa) e ponendo: 
 
 {
     \Large 
@@ -992,7 +992,7 @@ Riguardo alla decomposizione polifase, possiamo svolgere le seguenti osservazion
         \end{equation}
     }
     \item rispetto alla struttura originale, ora i filtri lavorano alla frequenza più bassa 
-    \item si ha una riduzione del carico compitazionale complessivo di un fattore L (ma avremo bisogno di L filtri)
+    \item si ha una riduzione del carico computazionale complessivo di un fattore L (ma avremo bisogno di L filtri)
 \end{itemize}
 
 \newpage 
@@ -1064,7 +1064,7 @@ dove, è presente anche qui il commutatore che gira in senso anti-orario. \newli
 
 Come il caso degli interpolatori polifase, anche qui gli i-esimi filtri $P_{i} \left[ n\right]$ lavorano alla frequenza più bassa. \newline 
 
-Anche come gli interpolatori polifase, anche nei decimatori si possono utilizzare altre strutture, si possono costrutire dei filtri a tempo variante. \newline 
+Anche come gli interpolatori polifase, anche nei decimatori si possono utilizzare altre strutture, si possono costruire dei filtri a tempo variante. \newline 
 
 \newpage 
 
@@ -1090,7 +1090,7 @@ dove:
 \begin{itemize}
     \item si suppone il caso più semplice, cioè tutti i componenti ed i segnali lineari 
     \item $x_c \left(t\right)$ è il segnale in analogico da campionare 
-    \item data una frequenza di campioamento $F_s$, e quindi dove il suo inverso è il tempo di campionamento $T_s$, $x \left[ n\right]$ è il segnale campionato idealmente: 
+    \item data una frequenza di campionamento $F_s$, e quindi dove il suo inverso è il tempo di campionamento $T_s$, $x \left[ n\right]$ è il segnale campionato idealmente: 
     {
         \Large 
         \begin{equation}
@@ -1125,8 +1125,8 @@ dove:
     \item $\abs{e}$ è l'errore di quantizzazione all'interno del singolo intervallo $\Delta$
 \end{itemize}
 
-Se si fanno tutte le ipotesi semplificative scritte precedentemente, che non sono sempre valide nella reltà ma è un primo passo per inziare a capire il fenomeno reale, 
-allora la conversione analogico-reale non è un processo statico, bensì statistico perchè nella realtà non sapremo dove il valore reale entrarà nel "bin" (cestino in inglese, per intendere a quale valore finito verrà assegnato il valore reale analogico). \newline 
+Se si fanno tutte le ipotesi semplificative scritte precedentemente, che non sono sempre valide nella realtà ma è un primo passo per iniziare a capire il fenomeno reale, 
+allora la conversione analogico-reale non è un processo statico, bensì statistico perchè nella realtà non sapremo dove il valore reale entrerà nel "bin" (cestino in inglese, per intendere a quale valore finito verrà assegnato il valore reale analogico). \newline 
 
 \begin{tcolorbox}
     Per adesso credete a quello che scrivo, ma nel corso della prof.ssa Susanna Spinsante di Miusre Elettroniche, andrete molto più nel dettaglio di queste slide: praticamente la conversione analogico-digitale è 3/4 del corso che affronterete il prossimo semestre. 
@@ -1189,11 +1189,11 @@ Da questa formula di $\left(\dfrac{S}{N}\right)_{dB}$, possiamo notare che, all'
 
 Ma, siccome spesso non possiamo avere dei bit elevati, dopo la conversione analogico-digitale, $x_{c} \left(t\right)$ viene decimato in un opportuno $\hat{x} \left[ n\right]$. \newline 
 
-Invece, nella maggior parte dei casi, piuttoso che aumentare il numero dei bit, si cerca di aumentare la frequenza di campionamento $F_s$ nel convertitore analogico-digitale a frequenze superiodi di Nyquist per migliora il rapporto segnale-rumore. \newline 
+Invece, nella maggior parte dei casi, piuttosto che aumentare il numero dei bit, si cerca di aumentare la frequenza di campionamento $F_s$ nel convertitore analogico-digitale a frequenze superiori di Nyquist per migliora il rapporto segnale-rumore. \newline 
 
 \newpage 
 
-Confrontando i casi in cui si utilizzano delle frequenze di camponamento diverse e confrontando gli spettri dei segnali: 
+Confrontando i casi in cui si utilizzano delle frequenze di campionamento diverse e confrontando gli spettri dei segnali: 
 
 \begin{figure}[h]
     \centering
@@ -1280,7 +1280,7 @@ si ha un guadagno di $\left(\dfrac{S}{N}\right)_{dB}$ di circa 3 dB, cioè di $\
 Grazie a tutte queste osservazione, possiamo trarre le seguenti informazioni: 
 
 \begin{itemize}
-    \item il filtro digitale deve lavorare con una precisioe di bit superiore del convertitore analogico-digitale e del convertitore digitale-analogico 
+    \item il filtro digitale deve lavorare con una precisione di bit superiore del convertitore analogico-digitale e del convertitore digitale-analogico 
     \item l'uso del sovra-campionamento migliora le prestazioni dei filtri analogici anti-aliasing e anti-imaging perchè, come si vede dalla seguente figura:  
     \begin{figure}[h]
         \centering
