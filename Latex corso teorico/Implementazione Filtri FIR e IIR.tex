@@ -1008,13 +1008,25 @@ ma il problema è (come al solito) garantire la fase lineare al filtro. \newline
 
 Avendoci a che fare con poli e zeri complessi e coniugati, non avremo a che fare con strutture del secondo ordine come visto negli IIR, bensì con una funzione di rete del quarto ordine. \newline 
 
-In questa maniera, si permette di mantenere la lineartità di fase. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 23} 
-Rispiegazione di pag 13 tutta 
-\end{tcolorbox} 
-
 Il FIR è molto più robusto dell'IIR, per quanto riguarda la quantizzazione. \newline 
+
+In questa maniera, cioè ponendo poli e zeri complessi e coniugati, si permette di mantenere la lineartità di fase. \newline 
+
+Come si nota dalle seguenti figure: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{fase di un fir al diminuire dei bit.png}
+\end{figure} 
+
+\newpage 
+
+al diminuire dei bit del filtro, la fase peggiora perchè nel piano z gli zeri si allontanano, come si vede nella seguenta figura: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{allontanamento degli zeri al diminuire dei bit.png}
+\end{figure} 
 
 \newpage 
 
@@ -1544,7 +1556,8 @@ si utilizza una memoria interna, per fare tutti i calcoli, a doppia precisione (
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 23 - 26\\
     Appunti | 2025-11-26 | pag 1 \\ 
-    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:22:00 - 1:42:50         
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:22:00 - 1:42:50 \\
+    Latex | 2026-01-07 Pomeriggio | pag 310 - 312          
 } 
 
 Le analisi svolte nelle pagine precedenti sono state svolte ipotizzando che si ha un'assenza, o una possibilità molto bassa, di overflow. \newline 
@@ -1614,10 +1627,6 @@ allora risulta che:
 
 Per una rappresntazione tipica a complemento a 2, avremo che: 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 28}
-Da \url{https://it.wikipedia.org/wiki/Complemento_a_due} si utilizza il complento a due perchè c'è un'unica rappresentazione dello zero ed è più facile fare i conti per un circuito se sono rappresentati dei numeri con segno? 
-\end{tcolorbox} 
-
 {
     \Large 
     \begin{equation}
@@ -1652,9 +1661,11 @@ che, semplificata, sarà uguale a:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 29}
-Siccome nell'equazione appena scritta abbiamo $\forall i$ significa che ogni nodo del circuito deve rispettare questa relazione? 
-\end{tcolorbox} 
+e questa relazione deve valore per ogni i-esimo nodo. \newline 
+
+\begin{tcolorbox}
+Si utilizza spesso il complemento a due perchè è quella che si utilizza spesso nelle rappresentazioni perchè il valore rappresentato si trova, sempre, nell'intervallo $\left[ -1, +1\right]$.     
+\end{tcolorbox}
 
 Si può utilizzare un fattore di scalatura S, tale che: 
 
@@ -1669,9 +1680,7 @@ Si può utilizzare un fattore di scalatura S, tale che:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 30}
-    Con la dicitura $\max_{i} \left[ \sum_{k = - \infty}^{+ \infty} \abs{h_{i} \left[ k\right]}\right]$ si intende che si definisce un unico valore massimo per tutti i nodi i-esimi del circuito? 
-\end{tcolorbox} 
+In altre parole, si definisce un unico valore massimo per tutti i nodi i-esimi. \newline 
 
 Spesso, però, questo metodo è troppo conservativo perchè, se al denominatore è presente il fattore $\max_{i} \left[ \sum_{k = - \infty}^{+ \infty} \abs{h_{i} \left[ k\right]}\right]$, 
 significa che il rapporto è il più piccolo, quindi è l'$x_{\text{max}}$ più piccolo da considerare, cioè il peggiore su cui svolgere lo scaling perchè il fattore di scala S sarà il più piccolo anche esso. \newline 
@@ -1680,10 +1689,13 @@ Di conseguenza, questo metodo di scaling è troppo conservativo, quindi si prefe
 
 \textbf{Seconda soluzione per lo Scaling} \newline 
 
-Un possibile approcio alternativo rispetto a quello precedente è quello di modellare il segnale come segnale a banda stretta. \newline 
+Un possibile approcio alternativo rispetto a quello precedente è quello di modellare il segnale come segnale a banda stretta, 
+con un'unica pulsazione $\omega_0$. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 31}
-    Con la dicitura "modella il segnale come segnale a banda stretta" si intende che il segnale $x \left[ n\right]$ può essere qualsiasi o che $x \left[ n\right]$ deve avere banda stretta in Foruier?  
+\begin{tcolorbox}
+Il fatto che la sequenza $x \left[ n\right]$ sia a banda stretta è un'ipotesi che noi facciamo sul segnale. \newline 
+
+Lo scaling e lo studio andrebbe applicato, a rigore, a tutte le armoniche $\omega$ del segnale $x \left[ n\right]$. 
 \end{tcolorbox}
 
 Data una sequenza di ingresso $x \left[ n\right]$ del tipo: 
@@ -1696,10 +1708,6 @@ Data una sequenza di ingresso $x \left[ n\right]$ del tipo:
         x_{\text{max}} \cdot \cos \left[ \omega_0 n\right]
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 32}
-    $\omega_0$ è la pulsazione fondamentale della sequenza $x \left[ n\right]$ ? 
-\end{tcolorbox}
 
 Allora possiamo definire all'i-esimo nodo $w_{i} \left[ n\right]$ come: 
 
@@ -1716,10 +1724,6 @@ Allora possiamo definire all'i-esimo nodo $w_{i} \left[ n\right]$ come:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 33}
-    $\omega_0$ è la pulsazione fondamentale della sequenza $x \left[ n\right]$ ? 
-\end{tcolorbox}
-
 in cui: 
 
 \begin{itemize}
@@ -1729,10 +1733,6 @@ in cui:
 \end{itemize} 
 
 Per un segnale generico $x \left[ n\right]$, per evitare l'overflow, deve valore che: 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 34}
-Cosa si intende per un segnale generico? 
-\end{tcolorbox}
 
 {
     \Large 
@@ -1748,9 +1748,7 @@ Cosa si intende per un segnale generico?
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 35}
-Questa condizione deve valere per tutti gli i-esimi nodi? 
-\end{tcolorbox} 
+Questa condizione deve valere per tutti gli i-esimi nodi  del circuito in cui si vuole applicare lo scaling. \newline 
 
 Pertanto, il fattore di scala S diventa il seguente: 
 
@@ -1767,7 +1765,7 @@ Pertanto, il fattore di scala S diventa il seguente:
 }
 
 Questo tipo di approcio è meno conservativo rispetto al precedente perchè, abbiamo fissato un unico valore $x_{\text{max}}$ per tutte le pulsazioni $\omega$:  
-in teoria, per essere più conservativi,dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. 
+in teoria, per essere più conservativi,dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. \newline 
 
 \textbf{Terza soluzione per lo Scaling} \newline 
 
@@ -1820,10 +1818,6 @@ possiamo scrivere che, per un qualsiasi i-esimo nodo:
         \end{split}
     \end{equation}
 }
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 37}
-Questa relazione vale sempre o deve valere in questo caso? 
-\end{tcolorbox} 
 
 dove però l'$x \left[ n\right]$ in $\int_{- \pi}^{+ \pi}
             \abs{
@@ -1887,7 +1881,8 @@ Utilizzando questo metodo, localmente potremmo avere overflow, ma globalmente no
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 27\\
     Appunti | 2025-11-26 | pag 1 \\ 
-    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:42:50 - 1:44:35   
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:42:50 - 1:44:35 \\
+    Latex | 2026-01-07 Pomeriggio | pag 314       
 } 
 
 Nella realtà, non occorre considerare tutti i nodi del circuito, ma solo quelli che rappresentano le somme totali, che sono i nodi più critici. \newline 
@@ -1914,14 +1909,16 @@ Ultime considerazioni riguardo allo scaling:
 
 \begin{itemize}
     \item lo scaling peggiora \textbf{SEMPRE} il rapporto S/N (Segnale Rumore) all'uscita del filtro: inoltre, l'SNR peggiora per poli vicini al cerchio unitario 
-    \item è possiile ridurre (o eliminare), in altre parole rendere più robusto il filtro, il problema dell'overflow utilizzando un accumulatore "a doppia precsione", dotato di "bit di guardia" 
+    \item è possibile ridurre (o eliminare), in altre parole rendere più robusto il filtro, il problema dell'overflow utilizzando un accumulatore "a doppia precsione", dotato di "bit di guardia" 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 38}
-Cosa è il bit accumulatore e cosa sono i bit di guardia, quelli vicini all'overflow? \newline 
+\begin{tcolorbox}
+I bit di guardia sono quelli che si trovano agli estremi dell'intervallo per segnale un overflow, che sono vicini all'overflow. \newline 
 
-Inoltre, avere una memoria a doppia precisione spesso non è possibile nei microcontrollori perchè le operazioni da svolgere devono essere facili e veloci, giusto? 
-\end{tcolorbox} 
+Sarà più chiaro nel corso di Misure Elettroniche con la prof.ssa Susanna Spinsante. \newline 
+
+Avere o meno una memoria a doppia precisione, ingegneristicamente parlando, dipende sempre dal caso d'uso. 
+\end{tcolorbox}
 
 \newpage 
 
@@ -1930,7 +1927,8 @@ Inoltre, avere una memoria a doppia precisione spesso non è possibile nei micro
 \footnote{ 
     Slide del prof | 11 - Implementazione Filtri FIR e IIR 2 | pag 28 - 29\\
     Appunti | 2025-11-26 | pag 1 \\ 
-    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:44:35 - 1:48:22     
+    Video Lezione CADSP Giovedì 2 Dicembre 2021 | 1:44:35 - 1:48:22 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 315       
 } 
 
 Per quanto riguarda questo corso, i circuiti che abbiamo studiato sono realizzati in fixed-point (cioè a virgola fissa) perchè sono i più facili da realizzare. \newline 
@@ -1943,7 +1941,7 @@ Di seguito una "lista della spesa" (aka cosa fare) per quanto riguarda la realiz
     \item non utilizzare le forme dirette 
     \item utilizzare, se possibile, accumulatori con molti bit (ma questo non è detto che è possibile, visto la memoria molto limitata dei microcontrollori)
     \item utilizzare le forme in cascata e parallela 
-    \item scegliere le sezioni secondo quanto scoperto dal ricercatore Jacksin nel 1986: 
+    \item scegliere le sezioni secondo quanto scoperto, in modo empirico (quindi senza dimostrazione), dal ricercatore Jacksin nel 1986: 
     \begin{itemize}
         \item accoppiare poli vicini al cerchio unitario con gli zeri che giacciono il più vicino possibile 
         \item ripetere finchè tutti i poli sono stati accoppiati 
@@ -1951,12 +1949,6 @@ Di seguito una "lista della spesa" (aka cosa fare) per quanto riguarda la realiz
         \item ricordare che i poli vicini al cerchio sono più "dannosi" e che il danno diminuisce se vengono accoppiati a zeri molto vicini perchè i poli compensano gli zeri  
     \end{itemize}
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 39}
-Cosa si intende per poli accoppiati? \newline 
-
-Inoltre, queste considerazioni di Jackson sono empiriche come quelle di Khaiser? 
-\end{tcolorbox} 
 
 \textbf{Filtri FIR} \newline 
 

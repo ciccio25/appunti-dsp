@@ -456,7 +456,8 @@ dove $f_{l}$ è la frequenza di $x{'} \left[ n\right]$. \newline
 \footnote{ 
     Slide del prof | 12 - Introduzione ai circuiti multirate | pag 17 - 18\\
     Appunti | 2025-12-03 | pag 3 \\
-    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 32:35 - 45:05   
+    Video Lezione CADSP Giovedì 6 Dicembre 2022 | 32:35 - 45:05 \\
+    Latex | 2026-01-07 Pomeriggio | pag 329 - 330   
 }
 
 Piuttosto che decimare nel modo classico come abbiamo studiato precedentemente in \ref{subsec: Decimazione e sottocampionamento} \nameref{subsec: Decimazione e sottocampionamento} a pag \pageref{subsec: Decimazione e sottocampionamento}: 
@@ -515,7 +516,8 @@ si ottiene il sequente spettro:
     \includegraphics[scale = 0.7]{segnale sotto-campionato.png}
 \end{figure} 
 
-dove, apparentemente, il contenuto informativo da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$, ma le porzioni di spettro si sono "spostate" in questa maniera: 
+dove, apparentemente, il contenuto informativo da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ sembra essere scomparso, 
+ma le porzioni di spettro si sono "spostate" in questa maniera: 
 
 {
     \Large 
@@ -528,6 +530,8 @@ dove, apparentemente, il contenuto informativo da $X \left(e^{\jmath \omega}\rig
         \end{split}
     \end{equation}
 }
+
+È un caso particolare in cui, sotto-campionando, non avremo aliasing, perchè il contenuto informazioni si è solo spostato e non modificato. \newline 
 
 Invece, per quanto riguarda le repliche, avremo che da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$, le porzioni di spettro si sono "spostate" in questa maniera:
 
@@ -544,11 +548,9 @@ Invece, per quanto riguarda le repliche, avremo che da $X \left(e^{\jmath \omega
 }
 
 \begin{tcolorbox}
-    Tecnicamente dovremmo dire che gli spetti da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ gli spettri non si spostato, bensì danno un contributo, ma noi diremo che si spostano per semplicità. 
-\end{tcolorbox}
+    Tecnicamente dovremmo dire che gli spetti da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ gli spettri non si spostato, bensì danno un contributo, ma noi diremo che si spostano per semplicità. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 40}
-Quindi stiamo decimando per campionare sotto al limite di Nyquist o è come se campionassimo sotto al limite di Nyquist ? 
+    Il motivo per cui noi vediamo il sotto-campionanmento di una sequenza è dovuto allo studio, nei capitoli successivi, dei banchi filtri. 
 \end{tcolorbox}
 
 $X_{d} \left(e^{\jmath \omega}\right)$ ora non ha buchi in frequenza rispetto a $X \left(e^{\jmath \omega}\right)$. \newline
@@ -586,10 +588,6 @@ Inolte, per quanto riguarda il fattore k:
     \item per k pari, si ottiene la sequenza desiderata 
     \item per k dispari, si ottiene la sequenza invertita 
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 41}
-Questa simmetria di k è dovuta alla simmetria del coseno e del seno ? 
-\end{tcolorbox}
 
 Poichè, in generale, il segnale non è a banda strettamente limitata, la struttura del decimatore tipico è la seguente: 
 

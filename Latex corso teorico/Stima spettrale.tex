@@ -109,7 +109,8 @@ Per avere un campionamento più fitto, nella DFT basta fare uno zero padding, ma
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 4 - 8\\
     Appunti | 2025-12-09 | pag 2  \\ 
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 47:23 - 1:15:40     
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 47:23 - 1:15:40 \\ 
+    Latex | 2026-01-07 Pomeriggio | pag 351 - 352     
 }
 
 Questo è il caso di tutte le sequenze molto lunghe o di cui si conosce solo un breve tratto. \newline 
@@ -264,8 +265,13 @@ abbiamo che avremo a che fare con una convoluzione nello spettro, cioè valgono 
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 43}
-Siccome nel mondo DSP non esistono integrali, se volessimo fare i precisini,in realtà $\hat{X} \left(e^{\jmath \omega}\right)$ è una stima di una stima di $X \left(e^{\jmath \omega}\right)$ ?
+$\hat{X} \left(e^{\jmath \omega}\right)$ è una stima di $X \left(e^{\jmath \omega}\right)$ perchè è finestrato. \newline 
+
+\begin{tcolorbox}
+Nel fantastico mondo del DSP, è possibili scrivere gli integrali come nella formula di $\hat{X} \left(e^{\jmath \omega}\right)$, 
+ma non è possibile calcolare il valore esatto perchè useremo dei numeri finiti (e quindi per forza l'integrale sarà approssimato e calcolato come una sommatoria). \newline 
+
+È questa la piccola differenza tra rappresentazione e calcolo: sembrano intendere la stessa cosa, ma c'è una linea sottile tra le due che li distingue. 
 \end{tcolorbox}
 
 Come studiato nel capitolo della progettazione dei filtri, possiamo decidere una tra le seguenti finestre studiate in \ref{subsec: Elenco delle finestre principali} \nameref{subsec: Elenco delle finestre principali} a pag \pageref{subsec: Elenco delle finestre principali}, 
@@ -289,11 +295,13 @@ può dare problemi per la localizzazione di picchi o di punti particolari, come 
     \includegraphics[scale = 0.8]{granulostià esempio.png}
 \end{figure}  
 
-Questo problema prende il nome di granulosità, che avevamo già affrontato, implicitamente, con il fenomeno di Gibbs in \ref{subsec: Conseguenze del Windowing} \nameref{subsec: Conseguenze del Windowing} a pag \pageref{subsec: Conseguenze del Windowing}. \newline 
+\begin{tcolorbox}
+La seguente figura è solo a scopo illustrativo. \newline
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 44}
-Spiegazione della slide e con quale forma d'onda è stata fatta la convoluzione la finestra. 
+Non ha a che fare con una specifica finestra vista. 
 \end{tcolorbox}
+
+Questo problema prende il nome di granulosità, che avevamo già affrontato, implicitamente, con il fenomeno di Gibbs in \ref{subsec: Conseguenze del Windowing} \nameref{subsec: Conseguenze del Windowing} a pag \pageref{subsec: Conseguenze del Windowing}. \newline 
 
 Come nela caso della progettazione dei filtri FIR, possiamo considerare i seguenti parametri, detti anche gradi di libertà, per la finestra $w \left[ n\right]$: 
 
@@ -310,15 +318,12 @@ Come nela caso della progettazione dei filtri FIR, possiamo considerare i seguen
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 9\\
     Appunti | 2025-12-09 | pag 2 \\ 
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:15:40 - 1:18:45 
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:15:40 - 1:18:45 \\
+    Latex | 2026-01-07 Pomeriggio | pag 353 
 }
 
 La stima dello spettro $\abs{X \left(e^{\jmath \omega}\right)}^{2}$ di un segnale $x \left[ n\right]$, che è stazionario, deterministico e di lunghezza incognita mediante la DFT, 
 a partire dalla conoscenza di L campioni del segnale, pone i seguenti problemi: 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 45}
-Come fa ad essere $x \left[ n\right]$ deterministico? Perchè la DFT viene fatta "off-line"? 
-\end{tcolorbox}
 
 \begin{itemize}
     \item risoluzione, cioè la distanza d in frequenza tra due sinusoidi, che dipende da L e dal tipo di finestra (che idealmente vorremmo avere uguale alla lunghezza di $x \left[ n\right]$, cioè infinita o molto lunga, ma che non è possibile perchè il tempo di osservazione per noi è L)
@@ -327,13 +332,20 @@ Come fa ad essere $x \left[ n\right]$ deterministico? Perchè la DFT viene fatta
     \item precisione finita, dovuta al rumore nello spettro 
 \end{itemize}
 
+\begin{tcolorbox}
+Il fatto che la sequenza $x \left[ n\right]$ sia deterministica è un'ipotesi che noi svolgiamo. \newline 
+
+Ovviamente, nella realtà $x \left[ n\right]$ non sarà deterministica. 
+\end{tcolorbox}
+
 \newpage 
 
 \section{Sequenze Random}
 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 11 - 13\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:32:50 - 1:42:20 
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:32:50 - 1:42:20 \\
+    Latex | 2026-01-07 Pomeriggio | pag 354 - 356 
 }
 
 \begin{tcolorbox}
@@ -357,11 +369,8 @@ Una sequenza casuale (o in inglese random) è una realizzazione di un processo s
     Questa è la notazione utilizzata in questo corso di variabile statistica: nel corso di teoria di segnali, avremmo una notazione differente. 
 \end{tcolorbox}
 
-$x_{n}$ è una serie temporale; ad essa è generalmente associata una sua descrizione statistica del processo, per avere informazione su tutte le possibili realizzazione del processo. \newline 
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 46}
-$x_{n}$ è una serie temporale perchè varia nel tempo? 
-\end{tcolorbox}
+$x_{n}$ è una serie temporale (e quindi cambia ogni istante nel tempo); 
+ad essa è generalmente associata una sua descrizione statistica del processo, per avere informazione su tutte le possibili realizzazione del processo. \newline 
 
 Tale descrizione statistica è completa quando conosciamo la distribuzione di probabilità del processo. \newline 
 
@@ -416,8 +425,9 @@ Poichè, spesso non è possibile conoscere le media di insieme, ci si accontenta
 TO-DO: Aggiungere link per la definizione di processo stazionario e quale è la differenza in senso lato  
 \end{tcolorbox} 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 47}
-Differenza tra stazionarietà e stazionarietà in senso lato? 
+\begin{tcolorbox}
+La differenza tra stazionarietà e stazionarietà in senso lato è che la prima è legata alla PDF (che non avremo mai perchè "viene data dagli dei dell'olimpo", quindi è un fenomeno statistico); 
+invece la stazionarietà in senso lato è legata al tempo, quindi alle realizzazioni n-esimi che noi utilizziamo e usiamo nei casi reali.     
 \end{tcolorbox}
 
 Allora, sicoccome nella realtà non conosciamo la PDF, non useremo i parametri appena indicati bensì i seguenti: 
@@ -430,9 +440,9 @@ Allora, sicoccome nella realtà non conosciamo la PDF, non useremo i parametri a
             <x_{n}> = \lim_{L \to + \infty} \dfrac{1}{2 \cdot L + 1} \cdot \sum_{n = - L}^{L} x \left[ n\right] 
         \end{equation}
     }
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 48}
-Siccome L tende ad infinito, è come se la media di $x_{n}$ fosse calcolata fosse calcolata con una finestra $w \left[ n\right]$ infintia, giusto? 
-\end{tcolorbox}
+    \begin{tcolorbox}
+        Il fatto di tendere L ad infinito è un'astrazione matematica: nella realtà noi non avremo una finestra infinita. 
+    \end{tcolorbox}
     \item vaianza: 
     {
         \Large 
@@ -454,8 +464,11 @@ Se le media temporali sono uguali a quelle di insieme, allora il processo si dic
 Inoltre, possiamo definire la cross-correlazione e la cross-covarianza tra due processi stocastici in maniera del tutto simile a quanto fatto per autocorrelazione ad autocovarianza 
 (analogo discorso nel caso di medie temporali). \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 49}
-Cosa significa l'ultima frase? 
+\begin{tcolorbox}
+La cross-correlazione e la cross-covarianza dipendono dai valori che abbiamo trovato noi. \newline 
+
+Invece la covarianza e l'auto-correlazione, col fatto che sono un'astrazione matematica perchè L tende ad infinito, 
+sono degli strumenti statistici. 
 \end{tcolorbox}
 
 Per una generica sequenza $x \left[ n\right]$, possiamo definire le seguenti quantità: 
@@ -511,10 +524,6 @@ dove:
 Se i segnali $x_{n}$ sono ad energia finita, i segnali deterministici sono aperiodici; 
 se sono a potenza finita, i segnali possono essere deterministici, periodici o random. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 50}
-L'ultima frase: cosa? 
-\end{tcolorbox}
-
 \newpage 
 
 \subsection{Spettro di Densità di potenza}
@@ -522,7 +531,7 @@ L'ultima frase: cosa?
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 15\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:42:20 - 1:48:40 
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:42:20 - 1:48:40  
 }
 
 Per segnali a potenza finita (per cui non si ha la trasformata di Fourier perchè non è definibile direttamente), allora si fa uso delle definizioni di auto-correlazione a auto-covarianza, per cui la trasformata di Fourier esiste. \newline 
@@ -605,7 +614,8 @@ In modo analogo, si può definire lo spettro densità di potenza incrociata tra 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 16\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:54:35 - 2:00:55   
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:54:35 - 2:00:55 \\
+    Latex | 2026-01-07 Pomeriggio | pag 358
 }
 
 Il problema, come abbiamo sempre scritto, è quello di stimare lo spettro di potenza $P_{xx} \left(\omega\right)$ di un segnale discreto $x \left[ n\right]$ causale, ergodico e stazionario (in senso lato), 
@@ -660,11 +670,11 @@ Una buona stima di $P \left(\omega\right)$, cioè $\hat{P} \left(\omega\right)$ 
     cioè, che la variabile aleatoria $x \left[ n\right]$ sia il più possibile che deterministica, che abbia poca varianza, cioè vicina alla media, se il fenomeno è gaussiano, avremo una campana più stretta 
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 51}
-Ma queste due condizioni non le avremo mai perchè abbiamo a che fare con dei calcolatori, che usando degli LFSR, genereranno una sequenza polarizzata e non consistente? 
-\end{tcolorbox} 
-
 Queste relazioni dovrebbero valere per ogni pulsazione $\omega$ di $x \left[ n\right]$. \newline 
+
+\begin{tcolorbox}
+A rigore, questo studio e stima dovrà essere fatta per ogni pulsazione $\omega$ perchè, per ogni pulsazione, avremo una PDF diversa.     
+\end{tcolorbox}
 
 Le uguaglianze scritte, nella realtà, non saranno uguaglianze esatte, bensì i valori calcolati tenderenno o saranno simili alle formule. \newline 
 
@@ -677,7 +687,8 @@ All'aumentare del numero di campioni conosciuti di $x \left[ n\right]$, la stima
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 17 - 21\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 2:00:55  - 02:18:00 
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 | 2:00:55  - 02:18:00 \\
+    Latex | 2026-01-07 Pomeriggio | pag 362 
 }
 
 Piuttosto che calcolarci la potenza $P_{xx} \left(\omega\right)$ attraverso l'autocorrelazione $\phi_{xx} \left[ n\right]$: 
@@ -1013,11 +1024,13 @@ Si può dimostrare che:
     \end{equation}
 }
 
-Pertanto la stima tramite Periodogramma è, in generale, non costintente. \newline 
+\begin{tcolorbox}
+Con questa relazione, e senza dimostrazione, si lega la stima della varianza alla potenza del segnale. \newline 
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 52}
-Rispiegazione, anche grafica, di quello che cè scrito nella slide 21. 
+Quindi più il segnale sarà potente, e più varianza ci sarà nel segnale. 
 \end{tcolorbox}
+
+Pertanto la stima tramite Periodogramma è, in generale, non costintente. \newline 
 
 \newpage 
 
@@ -1026,7 +1039,8 @@ Rispiegazione, anche grafica, di quello che cè scrito nella slide 21.
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 22 - 23\\
     Appunti | 2025-12-16 | pag 1\\
-    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  02:18:00 - 02:23:00    
+    Video Lezione CADSP Lunedì 12 Dicembre 2022 |  02:18:00 - 02:23:00 \\
+    Latex | 2026-01-07 Pomeriggio | pag 364     
 }
 
 Si può ottenere una stima consistente mediante una tecnica. \newline 
@@ -1089,15 +1103,17 @@ dove:
     \item $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$ è lo spettro stimato di $\hat{x} \left[ n\right]$ attraverso il metodo di Bartlett 
 \end{itemize}
 
-Dalla formula di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, possiamo notare che: 
+\newpage 
+
+Dalla formula di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, possiamo notare che, al pari di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, avremo che: 
 
 \begin{itemize}
     \item se M aumenta, allora K diminuisce (cioè avremo poche finestre, ma che ognuna sarà molto lunga)
     \item se R diminuisce, allora K aumenta (cioè le finestre sono molto correlate)
 \end{itemize}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 53}
-Se le finestre sono molto correlate, significa che le finestre sono molto corte, giusto? 
+\begin{tcolorbox}
+La correlazione è legata alla sovrapposizione delle finestre.     
 \end{tcolorbox}
 
 Grazie al meotodo di Bartlett, possiamo scegliere riguardo alla finestra la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
@@ -1112,7 +1128,7 @@ Di seguito degli esempi di periodigrammi pesati, attraverso il periodigram avera
 \end{figure} 
 
 \begin{tcolorbox}
-Ricordo che, essendo nel mondo DSP, lo spettro non è formato da linee continue, bensì da numeri, quindi lo spettro dei grafici è una semplice interpolazione tra punti.     
+La correlazione dipende dalla sovrapposizione tra le finestre     
 \end{tcolorbox}
 
 \newpage 
@@ -1122,7 +1138,8 @@ Ricordo che, essendo nel mondo DSP, lo spettro non è formato da linee continue,
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 24\\
     Appunti | 2025-12-16 | pag 2\\
-    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:05:45 - 00:08:55   
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:05:45 - 00:08:55 \\
+    Latex | 2026-01-07 Pomeriggio | pag 365        
 }
 
 Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato: 
@@ -1134,7 +1151,7 @@ Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato:
         \item se si vuole avere una bassa varianza, allora dovremo scegliere un M piccolo 
         \item se si vuole avere un'alta varianza varianza, allora dovremo scegliere un M grande 
     \end{itemize}
-    \item si moltiplica la sotto-sequenza r-esima $\hat{x}_{r} \left[ n\right]$ per la finestra scelta $w \left[ n\right]$ e si calcola la DFT (quindi si svolge la FFT) ad N punti dove $N \geq M$ (quindi si fa zero padding ove necessario) 
+    \item si moltiplica la sotto-sequenza r-esima $\hat{x}_{r} \left[ n\right]$ per la finestra scelta $w \left[ n\right]$ (il tipo di finestra dipende dalle specifiche del progetto, quindi rettangolare, Bartlett, ecc...) e si calcola la DFT (quindi si svolge la FFT) ad N punti dove $N \geq M$ (quindi si fa zero padding ove necessario) 
     \item si calcola la stima di $P_{xx} \left(\omega\right)$, cioè lo spettro di $x \left[ n\right]$ che si estende per $n \in \left[ - \infty, + \infty\right]$, come media, cioè:
     {
         \Large 
@@ -1149,10 +1166,6 @@ Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato:
     }
     dove $\hat{P}_{PEr} \left(\omega\right)$ è la stima dello spettro della r-esima $\hat{x}_{r} \left[ n\right]$
 \end{itemize}
-
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 54}
-La finestra che possiamo scegliere per svolgere la FFT può essere qualsiasi (i.e. rettangolare, Bartlet, ecc...), giusto?
-\end{tcolorbox}
 
 L'algoritmo di Weltch prende anche il nome di periodogramma mediato: è un metodo diretto sui dati senza stimare l'autocorrelazione. \newline 
 
@@ -1276,7 +1289,8 @@ Confrontando lo spettrogramma tra una nota di un piano e di un parlato, notiamo 
 \footnote{ 
     Slide del prof | 13 - Stima spettrale | pag 29 - 30 \\
     Appunti | 2025-12-16 | pag 2\\
-    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:43:20 - 00:56:00    
+    Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:43:20 - 00:56:00 \\
+    Latex | 2026-01-07 Pomeriggio | pag 369      
 }
 
 Considerando un segmento di segnale $x \left[ n\right]$, lo si vuole moltiplicare per un'opportuna sequenza $w \left[ n\right]$ che prende il nome di finestra. \newline 
@@ -1331,6 +1345,8 @@ cioè differiscono per un termine di fase. \newline
 Rispetto alla DTFT che avevamo studiato in \ref{sec: Trasformata di Fourier di Segnali Discreti} \nameref{sec: Trasformata di Fourier di Segnali Discreti} a pag \pageref{sec: Trasformata di Fourier di Segnali Discreti}, 
 questa volta la STFT non dipende solo dalla pulsazione $\omega$, bensì anche dall'n-esimo indice n. \newline 
 
+\newpage 
+
 Oltre alla STFT diretta, è possibile definire la trasformazione inversa come: 
 
 {
@@ -1351,13 +1367,6 @@ Oltre alla STFT diretta, è possibile definire la trasformazione inversa come:
     \end{equation}
 }
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black] \label{q: 56}
-Siccome la trasformazione inversa dipende da m, significa che per ogni m dovremmo definire una trasformazione inversa, giusto? \newline 
-
-Inoltre, nella formula della trasformazione inversa, l'integrale non è più tra $\left[ - \pi, + \pi\right]$ perchè non è detto che lo spettr sia simmetrico, giusto? 
-\end{tcolorbox}
-
-
 da cui, se $w \left[ n\right] \neq 0$: 
 
 {
@@ -1371,6 +1380,11 @@ da cui, se $w \left[ n\right] \neq 0$:
         X \left[ n, \omega\right) d \omega
     \end{equation}
 }
+
+\begin{tcolorbox}
+In teoria, la trasformazione inversa, siccome dipende dall'indice m, la dovremmo fare per ogni indice m, 
+ma noi ci poniamo nel caso più semplice, cioè per $m = 0$.     
+\end{tcolorbox}
 
 Dalla formula della STFT, ponendo: 
 
