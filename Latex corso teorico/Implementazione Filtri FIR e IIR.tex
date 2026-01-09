@@ -15,7 +15,7 @@
     Latex | 2025-12-16 Mattino | pag 280   
 } 
 
-Prima di descrivere degli SFG (Signal Flow Graph) è necessario svolgere un piccolo ripasso degli argomenti precedenti. \newline 
+Prima di descrivere gli SFG (Signal Flow Graph) è necessario svolgere un piccolo ripasso degli argomenti precedenti. \newline 
 
 Come studiato in \ref{sec: Sistemi LTI descritti da equazioni alle differenze} \nameref{sec: Sistemi LTI descritti da equazioni alle differenze} a pag \pageref{sec: Sistemi LTI descritti da equazioni alle differenze} 
 ed in \ref{sec: Funzioni di Rete} \nameref{sec: Funzioni di Rete} a pag \pageref{sec: Funzioni di Rete}, 
@@ -94,7 +94,7 @@ Infatti:
     \end{equation}
 }
 
-Quindi, gli elementi che comporranno negli SFG saranno: 
+Quindi, gli elementi che comporranno gli SFG saranno: 
 
 \begin{itemize}
     \item somma di variabili 
@@ -108,7 +108,7 @@ Un esempio grafico di SFG:
     \includegraphics[scale = 0.4]{Esempio di SFG 1.png}
 \end{figure}
 
-È necessario inserire i ritardi negli archi perchè, se consideriamo i grafi senza ritardi, l'SFG non sarà computabile come si vede nel seguente SGF in cui non sono presenti dei ritardi: 
+È necessario inserire i ritardi negli archi perchè, se consideriamo i grafi senza ritardi, l'SFG non sarà computabile come si vede nel seguente SFG in cui non sono presenti dei ritardi: 
 
 \begin{figure}[h]
     \centering
@@ -117,7 +117,7 @@ Un esempio grafico di SFG:
 
 \newpage 
 
-Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il seguente: 
+Invece un esempio di SFG computabile, se si parte da sinistra a destra, è il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -271,7 +271,7 @@ dove:
     \item $\left(1 - c_{k}^{''*} z^{-1}\right)$ è il complesso coniugato di $\left(1 - c_{k}^{''} z^{-1}\right)$
 \end{itemize}
 
-Scrivere in questa forma $H \left(z\right)$ permette di avere i seguenti vantaggi: 
+Scrivere in questa forma $H \left(z\right)$, permette di avere i seguenti vantaggi: 
 
 \begin{itemize}
     \item libertà realizzativa, in particolare sulla scelta delle sezioni e dell'ordine 
@@ -281,8 +281,8 @@ Scrivere in questa forma $H \left(z\right)$ permette di avere i seguenti vantagg
 La robustezza numerica nella forma in cascata è possibile perchè il singolo elemento che compone la funzione di rete influisce solo sulla sezione del secondo ordine per cui è stata progetta, 
 quindi l'impatto del singolo polo o  zero è locale e non globale. \newline 
 
-Proprio per questo motivo, in generale, se si realizza una forma in cascata, si cerca di utilizzare non in  termini del primo ordine, cioè $z^{-1}$, 
-bensì $z^{-2}$, come si nota nella seguente formulazione di $H \left(z\right)$: 
+Proprio per questo motivo, in generale, se si realizza una forma in cascata, si cerca di progettarla non in  termini di poli e zeri del primo ordine, cioè $z^{-1}$, 
+bensì con termini del secondo ordine, cioè $z^{-2}$, come si nota nella seguente formulazione di $H \left(z\right)$: 
 
 {
     \Large 
@@ -434,6 +434,8 @@ Di seguito un elenco di strutture per filtri FIR. \newline
     \includegraphics[scale = 0.4]{forma in cascata per filtri FIR.png}
 \end{figure} 
 
+\newpage 
+
 Osservando le seguenti strutture dei filtri FIR, possiamo svolgere le seguenti considerazioni: 
 
 \begin{itemize}
@@ -443,7 +445,7 @@ Osservando le seguenti strutture dei filtri FIR, possiamo svolgere le seguenti c
 
 In altre parole, nei FIR non ci sono le retroazioni come negli IIR. \newline 
 
-Non ci occupiamo quasi mai della fase, ma la condizione di simmetria o anti-simmetria dei coefficienti è sufficiente per avere fase lineare generalizzare, cioè ritardo di gruppo costante. \newline 
+Non ci occupiamo quasi mai della fase, ma la condizione di simmetria o anti-simmetria dei coefficienti è sufficiente per avere fase lineare generalizzata, cioè ritardo di gruppo costante. \newline 
 
 Questa simmetria può essere sfruttata per semplificare la struttura dei filtri con un conseguente risparmio di circa la metà dei moltiplicatori, cioè dei k-esimi coefficienti $b_k$. \newline 
 
@@ -499,11 +501,15 @@ con un esempio di strutta:
 } 
 
 \begin{tcolorbox}
-Il video della Lezione CADSP Martedì 29 Novembre 2022 è disponibile nel Learn. Rimando alla videolezione perchè quel giorno ero occupato per un seminario su Matlab, molto carino sugli SDR.      
+Oltre agli appunti, per questi appunti ho rivisto anche le videolezioni. \newline 
+
+Le videolezioni sono disponibili sul Learn del corso. 
 \end{tcolorbox}
 
-Le strutture viste in precedenza vengono usualmente implementate mediante circuiti digitali, 
-progettati appositamente o programmabili, e presentano, pertanto, problemi di quantizzazione, che comporta ad una precisione finita. \newline 
+Le strutture viste in precedenza vengono usualmente implementate dai circuiti digitali, 
+progettati appositamente o programmabili. \newline 
+
+Presentano, pertanto, problemi di quantizzazione, che comporta ad una precisione finita. \newline 
 
 \begin{tcolorbox}
 Un esempio di circuiti digitali programmabili sono gli FPGA (Field Programmable Gate Array). \newline 
@@ -780,7 +786,7 @@ come evidenziato in giallo nella figura, sono presenti 3 quantizzatori, dove:
     \item $Q_{Bo}$ è il quantizzatore del segnale in uscita 
 \end{itemize}
 
-Inoltre abbiamo che il coefficiente a di $H \left(z\right)$ non sarà uguale ad a in $\hat{H} \left(z\right)$, bensì una sua versione quantizzata, quindi: 
+Inoltre abbiamo che il coefficiente a di $H \left(z\right)$ non sarà uguale ad a in $\hat{H} \left(z\right)$, bensì sarà una sua versione quantizzata, quindi: 
 
 {
     \Large 
@@ -849,7 +855,7 @@ Considerando un circuito IIR generico, avremo che la funzione di rete $H \left(z
 
 in cui la precisione del filtro è infinita, perchè la funzione di rete $H \left(z\right)$ progettata "carta e penna" è ideale. \newline 
 
-Invece, considerando i coefficienti quantizzati (che è quello che accade in un circuiti digitale reale), avremo che la nuova funzione di rete non sarà $H \left(z\right)$, bensì: 
+Invece, considerando i coefficienti quantizzati (che è quello che accade in un circuito digitale reale), avremo che la nuova funzione di rete non sarà $H \left(z\right)$, bensì: 
 
 {
     \Large 
@@ -918,7 +924,7 @@ sensibili alla quantizzazione di ogni sezione. \newline
 
 È una via di mezzo tra le due strutture precedenti. \newline 
 
-Grazie a questa caratteristica elencata, in genere la struttura parallela è, in genere, meno sensibile alla quantizzazione rispetto alle forme dirette. \newline 
+Grazie a questa caratteristica elencata, la struttura parallela è, in genere, meno sensibile alla quantizzazione rispetto alle forme dirette. \newline 
 
 \newpage 
 
@@ -1038,7 +1044,7 @@ al diminuire dei bit del filtro, la fase peggiora perchè nel piano z gli zeri s
     Latex | 2026-01-07 Pomeriggio | pag 304        
 } 
 
-Ricordando che i circuiti che progettiamo applicano una equazione alle differenze del tipo: 
+Ricordando che i circuiti che progettiamo applicano un'equazione alle differenze del tipo: 
 
 {
     \Large 
@@ -1132,7 +1138,7 @@ dove:
 
 Quindi $\hat{y} \left[ n\right]$ è, grazie a queste semplificazioni, un circuito lineare MISO (Multiple Input Single Output, cioè, in italiano molteplici ingressi, singola uscita). \newline 
 
-Inoltre, dalla formula di $\hat{y} \left[ n\right]$ notiamo che, essendoci una moltiplicazione tra i k-esimo coefficiente ed una sequenza, avremo sempre un errore di quantizzazione, sia in ingresso che in uscita. \newline 
+Inoltre, dalla formula di $\hat{y} \left[ n\right]$ notiamo che, essendoci una moltiplicazione tra i k-esimi coefficienti ed una sequenza, avremo sempre un errore di quantizzazione, sia in ingresso che in uscita. \newline 
 
 \newpage 
 
@@ -1584,7 +1590,7 @@ Definiamo $w_{i} \left[ n\right]$ come:
     \end{equation}
 }
 
-cioè la convoluzione tra il segnale di ingresso $x \left[ n\right]$ e la risposta impulsiva del filtro $h_{i} \left[ n\right]$ fino a quel i-esimo nodo. \newline 
+cioè la convoluzione tra il segnale di ingresso $x \left[ n\right]$ e la risposta impulsiva del filtro $h_{i} \left[ n\right]$ fino a quell'i-esimo nodo. \newline 
 
 Adesso consideriamo il valore assoluto di $w_{i} \left[ n\right]$, cioè $\abs{w_{i} \left[ n\right]}$ come: 
 
@@ -1661,7 +1667,7 @@ che, semplificata, sarà uguale a:
     \end{equation}
 }
 
-e questa relazione deve valore per ogni i-esimo nodo. \newline 
+e questa relazione deve valere per ogni i-esimo nodo. \newline 
 
 \begin{tcolorbox}
 Si utilizza spesso il complemento a due perchè è quella che si utilizza spesso nelle rappresentazioni perchè il valore rappresentato si trova, sempre, nell'intervallo $\left[ -1, +1\right]$.     
@@ -1695,7 +1701,7 @@ con un'unica pulsazione $\omega_0$. \newline
 \begin{tcolorbox}
 Il fatto che la sequenza $x \left[ n\right]$ sia a banda stretta è un'ipotesi che noi facciamo sul segnale. \newline 
 
-Lo scaling e lo studio andrebbe applicato, a rigore, a tutte le armoniche $\omega$ del segnale $x \left[ n\right]$. 
+Lo scaling e lo studio andrebbero applicati, a rigore, a tutte le armoniche $\omega$ del segnale $x \left[ n\right]$. 
 \end{tcolorbox}
 
 Data una sequenza di ingresso $x \left[ n\right]$ del tipo: 
@@ -1827,7 +1833,7 @@ dove però l'$x \left[ n\right]$ in $\int_{- \pi}^{+ \pi}
             \cdot 
             \sum_{n = -\infty}^{+ \infty} 
             \abs{x \left[ n\right]}^{2}
-            $ può essere applicato un fattore moltiplicato di scala S. \newline 
+            $ può essere applicato un fattore moltiplicativo di scala S. \newline 
 
 Il fattore di scala S, per avere la condizione: 
 
@@ -1913,7 +1919,7 @@ Ultime considerazioni riguardo allo scaling:
 \end{itemize}
 
 \begin{tcolorbox}
-I bit di guardia sono quelli che si trovano agli estremi dell'intervallo per segnale un overflow, che sono vicini all'overflow. \newline 
+I bit di guardia sono quelli che si trovano agli estremi dell'intervallo di quantizzazione per segnale un overflow, che sono vicini all'overflow. \newline 
 
 Sarà più chiaro nel corso di Misure Elettroniche con la prof.ssa Susanna Spinsante. \newline 
 
