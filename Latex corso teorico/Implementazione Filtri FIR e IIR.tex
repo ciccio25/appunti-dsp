@@ -21,7 +21,7 @@ Come studiato in \ref{sec: Sistemi LTI descritti da equazioni alle differenze} \
 ed in \ref{sec: Funzioni di Rete} \nameref{sec: Funzioni di Rete} a pag \pageref{sec: Funzioni di Rete}, 
 una funzione $H \left(z\right)$ razionale corrisponde ad un'equazione lineare alle differenze finita a coefficienti costanti. \newline 
 
-Per questa classe di funzioni è possibile individuae 3 blocchi funzionali: 
+Per questa classe di funzioni è possibile individuare 3 blocchi funzionali: 
 
 \begin{figure}[h]
     \centering
@@ -77,7 +77,7 @@ Se il ritardo $n_0$ vale:
     \end{equation}
 }
 
-allora avremo che, l'elemento di ritardo nel dominio n è equivalente al prodtto per $z^{-1}$. \newline 
+allora avremo che, l'elemento di ritardo nel dominio n è equivalente al prodotto per $z^{-1}$. \newline 
 
 Infatti: 
 
@@ -134,7 +134,7 @@ Invece un esempio di SFG computabile, se si parte da destra a sinistra, è il se
     Latex | 2026-01-07 Pomeriggio | pag 285, 287 
 } 
 
-Come scritto precedentemente, siccome si considerano gli SFG (Signal Flow Graph) come strutture instantaneee, 
+Come scritto precedentemente, siccome si considerano gli SFG (Signal Flow Graph) come strutture istantanee, 
 allora, la condizione necessaria per gli SFG è che ci sia almeno un ciclo di ritardo. \newline 
 
 Usualmente, per l'uscita di un filtro $y \left[ n\right]$ si usa la seguente convenzione nel dominio n: 
@@ -187,7 +187,7 @@ Possiamo svolgere due osservazioni in merito alla seguente struttura:
 \begin{itemize}
     \item tutte le maglie hanno almeno un elemento di ritardo (cioè $z^{-1}$) 
     \item la forma diretta realizza prima gli zeri e poi i poli 
-    \item l'SFG è uni-direzionale, parte da sinistra con la sequenza di ingrezzo $x \left[ n\right]$ ed ha in uscita, a destra dell'SFG, la sequenza $y \left[ n\right]$
+    \item l'SFG è uni-direzionale, parte da sinistra con la sequenza di ingresso $x \left[ n\right]$ ed ha in uscita, a destra dell'SFG, la sequenza $y \left[ n\right]$
 \end{itemize} 
 
 Grazie alla proprietà di trasposizione degli SFG (cioè che si può scambiare l'ingresso con l'uscita e viceversa e rovesciare tutte le frecce degli archi senza alterare la $H \left(z\right)$), 
@@ -215,7 +215,7 @@ Possiamo svolgere le seguenti osservazioni:
 
 \begin{itemize}
     \item la forma diretta I trasposta è, come dice il nome, la forma diretta I in cui l'SFG, grazie alla proprietà di trasposizione, è stato cambiato di verso 
-    \item la forma diretta traspostta realizza prima i poli e poi gli zeri \newline 
+    \item la forma diretta trasposta realizza prima i poli e poi gli zeri \newline 
 \end{itemize}
 
 \textbf{Forma diretta II o Canonica} \newline 
@@ -281,7 +281,7 @@ Scrivere in questa forma $H \left(z\right)$ permette di avere i seguenti vantagg
 La robustezza numerica nella forma in cascata è possibile perchè il singolo elemento che compone la funzione di rete influisce solo sulla sezione del secondo ordine per cui è stata progetta, 
 quindi l'impatto del singolo polo o  zero è locale e non globale. \newline 
 
-Proprio per questo motivo, in generale, se si realizza una forma in cascata, si cerca di utilizzerare non termini del primo ordine, cioè $z^{-1}$, 
+Proprio per questo motivo, in generale, se si realizza una forma in cascata, si cerca di utilizzare non in  termini del primo ordine, cioè $z^{-1}$, 
 bensì $z^{-2}$, come si nota nella seguente formulazione di $H \left(z\right)$: 
 
 {
@@ -448,7 +448,7 @@ Non ci occupiamo quasi mai della fase, ma la condizione di simmetria o anti-simm
 Questa simmetria può essere sfruttata per semplificare la struttura dei filtri con un conseguente risparmio di circa la metà dei moltiplicatori, cioè dei k-esimi coefficienti $b_k$. \newline 
 
 
-Ad esempio, per un fitro FIR I, che avrà questa formulazione matematica: 
+Ad esempio, per un filtro FIR I, che avrà questa formulazione matematica: 
 
 {
     \Large 
@@ -469,7 +469,7 @@ con un esempio di strutta:
     \includegraphics[scale = 0.4]{Filtro FIR I con note struttura.png}
 \end{figure} 
 
-Invece, per un fitro FIR II, che avrà questa formulazione matematica: 
+Invece, per un filtro FIR II, che avrà questa formulazione matematica: 
 
 {
     \Large 
@@ -533,14 +533,14 @@ invece un circuito digitale, grazie alla quantizzazione, può interpretare le gr
     Perchè vedere dei video sulle divisioni? Perchè è il caso più complicato che un calcolatore possa compiere (e non è una cosa scontata come pensi). 
 \end{tcolorbox} 
 
-Il circuito digitale può rappresentare il valore quatizzato con due tipi di rappresentazione: 
+Il circuito digitale può rappresentare il valore quantizzato con due tipi di rappresentazione: 
 
 \begin{itemize}
     \item virgola mobile (in inglese floating point) 
     \item virgola fissa (in inglese fixed point)
 \end{itemize} 
 
-Il caso più complicato è quello della rappresentazione in virgola movile perchè vengono utilizzati tre elementi per rappresentare un numero: 
+Il caso più complicato è quello della rappresentazione in virgola mobile perchè vengono utilizzati tre elementi per rappresentare un numero: 
 
 \begin{itemize}
     \item segno 
@@ -557,7 +557,7 @@ L'IEEE (l'ente standardizzatore di riferimento), grazie allo standard IEEE 754, 
 
 \begin{itemize}
     \item 32 bit, o anche chiamata come singola precisione 
-    \item 64 bit, o anche chiamata come dobbia precisione 
+    \item 64 bit, o anche chiamata come doppia precisione 
 \end{itemize} 
 
 Come si visualizza dalla seguente schermata: 
@@ -635,7 +635,7 @@ Se consideriamo la sequenza $\hat{x} \left[ n\right]$ compresa tra due massimi, 
     \end{equation}
 }
 
-in cui il passo $\Delta$, cioè la distanza tra un valore compionato e l'altro, la consideriamo come: 
+in cui il passo $\Delta$, cioè la distanza tra un valore campionato e l'altro, la consideriamo come: 
 
 {
     \Large 
@@ -789,11 +789,11 @@ Inoltre abbiamo che il coefficiente a di $H \left(z\right)$ non sarà uguale ad 
     \end{equation}
 }
 
-Ipotizzando che il campionatore e il ricostritutore non creano aliasing, 
+Ipotizzando che il campionatore e il ricostrutore non creano aliasing, 
 la precisione sarà finita perchè il quantizzatore limita i valori che può quantizzatore. \newline 
 
 Questo rappresentato è un circuito non lineare dinamico perchè è presente un fattore di memoria;  
-inoltre, questo tipo di modellazione permette di visualizzare meglio cosa accade in un circito digitale reale. \newline 
+inoltre, questo tipo di modellazione permette di visualizzare meglio cosa accade in un circuito digitale reale. \newline 
 
 \newpage 
 
@@ -902,7 +902,7 @@ Invece, per quanto riguarda la forma in cascata:
     \includegraphics[scale = 0.4]{Filtro in cascata di ordine II IIR.png}
 \end{figure}
 
-ogni coppia di poli e zeri è realizzata indipendemente alle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
+ogni coppia di poli e zeri è realizzata indipendentemente alle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
 
 Quindi, la useremo sempre, specialmente se lavoriamo con numeri fissi. \newline 
 
@@ -913,7 +913,7 @@ Per quanto riguarda la forma parallela:
     \includegraphics[scale = 0.3]{forma parallela esempio filtro IIR solo grafo.png}
 \end{figure} 
 
-ogni coppia di poli è realizzata indipendent dalle altre, ma gli zeri sono realizzati implicitamente e quindi, 
+ogni coppia di poli è realizzata indipendentemente dalle altre, ma gli zeri sono realizzati implicitamente e quindi, 
 sensibili alla quantizzazione di ogni sezione. \newline 
 
 È una via di mezzo tra le due strutture precedenti. \newline 
@@ -992,11 +992,11 @@ Proprio perchè:
     \end{equation}
 }
 
-la relazione tra gli zeri si mantiene indipendente dalll'impatto della quantizzazione. \newline 
+la relazione tra gli zeri si mantiene indipendente dall'impatto della quantizzazione. \newline 
 
 \newpage 
 
-Come negli IIR, anche per i FIR sceglieremo le strutture a casacate come il seguente: 
+Come negli IIR, anche per i FIR sceglieremo le strutture a cascata come il seguente: 
 
 \begin{figure}[h]
     \centering
@@ -1010,7 +1010,7 @@ Avendoci a che fare con poli e zeri complessi e coniugati, non avremo a che fare
 
 Il FIR è molto più robusto dell'IIR, per quanto riguarda la quantizzazione. \newline 
 
-In questa maniera, cioè ponendo poli e zeri complessi e coniugati, si permette di mantenere la lineartità di fase. \newline 
+In questa maniera, cioè ponendo poli e zeri complessi e coniugati, si permette di mantenere la linearità di fase. \newline 
 
 Come si nota dalle seguenti figure: 
 
@@ -1053,7 +1053,7 @@ Ricordando che i circuiti che progettiamo applicano una equazione alle differenz
     \end{equation}
 }
 
-allora avremo che, per risumulare il circuito reale, $y \left[ n\right]$ non sarà uguale a quello progettato, bensì: 
+allora avremo che, per simulare il circuito reale, $y \left[ n\right]$ non sarà uguale a quello progettato, bensì: 
 
 {
     \Large 
@@ -1136,7 +1136,7 @@ Inoltre, dalla formula di $\hat{y} \left[ n\right]$ notiamo che, essendoci una m
 
 \newpage 
 
-Oltre al modello semplifcato, dobbiamo svolgere le seguenti ipotesi (che sono fortemente semplificative e non rispecchiano tanto la realtà, ma sono facili per svolgere delle considerazioni iniziali sulla quantizzazione): 
+Oltre al modello semplificato, dobbiamo svolgere le seguenti ipotesi (che sono fortemente semplificative e non rispecchiano tanto la realtà, ma sono facili per svolgere delle considerazioni iniziali sulla quantizzazione): 
 
 \begin{itemize}
     \item le somme sono senza overflow 
@@ -1156,7 +1156,7 @@ Se si utilizza una funzione di quantizzazione di arrotondamento, e che quindi ap
     \includegraphics[scale = 0.2]{arrotondamento a complemento a 2.png}
 \end{figure} 
 
-abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le sequenti carattersitiche: 
+abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le seguenti caratteristiche: 
 
 {
     \Large 
@@ -1208,14 +1208,14 @@ dove $m_e$ è la media dell'errore $e \left[ n\right]$, $\sigma_{e}^{2}$ è la v
 
 \newpage 
 
-Se si utilizza una funzione di quantizzazione di troncamento, e che quindi applica la sequente relazione a gradini: 
+Se si utilizza una funzione di quantizzazione di troncamento, e che quindi applica la seguente relazione a gradini: 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.2]{troncamento a complemento a 2.png}
 \end{figure} 
 
-abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le sequenti carattersitiche: 
+abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le seguenti caratteristiche: 
 
 {
     \Large 
@@ -1265,7 +1265,7 @@ Confrontando l'arrotondamento e il troncamento, visto che gli intervalli sono di
 hanno una media diversa: di conseguenza l'autocorrelazione sarà diversa anche essa, perchè l'autocorrelazione dipende la media. \newline 
 
 Inoltre, ricordando dal Teorema di Parseval la relazione tra varianza e potenza  \ref{teo: Teorema di Parseval} \nameref{teo: Teorema di Parseval} a pag \pageref{teo: Teorema di Parseval}, 
-più è bassa la varanza e più sarà la potenza emessa dal circuito progettato. \newline 
+più è bassa la varianza e più sarà la potenza emessa dal circuito progettato. \newline 
 
 \newpage 
 
@@ -1372,7 +1372,7 @@ Partendo da $y \left[ n\right]$ ideale, $\hat{y} \left[ n\right]$ in uscita dal 
 Quindi, dalla formula di $e_{y} \left[ n\right]$, il rumore in uscita dal filtro è la somma dei singoli rumori di quantizzazione filtrata dalla parte a soli poli. \newline 
 
 Come scritto in \ref{subsec: Rumore di Quantizzazione} \nameref{subsec: Rumore di Quantizzazione} a pag \pageref{subsec: Rumore di Quantizzazione} e concentrandosi solo sul rumore $e_{y} \left[ n\right]$, 
-avremo che le altre carattersitiche legate a $e_{y} \left[ n\right]$ valgono, senza dimostrazione: 
+avremo che le altre caratteristiche legate a $e_{y} \left[ n\right]$ valgono, senza dimostrazione: 
 
 {
     \Large 
@@ -1625,7 +1625,7 @@ allora risulta che:
     \end{equation}
 }
 
-Per una rappresntazione tipica a complemento a 2, avremo che: 
+Per una rappresentazione tipica a complemento a 2, avremo che: 
 
 {
     \Large 
@@ -1689,7 +1689,7 @@ Di conseguenza, questo metodo di scaling è troppo conservativo, quindi si prefe
 
 \textbf{Seconda soluzione per lo Scaling} \newline 
 
-Un possibile approcio alternativo rispetto a quello precedente è quello di modellare il segnale come segnale a banda stretta, 
+Un possibile approccio alternativo rispetto a quello precedente è quello di modellare il segnale come segnale a banda stretta, 
 con un'unica pulsazione $\omega_0$. \newline 
 
 \begin{tcolorbox}
@@ -1764,7 +1764,7 @@ Pertanto, il fattore di scala S diventa il seguente:
     \end{equation}
 }
 
-Questo tipo di approcio è meno conservativo rispetto al precedente perchè, abbiamo fissato un unico valore $x_{\text{max}}$ per tutte le pulsazioni $\omega$:  
+Questo tipo di approccio è meno conservativo rispetto al precedente perchè, abbiamo fissato un unico valore $x_{\text{max}}$ per tutte le pulsazioni $\omega$:  
 in teoria, per essere più conservativi,dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. \newline 
 
 \textbf{Terza soluzione per lo Scaling} \newline 
@@ -1953,7 +1953,7 @@ Di seguito una "lista della spesa" (aka cosa fare) per quanto riguarda la realiz
 \textbf{Filtri FIR} \newline 
 
 \begin{itemize}
-    \item si piò utilizzare la forma diretta, soprattutto se i filtri sono a fase lineare 
+    \item si può utilizzare la forma diretta, soprattutto se i filtri sono a fase lineare 
     \item utilizzare se possibile, accumulatori a molti bit 
     \item per la forma a cascata, l'ordine delle sezioni non è particolarmente importante 
 \end{itemize}
