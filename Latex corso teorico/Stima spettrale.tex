@@ -158,7 +158,7 @@ Da questo momento in poi, non considereremo più $x \left[ n\right]$ di lunghezz
     \end{equation}
 }
 
-e la finestra $w \left[ n\right]$ deve essere sempre non nullo. \newline 
+e la finestra $w \left[ n\right]$ deve essere sempre non nulla. \newline 
 
 Calcoliamo $\hat{X} \left(e^{\jmath \omega}\right)$, che è la stima di $X \left(e^{\jmath \omega}\right)$: 
 
@@ -220,7 +220,7 @@ Poichè $\hat{x} \left[ n\right]$ è di durata finita, di lunghezza L (che è la
     \end{equation}
 }
 
-e quindi $\hat{X} \left(e^{\jmath \omega}\right)$ sarà distorto rispetto a $X \left(e^{\jmath \omega}\right)$ perchè la finestra è più corta di $x \left[ n\right]$, che è lunga N. \newline 
+e quindi $\hat{X} \left(e^{\jmath \omega}\right)$ sarà distorto rispetto a $X \left(e^{\jmath \omega}\right)$ perchè la finestra $w \left[ n\right]$ è più corta di $x \left[ n\right]$, che è lunga N. \newline 
 
 Affinchè la formula di $\hat{X} \left[ k\right]$ sia valida, occorre che: 
 
@@ -233,7 +233,7 @@ Affinchè la formula di $\hat{X} \left[ k\right]$ sia valida, occorre che:
 
 oppure si fa zero padding su $x \left[ n\right]$ se N è minore di L, in modo da arrivare a $N \geq L$. \newline 
 
-Aumentare N non aggiunge l'informazione, non migliora l'informazione, non migliora la stima: permette di distinguere le frequenze. \newline 
+Aumentare N non aggiunge ulteriore informazione alla stima, non migliora l'informazione, non migliora la stima: permette di distinguere le frequenze. \newline 
 
 Per migliorare la stima, bisognerebbe aumentare L, cioè la lunghezza della finestra perchè abbiamo più informazioni di $x \left[ n\right]$ (o come la chiama il prof "abbiamo più birra"). \newline 
 
@@ -268,14 +268,13 @@ abbiamo che avremo a che fare con una convoluzione nello spettro, cioè valgono 
 $\hat{X} \left(e^{\jmath \omega}\right)$ è una stima di $X \left(e^{\jmath \omega}\right)$ perchè è finestrato. \newline 
 
 \begin{tcolorbox}
-Nel fantastico mondo del DSP, è possibili scrivere gli integrali come nella formula di $\hat{X} \left(e^{\jmath \omega}\right)$, 
+Nel fantastico mondo del DSP, è possibile scrivere gli integrali come nella formula di $\hat{X} \left(e^{\jmath \omega}\right)$, 
 ma non è possibile calcolare il valore esatto perchè useremo dei numeri finiti (e quindi per forza l'integrale sarà approssimato e calcolato come una sommatoria). \newline 
 
 È questa la piccola differenza tra rappresentazione e calcolo: sembrano intendere la stessa cosa, ma c'è una linea sottile tra le due che li distingue. 
 \end{tcolorbox}
 
-Come studiato nel capitolo della progettazione dei filtri, possiamo decidere una tra le seguenti finestre studiate in \ref{subsec: Elenco delle finestre principali} \nameref{subsec: Elenco delle finestre principali} a pag \pageref{subsec: Elenco delle finestre principali}, 
-cioè possiamo scegliere una tra le seguenti finestre: 
+Come studiato nel capitolo della progettazione dei filtri, possiamo decidere una tra le seguenti finestre studiate in \ref{subsec: Elenco delle finestre principali} \nameref{subsec: Elenco delle finestre principali} a pag \pageref{subsec: Elenco delle finestre principali}: 
 
 \begin{itemize}
     \item rettangolare 
@@ -283,11 +282,12 @@ cioè possiamo scegliere una tra le seguenti finestre:
     \item Hamming 
     \item Hanning 
     \item Kaiser 
+    \item altre tipe di finestre che non abbiamo studiato in questo corso 
 \end{itemize}
 
 \newpage 
 
-Ma, siccome noi valuteremo una stima di $\hat{X} \left(e^{\jmath \omega}\right)$, perchè non useremo gli integrali bensì una sommatria, allora, il fatto di avere dei valori finiti, 
+Ma, siccome noi valuteremo una stima di $\hat{X} \left(e^{\jmath \omega}\right)$, perchè abbiamo finestrato $x \left[ n\right]$, allora, il fatto di avere una finestra $w \left[ n\right]$ di lunghezza finita (di conseguenza una $\hat{x} \left[ n\right]$ di lunghezza anche essa finita), 
 può dare problemi per la localizzazione di picchi o di punti particolari, come visto in questa figura: 
 
 \begin{figure}[h]
@@ -303,7 +303,7 @@ Non ha a che fare con una specifica finestra vista.
 
 Questo problema prende il nome di granulosità, che avevamo già affrontato, implicitamente, con il fenomeno di Gibbs in \ref{subsec: Conseguenze del Windowing} \nameref{subsec: Conseguenze del Windowing} a pag \pageref{subsec: Conseguenze del Windowing}. \newline 
 
-Come nela caso della progettazione dei filtri FIR, possiamo considerare i seguenti parametri, detti anche gradi di libertà, per la finestra $w \left[ n\right]$: 
+Come nel caso della progettazione dei filtri FIR, possiamo considerare i seguenti parametri, detti anche gradi di libertà, per la finestra $w \left[ n\right]$: 
 
 \begin{itemize}
     \item la lunghezza della finestra L, aumentando la lunghezza della finestra, nella DFT avremo un lobo principale più stretto 
@@ -416,7 +416,7 @@ Inoltre, inserire le formule degli integrali dal corso di Teoria dei segnali.
 \end{tcolorbox} 
 
 \begin{tcolorbox}
-Generalmente noi avremo a che fare con segnali a media nulla perchè sennò, in Fourier, avremo una Delta di Dirac in $n = 0$, che rappresenterebba la continua in Fourier.     
+Generalmente noi avremo a che fare con segnali a media nulla perchè sennò, in Fourier, avremo una Delta di Dirac in $n = 0$, che rappresenterebbe la continua in Fourier.     
 \end{tcolorbox}
 
 Poichè, spesso non è possibile conoscere le media di insieme, ci si accontenta di conoscere le medie temporali della sequenza random a disposizione per processi stazionari in senso lato. \newline 
@@ -534,7 +534,7 @@ se sono a potenza finita, i segnali possono essere deterministici, periodici o r
     Video Lezione CADSP Lunedì 12 Dicembre 2022 | 1:42:20 - 1:48:40  
 }
 
-Per segnali a potenza finita (per cui non si ha la trasformata di Fourier perchè non è definibile direttamente), allora si fa uso delle definizioni di auto-correlazione a auto-covarianza, per cui la trasformata di Fourier esiste. \newline 
+Per segnali a potenza finita (per cui non si ha la trasformata di Fourier perchè non è definibile direttamente), allora si fa uso delle definizioni di auto-correlazione e auto-covarianza, per cui la trasformata di Fourier esiste. \newline 
 
 La trasformata di Fourier dell'autocorrelazione $\phi_{xx} \left[ m\right]$ è la seguente: 
 
@@ -555,7 +555,7 @@ La trasformata di Fourier dell'autocorrelazione $\phi_{xx} \left[ m\right]$ è l
     \end{equation}
 }
 
-che, $P_{xx} \left(\omega\right) $ va stimato. \newline 
+$P_{xx} \left(\omega\right) $ va stimato. \newline 
 
 Invece, la trasformata di Fourier dell'autocovarianza $\phi_{xx} \left[ n, m\right]$ è la seguente: 
 
@@ -667,7 +667,7 @@ Una buona stima di $P \left(\omega\right)$, cioè $\hat{P} \left(\omega\right)$ 
             0
         \end{equation}
     } 
-    cioè, che la variabile aleatoria $x \left[ n\right]$ sia il più possibile che deterministica, che abbia poca varianza, cioè vicina alla media, se il fenomeno è gaussiano, avremo una campana più stretta 
+    cioè, che la variabile aleatoria $x \left[ n\right]$ sia il più possibile deterministica, cioè che abbia poca varianza, che a sua volta implica chei valori di $x \left[ n\right]$ siano più vicini alla media; se il fenomeno è gaussiano, avremo una campana più stretta 
 \end{itemize}
 
 Queste relazioni dovrebbero valere per ogni pulsazione $\omega$ di $x \left[ n\right]$. \newline 
@@ -1013,7 +1013,7 @@ Grazie a questa dimostrazione, vale sempre questa proprietà:
 o, scritta in parole estese, siccome sia lo spettro vero di $x \left[ n\right]$, cioè $P_{xx} \left(\omega\right)$, e lo spettro al quadrato della finestra $w \left[ n\right]$ utilizzata, cioè $\abs{W \left(e^{\jmath \omega}\right)}^{2}$, sono sempre positivi, 
 allora anche la stima dello spettro, cioè $\hat{P}_{PE} \left(\omega\right)$, sarà sempre positiva. \newline 
 
-Dall'osservazione per cui i campioni a leg elevato dall'autocorrelazione aperiodica, risultato dalla somma di pochi prodotti, si può dedurre che la varianza della stima di $\hat{P}_{PE} \left(\omega\right)$ è molto grande. \newline 
+Dall'osservazione per cui i campioni a leg elevato dall'autocorrelazione aperiodica, risulta dalla somma di pochi prodotti, si può dedurre che la varianza della stima di $\hat{P}_{PE} \left(\omega\right)$ è molto grande. \newline 
 
 Si può dimostrare che: 
 
@@ -1127,10 +1127,6 @@ Di seguito degli esempi di periodogrammi pesati, attraverso il periodogram avera
     \includegraphics[scale = 0.5]{average periodogram con diverse lunghezze di finestre e overlap.png}
 \end{figure} 
 
-\begin{tcolorbox}
-La correlazione dipende dalla sovrapposizione tra le finestre     
-\end{tcolorbox}
-
 \newpage 
 
 \subsection{Sommario Periodogramma} \label{subsec: Sommario Periodogramma}
@@ -1223,7 +1219,7 @@ L'idea è quella di calcolare lo spettro di un breve segmento del segnale e cons
 Il segmento deve essere abbastanza corto da poter considerare "stazionario" il segnale in esso: 
 ad esempio, per il parlato umano si può considerare un segnale stazionario per 20 ms. \newline 
 
-Grazie a questa momentanea stazionarietà, si possono utilizzare gli strumenti stazionario ai segnali non stazionari. \newline 
+Grazie a questa momentanea stazionarietà, si possono utilizzare gli strumenti stazionari ai segnali non stazionari. \newline 
 
 Quindi, in parole povere, è quello di campionare lo spettro nel tempo. \newline 
 
@@ -1458,7 +1454,7 @@ La Short Time Fourier può essere interpretata come un'operazione di filtraggio 
     Video Lezione CADSP Martedì 13 Dicembre 2022 |  00:56:00 - 01:08:25 
 }
 
-Se la finestra $w \left[ n\right]$ è una sequenza di lunghezza finita (che lo deve essere per forza sennò non la potremmo inserire in un calcolatore), allora è possibili utilizzare la DFT e quindi l'algoritmo FFT. \newline 
+Se la finestra $w \left[ n\right]$ è una sequenza di lunghezza finita (che lo deve essere per forza sennò non la potremmo inserire in un calcolatore), allora è possibile utilizzare la DFT e quindi l'algoritmo FFT. \newline 
 
 Restringendo ai casi in cui volessimo campionare un segnale $x \left[ n\right]$ (in modo da avere pulsazioni $\omega$ limitati, quindi filtri limitati), 
 avremo che, campionando nel tempo $x \left[ n\right]$ abbiamo che la STFT diventa: 
