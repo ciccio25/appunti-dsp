@@ -28,7 +28,7 @@
 
 In molte applicazioni si è interessati al calcolo dello spettro di un segnale campionato, in particolare si vuole fare una stima dello spettro di densità di energia o lo spettro di densità di potenza. \newline 
 
-Si parla di stima dello spettro e non di spettro reale perchè, nella realtà, avendo a che fare con segnali casuali, non possiamo conoscere a priori il segnale, e quindi il massmo che possiamo fare è stimarlo. \newline 
+Si parla di stima dello spettro e non di spettro reale perchè, nella realtà, avendo a che fare con segnali casuali, non possiamo conoscere a priori il segnale, e quindi il massimo che possiamo fare è stimarlo. \newline 
 
 Inoltre si parla di stima perchè le sequenze hanno una durata che può essere: 
 
@@ -94,9 +94,9 @@ Si noti che, essendo la sequenza $x \left[ n\right]$ finita, non calcoleremo la 
     \end{equation}
 }
 
-La funzione $X \left(e^{\jmath \omega}\right)$ è una funzione calcolabile analitcamente perchè la sequenza è di durata finita. \newline 
+La funzione $X \left(e^{\jmath \omega}\right)$ è una funzione calcolabile analiticamente perchè la sequenza è di durata finita. \newline 
 
-Questo è il caso ideale e non saremmo mai in grado di calcolare analitcamente la funzione $X \left(e^{\jmath \omega}\right)$ nella realtà. \newline 
+Questo è il caso ideale e non saremmo mai in grado di calcolare analiticamente la funzione $X \left(e^{\jmath \omega}\right)$ nella realtà. \newline 
 
 Come studiato in \ref{ch: FFT} \nameref{ch: FFT} da pag \pageref{ch: FFT}, la FFT è uno strumento molto utile per calcolare la DFT di $x \left[ n\right]$. \newline 
 
@@ -131,10 +131,10 @@ La DTFT di $x \left[ n\right]$, cioè:
 
 non si può calcolare direttamente perchè i valori n-esimi sono infiniti (la sommatoria si svolge nell'intervallo $\left[ - \infty, + \infty\right]$). \newline 
 
-Quindi, l'idea è quella di troncare la sequenza $x \left[ n\right]$ alla lunghezza L, utilizzando una finsitra, proprio come abbiamo studiato in \ref{sec: Progetto di filtri FIR: Windowing} \nameref{sec: Progetto di filtri FIR: Windowing} da pag \pageref{sec: Progetto di filtri FIR: Windowing}, 
+Quindi, l'idea è quella di troncare la sequenza $x \left[ n\right]$ alla lunghezza L, utilizzando una finestra, proprio come abbiamo studiato in \ref{sec: Progetto di filtri FIR: Windowing} \nameref{sec: Progetto di filtri FIR: Windowing} da pag \pageref{sec: Progetto di filtri FIR: Windowing}, 
 ma questa volta non per la risposta impulsiva dei filtri, bensì troncare direttamente la sequenza $x \left[ n\right]$. \newline 
 
-Oltre al troncamente, dobbiamo considerare il caso più semplice, cioè quella di una sequenza $x \left[ n\right]$ stazionaria. \newline 
+Oltre al troncamento, dobbiamo considerare il caso più semplice, cioè quella di una sequenza $x \left[ n\right]$ stazionaria. \newline 
 
 \begin{tcolorbox}
     La stazionarietà l'avevamo studiata anche nel corso di Teoria dei segnali con il prof. Franco Chiaraluce, ma per un breve ripasso al volo di cosa si intende per stazionarietà: \newline 
@@ -145,7 +145,7 @@ Oltre al troncamente, dobbiamo considerare il caso più semplice, cioè quella d
 
 Il troncamento implica un prodotto tra $x \left[ n\right]$ (di lunghezza infinita) e la finestra $w \left[ n\right]$ (di lunghezza finita). \newline 
 
-Da questo momento in poi, non consideremo più $x \left[ n\right]$ di lunghezza infinita, bensì la sua stima $\hat{x} \left[ n\right]$: 
+Da questo momento in poi, non considereremo più $x \left[ n\right]$ di lunghezza infinita, bensì la sua stima $\hat{x} \left[ n\right]$: 
 
 {
     \Large 
@@ -306,7 +306,7 @@ Questo problema prende il nome di granulosità, che avevamo già affrontato, imp
 Come nela caso della progettazione dei filtri FIR, possiamo considerare i seguenti parametri, detti anche gradi di libertà, per la finestra $w \left[ n\right]$: 
 
 \begin{itemize}
-    \item la lunghezza della finestra L, aumentando la lunghezza della finestra, nella DFT avremo un lobo principarle più stretto 
+    \item la lunghezza della finestra L, aumentando la lunghezza della finestra, nella DFT avremo un lobo principale più stretto 
     \item il tipo di finestra, quindi la forma della finestra, perchè attenuazioni dei lobi laterali alta implica un lobo principale più largo 
     \item la lunghezza della DFT (e quindi della FFT) in modo tale che $N > L$, perchè maggiore è N e minore è la granulosità 
 \end{itemize}
@@ -349,7 +349,7 @@ Ovviamente, nella realtà $x \left[ n\right]$ non sarà deterministica.
 }
 
 \begin{tcolorbox}
-    Come abbiamo scritto precedentemnte, nella realtà non avremo a che fare con sequenze $x \left[ n\right]$ deterministiche, o di lunghezza finita o infinita, 
+    Come abbiamo scritto precedentemente, nella realtà non avremo a che fare con sequenze $x \left[ n\right]$ deterministiche, o di lunghezza finita o infinita, 
     bensì avremo a che fare con sequenze $x \left[ n\right]$ casuali: per questo, non prevedendo il futuro, l'unica cosa che possiamo fare a posteriori della sequenza casuale $x \left[ n\right]$ è studiarla con gli strumenti della statistica, 
     che abbiamo già studiato al corso di Teoria dei Segnali con il mitico prof. Franco Chiaraluce. \newline 
 
@@ -374,7 +374,7 @@ ad essa è generalmente associata una sua descrizione statistica del processo, p
 
 Tale descrizione statistica è completa quando conosciamo la distribuzione di probabilità del processo. \newline 
 
-La descrizione diventa paraiale se conosciamo le medie di insieme del fenomeno $x_{n}$. \newline 
+La descrizione diventa paragonabile se conosciamo le medie di insieme del fenomeno $x_{n}$. \newline 
 
 Di seguito i parametri che andremo ad utilizzare: 
 
@@ -557,7 +557,7 @@ La trasformata di Fourier dell'autocorrelazione $\phi_{xx} \left[ m\right]$ è l
 
 che, $P_{xx} \left(\omega\right) $ va stimato. \newline 
 
-Invece, la trasformata di Fouerier dell'autocovarianza $\phi_{xx} \left[ n, m\right]$ è la seguente: 
+Invece, la trasformata di Fourier dell'autocovarianza $\phi_{xx} \left[ n, m\right]$ è la seguente: 
 
 {
     \Large 
@@ -676,7 +676,7 @@ Queste relazioni dovrebbero valere per ogni pulsazione $\omega$ di $x \left[ n\r
 A rigore, questo studio e stima dovrà essere fatta per ogni pulsazione $\omega$ perchè, per ogni pulsazione, avremo una PDF diversa.     
 \end{tcolorbox}
 
-Le uguaglianze scritte, nella realtà, non saranno uguaglianze esatte, bensì i valori calcolati tenderenno o saranno simili alle formule. \newline 
+Le uguaglianze scritte, nella realtà, non saranno uguaglianze esatte, bensì i valori calcolati tenderanno o saranno simili alle formule. \newline 
 
 All'aumentare del numero di campioni conosciuti di $x \left[ n\right]$, la stima dello spettro, cioè $\hat{P}_{xx} \left(\omega\right)$, deve tendere allo spettro vero, cioè $P_{xx} \left(\omega\right)$, con una variabilità sempre minore. \newline 
 
@@ -890,7 +890,7 @@ Con tutte queste considerazioni,
 }
 
 Come avevamo accennato in \ref{sec: Stima dello spettro dei segnali random} \nameref{sec: Stima dello spettro dei segnali random} a pag \pageref{sec: Stima dello spettro dei segnali random}, 
-una qualasiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(\omega\right)$ ( che è la stima di $P_{xx} \left(\omega\right)$ )  è uguale a: 
+una qualsiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(\omega\right)$ ( che è la stima di $P_{xx} \left(\omega\right)$ )  è uguale a: 
 
 {
     \Large 
@@ -924,7 +924,7 @@ Quindi il valore atteso della stima, cioè $E \left[ \hat{P}_{PE} \left(\omega\r
 È una convoluzione perchè $P_{xx} \left(\theta\right)$, in $E \left[ \hat{P}_{PE} \left(\omega\right)\right]$, non è semplicemente moltiplicato per $\abs{W \left(e^{\jmath \omega }\right)}^{2}$, 
 bensì è moltiplicato per $\abs{W \left(e^{\jmath \left(\omega - \theta\right)}\right)}^{2}$. \newline 
 
-Si può dimostrare (cioè non lo dimostreremo) che, affinchè la stima sia asintoticamente non polatizzata, cioè:
+Si può dimostrare (cioè non lo dimostreremo) che, affinchè la stima sia asintoticamente non polarizzata, cioè:
 
  {
         \Large 
@@ -1013,7 +1013,7 @@ Grazie a questa dimostrazione, vale sempre questa proprietà:
 o, scritta in parole estese, siccome sia lo spettro vero di $x \left[ n\right]$, cioè $P_{xx} \left(\omega\right)$, e lo spettro al quadrato della finestra $w \left[ n\right]$ utilizzata, cioè $\abs{W \left(e^{\jmath \omega}\right)}^{2}$, sono sempre positivi, 
 allora anche la stima dello spettro, cioè $\hat{P}_{PE} \left(\omega\right)$, sarà sempre positiva. \newline 
 
-Dall'osservazione per cui i campioni a lag elevato dall'autocorrelazione aperiodica, risultato dalla somma di pochi prodotti, si può dedurre che la varianza della stima di $\hat{P}_{PE} \left(\omega\right)$ è molto grande. \newline 
+Dall'osservazione per cui i campioni a leg elevato dall'autocorrelazione aperiodica, risultato dalla somma di pochi prodotti, si può dedurre che la varianza della stima di $\hat{P}_{PE} \left(\omega\right)$ è molto grande. \newline 
 
 Si può dimostrare che: 
 
@@ -1030,7 +1030,7 @@ Con questa relazione, e senza dimostrazione, si lega la stima della varianza all
 Quindi più il segnale sarà potente, e più varianza ci sarà nel segnale. 
 \end{tcolorbox}
 
-Pertanto la stima tramite Periodogramma è, in generale, non costintente. \newline 
+Pertanto la stima tramite Periodogramma è, in generale, non consistente. \newline 
 
 \newpage 
 
@@ -1079,9 +1079,9 @@ dove R indica gli indici di overlap, che generalmente, è uguale:
     \end{equation}
 }
 
-Si possono utilizzare qualasiasi valori di R, ma quello del 50 \% di overlap, cioè $R = \dfrac{M}{2}$, è un valore standard (come si vede nella figura di esempio). \newline 
+Si possono utilizzare qualsiasi valori di R, ma quello del 50 \% di overlap, cioè $R = \dfrac{M}{2}$, è un valore standard (come si vede nella figura di esempio). \newline 
 
-Il meotodo di Bartlett (chiamato anche metodo di Weltch) ci permette di calcolare lo spettro di $\hat{x} \left[ n\right]$ come: 
+Il metodo di Bartlett (chiamato anche metodo di Weltch) ci permette di calcolare lo spettro di $\hat{x} \left[ n\right]$ come: 
 
 {
     \Large 
@@ -1116,11 +1116,11 @@ Dalla formula di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, possiamo n
 La correlazione è legata alla sovrapposizione delle finestre.     
 \end{tcolorbox}
 
-Grazie al meotodo di Bartlett, possiamo scegliere riguardo alla finestra la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
+Grazie al metodo di Bartlett, possiamo scegliere riguardo alla finestra la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
 
-Più overlap esiste tra le finestre, minore sarà la risuluzione perchè le finestre sono più corte, ma avranno più varianza: è un trade-off. \newline 
+Più overlap esiste tra le finestre, minore sarà la risoluzione perchè le finestre sono più corte, ma avranno più varianza: è un trade-off. \newline 
 
-Di seguito degli esempi di periodigrammi pesati, attraverso il periodigram averaging con diverse finestre e overlap: 
+Di seguito degli esempi di periodogrammi pesati, attraverso il periodogram averaging con diverse finestre e overlap: 
 
 \begin{figure}[h]
     \centering
@@ -1145,7 +1145,7 @@ La correlazione dipende dalla sovrapposizione tra le finestre
 Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato: 
 
 \begin{itemize}
-    \item data una sequenza molto lunga (ideallmente infinita) $x \left[ n\right]$, si ottengono Q punti per formare la sequenza $\hat{x} \left[ n\right]$
+    \item data una sequenza molto lunga (idealmente infinita) $x \left[ n\right]$, si ottengono Q punti per formare la sequenza $\hat{x} \left[ n\right]$
     \item si suddivide $\hat{x} \left[ n\right]$ in K segmenti lunghi M punti e sovrapposti di $M - R$ punti dove: 
     \begin{itemize}
         \item se si vuole avere una bassa varianza, allora dovremo scegliere un M piccolo 
@@ -1174,7 +1174,7 @@ Come studiato in \ref{ch: Progetti Filtri FIR} \nameref{ch: Progetti Filtri FIR}
 \begin{itemize}
     \item risoluzione 
     \item leakege in base al tipo di finestra 
-    \item granulosità ini base al valore di N
+    \item granulosità in base al valore di N
 \end{itemize}
 
 \newpage 
@@ -1460,7 +1460,7 @@ La Short Time Fourier può essere interpretata come un'operazione di filtraggio 
 
 Se la finestra $w \left[ n\right]$ è una sequenza di lunghezza finita (che lo deve essere per forza sennò non la potremmo inserire in un calcolatore), allora è possibili utilizzare la DFT e quindi l'algoritmo FFT. \newline 
 
-Restringegndo ai casi in cui volessimo campionare un segnale $x \left[ n\right]$ (in modo da avere pulsazioni $\omega$ limitati, quindi filtri limitati), 
+Restringendo ai casi in cui volessimo campionare un segnale $x \left[ n\right]$ (in modo da avere pulsazioni $\omega$ limitati, quindi filtri limitati), 
 avremo che, campionando nel tempo $x \left[ n\right]$ abbiamo che la STFT diventa: 
 
 {
@@ -1499,7 +1499,7 @@ dove:
 Questa formula del campionamento nel tempo della STFT è molto utile perchè permette di scrivere infiniti filtri $\omega$ in filtri discretizzati (quindi limitati) che dipendono da una variabile discreta, 
 cioè k. \newline 
 
-Oltre a campionare nel tempo, con la STFT si pul campionare in frequenza come: 
+Oltre a campionare nel tempo, con la STFT si può campionare in frequenza come: 
 
 {
     \Large 
@@ -1565,7 +1565,7 @@ cioè il k-esimo filtro $h_{k} \left[ n\right]$ è un filtro non causale (e che 
 
 \newpage 
 
-Da un punto di vista realizzativo, fare la STFT campionata nel tempo, se abbiamo una finestra causale, singifica avere un bbaco filtri come il seguente: 
+Da un punto di vista realizzativo, fare la STFT campionata nel tempo, se abbiamo una finestra causale, significa avere un banco filtri come il seguente: 
 
 \begin{figure}[h]
     \centering
