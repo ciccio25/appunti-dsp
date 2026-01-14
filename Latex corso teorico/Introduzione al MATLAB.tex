@@ -23,13 +23,13 @@
     Visto che ci possono essere alcune differenze nell'uso dei comandi (cioè lo stesso comando tra una versione e l'altra può cambiare lievemente funzione), 
     in questo anno accademico 2025/2026, 
     il professore sta utilizzando la versione di MATLAB 2022b, invece nell'aula CESMI, cioè l'aula in cui si svolgerà l'esame, 
-    è installata la versione 2023b. \newline 
+    è installata la versione 2023a. \newline 
 
     Il mio consiglio è quello di installare tutte e due le versioni con i due toolbox che serviranno all'esame, che sono: 
     
     \begin{itemize}
-        \item Signal Processing Toolbox, link della relativa documentazione \url{https://it.mathworks.com/help/signal/index.html}
-        \item DSP System Toolbox, link della relativa documentazione \url{https://it.mathworks.com/help/dsp/index.html}  
+        \item Signal Processing Toolbox, link della relativa documentazione \\\url{https://it.mathworks.com/help/signal/index.html}
+        \item DSP System Toolbox, link della relativa documentazione \\\url{https://it.mathworks.com/help/dsp/index.html}  
     \end{itemize}
     
     Vi consiglio di scaricare ADESSO le versioni di Matlab che vi servono perchè a Maggio 2025 c'è stato un attacco informatico che ha disattivato tutti i servizi di Mathworks per un mese intero\\ 
@@ -49,8 +49,10 @@
     MATLAB Crash Course for Beginners by freeCodeCamp.org \\ 
     \url{https://www.youtube.com/watch?v=7f50sQYjNRA} \newline 
 
+    \begin{comment}
     Negli appunti cercherò anche, se possibile, di spiegare il codice passo passo (anche perchè all'esame ci verrà richiesto di scrivere uno script Matlab). \newline 
-
+    \end{comment}
+    
     Ora basta con le doverose introduzioni, proseguiamo. 
 \end{tcolorbox}
 
@@ -300,7 +302,7 @@ diag(M)
 calcola elenca gli elementi di una diagonale di una matrice. \newline 
 
 \begin{tcolorbox}
-    Per apprfondire il comando diag: \url{https://it.mathworks.com/help/matlab/ref/diag.html} \newline 
+    Per apprfondire il comando diag: \\\url{https://it.mathworks.com/help/matlab/ref/diag.html} \newline 
 
     Se non ti ricordi cosa significa la diagonale di una matrice: \newline 
 
@@ -320,7 +322,7 @@ calcola gli autovalori della matrice M. \newline
 
 \begin{tcolorbox}
 
-    Per approfondire il comando eig: \url{https://it.mathworks.com/help/matlab/ref/eig.html}\newline 
+    Per approfondire il comando eig: \\\url{https://it.mathworks.com/help/matlab/ref/eig.html}\newline 
 
     Se non ti ricordi cosa significa la diagonale di una matrice: \newline 
 
@@ -363,7 +365,7 @@ A(:, :, 1)
 permettono di creare una matrice multidimensionale con dimensione 2x3x2 con valori casuali. \newline 
 
 \begin{tcolorbox}
-   Per approfondire gli array multidimensionali: \url{https://it.mathworks.com/help/matlab/math/multidimensional-arrays.html}
+   Per approfondire gli array multidimensionali: \\\url{https://it.mathworks.com/help/matlab/math/multidimensional-arrays.html}
 \end{tcolorbox}
 
 \newpage 
@@ -378,10 +380,10 @@ Oltre a questo, è possibile svolgere delle operazioni matriciali come le seguen
 \end{figure} 
 
 Inoltre, utilizzando il punto prima dell'operatore, 
-si può effettuare una operazione elemento per elemento (cioè element-wise) tra i vettori e matrici coinvolti. \newline 
+si può effettuare un'operazione elemento per elemento (cioè element-wise) tra i vettori e matrici coinvolti. \newline 
 
 \begin{tcolorbox}
-    Un approfondimento su questo argomento: \url{https://it.mathworks.com/help/matlab/matlab_prog/array-vs-matrix-operations.html}
+    Un approfondimento su questo argomento: \\\url{https://it.mathworks.com/help/matlab/matlab_prog/array-vs-matrix-operations.html}
 \end{tcolorbox}
 
 Di seguito un esempio di comandi utilizzati comunemente su Matlab: 
@@ -423,9 +425,11 @@ oppure:
 A = 3 + 3j
 \end{lstlisting}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegazione codice Esempio 2.1 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -436,16 +440,16 @@ TO-DO: Spiegazione codice Esempio 2.1
     Appunti | 2025-10-01 | pag 3
 }
 
-In Matlab, ci sono diversi modi di graficare i vettori i vettori, che sono: 
+In Matlab, ci sono diversi modi di graficare i vettori, che sono: 
 
 \begin{itemize}
-    \item plot, in cui vengono interpolati (cioè collegati) i punti in "modo" continuo \url{https://it.mathworks.com/help/matlab/ref/plot.html} 
-    \item stem, in cui viene data una rappresentazione ad impulsi \url{https://it.mathworks.com/help/matlab/ref/stem.html}
-    \item bar, in cui viene data una rappresentazione con i diagrammi a barre \url{https://it.mathworks.com/help/matlab/ref/bar.html} 
+    \item plot, in cui vengono interpolati (cioè collegati) i punti in "modo" continuo \\\url{https://it.mathworks.com/help/matlab/ref/plot.html} 
+    \item stem, in cui viene data una rappresentazione ad impulsi \\\url{https://it.mathworks.com/help/matlab/ref/stem.html}
+    \item bar, in cui viene data una rappresentazione con i diagrammi a barre \\\url{https://it.mathworks.com/help/matlab/ref/bar.html} 
 \end{itemize}
 
 \begin{tcolorbox}
-    Se vuoi sapere tutti i modi per graficare un vettore: \url{https://it.mathworks.com/help/matlab/creating_plots/types-of-matlab-plots.html}
+    Se vuoi sapere tutti i modi per graficare un vettore: \\\url{https://it.mathworks.com/help/matlab/creating_plots/types-of-matlab-plots.html}
 \end{tcolorbox}
 
 Se si invoca un solo vettore, esso verrà graficato rispetto all'indice. \newline 
@@ -516,13 +520,15 @@ I seguenti comandi sono utili per gestire più figure in Matlab:
 
 \end{tcolorbox}
 
-
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegazione codice Esempio 2.2 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
+\begin{comment}
 \section{Esercizi di esempio}
 
 \footnote{ 
@@ -536,6 +542,8 @@ TO-DO: Spiegazione codice Esempio 2.1, 2.2, 2.3, 2.4
 
 \newpage 
 
+\end{comment}
+
 \section{Matlab Programming}
 
 \footnote{ 
@@ -545,14 +553,14 @@ TO-DO: Spiegazione codice Esempio 2.1, 2.2, 2.3, 2.4
 
 È possibile realizzare programmi ad-hoc tramite il linguaggio di programmazione Matlab. \newline 
 
-Il linguaggio Matlab, oltre alle semplificazioni assegnazioni di variabili e ad operatori matematici, comprende anche "statements" più evoluti come: 
+Il linguaggio Matlab, oltre alle semplici assegnazioni di variabili e ad operatori matematici, comprende anche "statements" più evoluti come: 
 
 \begin{itemize}
-    \item if, elseif, else, eseguono  delle operazione se le condizioni sono vere \url{https://it.mathworks.com/help/matlab/ref/if.html} 
-    \item switch, case, otherwise, eseguono uno tra i gruppi di operazioni \url{https://it.mathworks.com/help/matlab/ref/switch.html} 
-    \item for, foor-loop che si ripete un numero di volte prefissato \url{https://it.mathworks.com/help/matlab/ref/for.html} 
-    \item while, while-loop che si ripete se la condizione rimane vera \url{https://it.mathworks.com/help/matlab/ref/while.html} 
-    \item break, termina un'esecuzione di un while-loop o di un for-loop \url{https://it.mathworks.com/help/matlab/ref/break.html}
+    \item if, elseif, else, eseguono  delle operazione se le condizioni sono vere \\\url{https://it.mathworks.com/help/matlab/ref/if.html} 
+    \item switch, case, otherwise, eseguono uno tra i gruppi di operazioni \\\url{https://it.mathworks.com/help/matlab/ref/switch.html} 
+    \item for, foor-loop che si ripete un numero di volte prefissato \\\url{https://it.mathworks.com/help/matlab/ref/for.html} 
+    \item while, while-loop che si ripete se la condizione rimane vera \\\url{https://it.mathworks.com/help/matlab/ref/while.html} 
+    \item break, termina un'esecuzione di un while-loop o di un for-loop \\\url{https://it.mathworks.com/help/matlab/ref/break.html}
 \end{itemize}
 
 Esistono due possibilità per programmare in Matlab: 
@@ -575,9 +583,11 @@ Il file script è un file che contiene una sequenza di comandi Matlab, generalme
 
 È bene non assegnare a nessun script il nome delle funzioni predefinite o il nome di una variabile usata. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegazione codice Esempio 2.5
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -596,7 +606,7 @@ Il passaggio per valore implica che le variabili definite all'interno della funz
 \begin{tcolorbox}
     I concetti di visibilità locale e globale sono dei concetti molto importanti nella programmazione. \newline 
 
-    Per approfondire: \url{https://it.wikipedia.org/wiki/Visibilit%C3%A0_(programmazione)} \newline 
+    Per approfondire: \\\url{https://it.wikipedia.org/wiki/Visibilit%C3%A0_(programmazione)} \newline 
 
     Per quanto riguarda il passaggio del valore in una funzione, lo si ha anche in altri linguaggi di programmazione, come ad esempio il C e il C++. \newline 
 
@@ -609,11 +619,11 @@ Il passaggio per valore implica che le variabili definite all'interno della funz
     
 \end{tcolorbox}
 
-In Matlab esiste un tipo di variabile interessante chiamata come "Persistent variable", 
-che sono variabili locale che sono viste come globali solamente dalla funzione dove sono state definite. \newline 
+In Matlab esiste un tipo di variabile interessante chiamata "Persistent variable", 
+che è una variabile locale che vista come globale solamente dalla funzione dove è stata definita. \newline 
 
 \begin{tcolorbox}
-    Nella documentazione di persistent sono disponibili degli esempi più dettagliati per approfondire il tema: 
+    Nella documentazione di persistent sono disponibili degli esempi più dettagliati per approfondire il tema: \\ 
     \url{https://it.mathworks.com/help/matlab/ref/persistent.html}
 \end{tcolorbox}
 
@@ -679,9 +689,11 @@ length(x) + length(h)
 
 Per questo motivo che, in questo corso, useremo la funzione my\_conv.m .\newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegazione codice Esempio 2.3 my\_conv.m
 \end{tcolorbox} 
+\end{comment}
 
 Come studiato nel capitolo precedente \ref{subsec: Proprietà di campionamento} \nameref{subsec: Proprietà di campionamento} 
 una qualsiasi sequenza $x \left[ n \right]$ può essere espressa come somma di impulsi unitari 
@@ -703,9 +715,11 @@ dove il singolo impulso unitari $\delta \left[ n\right]$ prende il nome di Delta
 
 La proprietà di campionamento delle sequenze discrete appena descritta, permette di assegnare uno specifico significato operativo all'operazione di convoluzione. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegazione codice Esempio 2.4 
 \end{tcolorbox}
+\end{comment}
 
 
 Tale significato operativo può essere analogamente essere messo in luce considerando la convoluzione come una operazione matriciale. \newline 
@@ -738,11 +752,13 @@ Per approfondire cosa è una matrice di Toepliz e la Delta di Kronocher:
 
 La matrice è ottenuta shiftatndo nel tempo la sequenza base h su ogni colonna. \newline 
 
+\begin{comment}
 Per esempio: 
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare un esempio di una convoluzione tra due sequenze utilizzando la matrice di Toeplitz  
 \end{tcolorbox} 
+\end{comment}
 
 Questa interpretazione è molto utile ai fini computazionali. \newline 
 
@@ -750,7 +766,7 @@ Il comando Matlab da utilizzare per generare la matrice di convoluzione è convm
 
 
 \begin{tcolorbox}
-    Dalla documentazione di convmtx \url{https://it.mathworks.com/help/signal/ref/convmtx.html} \newline 
+    Dalla documentazione di convmtx \\\url{https://it.mathworks.com/help/signal/ref/convmtx.html} \newline 
 
     "Computing a convolution using conv when the signals are vectors is generally more efficient than using convmtx. For multichannel signals, convmtx might be more efficient." \newline 
 
@@ -760,8 +776,10 @@ Il comando Matlab da utilizzare per generare la matrice di convoluzione è convm
 
 \end{tcolorbox} 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: TO-DO: Spiegazione codice Esempio 2.5, 2.6, 2.7 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
