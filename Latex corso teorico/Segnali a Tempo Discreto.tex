@@ -54,7 +54,7 @@ Un esempio di sequenza:
 \newpage 
 
 \begin{tcolorbox}
-    Dal punto di vista grafico, si considera l'interpolazione del punto 
+    Dal punto di vista grafico, si considera l'interpolazione tra i punti  
     (cioè quella linea che collega il t-esimo punto al x[t-esimo] punto). \newline 
 
     Nella realtà, se si considera una sequenza, 
@@ -76,7 +76,7 @@ Un esempio di sequenza:
 
 La sequenza elementare alla base di tutte le sequenze è la sequenza impulso unitario. \newline 
 
-Di seguito dal punto di vista grafico la sequenza impulso unitario: 
+Di seguito, dal punto di vista grafico, la sequenza impulso unitario: 
 
 \begin{figure}[h]
     \centering
@@ -98,7 +98,7 @@ La sequenza $\delta [n]$ impulso unitario gode della sequenza proprietà:
     \end{equation}
 }
 
-cioè, scritta a parole, vale 1 per n e vale 0 per tutti gli altri valori di n. \newline 
+cioè, scritta a parole, vale 1 per n (che generalmente è $n = 0$) e vale 0 per tutti gli altri valori di n. \newline 
 
 \begin{tcolorbox}
     Se avete svolto e/o seguito l'esame di Teoria dei Segnali (o Segnali Determinati e Aleatori) con Franco Chiaraluce, 
@@ -198,7 +198,7 @@ altrimenti la sequenza impulso unitario rimane tale se $A = 1$. \newline
 
 Il ritardo può essere definito anche in inglese come shift o delay. \newline 
 
-Lo shift è una proprietà di traslazione di sequenze. \newline 
+Lo shift è una proprietà di traslazione delle sequenze. \newline 
 
 \newpage 
 
@@ -316,12 +316,12 @@ possiamo scrivere il gradino unitario $u \left[ n \right] $ come:
 
 Quindi, la sommatoria non inizia più da $k = - \infty$, bensì da $k = 0$. \newline 
 
-Si può applicare le seguenti semplificazione perchè: 
+Si possono applicare le seguenti semplificazioni perchè: 
 
 {
     \Large 
     \begin{equation}
-            u \left[ k \right] = 1 \text{ } \forall k \geq 0
+            u \left[ k \right] = 1 \quad \forall k \geq 0
     \end{equation}
 }
 
@@ -413,13 +413,13 @@ In formule:
 {
     \Large 
     \begin{equation}
-        u \left[ n \right] = 1 \text{ } \forall n
+        u \left[ n \right] = 1 \quad \forall n
     \end{equation}
 }
 
 \newpage 
 
-\subsubsection{Sequenze esponenziali reali}
+\subsubsection{Sequenze esponenziali reali} \label{subsubsec: Sequenze esponenziali reali}
 
 \footnote{ 
     Slide del prof | 1 - Segnali e Sistemi a Tempo Discreto | pag 6 \\
@@ -436,6 +436,7 @@ Una sequenza $x \left[ n \right]$ esponenziale reale ha la seguente formulazione
         x \left[ n \right] 
         = 
         A \cdot \alpha^{n} 
+        \quad
         \text{ con }
         A, \alpha \in \mathbb{R} 
     \end{equation}
@@ -469,6 +470,7 @@ Una sequenza $x \left[ n \right]$ esponenziale complessa ha la seguente formulaz
         x \left[ n \right] 
         = 
         A \cdot \alpha^{n} 
+        \quad
         \text{ con }
         A, \alpha \in \mathbb{C} 
     \end{equation}
@@ -480,13 +482,14 @@ L'inviluppo della sequenza ha lo stesso andamento dell'esponenziale reale. \newl
 Per inviluppo si intende "l'integrale" della sequenza. \newline 
 
 Avendo a che fare con una sequenza sinusoidale (perchè si considerano $A$ e $\alpha$ complessi), 
-allora avremo una sequenza sinusoidale, il cui andamento tende alle figure del sottocapitolo delle "Sequenze esponenziali reali". \newline 
+allora avremo una sequenza sinusoidale, il cui andamento tende alle figure del sottocapitolo 
+\ref{subsubsec: Sequenze esponenziali reali} \nameref{subsubsec: Sequenze esponenziali reali} a pag \pageref{subsubsec: Sequenze esponenziali reali}. \newline 
 
 Inoltre, essendo una sequenza complessa, e quindi sinusoidale, dovrà essere studiata sia per il modulo che per la fase. 
 \end{tcolorbox}
 
 In base ai valori di $\alpha$, 
-avremo l'andamento l'andamento di $x \left[ n \right]$: 
+avremo l'andamento di $x \left[ n \right]$: 
 
 \begin{itemize}
     \item $\abs{\alpha} < 1 $, allora $x \left[ n \right]$ è decrescente 
@@ -494,7 +497,7 @@ avremo l'andamento l'andamento di $x \left[ n \right]$:
     \item $\abs{\alpha} > 1 $, allora $x \left[ n \right]$ è crescente
 \end{itemize}
 
-Possiamo definire i seguenti casi particolari delle sequenza esponenziali complesse. \newline 
+Possiamo definire i seguenti casi particolari delle sequenze esponenziali complesse. \newline 
 
 Definiamo l'esponenziale complesso puro $x \left[ n \right]$ come: 
 
@@ -642,11 +645,13 @@ si può studiare mezzo periodo della sequenza. \newline
 
 Le "alte" frequenze sono intorno a $\pm \pi$, le "basse" frequenze intorno allo $[\pm \pi, \pm 2 \pi]$. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare il disegno delle alte e basse frequenze
 \end{tcolorbox} 
+\end{comment}
 
-Essendo la funzione periodica si può scrivere la sequenza proprietà: 
+Essendo la funzione periodica si può scrivere la sequente proprietà: 
 
 {
     \Large 
@@ -681,13 +686,13 @@ dove:
 {
     \Large 
     \begin{equation}
-        \omega_0 N
+        \omega_0 \cdot N
         = 
-        2 \pi k
+        2 \cdot \pi \cdot k
     \end{equation}
 }
 
-Se N esiste, allora la sequenza esponenziale complesso puro sarà periodico nel periodo N. \newline 
+Se N esiste, allora la sequenza esponenziale complessa pura sarà periodica nel periodo N. \newline 
 
 \begin{tcolorbox}
     In altre parole, se vogliamo una sequenza esponenziale complessa periodica,  
@@ -853,7 +858,7 @@ In formule:
         y \left[ n - n_0\right]
         &= 
         T \{ x \left[ n - n_0\right]\}
-        \text{ }
+        \quad
         \forall n_0, x \left[ n\right]
         \end{split}
     \end{equation}
@@ -939,15 +944,17 @@ allora:
             y_1 \left[ n\right] 
             &= 
             y_2 \left[ n\right] 
-            \text{ }
+            \quad
             \forall n_0, x_1 \left[ n\right], x_2 \left[ n\right], n \leq n_0
         \end{split}
     \end{equation}
 }
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare il disegno dell'andamento di una sequenza dall'indice k 
 \end{tcolorbox} 
+\end{comment}
 
 Un esempio di un di sistema causale è la differenza in indietro: 
 
@@ -975,9 +982,11 @@ Invece, un sistema non causale è la differenza in avanti come il seguente:
     \end{equation}
 }
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare il disegno dell'andamento di differenza in avanti e una differenza in indietro 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -1021,7 +1030,7 @@ allora:
             &B_y 
             < 
             + \infty
-            \text{ }
+            \quad
             \forall n, x \left[ n\right]
         \end{split}
     \end{equation}
@@ -1034,7 +1043,7 @@ i quali non tendono ad infinito. \newline
 
 Per adesso, l'opposto della stabilità, cioè l'instabilità del sistema, non è un problema. \newline 
 
-Verrà approfondito in seguito, perchè non è detto che sia un problema: 
+Verrà approfondita in seguito, perchè non è detto che sia un problema: 
 come tutte le cose in ingegneria, dipende.
 \end{tcolorbox}
 
@@ -1410,7 +1419,7 @@ Il secondo metodo è quello della somma dei prodotti fra i campioni $x \left[ n\
 \begin{tcolorbox}
     Rispetto all'equazione precedente, questa volta il ritardo della risposta impulsiva $h \left[ - (k)\right]$ viene fatta per l'indice n e non per l'indice k. \newline 
 
-    Inoltre, il ribaltamento (o rovesciamento) di $h \left[ k - n\right]$ viene fatta grazie al segno negativo davanti a (k - n). \newline 
+    Inoltre, il ribaltamento (o rovesciamento) di $h \left[ k - n\right]$ viene fatto grazie al segno negativo davanti a (k - n). \newline 
 
     A lezione, per spiegare in modo grafico cosa è la convoluzione, il prof ci ha fatto vedere questi due video: 
 
@@ -1436,7 +1445,7 @@ Se il sistema è causale, cioè ha la seguente risposta impulsiva:
 {
     \Large 
     \begin{equation}
-        h \left[ n\right] = 0 \text{ } \forall n < 0
+        h \left[ n\right] = 0 \quad \forall n < 0
     \end{equation}
 }
 
@@ -1515,7 +1524,7 @@ Inoltre, sapendo che nei sistemi causali:
 {
     \Large 
     \begin{equation}
-        h \left[ n\right] = 0 \text{ } \forall n < 0
+        h \left[ n\right] = 0 \quad \forall n < 0
     \end{equation}
 }
 
@@ -1632,7 +1641,7 @@ Il sistemi LTI FIR saranno sempre stabili se:
         \abs{h \left[ n\right]} 
         < 
         + \infty
-        \text{ }
+        \quad
         \forall 
         n
     \end{equation}
@@ -1642,7 +1651,7 @@ Il sistemi LTI FIR saranno sempre stabili se:
 
 Invece i sistemi IIR sono sistemi in cui la risposta impulsiva ha durata illimitata (e quest'ultimo dettaglio può essere un pro ed un contro: lo vedremo meglio nei prossimi capitoli). \newline 
 
-Quindi, rispetto al caso precedente dei FIR, la finestra non sarà limitata compresa tra due indici $n_1$ e $n_2$, 
+Quindi, rispetto al caso precedente dei FIR, la finestra non sarà limitata, cioè compresa tra due indici $n_1$ e $n_2$, 
 bensì la finestra sarà tra $- \infty$ e $+ \infty$. \newline 
 
 Un esempio di risposta impulsiva IIR: 
@@ -1666,8 +1675,8 @@ La stabilità del sistema LTI IIR sarà garantita solo se:
     \end{equation}
 }
 
-Quindi, per garantire la stabilità del sistema LTI non bisogna che la sua risposta impulsiva debba avere una finestra finita, 
-l'importante che la sua risposta impulsiva converga ad un valore che non sia infinito. \newline 
+Quindi, per garantire la stabilità del sistema LTI non bisogna che la sua risposta impulsiva debba avere una finestra finita:  
+l'importante è che la sua risposta impulsiva converga ad un valore che non sia infinito. \newline 
 
 \newpage 
 
@@ -1781,11 +1790,12 @@ quindi, il sistema identità è un sistema FIR stabile, causale e stabile. \newl
     \end{equation}
 }
 
-Il sistema è FIR e stabile, ma la causalità dipende dai valori di M. \newline 
+Il sistema è FIR e stabile, ma la causalità dipende dai valori di M: 
 
-Se $M > 0$, il sistema è causale. \newline  
-
-Se $M < 0$, il sistema è non causala. \newline 
+\begin{itemize}
+    \item se $M > 0$, il sistema è causale
+    \item se $M < 0$, il sistema è non causale
+\end{itemize}
 
 \textbf{Differenza in avanti} \newline 
 
@@ -1875,11 +1885,12 @@ Il sistema è IIR, causale ma non stabile. \newline
 
 dove $u \left[ n\right]$ è un gradino e M è un indice di ritardo. \newline 
 
-Il sistema è IIR, non stabile, ma la causalità dipende dal ritardo M. \newline 
+Il sistema è IIR, non stabile, ma la causalità dipende dal ritardo M: 
 
-Se $M > 0$, il sistema è causale (cioè è in ritardo). \newline  
-
-Se $M < 0$, il sistema è non causala (cioè è in anticipo). \newline 
+\begin{itemize}
+    \item se $M > 0$, il sistema è causale (cioè è in ritardo)
+    \item se $M < 0$, il sistema è non causala (cioè è in anticipo)  
+\end{itemize}
 
 \newpage 
 
@@ -2078,7 +2089,7 @@ sono quei sistemi in cui la combinazione lineare in uscita è uguale alla combin
 Tre osservazioni in merito a questo tipo di sistema: 
 
 \begin{itemize}
-    \item le sommme sono finite e non infinite come nel caso del prodotto di convoluzione, perchè gli indici vanno da $k = 0$ a N (per l'uscita) ed a M (per l'ingresso)
+    \item le somme sono finite e non infinite come nel caso del prodotto di convoluzione, perchè gli indici vanno da $k = 0$ a N (per l'uscita) ed a M (per l'ingresso)
     \item non è necessario conoscere la risposta impulsiva del sistema 
     \item è facilmente computabile da un calcolatore
 \end{itemize}
