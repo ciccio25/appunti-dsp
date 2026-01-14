@@ -89,6 +89,8 @@ Allora possiamo scrivere:
     \end{equation}
 }
 
+\newpage 
+
 Grazie alla proprietà dell'impulso, 
 possiamo portare il segnale analogico $x_c \left(t\right)$ dentro la sommatoria, quindi: 
 
@@ -300,11 +302,13 @@ crea replicità in frequenza. \newline
     ma, come ben sappiamo, grazie alle proprietà tra Fourier e il tempo, se vale un principio in un dominio vale anche nell'altro e viceversa.
 \end{tcolorbox}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire seconda figura (quella con su scritta Aliasing) e scriverci le osservazioni 
 \end{tcolorbox} 
+\end{comment}
 
-Questa modulazione provoca aliasing che deve essere cancellato opportunamente perchè è stata sotto-campionata, 
+Questa modulazione provoca aliasing, che deve essere cancellato opportunamente perchè è stata sotto-campionata, 
 cioè è stato campionato ad una pulsazione minore di quella di Nyquist. \newline 
 
 Ritornando alla figura dello spettro di $X_s \left( \jmath \Omega \right)$: 
@@ -347,7 +351,7 @@ Se il segnale da campionare $x_c \left(t\right)$ è limitato in banda, cioè:
 {
     \Large 
     \begin{equation}
-        X_c \left(\jmath \Omega\right) = 0 \text{ per } \abs{\Omega} > \Omega_N
+        X_c \left(\jmath \Omega\right) = 0 \quad \text{ per } \abs{\Omega} > \Omega_N
     \end{equation}
 }
 
@@ -359,6 +363,7 @@ allora $x_c \left(t\right)$ è univocamente rappresentato dai suoi campioni:
         x \left[n \right]
         = 
         x_c \left(n \cdot T\right) 
+        \quad
         \text{ per }
         n = 0, \pm 1, \pm 2, \dots
     \end{equation}
@@ -467,12 +472,13 @@ Ma sapendo che il segnale discreto $x \left[ n\right]$ in Fourier è:
     \end{equation}
 }
 
-Allora possiamo dire che sia il segnale campionato $x_s \left(t\right)$ e il segnale campionato a tempo discreto $x \left[ n\right]$ sono uguali se: 
+allora possiamo dire che sia il segnale campionato $x_s \left(t\right)$ e il segnale campionato a tempo discreto $x \left[ n\right]$ sono uguali se: 
 
 {
     \Large 
     \begin{equation}
         X_s \left(\jmath \Omega\right) = X \left(e^{\jmath \omega}\right)
+        \quad
         \text{ se }
         \omega = \Omega T
     \end{equation}
@@ -486,15 +492,19 @@ In particolare:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
         X_s \left(\jmath \Omega \right)
-        = 
+        &= 
         \left. 
         X \left(e^{\jmath \omega}\right)
         \right|_{\omega = \Omega T} 
-        = 
+        \\
+        &= 
         \dfrac{1}{T}
         \sum_{k = -\infty}^{+ \infty}
         X_c \left(\jmath \Omega - \jmath \dfrac{2 \pi k}{T}\right)
+        \end{split}
     \end{equation}
 }
 
@@ -550,7 +560,7 @@ allora possiamo scrivere che il segnale $x \left[ n\right]$ ha il seguente andam
     \end{equation}
 }
 
-Se non c'è aliasing (cioè si rispetta il \ref{sec: Teorema di Nyquist} \nameref{sec: Teorema di Nyquist}), 
+Se non c'è aliasing (cioè si rispetta il \ref{sec: Teorema di Nyquist} \nameref{sec: Teorema di Nyquist}) a pag \pageref{sec: Teorema di Nyquist}, 
 allora si può ricostruire il segnale continuo $x_r \left(t\right)$ mediante un filtro passa-basso continuo ideale con la seguente funzione di trasferimento $H_r \left(\jmath \Omega\right)$: 
 
 {
@@ -613,6 +623,7 @@ il segnale ricostruito ideale $x_r \left(t\right)$ è il seguente:
         = 
         \sum_{n = -\infty}^{+ \infty} 
         x \left[  n \right]
+        \cdot
         \dfrac{\sin \left( \dfrac{\pi \left(t - nT\right)}{T}\right)}{\dfrac{\pi \left(t - nT\right)}{T}}
     \end{equation}
 }
@@ -717,6 +728,7 @@ Se non c'è aliasing, possiamo scrivere che:
     \Large 
     \begin{equation}
         X_c \left(\jmath \Omega\right) = 0 
+        \quad
         \text{ per }
         \abs{\Omega} > \Omega_N 
         \text{ e }
@@ -746,6 +758,7 @@ Allora, possiamo scrivere che:
             &= 
             \dfrac{1}{T}
             X_c \left(\dfrac{\jmath \omega}{T}\right)
+            \quad
             \text{ per }
             \abs{\omega} < \pi, k = 0
         \end{split}
@@ -806,10 +819,11 @@ che in frequenza sarà:
         = 
         \begin{cases}
             T \cdot X \left(e^{\jmath \Omega T}\right)
+            \quad
             \text{ per }
             \abs{\Omega} < \dfrac{\Omega_s}{2}
             \\
-            0 \text{ altrove}
+            0 \quad \text{ altrove}
         \end{cases}
     \end{equation}
 }
@@ -856,7 +870,7 @@ dove:
 
     Lo stesso esempio, nel mondo analogico, sarebbe stato diverso: Apple, per migliorare il prodotto, dovrebbe manualmente e fisicamente prendere le Airpods Pro di tutti i clienti, cambiargli fisicamente il filtro della cancellazione del rumore e poi spedirlo ai clienti di nuovo. \newline 
 
-    Ecco perchè è molto più vantaggioso eseguire una elaborazione dei segnali analogici con sistemi discreti. \newline 
+    Ecco perchè è molto più vantaggioso eseguire un'elaborazione dei segnali analogici con sistemi discreti. \newline 
 
     Oppure, nel caso moderno, anche nelle macchine ciò accade, con gli aggiornamenti chiamati "over-the-air", come viene spiegato in questo video: \newline 
 
@@ -871,6 +885,7 @@ avremo che il campionatore (se non c'è aliasing) avrà il seguente andamento:
     \Large 
     \begin{equation}
         X \left(e^{\jmath \omega}\right) = \dfrac{1}{T} X_c \left(\dfrac{\jmath \omega}{T}\right)
+        \quad
         \text{ per } \abs{\omega} < \pi
     \end{equation}
 
@@ -886,6 +901,7 @@ Il sistema LTI (Linear Time Invariant) ha il seguente andamento in frequenza:
         Y \left(e^{\jmath \omega}\right)
         =
         H \left(e^{\jmath \omega}\right) \cdot X \left(e^{\jmath \omega}\right)
+        \quad
         \text{ per } \abs{\omega} < \pi
     \end{equation}
 }
@@ -901,6 +917,7 @@ Invece il ricostruttore (indicato in figura come Interpolatore T) ha il seguente
         = 
         \begin{cases}
             T \cdot Y \left(e^{\jmath \Omega T}\right)
+            \quad
             \text{ per }
             \abs{\Omega} < \dfrac{\Omega_s}{2} 
             \\
@@ -919,10 +936,11 @@ possiamo scrivere che in frequenza l'uscita del blocco avrà il seguente andamen
         = 
         \begin{cases}
             H \left(e^{\jmath \Omega T}\right) \cdot X_c \left(\jmath \Omega\right)
+            \quad
             \text{ per }
             \abs{\Omega} < \dfrac{\Omega_s}{2} 
             \\
-            0 \text{ altrove}
+            0 \quad \text{ altrove}
         \end{cases}
     \end{equation}
 }
@@ -992,9 +1010,9 @@ Idealmente il filtro anti-aliasing $H_{aa} \left(\jmath \Omega\right)$ ha il seg
         H_{aa} \left(\jmath \Omega\right) 
         = 
         \begin{cases}
-            1 \text{ per } \abs{\Omega} < \dfrac{\Omega_s}{2} 
+            1 \quad \text{ per } \abs{\Omega} < \dfrac{\Omega_s}{2} 
             \\
-            0 \text{ altrove}
+            0 \quad \text{ altrove}
         \end{cases}
     \end{equation}
 }
@@ -1006,9 +1024,11 @@ come in figura:
     \includegraphics[scale = 0.3]{Filtro interpolatore in frequenza.png}
 \end{figure}  
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la figura sopra scrivendo 1 al posto di T e $H_{aa} \left(\jmath \Omega\right)$ al posto di $H_{r} \left(\jmath \Omega\right)$
 \end{tcolorbox} 
+\end{comment}
 
 Invece $H_{aa} \left(\jmath \Omega\right)$ reale, ha il seguente andamento (considerando solo le pulsazioni $\Omega$ positive): 
 
@@ -1113,9 +1133,9 @@ questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione 
 il filtro zero-oder hold diminuisce il segnale di ingresso di 4 dB, che è circa la metà del segnale iniziale. \newline 
 
 \begin{tcolorbox}
-    Questo corso di DSP non si occupa su come è fatto fisicamente il Sample \& Hold, per noi il S\&H sarà un unico blocco. \newline 
+    Questo corso di DSP non si occupa su come è fatto fisicamente il Sample \& Hold, per noi il S\&H è un unico blocco. \newline 
     
-    Ci penserà la prof.ssa Susanna Spinsante al corso di Misure Elettroniche
+    Ci penserà la prof.ssa Susanna Spinsante al corso di Misure Elettroniche il prossimo semestre. 
 \end{tcolorbox}
 
 \newpage 
@@ -1127,7 +1147,7 @@ il filtro zero-oder hold diminuisce il segnale di ingresso di 4 dB, che è circa
     Appunti| 2025-10-14 | pag 3
 } 
 
-Il convertitore A/D è quel blocco che converte una grandezza analogica (generalmente una tensione) costante all'igresso in un numero digitale (che è facilmente interpretabile ed elaborabile da un sistema digitale). \newline 
+Il convertitore A/D è quel blocco che converte una grandezza analogica (generalmente una tensione) costante all'ingresso in un numero digitale (che è facilmente interpretabile ed elaborabile da un sistema digitale). \newline 
 
 L'operazione richiede un certo tempo di conversione che deve essere inferiore al periodo di campionamento T. \newline 
 
@@ -1391,9 +1411,11 @@ Si può compensare l'effetto in frequenza dello zero-order hold con il filtro an
     \includegraphics[scale = 0.3]{Filtro anti imaging ideale e reale.png}
 \end{figure}   
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Continuare di copiare le considerazioni dopo aver capito cosa fanno le formule nella pagine
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -1452,7 +1474,7 @@ dove:
     \item $H^{\sim}_r \left(\jmath \Omega\right)$ è la trasformata di Fourier del filtro anti-imaging dentro al convertitore D/A reale 
 \end{itemize}
 
-$x_c \left(t\right)$ viene variato da tutti i blocchi della seguente pipeline. \newline 
+$x_c \left(t\right)$ viene modificato da tutti i blocchi della seguente pipeline. \newline 
 
 Il sistema LTI discreto può compensare l'effetto degli altri sistemi analogici. \newline 
 
@@ -1467,6 +1489,7 @@ A questi segnali, va sommato il rumore di quantizzazione. \newline
 \end{tcolorbox}
 
 \newpage 
-
+. 
+\newpage 
 
 
