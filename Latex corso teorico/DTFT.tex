@@ -123,8 +123,8 @@ In particolare la risposta in frequenza $H\left( e^{\jmath \omega}\right)$, sicc
 si può dividere in: 
 
 \begin{itemize}
-    \item Riposta in ampiezza (in inglese prende il nome di "Magnitude") e lo si denota con il seguente simbolo $\abs{H\left( e^{\jmath \omega}\right)}$ 
-    \item Risposta in fase e lo si denota con il seguente simbolo $\sphericalangle H\left( e^{\jmath \omega}\right)$
+    \item riposta in ampiezza (in inglese prende il nome di "Magnitude") e lo si denota con il seguente simbolo $\abs{H\left( e^{\jmath \omega}\right)}$ 
+    \item risposta in fase e lo si denota con il seguente simbolo $\sphericalangle H\left( e^{\jmath \omega}\right)$
 \end{itemize}
 
 \begin{tcolorbox}
@@ -176,7 +176,7 @@ che è quella formula che riporta il segnale $F \left(\jmath \omega\right)$ dal 
     \end{equation}
 }
 
-Invece, nel dominio dei discreti avremo che la seguente formula: 
+Invece, nel dominio dei discreti, non useremo la trasformata di Fourier, bensì useremo questa formula: 
 
 {
     \Large 
@@ -190,7 +190,7 @@ Invece, nel dominio dei discreti avremo che la seguente formula:
     \end{equation}
 }
 
-che prende di DTFT (cioè Discrete-Time Fourier Transform). \newline 
+che prende il nome di DTFT (cioè Discrete-Time Fourier Transform). \newline 
 
 Invece la formula inversa della DTFT (la anti-DTFT) è la seguente: 
 
@@ -362,7 +362,7 @@ La relazione tra ingresso ed uscita in frequenza del sistema LTI è la seguente:
     \end{equation}
 }
 
-(che è la stessa della del caso continuo della trasformata di Fourier). \newline 
+(che è la stessa del caso continuo della trasformata di Fourier). \newline 
 
 \newpage 
 
@@ -673,7 +673,7 @@ Siccome $X \left( e^{\jmath \omega}\right)$ è simmetrica, possiamo scrivere che
 \end{tcolorbox} 
 
 Inoltre, grazie alla simmetria che godono le sequenze reali, 
-possiamo solo analizzare la trasformata solo nel metà intervallo, 
+possiamo analizzare la trasformata solo nella metà dell'intervallo delle pulsazioni, 
 quindi piuttosto che analizzare la trasformata in: 
 
 {
@@ -701,9 +701,11 @@ possiamo analizzarla nell'intervallo:
     Appunti | 2025-10-08 | pag 1 
 } 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare le foto dei grafici su Matlab e poi metterle in questa subsection 
 \end{tcolorbox} 
+\end{comment}
 
 
 Di seguito un elenco delle trasformate di Fourier a tempo discreto che andremo ad utilizzare spesso durante il corso. \newline 
@@ -761,7 +763,7 @@ una sommatoria di Delta di Dirac $\delta$ ogni $\omega + 2 \pi k$: in altre paro
     \end{equation}
 }
 
-dove, con questa notazione, si vuole intende che una serie di sinusoidi a pulsazione fondamentale di $\omega_0$ nel dominio n è uguale a 
+dove, con questa notazione, si vuole intendere che una serie di sinusoidi a pulsazione fondamentale di $\omega_0$ nel dominio n è uguale a 
 una sommatoria di Delta di Dirac $\delta$ ogni $\omega -\omega_0 + 2 \pi k$: in altre parole $\delta \left( \omega - \omega_0 + 2 \pi k\right)$ è un treno di impulsi il cui valore tende a $+ \infty$ nelle ampiezze. \newline 
 
 {
@@ -977,6 +979,7 @@ lo spettro di un filtro elimina-banda è periodico (si ripete) ogni $k \pi$. \ne
 
 \newpage 
 
+\begin{comment}
 \subsection{Trasformata di Fourier in Matlab}
 
 \footnote{ 
@@ -985,10 +988,12 @@ lo spettro di un filtro elimina-banda è periodico (si ripete) ogni $k \pi$. \ne
 } 
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
-TO-DO: TO-DO: Spiegazione codice Esempio 3.1, 3.2 
+TO-DO: Spiegazione codice Esempio 3.1, 3.2 
 \end{tcolorbox} 
 
 \newpage 
+
+\end{comment}
 
 \subsection{Filtri passa basso ideale} \label{subsec: Filtri passa basso ideale}
 
