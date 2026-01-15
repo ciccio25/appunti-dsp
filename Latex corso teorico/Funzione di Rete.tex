@@ -211,7 +211,7 @@ dove:
 
 \begin{itemize}
     \item $H \left( e^{\jmath \omega}\right)$ è la DTFT di $h \left[ n\right]$
-    \item l'uscita del sistema LTI nel dominio delle frequenze, cioè $Y \left( e^{\jmath \omega}\right)$, è un prodotto algebrico (che è un processo matematico facile da computazionare) tra la risposta in frequenza $H \left( e^{\jmath \omega}\right)$ e l'ingresso $X \left( e^{\jmath \omega}\right)$ \newline
+    \item l'uscita del sistema LTI nel dominio delle frequenze, cioè $Y \left( e^{\jmath \omega}\right)$, è un prodotto algebrico (che è un processo matematico facile da computare) tra la risposta in frequenza $H \left( e^{\jmath \omega}\right)$ e l'ingresso $X \left( e^{\jmath \omega}\right)$ \newline
 \end{itemize}
 
 \newpage 
@@ -233,11 +233,11 @@ dove:
 
 \begin{itemize}
     \item $H \left( z \right)$ è la trasformata-z di $h \left[ n\right]$
-    \item anche qui, come nel dominio delle frequenze, l'uscita del sistema LTI nel dominio delle z, cioè $Y \left( z \right)$, è un prodotto algebrico (che è un processo matematico facile da computazionare) tra la risposta nel dominio z $H \left( z\right)$ e l'ingresso $X \left( z\right)$ \newline
+    \item anche qui, come nel dominio delle frequenze, l'uscita del sistema LTI nel dominio delle z, cioè $Y \left( z \right)$, è un prodotto algebrico (che è un processo matematico facile da computare) tra la risposta nel dominio z $H \left( z\right)$ e l'ingresso $X \left( z\right)$ \newline
 \end{itemize} 
 
 \begin{tcolorbox}
-Ricordiamo al volo che per passare dal dominio delle frequenza al dominio z è necessario definire una ROC, 
+Ricordiamo al volo che, per passare dal dominio delle frequenza al dominio z, è necessario definire una ROC, 
 importante soprattutto per l'anti-trasformata-z (vedi \ref{sec: Proprietà della ROC} \nameref{sec: Proprietà della ROC} pag \pageref{sec: Proprietà della ROC})   
 \end{tcolorbox}
 
@@ -268,6 +268,7 @@ con risposta impulsiva $h \left[ n\right]$ ed ingressi Z-trasformabili, vale:
         \cdot 
         X \left( z\right)
         \quad 
+        \text{per }
         z \in ROC 
     \end{equation}
 }
@@ -345,12 +346,14 @@ Sia $\abs{H \left( e^{\jmath \omega}\right)}$ che $e^{\jmath \sphericalangle H \
     Latex | 2025-10-27 Sera | pag 135 - 136 
 }
 
-Nei filtri LTI, spesso si considerano i segnali random che, essendo ciclostazionari, 
-non analizziamo il loro modulo (in inglese Magnitude) in Fourier, bensì la loro varianza. \newline 
+Nei filtri LTI, spesso si considerano i segnali random i cui, essendo ciclostazionari, 
+non sarà analizzato il loro modulo (in inglese Magnitude) in Fourier, bensì la loro varianza. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire il capitolo di Telecomunicazioni in cui si dimostra ciò
 \end{tcolorbox} 
+\end{comment}
 
 In particolare, data la trasformata di Fouerier della risposta impulsiva $h \left[ n\right]$, 
 cioè $H \left( e^{\jmath \omega}\right)$, consideriamo come spettro dei moduli la sua potenza, cioè: 
@@ -598,6 +601,7 @@ Di seguito elenchiamo i casi più importanti di $\arg \left[ H \left( e^{\jmath 
         = 
         0 
         \quad 
+        \text{per }
         \abs{\omega} < \pi
     \end{equation}
 }
@@ -613,6 +617,7 @@ In questo caso, non si ha nessuna distorsione perchè il sistema è istantaneo (
         = 
         - \alpha \omega
         \quad 
+        \text{per }
         \abs{\omega} < \pi, \alpha \text{ costante}
     \end{equation}
 }
@@ -638,7 +643,7 @@ Come esempio di risposta in fase lineare:
         \\
         y \left[ n \right]
         &= 
-        2 x \left[ x - 3\right]
+        2 \cdot x \left[ x - 3\right]
         \end{split}
     \end{equation}
 }
@@ -659,6 +664,7 @@ in cui:
         = 
         - \alpha \omega + \beta
         \quad 
+        \text{per }
         \abs{\omega} < \pi, \alpha, \beta \text{ costanti}
     \end{equation}
 }
@@ -724,7 +730,7 @@ consideriamo la risposta in Fourier del sistema LTI $H \left( e^{\jmath \omega}\
             \\
             \quad 
             \\
-            x \left[ n \right] = 2 \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
+            x \left[ n \right] = 2 \cdot \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
         \end{cases}
     \end{equation}
 }
@@ -951,7 +957,7 @@ $y \left[ n\right]$ sarà uguale a:
         \end{equation}
 } 
 
-Se ipotizzassimo che: 
+Se ipotizziamo che: 
 
 {
     \Large 
@@ -962,7 +968,7 @@ Se ipotizzassimo che:
     \end{equation}
 }
 
-allora possiamo dire che il contributo in $y \left[ n\right]$: 
+allora possiamo dire che il contributo in $y \left[ n\right]$ vale: 
 
 {
     \Large 
@@ -1038,9 +1044,11 @@ dove:
 
 Quindi il ritardo di gruppo, cioè $\beta_0^{'}$, esprime come cambia l'ampiezza del segnale in ingresso, cioè $A_0$, dopo il sistema LTI. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire delle foto di come cambia il segnale di ingresso al sistema LTI prima e dopo il filtro a causa del ritardo di gruppo e di fase
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -1075,6 +1083,7 @@ Si definisce ritardo di fase $\tau_{ph}$ (detto anche in inglese come Phase Dela
         = 
         - 
         \dfrac{\arg \left[ H \left( e^{\jmath \omega}\right)\right]}{\omega} 
+        \quad
         \text{ per }
         \abs{\omega} < \pi
     \end{equation}
@@ -1094,6 +1103,7 @@ Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) 
         grd \left[ H \left( e^{\jmath \omega}\right)\right]
         = 
         - \dfrac{d}{d \omega} \arg \left[ H \left( e^{\jmath \omega}\right)\right] 
+        \quad
         \text{ per }
         \abs{\omega} < \pi
     \end{equation}
@@ -1174,7 +1184,7 @@ avremo che vale:
 
     Ma, nella realtà, accetteremo un ritardo di fase abbastanza basso, possibilmente lineare, cosicchè il ritardo di gruppo sia costante e molto basso. \newline 
 
-    La durata del ritardo di gruppo dipende dall'applicazione in cui il sistema LTI sarà applicato: il ritardo di gruppo in un sistema di telecomunicazioni è diverso dal ritardo di gruppo per un sistema di audio. 
+    La durata del ritardo di gruppo dipende dall'applicazione in cui il sistema LTI sarà applicato: il ritardo di gruppo in un sistema di telecomunicazioni è diverso dal ritardo di gruppo per un sistema audio. 
 \end{tcolorbox}
 
 \newpage 
@@ -1221,7 +1231,7 @@ Ipotizzando che avremo un sistema causale, allora l'uscita di un sistema LTI dis
 dove: 
 
 \begin{itemize}
-    \item gli $a_k$ coefficienti sono i coefficienti della risposta libera del sistema LTI, libera perchè non dipende dall'ingresso $x \left[ n\right]$
+    \item gli $a_k$ coefficienti sono i coefficienti della risposta libera del sistema LTI, libera perchè l'uscita $y \left[ n\right]$ non dipende dall'ingresso $x \left[ n\right]$
     \item i $b_k$ coefficienti sono i coefficienti della risposta forzata del sistema LTI, forzata perchè il funzionamento del sistema LTI cambia in base all'ingresso $x \left[ n\right]$ 
     \item le sommatorie iniziano da $k = 0$ perchè si considera un sistema causale, dove $n = 0$ è l'istante iniziale di osservazione del sistema LTI discreto
 \end{itemize}
@@ -1266,7 +1276,7 @@ Avere delle condizioni iniziali significa che, ad ogni n+1 indice, andremo a con
 Quindi un sistema anti-causale non si risolverà da $- \infty$ a $+ \infty$ (o da sinistra verso destra) come nei sistemi causali, 
 bensì si risolverà partendo da $+ \infty$ a $- \infty$ (o da destra verso sinistra). \newline 
 
-Anche se ingegneristicamente parlando andremo avremo a che fare principalmente con sistemi causali, questa modalità di risolvere i sistemi alle differenze sarà molto utile per gli esercizi di DSP su Matlab. \newline 
+Anche se ingegneristicamente parlando avremo a che fare principalmente con sistemi causali, questa modalità di risolvere i sistemi alle differenze sarà molto utile per gli esercizi di DSP su Matlab. \newline 
 
 E anche perchè, nel "fantastico mondo del DSP", non esiste un verso del "tempo": tutto è possibile. 
 \end{tcolorbox}
@@ -1276,7 +1286,7 @@ Se volessimo risolvere il sistema in modo anti-causale, dovremmo avere le condiz
 \begin{tcolorbox}
 Una piccola osservazione rispetto al numero di N e M. \newline 
 
-Più coefficienti in sistema alle differenze ci sono e più calcoli bisogna fare: ecco perchè, in questo corso (ma anche fuori dall'università) si sceglierà di utilizzare un sistema IIR, 
+Più coefficienti sono presenti in un sistema alle differenze  e più calcoli bisogna fare: ecco perchè, in questo corso (ma anche fuori dall'università) si sceglierà di utilizzare un sistema IIR, 
 perchè, per fare gli stessi conti, ci vuole meno tempo rispetto a un sistema FIR con tanti M rispetto a N.    
 \end{tcolorbox}
 
@@ -1466,7 +1476,7 @@ allora $H \left(z\right)$ può essere ulteriormente semplificata come:
 }
 
 e anti-trasformando-z, quindi passando dal dominio z al dominio delle sequenze n, avremo che 
-la risposta impulsiva di un sistema LTI con $H \left(z\right)$ nel dominio z( che nel dominio n è $h \left[ n\right]$) sarà uguale a: 
+la risposta impulsiva di un sistema LTI con $H \left(z\right)$ nel dominio z (che nel dominio n è $h \left[ n\right]$) sarà uguale a: 
 
 {
     \Large 
@@ -1836,6 +1846,7 @@ se consideriamo un sistema LTI discreto, con risposta impulsiva $h \left[ n\righ
         = 
         - \alpha \omega
         \quad 
+        \text{ per }
         \abs{\omega} < \pi, \alpha \text{ costante}
     \end{equation}
 }
@@ -1883,7 +1894,7 @@ Quindi, $h \left[ n\right]$ è la versione ritardata di $\alpha$ campioni della 
 
 In linea generale, il valore di $\alpha$ può essere qualsiasi. \newline 
 
-Grazie a questa astrazione, possiamo vedere un qualsiasi sistema LTI discreto come un ricampionamento in analogico del segnale a un diverso istante di ritardo $alpha$: 
+Grazie a questa astrazione, possiamo vedere un qualsiasi sistema LTI discreto come un ricampionamento in analogico del segnale a un diverso istante di ritardo $\alpha$: 
 per questo motivo, il valore di $\alpha$ va opportunamente scelto. \newline 
 
 Possiamo considerare due casi particolari di $\alpha$: 
@@ -1902,9 +1913,11 @@ Se $\alpha$ è intero, allora la risposta impulsiva del sistema LTI discreto $h 
     \includegraphics[scale = 0.1]{Shift di una sequenza per alpha intero.png}
 \end{figure} 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la foto qui sopra meglio oppure rifarla su Matlab 
 \end{tcolorbox} 
+\end{comment}
 
 cioè l'asse di simmetria coincide con un impulso. \newline 
 
@@ -1913,7 +1926,7 @@ Quindi, in questo caso:
 {
     \Large 
     \begin{equation}
-        h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        h \left[ 2 \alpha - n\right] = h \left[ n\right] \quad \text{ per } h \left[ n\right] \in \mathbb{R}
     \end{equation}
 }
 
@@ -1926,7 +1939,7 @@ accade come il caso precedente, quindi:
 {
     \Large 
     \begin{equation}
-        h \left[ 2 \alpha - n\right] = h \left[ n\right] \text{ per } h \left[ n\right] \in \mathbb{R}
+        h \left[ 2 \alpha - n\right] = h \left[ n\right] \quad \text{ per } h \left[ n\right] \in \mathbb{R}
     \end{equation}
 }
 
@@ -1942,7 +1955,7 @@ ma in questo caso non si può compensare ed avere il sitema LTI a fase zero e l'
     Latex | 2025-10-27 Sera | pag 160
 } 
 
-Considerando il caso generale di un sistema LTI con risposta in fase lineare generalizzata, 
+Considerando il caso generale di un sistema LTI con risposta di fase lineare generalizzata, 
 avremo che $H \left( e^{\jmath \omega }\right)$ sarà uguale a: 
 
 {
@@ -1990,7 +2003,7 @@ la cui risposta all'impulso sia moltiplicata per la costante $e^{\jmath \beta}$:
 dove $\abs{H \left(e^{\jmath \omega}\right)} \cdot e^{\jmath \alpha \omega} $ è proprio il sistema con risposta di fase lineare. \newline 
 
 Come il caso precedente, 
-dobbiamo considerare dei casi particolari di $\alpha$ e $\beta$ che modifica la risposta impulsiva $h \left[ n\right]$: 
+dobbiamo considerare dei casi particolari di $\alpha$ e $\beta$ che modificano la risposta impulsiva $h \left[ n\right]$: 
 
 \begin{itemize}
     \item se $\alpha$ è intero e $\beta = 0$ o $\beta = \pi$, allora $h \left[ n\right]$ è coniugata simmetrica rispetto ad $\alpha$, quindi: 
@@ -2054,9 +2067,9 @@ Spesso si sceglie $\beta$ costante a tratti, ad esempio:
         \beta 
         = 
         \begin{cases}
-            0 \quad \abs{\omega} < \omega_0 
+            0 \quad \text{ per } \abs{\omega} < \omega_0 
             \\
-            \pi \quad \omega_0 < \abs{\omega} < \pi  
+            \pi \quad \text{ per } \omega_0 < \abs{\omega} < \pi  
         \end{cases}
     \end{equation}
 }
@@ -2094,9 +2107,9 @@ Data la seguente risposta impulsiva $h \left[ n\right]$:
         \begin{cases}
         \delta \left[ n\right] 
         -
-        \delta \left[ n - 1\right] \quad \forall n \neq 0 
+        \delta \left[ n - 1\right] \quad &\forall n \neq 0 
         \\
-        0 \quad \text{per } n = 0       
+        0 \quad &\text{per } n = 0       
         \end{cases}
     \end{equation}
 }
@@ -2116,9 +2129,9 @@ Allora $h \left[ n\right]$ è una derivata in un sistema discreto. \newline
         \begin{cases}
         \delta \left[ n\right] 
         +
-        \delta \left[ n - 1\right] \quad \forall n \neq 0 
+        \delta \left[ n - 1\right] \quad &\forall n \neq 0 
         \\
-        0 \quad \text{per } n = 0       
+        0 \quad &\text{per } n = 0       
         \end{cases}
     \end{equation}
 }
@@ -2236,11 +2249,11 @@ dove:
     \begin{equation}
         h \left[ n\right]
         \begin{cases}
-        +1 \quad \text{ per } n = 0 
+        +1 \quad &\text{per } n = 0 
         \\
-        -1 \quad \text{ per } n = 1
+        -1 \quad &\text{per } n = 1
         \\
-        0 \quad \forall n > 1
+        0 \quad &\forall n > 1
         \end{cases}
     \end{equation}
 }
@@ -2303,9 +2316,9 @@ Considerando ua risposta impulsiva $h \left[ n\right]$ del tipo:
         \delta \left[ n\right]
         - 
         \delta \left[ n - 2\right] 
-        \quad \forall n \neq 1, n \neq -1
+        \quad &\forall n \neq 1, n \neq -1
         \\ 
-        0 \text{ per } n = 1, n = -1
+        0 &\text{per } n = 1, n = -1
         \end{cases}
     \end{equation}
 }
@@ -2381,11 +2394,11 @@ dove, i valori di $\alpha$ e $\beta$ sono, rispettivamente, uguali a:
         \beta 
         = 
         \begin{cases}
-            \dfrac{\pi}{2} \quad \text{ per }0 \leq \omega \leq \pi 
+            \dfrac{\pi}{2} \quad &\text{ per }0 \leq \omega \leq \pi 
             \\
             \quad
             \\
-            \dfrac{\pi}{2} + \pi \quad \text{ per }\pi  < \omega  < 2 \pi 
+            \dfrac{\pi}{2} + \pi \quad &\text{ per }\pi  < \omega  < 2 \pi 
         \end{cases}
     \end{equation}
 }
@@ -2409,13 +2422,13 @@ dove:
     \begin{equation}
         h \left[ n\right]
         \begin{cases}
-        +1 \quad \text{ per } n = 0 
+        +1 \quad &\text{per } n = 0 
         \\
-        0 \quad \text{ per } n = 1
+        0 \quad &\text{per } n = 1
         \\
-        -1 \quad \text{ per } n = 2
+        -1 \quad &\text{per } n = 2
         \\
-        0 \quad \forall n > 2
+        0 \quad &\forall n > 2
         \end{cases}
     \end{equation}
 }
@@ -2506,9 +2519,9 @@ Allora, se esiste simmetria nel sistema FIR, avremo che:
         h \left[ n\right]
         = 
         \begin{cases}
-            h \left[ M - n\right] \quad 0 \leq n \leq M 
+            h \left[ M - n\right] \quad &\text{per } 0 \leq n \leq M 
             \\
-            0 \quad \text{altrove }
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -2523,9 +2536,9 @@ Oppure, se esiste anti-simmetria nel sistema FIR, avremo che:
         h \left[ n\right]
         = 
         \begin{cases}
-            - h \left[ M - n\right] \quad 0 \leq n \leq M 
+            - h \left[ M - n\right] \quad &\text{per } 0 \leq n \leq M 
             \\
-            0 \quad \text{altrove }
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -2541,9 +2554,11 @@ Allora, grazie a questa proprietà dei sistemi FIR, possiamo distinguere queste 
     \includegraphics[scale = 0.38]{Sistemi FIR 4 tipi .png}
 \end{figure} 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la foto qui sopra (togliere scritta dell'università e cose cerchiate verde sopra)
 \end{tcolorbox} 
+\end{comment}
 
 \begin{tcolorbox}
 Questo tipo di FIR è molto importante per il corso.     
@@ -2640,7 +2655,7 @@ Possiamo svolgere la seguente osservazioni, dati questi due sistemi, possiamo es
     \end{equation}
 }
 
-in cui questi due sistemi hanno lo stesso modulo nel dominio-z, perchè: 
+in cui questi due sistemi hanno lo stesso modulo nel dominio z, perchè: 
 
 {
     \Large 
@@ -2801,7 +2816,7 @@ Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) 
 Ecco perchè se la fase è sempre negativa, il ritardo di gruppo è sempre positivo. 
 \end{tcolorbox}
 
-Siccome il ritardo di gruppo di un filtro All-pass è sempre positiva, 
+Siccome il ritardo di gruppo di un filtro All-pass è sempre positivo, 
 generalmente questo tipo di sistema è utilizzato come sistema ritardante. \newline  
 
 \newpage 
@@ -2858,9 +2873,11 @@ Utilizzando invece un sistema $H_2 \left(z\right)$ qualsiasi, possiamo vederlo c
     \includegraphics[scale = 0.3]{Sistema LTI come scomposizione di due sistemi di cui uno a fase minima.png}
 \end{figure} 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la figura, al posto di scrivere nel blocchetto $H_{AP} \left(z\right)$, scrivere $H_{al} \left(z\right)$
 \end{tcolorbox} 
+\end{comment}
 
 i cui sistemi sono $H_1 \left(z\right)$ e $H_{al} \left(z\right)$. \newline 
 
@@ -2880,7 +2897,7 @@ Questi due sistemi hanno la seguente relazione:
 \newpage 
 
 Sapendo che un sistema $H_{al} \left(z\right)$ all-pass non impone un modulo, ma modifica solo la fase,  
-allora possiamo scrivere che un generico sistema $H_2 \left(z\right)$, lo possiamo scrivere come (facendo i passaggio step-by step): 
+allora possiamo scrivere che un generico sistema $H_2 \left(z\right)$ è possibile scriverlo come (facendo i passaggio step-by step): 
 
 {
     \Large 
@@ -3111,4 +3128,7 @@ Inoltre, essendo l'asse di simmetria più vicino al valore iniziale a $ n = 0$ c
 allora il segnale sarà elaborato più velocemente. \newline 
 
 \newpage 
+. 
+
+\newpage
 
