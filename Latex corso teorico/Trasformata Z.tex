@@ -31,10 +31,10 @@ La trasformata-Z è la trasformata di Laplace nel dominio digitale, quindi dove 
 
 \begin{tcolorbox}
     Essendo la trasformata-Z la trasformata di Laplace nel dominio digitale, 
-    si può utilizzarla per studiare il transitorio della sequenza, come avevamo fatto in Laplace ad Elettronica, 
+    la si può utilizzare per studiare il transitorio della sequenza, come avevamo fatto in Laplace ad Elettronica, 
     ma, nel corso di DSP, la trasformata-z ci servirà solo per rappresentare la sequenza nel dominio z, senza studiare il transitorio. \newline  
 
-    In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se: 
+    In Elettrotecnica avevamo studiato la trasformata di Laplace, in cui, data una funzione f(t) possiamo definire la sua trasformata di Lapace se esiste questo limite: 
 
     {
         \Large 
@@ -166,9 +166,9 @@ Possiamo svolgere le seguenti osservazioni:
     {
         \Large 
         \begin{equation}
-       Z \left\{a x_1 \left[ n\right] + b x_2 \left[ n\right]\right\} 
+       Z \left\{a \cdot x_1 \left[ n\right] + b \cdot x_2 \left[ n\right]\right\} 
        = 
-       a Z \left\{ x_1 \left[ n\right]\right\} + b Z \left\{ x_2 \left[ n\right]\right\}     
+       a \cdot Z \left\{ x_1 \left[ n\right]\right\} + b \cdot Z \left\{ x_2 \left[ n\right]\right\}     
         \end{equation}
     } 
 \end{itemize}
@@ -706,7 +706,7 @@ Ad esempio:
     \begin{equation}
         X \left(z\right)
         =
-        \dfrac{5}{\alpha z^{-1}} 
+        \dfrac{5}{\alpha \cdot z^{-1}} 
     \end{equation}
 }
 
@@ -726,11 +726,12 @@ allora, sapendo la ROC e $X \left( z\right)$ possiamo ritornare nel dominio n de
     \begin{equation}
         x \left[ n\right]
         = 
-        5 \alpha^{n} u \left[ n\right]
+        5 \cdot \alpha^{n} \cdot u \left[ n\right]
     \end{equation}
 }
 
-Nel metodo per espansione in serie, invece, ci si riporta ad una espressione come serie di potenze in $z^{-1}$, i coefficienti sono i valori delle sequenze \newline 
+Nel metodo per espansione in serie, invece, ci si riporta ad un'espressione come serie di potenze in $z^{-1}$, 
+cioè i coefficienti sono i valori delle sequenze \newline 
 
 Un esempio pratico: 
 
@@ -826,9 +827,9 @@ la ROC è la seguente:
 }
 
 \begin{tcolorbox}
-Dal punto di vista ingegneristico, avremo a che fare la maggior parte delle volte con questo tipo di sequenze, 
+Dal punto di vista ingegneristico, la maggior parte delle volte avremo a che fare con questo tipo di sequenze, 
 cioè le sequenze monolatere destre perchè sono sequenze causali, a differenza delle sequenze monolatere sinistre, 
-dove le sequenze non sono causali, chiamate anche sequenza "non real-time", perchè l'elaborazione "è all'indietro" nel tempo.     
+dove le sequenze non sono causali, chiamate anche sequenze "non real-time", perchè l'elaborazione "è all'indietro" nel tempo.     
 \end{tcolorbox}
 
 \newpage 
@@ -872,9 +873,11 @@ Invece per sequenze (bilatere) generiche, se esiste una ROC avremo che:
 
 cioè la ROC è una regione anulare. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare dei disegni delle ROC in questi quattro tipi di sequenze
 \end{tcolorbox} 
+\end{comment}
 
 La ROC è una regione connessa. \newline 
 
@@ -930,9 +933,11 @@ I poli sono:
 
 I poli solo le uniche discontinuità della funzione razionale $X \left(z\right)$. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Reimparare come rifare il luogo della radici e imparare come fare il luogo delle radici nel dominio z
 \end{tcolorbox} 
+\end{comment}
 
 Di seguito un esempio di una funzione di trasferimento $X \left(z\right)$: 
 
@@ -950,9 +955,11 @@ Di seguito un esempio di una funzione di trasferimento $X \left(z\right)$:
     \end{equation}
 }
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare passo passo come ci si arriva da una funzione scritta in z a $z^{-1}$ come esempio
 \end{tcolorbox} 
+\end{comment}
 
 allora possiamo graficare $X \left(z\right)$ nel dominio z come: 
 
@@ -987,11 +994,13 @@ Data $X \left(z\right)$ e visualizzando dal piano del dominio z, è possibile de
     Le proprietà della trasformata-z non verranno richieste all'esame, ma saranno molto utili dal punto di vista pratico e per capire la relazione con la trasformata di Laplace.
 \end{tcolorbox}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Fare le foto di cosa succede per ogni proprietà che non ci sto capendo nulla senza qualche grafico di esempio. \newline 
 
 Screenshootare gli esempi delle slide del video \url{https://www.youtube.com/watch?v=JZX7iPyF8R0}
 \end{tcolorbox} 
+\end{comment}
 
 Come ogni trasformata, anche la trasformata-z rispecchia delle proprietà. \newline 
 
@@ -1052,7 +1061,7 @@ allora possiamo esprimere che:
     \begin{equation}
         x \left[ n - n_0\right] 
         \leftrightarrow
-        z^{- n_0} X \left( z\right)
+        z^{- n_0} \cdot X \left( z\right)
     \end{equation}
 }
 
@@ -1061,7 +1070,7 @@ in cui la ROC vale:
 {
     \Large 
     \begin{equation}
-        ROC \left\{ z^{- n_0} X \left( z\right) \right\}
+        ROC \left\{ z^{- n_0} \cdot X \left( z\right) \right\}
         = 
         ROC \left( X \right) 
         \text{ eccetto per } z = 0 \text{ oppure } z = + \infty
@@ -1089,7 +1098,7 @@ in cui la ROC vale:
 {
     \Large 
     \begin{equation}
-        ROC \left\{ z^{- n_0} X \left( z\right) \right\}
+        ROC \left\{ z^{- n_0} \cdot X \left( z\right) \right\}
         = 
         ROC \left( X \right) 
         \text{ eccetto per } z = 0 \text{ oppure } z = + \infty
@@ -1118,6 +1127,7 @@ possiamo scrivere che:
         z_0^{n} \cdot x \left[ n\right]
         \leftrightarrow 
         X \left( \dfrac{z}{z_0}\right)
+        \quad
         \text{ dove } z_0 \text{ costante}
     \end{equation}
 }
@@ -1238,7 +1248,7 @@ Data una sequenza $x \left[  n \right]$ nel dominio n causale dove:
         x \left[ n\right] 
         = 
         0 
-        \text{ } 
+        \quad
         \forall n < 0
     \end{equation}
 }
@@ -1266,4 +1276,8 @@ e
     \end{equation}
 }
 
+\newpage 
+. 
+
+\newpage 
 
