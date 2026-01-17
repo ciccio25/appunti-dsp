@@ -55,6 +55,7 @@ Da un punto di vista matematico, la relazione tra la sequenza sottocampionata $x
         = 
         x \left[ n \cdot M\right]
         \quad 
+        \text{per }
         M \in \mathbb{N}
     \end{equation}
 }
@@ -133,6 +134,8 @@ e quindi da $X_{d} \left(z\right)$, avremo $X_{d} \left(e^{\jmath \omega}\right)
         \right)
     \end{equation}
 }
+
+\newpage 
 
 da cui possiamo svolgere le seguente osservazioni: 
 
@@ -221,6 +224,7 @@ Analizzando la trasformata-z di $x_{l} \left[ n\right]$, avremo che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{split}
             X_{l} \left(z\right)
             &= 
@@ -345,7 +349,7 @@ L'interpolazione lineare si ottiene tramite un sistema a risposta impulsiva:
         h_{\text{zoh}} \left[ n\right] 
         = 
         \begin{cases}
-            1 - \dfrac{\abs{n}}{L} \quad &\abs{n} \leq L -1 
+            1 - \dfrac{\abs{n}}{L} \quad & \text{per } \abs{n} \leq L -1 
             \\
             0 \quad &\text{altrove}
         \end{cases}
@@ -571,6 +575,8 @@ Inoltre, in $X_{d} \left(e^{\jmath \omega}\right)$, lo spettro si è invertito: 
 invece che $x \left[ n\right]$. \newline 
 
 Nello spettro (e senza dimostrazione), significa fare uno shift di $+ \pi$ a $X_{d} \left(e^{\jmath \omega}\right)$. \newline 
+
+\newpage 
 
 In generale se: 
 
@@ -900,6 +906,7 @@ Ipotizzando $H \left(z\right)$ un filtro IIR, allora avremo in uscita $y \left[ 
             \cdot 
             x \left[ \dfrac{k}{L}\right]
             \quad 
+            \text{per }
             \dfrac{k}{L} \in \mathbb{N}
         \end{split}
     \end{equation}
@@ -1129,7 +1136,7 @@ Se si fanno tutte le ipotesi semplificative scritte precedentemente, che non son
 allora la conversione analogico-reale non è un processo statico, bensì statistico perchè nella realtà non sapremo dove il valore reale entrerà nel "bin" (cestino in inglese, per intendere a quale valore finito verrà assegnato il valore reale analogico). \newline 
 
 \begin{tcolorbox}
-    Per adesso credete a quello che scrivo, ma nel corso della prof.ssa Susanna Spinsante di Miusre Elettroniche, andrete molto più nel dettaglio di queste slide: praticamente la conversione analogico-digitale è 3/4 del corso che affronterete il prossimo semestre. 
+    Per adesso credete a quello che scrivo, ma nel corso della prof.ssa Susanna Spinsante di Misure Elettroniche, andrete molto più nel dettaglio di queste slide: praticamente la conversione analogico-digitale è 3/4 del corso che affronterete il prossimo semestre. 
 \end{tcolorbox}
 
 \newpage  
@@ -1163,7 +1170,7 @@ avremo che la varianza di $e \left[ n\right]$, cioè $\sigma_{e}^{2}$ sarà ugua
     Inoltre, i passaggi matematici statistici saranno saltati perchè non sono materia approfondita di questo corso. 
 \end{tcolorbox}
 
-Allora, se $x_{c} \left(t\right) $ è un processo casuale bianco con potenza $\sigma_{x}^{2}$ allora avremo che il rapporto segnale rumore in db in uscità sarà di: 
+Allora, se $x_{c} \left(t\right) $ è un processo casuale bianco con potenza $\sigma_{x}^{2}$ allora avremo che il rapporto segnale rumore in dB in uscità sarà di: 
 
 {
     \Large 
@@ -1256,7 +1263,7 @@ mentre quella del rumore $e \left[ n\right]$, cioè $P_{e} \left(\omega\right)$,
     \end{equation}
 }
 
-Quindi, grazie al sovra-campionamento, il rumore bianco $P_{e} \left(\omega\right)$ si è "spalmanto" lungo la banda (che graie al sovra-campionamento è maggiore), 
+Quindi, grazie al sovra-campionamento, il rumore bianco $P_{e} \left(\omega\right)$ si è "spalmanto" lungo la banda (che grazie al sovra-campionamento è maggiore), 
 quindi, nel filtro passa-basso, si avrà la metà del rumore all'interno della banda utile. \newline 
 
 In generale, per un fattore $2^{S}$ di sovra-campionamento, abbiamo che il rapporto segnale-rumore in uscità sarà di: 
@@ -1418,7 +1425,7 @@ Oppure, piuttosto che calcolarci noi l'SNR, si utilizzano le seguenti tabelle:
 
 Come si può notare dalla tabella, all'aumentare del fattore di oversampling S, il noise shaping aumenta, quindi il rumore diminuisce nella banda utile. \newline 
 
-Generalizzando il Delta-Sigma, possiamo introdurre i convertitori noise shaping, che sono realizzati a più stadi. \newline 
+Generalizzando il Sigma-Delta, possiamo introdurre i convertitori noise shaping, che sono realizzati a più stadi. \newline 
 
 Un esempio di un convertitore a più stadi: 
 
@@ -1454,7 +1461,9 @@ I problemi, come abbiamo studiato nei circuiti multirate, sono sempre gli stessi
 \end{itemize}
 
 \newpage 
+.
 
+\newpage 
 
 
 
