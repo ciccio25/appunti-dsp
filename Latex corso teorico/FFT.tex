@@ -358,7 +358,7 @@ Grazie a questa proprietà del Twiddle, possiamo ulteriormente semplificare $X \
 \newpage 
 
 Ad esempio, se abbiamo una sequenza $x \left[ n\right]$ lunga $N = 8$, 
-possiamo dividerla in due DFT mostrato in figura: 
+possiamo dividerla in due DFT come mostrato in figura: 
 
 \begin{figure}[h]
     \centering
@@ -455,9 +455,9 @@ dove:
     \Large 
     \begin{equation}
         \begin{cases}
-            r = 2^{M - l}
+            r &= 2^{M - l}
             \\
-            p^{''} = p^{'} + 2^{l - 1}
+            p^{''} &= p^{'} + 2^{l - 1}
         \end{cases}
     \end{equation}
 }
@@ -465,7 +465,7 @@ dove:
 con i valori di $q^{'}$, $q^{''}$, $p^{'}$, $p^{''}$ opportuni in base allo stadio in cui si svolge la DFT. \newline 
 
 \begin{tcolorbox}
-    Come dice il professore a lezione, gli ingegneri non "toccano terra" quindi vedono la natura in qualsiasi cosa fanno: 
+    Come dice il professore a lezione, gli ingegneri non "toccano terra" quindi vedono la natura in qualsiasi cosa fanno, allora: 
     
     \includegraphics[scale = 0.4]{Touching grass meme.png}
      
@@ -552,9 +552,11 @@ Questa relazione è valida grazie al bit reversing che si fa tra bot di ingresso
 quindi è possibile fare questa associazione.     
 \end{tcolorbox}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Spiegare perchè si usa il bit-reversing in questo tipo di FFT
 \end{tcolorbox} 
+\end{comment}
 
 Invece: 
 
@@ -596,11 +598,13 @@ quindi:
 
 \newpage 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Trovare un video in cui si spiega meglio la concenzione di "in place" della butterfly
 \end{tcolorbox} 
+\end{comment}
 
-Grazie a questa ultima equazione, per ogni coppia di punti, quindi grazie anche alla proprietà di simmetria del Twiddle, 
+Grazie a quest'ultima equazione, per ogni coppia di punti, quindi grazie anche alla proprietà di simmetria del Twiddle, 
 è necessario un solo Twiddle. \newline 
 
 Qunidi passeremo da questo: 
@@ -682,9 +686,9 @@ in cui:
     \Large 
     \begin{equation}
         \begin{cases}
-            X^{l} \left[ p^{'}\right] = X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r} 
+            X^{l} \left[ p^{'}\right] &= X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r} 
             \\
-            X^{l} \left[ p^{''}\right] = X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r}  
+            X^{l} \left[ p^{''}\right] &= X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \cdot W_{N}^{r}  
         \end{cases}
     \end{equation}
 }
@@ -702,9 +706,9 @@ in cui:
     \Large 
     \begin{equation}
         \begin{cases}
-            X^{l} \left[ p^{'}\right] = X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] 
+            X^{l} \left[ p^{'}\right] &= X^{l - 1} \left[ q^{'}\right] + X^{l - 1} \left[ q^{''}\right] 
             \\
-            X^{l} \left[ p^{''}\right] = \left( X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \right)\cdot W_{N}^{r}  
+            X^{l} \left[ p^{''}\right] &= \left( X^{l - 1} \left[ q^{'}\right] - X^{l - 1} \left[ q^{''}\right] \right)\cdot W_{N}^{r}  
         \end{cases}
     \end{equation}
 }
@@ -1021,9 +1025,11 @@ Da un punto di vista schematico, avremo questo schema:
     \url{https://www.youtube.com/watch?v=v50IMrrWG4E}
 \end{tcolorbox}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la figura mettendo $L+P-1$ al posto di N, $P-1$ al posto di $M-1$ (vedi slide del prof per confronto) 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -1050,9 +1056,11 @@ ma la FFT verrà calcolata in L punti e non in $L+P-1$ punti, come mostrato in f
     \url{https://www.youtube.com/watch?v=vguD0jt7pFw}
 \end{tcolorbox}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare la figura mettendo $L$ al posto di N, $P-1$ al posto di $M-1$ (vedi slide del prof per confronto) 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
