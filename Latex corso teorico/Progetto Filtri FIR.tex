@@ -90,9 +90,9 @@ Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omeg
         H_d \left(e^{\jmath \omega}\right) 
         = 
         \begin{cases}
-            1 \quad \abs{\omega} < \omega_c 
+            1 \quad &\text{per }\abs{\omega} < \omega_c 
             \\ 
-            0 \quad \text{altrove} 
+            0 \quad &\text{altrove } 
         \end{cases}
     \end{equation}
 }
@@ -118,9 +118,9 @@ che vale:
         H_d \left(e^{\jmath \omega}\right) 
         &= 
         \begin{cases}
-            1 \quad \abs{\omega} < \omega_c 
+            1 \quad &\text{per }\abs{\omega} < \omega_c 
             \\ 
-            0 \quad \text{altrove} 
+            0 \quad &\text{altrove } 
         \end{cases} 
         \\ 
         &\downarrow 
@@ -171,9 +171,9 @@ Quindi in formule siamo partiti da $H_d \left(e^{\jmath \omega}\right)$:
         H_d \left(e^{\jmath \omega}\right) 
         = 
         \begin{cases}
-            1 \quad \abs{\omega} < \omega_c 
+            1 \quad &\text{per } \abs{\omega} < \omega_c 
             \\ 
-            0 \quad \text{altrove} 
+            0 \quad &\text{altrove } 
         \end{cases} 
     \end{equation}
 } 
@@ -205,9 +205,9 @@ Alla fine di tutto ciò, possiamo definire la risposta impulsiva $h \left[ n\rig
         h \left[ n\right] 
         = 
         \begin{cases}
-            h_d \left[ n\right] \quad 0 \leq n \leq M
+            h_d \left[ n\right] \quad &\text{per } 0 \leq n \leq M
             \\ 
-            0 \quad \text{altrove} 
+            0 \quad &\text{altrove } 
         \end{cases}
     \end{equation}
 }
@@ -220,9 +220,9 @@ Ma, definendo una nuova finestra rettangolare $w \left[ n\right]$ nel dominio n:
         w \left[ n\right] 
         = 
         \begin{cases}
-            1 \quad 0 \leq n \leq M
+            1 \quad &\text{per } 0 \leq n \leq M
             \\ 
-            0 \quad \text{altrove} 
+            0 \quad &\text{altrove } 
         \end{cases}
     \end{equation}
 }
@@ -254,6 +254,7 @@ Analizzando $H \left(e^{\jmath \omega}\right)$, ma questa volta con il windowing
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             H \left(e^{\jmath \omega}\right) 
             &= 
@@ -301,13 +302,13 @@ Inoltre, le oscillazioni aumentano all'aumentare di M e sono maggiori nella band
 
 Ricordiamo al volo che M+1 è la lunghezza della finestra $w \left[ n\right]$. \newline 
 
-Ma la domanda è: è necessario avvicinarsi ad un filtro ideale? \newline 
+Ma la vera domanda da porsi per la progettazione dei filtri FIR è: è necessario avvicinarsi ad un filtro ideale? \newline 
 
 La risposta è no, perchè il filtro impiegherebbe troppo tempo. \newline 
 
 \newpage 
 
-Inoltre, in una finestratura abbiamo due parametri liberi per svolgere questa tecnica, che sono: 
+Inoltre, in una finestratura, abbiamo due parametri liberi per svolgere questa tecnica, che sono: 
 
 \begin{itemize}
     \item la lunghezza della finestra, cioè quanti M+1 campioni servono al filtro FIR 
@@ -319,6 +320,7 @@ Considerando, per adesso e per semplicità, una finestra $w \left[ n\right]$ nel
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             W \left(e^{\jmath \omega}\right) 
             &= 
@@ -401,7 +403,7 @@ Invece, aumentando M possiamo avere il seguente caso:
 possiamo notare che: 
 
 \begin{itemize}
-    \item la banda di transizione dipende dalla larghezza del main lobe, quindi dal fattore M 
+    \item la banda di transizione dipende dalla larghezza del main lobe (in italiano lobo principale), quindi dal fattore M 
     \item il ripple dipende dall'ampiezza dei lobi laterali, in inglese sidelobes (ma generalmente i sidelobes non sono importanti perchè sono in banda oscura, l'importante che abbiano un'ampiezza minore delle specifiche)
 \end{itemize} 
 
@@ -416,7 +418,7 @@ possiamo notare che:
 } 
 
 Siccome si vuole scegliere una finestra $w \left[ n\right]$ tale che in Fourier $W \left(e^{\jmath \omega}\right)$ abbia dei lobi laterali più bassi, 
-allora è possibile azzerando dolcemente gli estremi della finestra. \newline 
+ciò è possibile azzerando dolcemente gli estremi della finestra. \newline 
 
 A questo punto, siccome l'area sotto alla finestra è costante in tutti i lobi, il lobo principale è più largo. \newline 
 
@@ -442,9 +444,9 @@ Di seguito le finestre $w \left[ n\right]$ più utilizzati nell'ambito DSP. \new
         w \left[ n\right] 
         = 
         \begin{cases}
-            \dfrac{2 n}{M} \quad \text{ per } 0 \leq n \leq \dfrac{M}{2} 
+            \dfrac{2 n}{M} \quad &\text{per } 0 \leq n \leq \dfrac{M}{2} 
             \\ 
-            2 - \dfrac{2 n}{M} \quad \text{ per }\dfrac{M}{2} \leq n \leq M 
+            2 - \dfrac{2 n}{M} \quad &\text{per }\dfrac{M}{2} \leq n \leq M 
         \end{cases}
     \end{equation}
 }
@@ -551,7 +553,7 @@ Questa è l'unica finestra in cui anche nella figura è indicata l'attenuazione 
 \end{tcolorbox}
 
 Confrontando una finestra rettangolare con una finestra di Bartlett rettangolare, avremo un'attenuazione maggiore minima all'estremo del lobo principale 
-(-25 dB è un'attuazione maggiore rispetto ai -21 dB), ma a discapito un allargamento del lobo principale $\Delta \omega $ (si passa da $\dfrac{4 \pi}{M + 1}$ a $\dfrac{8 \pi}{M + 1}$ ). \newline 
+(-25 dB è un'attuazione maggiore rispetto ai -21 dB), ma a discapito di un allargamento del lobo principale $\Delta \omega $ (si passa da $\dfrac{4 \pi}{M + 1}$ a $\dfrac{8 \pi}{M + 1}$ ). \newline 
 
 \newpage 
 
@@ -631,7 +633,7 @@ ma è quella che ha una larghezza maggiore del lobo principale. \newline
 } 
 
 \begin{tcolorbox}
-Queste sono le considerazioni che realmente è necessario memorizzare per l'esame.     
+Queste sono le considerazioni che realmente sono necessarie da memorizzare per l'esame.     
 \end{tcolorbox}
 
 Dopo tutte queste spiegazioni, come mostrato dalla seguente figura:     
@@ -765,13 +767,13 @@ Il metodo di Kaiser comprende le due seguenti formule empiriche:
         = 
         \begin{cases}
         0.1102 \cdot \left(A - 8.7\right) 
-        \quad \text{ per } A > 50 
+        \quad &\text{per } A > 50 
         \\
         0.5842 \cdot \left(A - 21\right)^{0.4} + 0.07886 \cdot \left( A - 21\right)    
-        \quad \text{ per } 21 \leq A \leq 50 
+        \quad &\text{per } 21 \leq A \leq 50 
         \\
         0  
-        \quad \text{ per } A < 21
+        \quad &\text{per } A < 21
         \end{cases}
     \end{equation}
 } 
@@ -1242,13 +1244,13 @@ Il problema della DCT è trovare una risposta impulsiva $h \left[ n\right]$ affi
     \begin{equation}
         \begin{cases}
             \abs{1 - H \left(e^{\jmath \omega}\right)} \leq \delta_1 
-            &\text{ per } 
+            &\text{per } 
             0 \leq \abs{\omega} \leq \omega_p 
             \\
             \quad
             \\
             \abs{H \left(e^{\jmath \omega}\right)} \leq \delta_2 
-            &\text{ per } 
+            &\text{per } 
             \omega_s \leq \abs{\omega} \leq \pi 
         \end{cases}
     \end{equation}
@@ -1354,7 +1356,7 @@ avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di appr
                 2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
             \right)
         \right] 
-        &\text{ per } 0 \leq \abs{\omega} \leq \omega_p
+        &\text{per } 0 \leq \abs{\omega} \leq \omega_p
         \\
         \quad
         \\
@@ -1370,7 +1372,7 @@ avremo che, grazie all'algoritmo di Parks-McClellan, la funzione "errore di appr
                 2 \cdot h \left[ n\right] \cdot \cos \left(\omega n\right)
             \right)
         \right] 
-         &\text{ per } \omega_s \leq \abs{\omega} \leq \pi
+         &\text{per } \omega_s \leq \abs{\omega} \leq \pi
         \end{cases}
     \end{equation}
 } 
@@ -1518,6 +1520,9 @@ Di seguito le considerazioni finali riguardo ai filtri FIR Equiripple:
     }
     \item per i filtri multi-banda, ci sono ancora almeno $\left(L + 2\right)$ estremi, ma non è necessario che siano solo nelle bande passanti e oscura
 \end{itemize}
+
+\newpage 
+. 
 
 \newpage 
 
