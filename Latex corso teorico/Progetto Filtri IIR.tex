@@ -15,7 +15,7 @@
     Latex | 2025-11-23 Sera | pag 223  
 }
 
-Come scritto nelle pagine precedenti, in questo corso andremo affrontare i filtri discreti, che, essendo sistemi (tristi) lineari (o meglio LTI), 
+Come scritto nelle pagine precedenti, in questo corso affrontaremo i filtri discreti, che, essendo sistemi (tristi) lineari (o meglio LTI), 
 sono selettivi in frequenza, capaci di rimuovere e non aggiungere alcune componenti in frequenza. \newline 
 
 Solo i sistemi non lineari posso aggiungere componenti in frequenza, ma non verrano affrontati in questo corso. \newline 
@@ -53,9 +53,9 @@ Tipicamente, le specifiche vengono date in analogico e sono le seguenti:
 
 \begin{tcolorbox}
     Il terzo e quarto punto, in questo corso non verranno affrontati perchè sono degli argomenti in cui è necessario uno studio approfondito: 
-    ci concentreremo sui primi due. \newline 
+    ci concentreremo sui primi due punti. \newline 
 
-    Il rapporto segnale rumore può essere anche definito come errore di quantizzazione. 
+    Il rapporto segnale rumore può essere anche definito come errore di quantizzazione, argomento che affronteremo nei futuri capitoli. 
 \end{tcolorbox}
 
 Per quanto riguarda la progettazione del filtro digitale, cioè $H \left(z\right)$, bisognerà svolgere queste scelte: 
@@ -116,7 +116,7 @@ possiamo svolgere diverse considerazioni. \newline
 \end{tcolorbox}
 
 Idealmente vorremmo avere un filtro in cui la banda di transizione fosse nulla perchè vorremmo avere un filtro rettangolare in frequenza, 
-ma ciò non è possibile perchè, ricordando la relazione tra il dominio del tempo e Fourier, se si ha una transizione brusca in Fourier si avrà un andamento nel tempo infinito, che non è possibile. \newline 
+ma ciò non è possibile perchè, ricordando la relazione tra il dominio del tempo e Fourier, se si ha una transizione brusca in Fourier si avrà un andamento nel tempo infinito nel tempo, e ciò non è possibile. \newline 
 
 Per questo motivo, nel filtro prototipo, quindi anche nelle specifiche, è necessario avere una banda di transizione non nulla (nella figura, quelle pulsazioni $\omega$ comprese nell'intervallo $\left[ \omega_p, \omega_s\right]$). \newline 
 
@@ -132,11 +132,13 @@ $\omega$ per $\abs{\omega} < \pi$, ma viene assegnata per punti e/o attraverso d
     \begin{equation}
         \begin{cases}
             \left(1 - \delta_1\right) \leq \abs{H \left(e^{\jmath \omega}\right)} \leq \left(1 - \delta_1\right) 
-            \text{ per }
+            \quad 
+            &\text{per }
             \abs{\omega} \leq \pi 
             \\
             \abs{H \left(e^{\jmath \omega}\right)} \leq \delta_2 
-            \text{ per }
+            \quad 
+            &\text{per }
             \omega_s \leq \abs{\omega} \leq \pi  
         \end{cases}
     \end{equation}
@@ -168,7 +170,7 @@ Per la progettazione di un filtro IIR, generalmente, si applicano una tra le due
 \end{itemize}
 
 Per tecniche di trasformazione si intende che, inizialmente, si progetta il filtro (o un suo prototipo) nel dominio di Laplace, cioè nel dominio s, 
-cioè si progetta un filtro analogico corrispondente. \newline 
+quindi si progetta un filtro analogico corrispondente. \newline 
 
 Poi, si trasforma il filtro analogico, cioè $H_c \left(s\right)$ del filtro continuo in una funzione $H \left(z\right)$, cioè nel dominio discreto z, che è proprio il filtro voluto in digitale. \newline 
 
@@ -190,7 +192,7 @@ Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci so
 \begin{tcolorbox}
     Il fatto di svolgere tanti conti dipende dall'architettura del sistema che deve svolgere i calcoli. \newline 
 
-    Oggi giorni, i computer moderni possono svolgere tanti calcoli contemporaneamente, quindi non è un problema. \newline 
+    Oggigiorno, i computer moderni possono svolgere tanti calcoli contemporaneamente, quindi non è un problema. \newline 
 
     Il problema che permane è quello di ottimizzare poi il filtro finale al sistema d'uso finale (che può essere un piccolo micro-controllore), 
     ma in genere il sistema che svolge il progetto non ha un problema computazionale. 
@@ -363,7 +365,7 @@ I valori di n e $\Omega_c$ vengono trovati per tentativi. \newline
 
 
 \begin{tcolorbox}
-    Generalmente, in commercio, ci sono dei software che trovano i valori di n e $\Omega_c$ vengono trovati per tentativi. 
+    Generalmente, in commercio, ci sono dei software che trovano i valori di n e $\Omega_c$: vengono trovati per tentativi. 
 \end{tcolorbox}
 
 I coefficienti di $H_c \left(s\right)$ si trovano analiticamente o da apposite tabelle. \newline 
@@ -1060,7 +1062,7 @@ Quindi avremo questo sistema di risoluzione:
     \begin{equation}
         \begin{cases}
             y_c \left(nT\right) 
-            = 
+            &= 
             \dfrac{T}{2}
             \left[
                 y^{'}_c \left(nT\right)
@@ -1071,7 +1073,7 @@ Quindi avremo questo sistema di risoluzione:
             y_c \left(\left(n-1\right)T\right)
             \\
             y^{'}_c \left(nT\right)
-            = 
+            &= 
             - \dfrac{c_0}{c_1}    
             y_c \left(nT\right)
             +
@@ -1090,11 +1092,11 @@ Ponendo:
     \begin{equation}
         \begin{cases}
             y \left[ n\right] 
-            = 
+            &= 
             y_c \left(nT\right)
             \\
             x \left[ n\right]
-            = 
+            &= 
             x_c \left(nT\right)
         \end{cases}
     \end{equation}
@@ -1183,8 +1185,8 @@ avremo che:
     H_c \left(s\right) 
     \right|_{s 
         = 
-        \dfrac{2}{T} 
-        \dfrac{1 - z^{-1}}{1 + z^{-1}}}   
+        \frac{2}{T} 
+        \frac{1 - z^{-1}}{1 + z^{-1}}}   
     \end{equation}
     
 } 
@@ -1262,7 +1264,7 @@ Dalla seguente figura, si possono svolgere le seguenti considerazioni riguardo l
 \begin{itemize}
     \item tra $\omega$ e $\Omega$ non esiste una relazione lineare (in altri termini non è presente una retta nel grafico) 
     \item si avrà una bassa distorsione per $\Omega$ basse, cioè quelle vicino a $\Omega = 0 $ perchè avremo un $\omega$ che sarà più vicino a $\abs{0}$
-    \item si avarà una alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
+    \item si avarà un'alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
 \end{itemize} 
 
 Questo tipo di distorsione non lineare nelle frequenze prende il nome di compressione. \newline 
@@ -1386,7 +1388,7 @@ Questo secondo metodo può essere utilizzato solo se si svolgono queste accortez
 
 \begin{itemize}
     \item dai passi 1 a 5, il parametro T, cioè il passo di integrazione, può essere fissato arbitrariamente, ad esempio $T = 1$ 
-    \item si può utilizzare all'invarianza all'impulso, quindi questo metodo vale per tutti i tipi di filtri, anche quelli passa.alto ed elimina banda, ma accettando una piccola distorsione di fase 
+    \item si può utilizzare all'invarianza all'impulso, quindi questo metodo vale per tutti i tipi di filtri, anche quelli passa-alto ed elimina-banda, ma accettando una piccola distorsione di fase 
 \end{itemize} 
 
 \newpage 
@@ -1410,7 +1412,7 @@ quindi:
 \end{figure}  
 
 \begin{tcolorbox}
-    Ma tanto a noi tutti questi passaggi non interessa perchè la progettazione dei filtri, almeno per questo esame, verrà fatto con il package "filterDesigner" su Matlab. \newline 
+    Tanto a noi tutti questi passaggi non ci interessano perchè la progettazione dei filtri, almeno per questo esame, verrà fatto con il package "filterDesigner" su Matlab. \newline 
 
     A noi interessa sapere che Matlab, in background, fa tutti questi calcoli. 
 \end{tcolorbox}
