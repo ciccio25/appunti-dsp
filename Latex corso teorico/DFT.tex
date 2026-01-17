@@ -53,7 +53,7 @@ Come si nota dalla figura, la conoscenza degli N campioni, cioè:
 {
     \Large 
     \begin{equation}
-        \tilde{x} \left[ k\right] \text{ per } k = 0, 1, \dots, \left(N - 1\right)
+        \tilde{x} \left[ k\right] \quad \text{ per } k = 0, 1, \dots, \left(N - 1\right)
     \end{equation}
 }
 
@@ -91,9 +91,9 @@ cioè una convoluzione tra $x \left[ n\right]$ e $s \left[ n\right]$, dove:
         x \left[ n\right]
         = 
         \begin{cases}
-            \tilde{x} \left[ n\right] \text{ per } 0 \leq n \leq N - 1 
+            \tilde{x} \left[ n\right] \quad &\text{per } 0 \leq n \leq N - 1 
             \\
-            0 \text{ altrove}
+            0   \quad &\text{altrove}
         \end{cases}
     \end{equation}
 }
@@ -108,6 +108,8 @@ Da un punto di vista grafico, a titolo di esempio:
     \centering
     \includegraphics[scale = 0.25]{DTFT di una sequenza periodica esempio.png}
 \end{figure} 
+
+dove, i puntini nel grafico di $s \left[ n\right]$ indica che la sequenza degli impulsi si estende per $n \in \left[ - \infty, + \infty\right]$. \newline 
 
 \newpage 
 
@@ -143,7 +145,7 @@ dove:
 
 Dalla formula di $\tilde{x} \left[ n\right]$, possiamo svolgere diverse considerazioni. \newline 
 
-Grazie anche alla notazione, dalla formula di $\tilde{x} \left[ n\right]$, possiamo notare che i coefficiente della serie DFS, 
+Grazie anche alla notazione, dalla formula di $\tilde{x} \left[ n\right]$, possiamo notare che i coefficienti della serie DFS, 
 $\tilde{X} \left[ k\right]$ sono estendibili da $\left[ - \infty, + \infty\right]$, proprio come $\tilde{x} \left[ n\right]$. \newline 
 
 Sapendo che la pulsazione fondamentale $\omega_0$ vale: 
@@ -277,9 +279,9 @@ ricordando che:
         W_N^{kn} 
         = 
         \begin{cases}
-            N \text{ per n multiplo di N}
+            N \quad &\text{per n multiplo di N }
             \\
-            0 \text{ altrimenti}
+            0 \quad &\text{altrimenti }
         \end{cases}
     \end{equation}
 }
@@ -301,17 +303,21 @@ con un treno di impulsi $s \left[ n\right]$, spaziati di N, allora, possiamo scr
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
         X \left(e^{\jmath \omega}\right) 
-        = 
+        &= 
         \sum_{n = - \infty}^{+ \infty}
         x \left[ n\right]
         \cdot 
         e^{- \jmath \omega n}
-        =
+        \\
+        &=
         \sum_{n = 0}^{N - 1}
         x \left[ n\right]
         \cdot 
         e^{- \jmath \omega n} 
+        \end{split}
     \end{equation}
 }
 
@@ -437,7 +443,7 @@ Campionare la DTFT della sequenza $x \left[ n\right]$, cioè $X \left( e^{\jmath
 equivale ad avere la DFS di una sequenza periodica di periodo N, ottenuta facendo la convoluzione di $x \left[  n \right]$ con un treno di impulsi spaziati di N. \newline 
 
 \begin{tcolorbox}
-    La dimostrazione di questo è svolto nelle pagine 11-12 del PDF "7 - DFT", ma essendo le slides facoltative e non di interesse al corso, perchè tanto la DFS non la useremo mai, l'ho salata. 
+    La dimostrazione di questo è svolto nelle pagine 11-12 del PDF "7 - DFT", ma essendo le slides facoltative e non di interesse al corso, perchè tanto la DFS non la useremo mai, l'ho saltata. 
 \end{tcolorbox}
 
 Per un prefissato valore di N e data la lunghezza di $x \left[ n\right]$, possiamo considerare due casi interessanti: \newline 
@@ -461,9 +467,9 @@ $x \left[ n\right]$ può essere calcolato dai N campioni della sua $X \left(e^{\
         x \left[ n \right]
         = 
         \begin{cases}
-            \tilde{x} \left[ n\right] \text{ per } 0 \leq n \leq N -1 
+            \tilde{x} \left[ n\right] \quad &\text{per } 0 \leq n \leq N -1 
             \\
-            0 \text{ altrove}
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -512,9 +518,9 @@ Si definisce perciò la DFT diretta come:
         = 
         \begin{cases}
             \sum_{n = 0}^{N -1}
-            x \left[ n\right] \cdot W_N^{kn} \quad \text{ per } 0 \leq k \leq N -1 
+            x \left[ n\right] \cdot W_N^{kn} \quad &\text{per } 0 \leq k \leq N -1 
             \\
-            0 \quad \text{ altrove}
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -538,9 +544,9 @@ Possiamo definire il processo inverso della DFT diretta, cioè la DFT inversa co
         = 
         \begin{cases}
             \sum_{k = 0}^{N -1}
-            X \left[ k\right] \cdot W_N^{-kn} \quad \text{ per } 0 \leq k \leq N -1 
+            X \left[ k\right] \cdot W_N^{-kn} \quad &\text{per } 0 \leq k \leq N -1 
             \\
-            0 \quad \text{ altrove}
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -595,9 +601,9 @@ Se invece volessimo fare il processo inverso:
         x \left[ n\right]
         = 
         \begin{cases}
-            \tilde{x} \left[ n\right] \quad \text{ per } 0 \leq n \leq N -1
+            \tilde{x} \left[ n\right] \quad &\text{per } 0 \leq n \leq N -1
             \\
-            0 \quad \text{ altrove }
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -621,9 +627,9 @@ Se invece volessimo fare il processo inverso:
         X \left[ k\right]
         = 
         \begin{cases}
-            \tilde{X} \left[ k\right] \quad \text{ per } 0 \leq k \leq N -1
+            \tilde{X} \left[ k\right] \quad &\text{per } 0 \leq k \leq N -1
             \\
-            0 \quad \text{ altrove }
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -646,7 +652,7 @@ Poichè la DFT della sequenza $x \left[ n\right]$ è la DTFT di $x \left[ n\righ
     \end{equation}
 }
 
-e poichè la ricostruzione perfetto di $x \left[ n\right]$ richiede \textbf{ almeno } N campioni in frequenza, per evitare aliasing temporale 
+e poichè la ricostruzione perfetta di $x \left[ n\right]$ richiede \textbf{ almeno } N campioni in frequenza, per evitare aliasing temporale 
 (come visto in \ref{sec: Aliasing nel tempo} \nameref{sec: Aliasing nel tempo} a pag \pageref{sec: Aliasing nel tempo}), 
 allora si può aumentare la lunghezza della DFT con la tecnica chiamata Zero Padding, cioè aggiungere M-N zeri alla sequenza iniziale $x \left[ n\right]$. \newline 
 
@@ -682,7 +688,7 @@ La reversibilità tra il dominio n e quello delle DFT è garantito perchè, in t
 Confrontando gli spettri delle DFT delle due sequenze (cioè le due figure a destra) possiamo notare che: 
 
 \begin{itemize}
-    \item la sequenza rossa tratteggiata indica lo spettro della DFT se M tende ad infinito, cioè se la DFT fosse uguale alla DTFT 
+    \item la sequenza rossa tratteggiata indica lo spettro della DFT se M tendesse ad infinito, cioè se la DFT fosse uguale alla DTFT 
     \item nella sequenza con zero padding, cioè quella con $M = 10$, ci sono più valori di $\abs{X \left[ k\right]}$ rispetto alla sequenza senza zero padding, con $M = 5$; questi valori in più non alterano la DFT, ma aggiunge campioni intermedi (chiamati anche campioni di interpolazione)
 \end{itemize}
 
@@ -704,7 +710,7 @@ Confrontando gli spettri delle DFT delle due sequenze (cioè le due figure a des
 }
 
 La DFT della sequenza di $x \left[ n\right]$ non è altro che la DFS della sequenza periodicizzata $\tilde{x} \left[ n\right]$, 
-quindi le proprietà della DFT sono le stessa della DFS, salvo che ora che gli indici vanno calcolati in modulo N. \newline 
+quindi le proprietà della DFT sono le stessa della DFS, salvo che ora gli indici vanno calcolati in modulo N. \newline 
 
 Le proprietà della DFT sono le seguenti: 
 
@@ -745,9 +751,11 @@ Un esempio di traslazione circolare passo-passo fatto a lezione: \newline
     \includegraphics[scale = 0.23]{2025-10-29 Esempio di convoluzione circolare con due sequenze editata.png}
 \end{figure} 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Modificare l'immagine per renderla più nitida
 \end{tcolorbox} 
+\end{comment}
 
 \begin{tcolorbox}
     Vi lascio degli esercizi fatti passo passo: 
@@ -783,7 +791,7 @@ cioè si svolge la traslazione nello spettro della DFT e non del tempo. \newline
 \begin{tcolorbox}
     Se abbiamo una convoluzione lineare tra due sequenze $x_1 \left[ n\right]$ lunga L e $x_2 \left[ n\right]$ lunga M 
     come studiato in \ref{subsec: Prodotto di convoluzione e le sue proprietà} \nameref{subsec: Prodotto di convoluzione e le sue proprietà} a pag \pageref{subsec: Prodotto di convoluzione e le sue proprietà}, 
-    avremo che la sequenza $x_1 \left[ n\right] * x_2 \left[ n\right]$ sarò lunga $L + M -1$, quindi la sequenza convoluita sarà più lunga di $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$. \newline 
+    avremo che la sequenza $x_1 \left[ n\right] * x_2 \left[ n\right]$ sarà lunga $L + M -1$, quindi la sequenza convoluita sarà più lunga di $x_1 \left[ n\right]$ e $x_2 \left[ n\right]$. \newline 
     
     Ma, nel "fantastico mondo del DSP", noi vorremmo avere una convoluzione di lunghezza fissa: per questo motivo, oltre alla convoluzione lineare precedentemente studiata, 
     è necessario presentare altri tipi di convoluzione. 
