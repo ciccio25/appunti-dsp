@@ -309,7 +309,9 @@ in cui:
 
 dove con la dicitura "trunc" si intende che si prende la divisione $\dfrac{N + 1}{2}$ e si prende l'intero arrotondato per difetto. \newline 
 
-Facciamo questa operazione per la scelta del valore $N_2$ perchè vogliamo sapere quante sezioni del secondo ordine ci servono. \newline 
+Facciamo quest'operazione per la scelta del valore $N_2$ perchè vogliamo sapere quante sezioni del secondo ordine ci servono. \newline 
+
+\newpage 
 
 Un esempio di forma in cascata del secondo ordine con forma diretta II canonica (con note): 
 
@@ -318,7 +320,7 @@ Un esempio di forma in cascata del secondo ordine con forma diretta II canonica 
     \includegraphics[scale = 0.3]{Forma in cascata del secondo ordine filtri IIR esempio note.png}
 \end{figure}
 
-\newpage 
+
 
 \textbf{Forma parallela} \newline 
 
@@ -360,7 +362,7 @@ Un esempio di struttura in forma parallela:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.4]{forma parallela esempio filtro IIR.png}
+    \includegraphics[scale = 0.3]{forma parallela esempio filtro IIR.png}
 \end{figure} 
 
 \newpage 
@@ -392,6 +394,7 @@ Quindi passeremo da:
             \sum_{k = 1}^{N} 
             a_k \cdot z^{-k}
         } 
+        \quad 
         \text{ con } 
         a_0 = 1
     \end{equation}
@@ -546,6 +549,8 @@ Il circuito digitale può rappresentare il valore quantizzato con due tipi di ra
     \item virgola fissa (in inglese fixed point)
 \end{itemize} 
 
+\newpage 
+
 Il caso più complicato è quello della rappresentazione in virgola mobile perchè vengono utilizzati tre elementi per rappresentare un numero: 
 
 \begin{itemize}
@@ -696,6 +701,8 @@ Dal punto di vista grafico, la funzione arrotondamento avrà il seguente andamen
     \includegraphics[scale = 0.15]{arrotondamento a complemento a 2.png}
 \end{figure} 
 
+\newpage 
+
 invece il troncamento avrà il seguente andamento: 
 
 \begin{figure}[h]
@@ -705,13 +712,11 @@ invece il troncamento avrà il seguente andamento:
 
 Quindi, come visualizzato e scritto nelle formule, la quantizzazione è un'operazione non lineare (cioè banalmente non è una retta graficamente parlando). \newline 
 
-\newpage 
-
 Durante il calcolo della quantizzazione, si può ricorrere in overflow, cioè la generazione di numeri più grandi di quelli rappresentabili con il numero di bit a disposizione. \newline  
 
 \begin{tcolorbox}
 
-    Con la dicitura "durante il calcolo" si intende i calcoli (tra cui somme, prodotti, sottrazioni, ecc..) vengono fatte tutte nel circuito digitale e con le rispettive rappresentazioni scelte. \newline  
+    Con la dicitura "durante il calcolo" si intende che i calcoli (tra cui somme, prodotti, sottrazioni, ecc..) vengono fatte tutte nel circuito digitale e con le rispettive rappresentazioni scelte. \newline  
 
     Dal punto di vista elettronico ed implementativo, andare in overflow è una tecnica molto utile perchè le risorse sono limitate, ma se si tratta di sicurezza è un problema enorme (banale, ma è la base delle falle di sicurezza moderne). \newline 
 
@@ -736,6 +741,8 @@ Sono possibili 2 strategie:
     
     perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, ritorna al valore minimo (in figura da 011 a 100)
     
+    \newpage 
+
     \item Saturazione, che ha il seguente andamento: 
     
     \begin{figure}[h]
@@ -745,8 +752,6 @@ Sono possibili 2 strategie:
     
     perchè, una volta che $\hat{x} \left[ n\right]$ arriva al valore massimo, rimane a quel valore (in figura da 011 rimane 011)
 \end{itemize}
-
-\newpage 
 
 La tecnica "wrap around" è utilizzata negli ADC moderni, come l'ADC Sigma Delta. \newline
 
@@ -770,6 +775,8 @@ Come si nota dallo schema, questo è il caso ideale senza quantizzazione, quindi
 Si considera, per adesso, una precisazione infinita perchè, nel circuito, non è presente un quantizzatore, quindi non esiste l'errore di quantizzazione. \newline 
 
 Inoltre, essendoci una retroazione, il circuito digitale $H \left(z\right)$ è un circuito IIR che prende il nome anche di integratore. \newline 
+
+\newpage 
 
 Andando invece per un modello più completo: 
 
@@ -801,8 +808,6 @@ la precisione sarà finita perchè il quantizzatore limita i valori che può qua
 Questo rappresentato è un circuito non lineare dinamico perchè è presente un fattore di memoria;  
 inoltre, questo tipo di modellazione permette di visualizzare meglio cosa accade in un circuito digitale reale. \newline 
 
-\newpage 
-
 Invece, se consideriamo un modello semplificato del precedente, avremo il seguente schema: 
 
 \begin{figure}[h]
@@ -822,7 +827,7 @@ Questo è un circuito lineare con rumore: questo tipo di modello, dove è presen
 
 Il fatto che questa modellazione è lineare, ci permette di modellizzare un processo non lineare, che è la quantizzazione, come un circuito lineare perchè presente solo somme e prodotti. \newline 
 
-In questi casi, si è solo considerato solo errore di quantizzazione, non altri tipi di rumore (come quello quello termico che abbiamo incontrato nel corso di telecomunicazioni). \newline 
+In questi casi, si è considerato solo come errore quello di quantizzazione, non altri tipi di rumore (come quello quello termico che abbiamo incontrato nel corso di telecomunicazioni). \newline 
 
 Negli ultimi 2 circuiti visualizzati abbiamo ipotizzato che non ci fosse l'overflow: 
 in caso di overflow, bisogna svolgere ulteriori considerazioni (che in questo corso non svolgiamo). \newline 
@@ -908,7 +913,7 @@ Invece, per quanto riguarda la forma in cascata:
     \includegraphics[scale = 0.4]{Filtro in cascata di ordine II IIR.png}
 \end{figure}
 
-ogni coppia di poli e zeri è realizzata indipendentemente alle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
+ogni coppia di poli e zeri è realizzata indipendentemente dalle altre, quindi è una struttura poco sensibile alla quantizzazione. \newline 
 
 Quindi, la useremo sempre, specialmente se lavoriamo con numeri fissi. \newline 
 
@@ -936,7 +941,7 @@ Grazie a questa caratteristica elencata, la struttura parallela è, in genere, m
     Latex | 2026-01-07 Pomeriggio | pag 301 - 302         
 } 
 
-Non avendo poli i filtri FIR, la quantizzazione dei coefficienti provoca lo spostamento degli zeri da $H \left(z\right)$ a $\hat{H} \left(z\right)$: 
+Non avendo poli nei filtri FIR, la quantizzazione dei coefficienti, in questi tipi di circuiti, provoca lo spostamento degli zeri da $H \left(z\right)$ a $\hat{H} \left(z\right)$: 
 
 
 {
@@ -1292,7 +1297,7 @@ Considerando un filtro IIR in forma diretta I del secondo ordine (ma che può es
     \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta I.png}
 \end{figure} 
 
-per linearità dei grafi e dei nodi, tutti i contributi di errore si sommano allo stesso nodo di $e_{T} \left[ n\right]$, che varrà: 
+Per linearità dei grafi e dei nodi, tutti i contributi di errore si sommano allo stesso nodo di $e_{T} \left[ n\right]$, che varrà: 
 
 {
     \Large 
@@ -1435,9 +1440,9 @@ Ricordando che, per i nostri scopi, la funzione di quantizzazione per $e_T \left
     \Large 
     \begin{equation}
         \begin{cases}
-        m_{e_T} = 0 
+        m_{e_T} &= 0 
         \\
-        P_{e_T} \left(\omega\right) = \sigma_{T}^{2}   
+        P_{e_T} \left(\omega\right) &= \sigma_{T}^{2}   
         \end{cases}
     \end{equation}
 }
@@ -1449,11 +1454,11 @@ Allora per $e_y \left[ n\right]$ saranno uguali a:
     \begin{equation}
         \setlength{\jot}{20pt} % affecting the line spacing in the environment
         \begin{cases}
-            m_{e_y} = 0 
+            m_{e_y} &= 0 
             \\
-            P_{e_y} = \sigma_{T}^{2} \cdot \abs{H_a \left(e^{\jmath \omega}\right)}^{2}
+            P_{e_y} &= \sigma_{T}^{2} \cdot \abs{H_a \left(e^{\jmath \omega}\right)}^{2}
             \\
-            \sigma_{e_y}^{2} = \dfrac{\sigma_{T}^{2}}{2 \pi} \int_{- \pi}^{+ \pi} \abs{H_a \left(e^{\jmath \omega}\right)}^{2} d\omega
+            \sigma_{e_y}^{2} &= \dfrac{\sigma_{T}^{2}}{2 \pi} \int_{- \pi}^{+ \pi} \abs{H_a \left(e^{\jmath \omega}\right)}^{2} d\omega
         \end{cases}
     \end{equation}
 } 
@@ -1474,9 +1479,9 @@ dove però, rispetto al caso dei filtri FIR IIR in forma diretta I, in questo ca
     \Large 
     \begin{equation}
         \begin{cases}
-            e_{a} \left[ n\right] = e_{a_1} \left[ n\right] + e_{a_2} \left[ n\right]
+            e_{a} \left[ n\right] &= e_{a_1} \left[ n\right] + e_{a_2} \left[ n\right]
             \\ 
-            e_{b} \left[ n\right] = e_{b_0} \left[ n\right] + e_{b_1} \left[ n\right] + e_{b_2} \left[ n\right]
+            e_{b} \left[ n\right] &= e_{b_0} \left[ n\right] + e_{b_1} \left[ n\right] + e_{b_2} \left[ n\right]
         \end{cases}
     \end{equation}
 }
@@ -1505,6 +1510,8 @@ in cui:
 }
 
 dove $h \left[ k\right]$ è la risposta impulsiva del filtro. \newline 
+
+\newpage 
 
 Applicando la quantizzazione in cui si applica l'arrotondamento, avremo che: 
 
@@ -1771,7 +1778,7 @@ Pertanto, il fattore di scala S diventa il seguente:
 }
 
 Questo tipo di approccio è meno conservativo rispetto al precedente perchè, abbiamo fissato un unico valore $x_{\text{max}}$ per tutte le pulsazioni $\omega$:  
-in teoria, per essere più conservativi,dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. \newline 
+in teoria, per essere più conservativi, dovremmo conoscere il valore massimo di ogni pulsazione $\omega$ del segnale di ingresso $x \left[ n\right]$. \newline 
 
 \textbf{Terza soluzione per lo Scaling} \newline 
 
@@ -1963,6 +1970,9 @@ Di seguito una "lista della spesa" (aka cosa fare) per quanto riguarda la realiz
     \item utilizzare se possibile, accumulatori a molti bit 
     \item per la forma a cascata, l'ordine delle sezioni non è particolarmente importante 
 \end{itemize}
+
+\newpage 
+.
 
 \newpage 
 
