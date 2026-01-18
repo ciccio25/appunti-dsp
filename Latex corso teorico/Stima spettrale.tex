@@ -19,7 +19,7 @@
     La stima dello spettro è quello che realmente faremo SEMPRE perchè i segnali analogici reali sono infiniti (o di lunghezza molto lunga rispetto alla memoria finita del calcolatore). \newline 
     
     Mi dispiace che ho dovuto scrivere più di 300 pagine per arrivare a questo punto, ma è stato doveroso perchè ci servono delle basi per capire cosa faremo realmente: 
-    è come studiare e passare l'esame di Analisi Matematica 1, per poi utilizzare, ogni giorno, massimo le somme, sottrazioni, divisioni, moltiplicazioni e approssimazioni. \newline 
+    è come studiare e passare l'esame di Analisi Matematica 1, per poi utilizzare, ogni giorno, al massimo le somme, sottrazioni, divisioni, moltiplicazioni e approssimazioni. \newline 
     
     Questo è il primo "vero" capitolo di DSP, su cui si basa anche l'esame finale, specialmente la prova su Matlab. \newline  
 
@@ -100,7 +100,7 @@ Questo è il caso ideale e non saremmo mai in grado di calcolare analiticamente 
 
 Come studiato in \ref{ch: FFT} \nameref{ch: FFT} da pag \pageref{ch: FFT}, la FFT è uno strumento molto utile per calcolare la DFT di $x \left[ n\right]$. \newline 
 
-Per avere un campionamento più fitto, nella DFT basta fare uno zero padding, ma nella realtà questo caso non sarà possibile farlo. \newline 
+Per avere un campionamento più fitto, nella DFT basta fare uno zero padding, ma nella realtà, questo caso non sarà possibile farlo. \newline 
 
 \newpage 
 
@@ -233,7 +233,7 @@ Affinchè la formula di $\hat{X} \left[ k\right]$ sia valida, occorre che:
 
 oppure si fa zero padding su $x \left[ n\right]$ se N è minore di L, in modo da arrivare a $N \geq L$. \newline 
 
-Aumentare N non aggiunge ulteriore informazione alla stima, non migliora l'informazione, non migliora la stima: permette di distinguere le frequenze. \newline 
+Aumentare N non aggiunge ulteriore informazione alla stima, non migliora l'informazione, non migliora la stima: permette di distinguere meglio le frequenze l'una dall'altra. \newline 
 
 Per migliorare la stima, bisognerebbe aumentare L, cioè la lunghezza della finestra perchè abbiamo più informazioni di $x \left[ n\right]$ (o come la chiama il prof "abbiamo più birra"). \newline 
 
@@ -292,7 +292,7 @@ può dare problemi per la localizzazione di picchi o di punti particolari, come 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.8]{granulostià esempio.png}
+    \includegraphics[scale = 1]{granulostià esempio.png}
 \end{figure}  
 
 \begin{tcolorbox}
@@ -370,7 +370,7 @@ Una sequenza casuale (o in inglese random) è una realizzazione di un processo s
 \end{tcolorbox}
 
 $x_{n}$ è una serie temporale (e quindi cambia ogni istante nel tempo); 
-ad essa è generalmente associata una sua descrizione statistica del processo, per avere informazione su tutte le possibili realizzazione del processo. \newline 
+ad essa è generalmente associata una sua descrizione statistica del processo, per avere informazione su tutte le possibili realizzazioni del processo. \newline 
 
 Tale descrizione statistica è completa quando conosciamo la distribuzione di probabilità del processo. \newline 
 
@@ -409,28 +409,32 @@ Di seguito i parametri che andremo ad utilizzare:
     }
 \end{itemize}
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire dei video youtube o link per ripassare cosa significano i parametri statistici indicati. \newline 
 
 Inoltre, inserire le formule degli integrali dal corso di Teoria dei segnali. 
 \end{tcolorbox} 
+\end{comment}
 
 \begin{tcolorbox}
-Generalmente noi avremo a che fare con segnali a media nulla perchè sennò, in Fourier, avremo una Delta di Dirac in $n = 0$, che rappresenterebbe la continua in Fourier.     
+Generalmente noi avremo a che fare con segnali a media nulla perchè sennò, in Fourier, avremo una Delta di Dirac in $\omega = 0$, che rappresenterebbe la continua in Fourier.     
 \end{tcolorbox}
 
 Poichè, spesso non è possibile conoscere le media di insieme, ci si accontenta di conoscere le medie temporali della sequenza random a disposizione per processi stazionari in senso lato. \newline 
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Aggiungere link per la definizione di processo stazionario e quale è la differenza in senso lato  
 \end{tcolorbox} 
+\end{comment}
 
 \begin{tcolorbox}
 La differenza tra stazionarietà e stazionarietà in senso lato è che la prima è legata alla PDF (che non avremo mai perchè "viene data dagli dei dell'olimpo", quindi è un fenomeno statistico); 
-invece la stazionarietà in senso lato è legata al tempo, quindi alle realizzazioni n-esimi che noi utilizziamo e usiamo nei casi reali.     
+invece la stazionarietà in senso lato è legata al tempo, quindi alle n-esime realizzazioni  che noi utilizziamo e usiamo nei casi reali.     
 \end{tcolorbox}
 
-Allora, sicoccome nella realtà non conosciamo la PDF, non useremo i parametri appena indicati bensì i seguenti: 
+Allora, siccome nella realtà non conosciamo la PDF, non useremo i parametri appena indicati bensì i seguenti: 
 
 \begin{itemize}
     \item media: 
@@ -638,7 +642,7 @@ che è una funzione reale sempre positiva, se $x \left[ n\right]$ è reale, allo
 La conoscenza di un numero limitato di campioni di realizzazione di $x \left[ n\right]$ permette solo di stimare lo spettro 
 (lo stimiamo sempre perchè abbiamo solo campioni limitati di $x \left[ n\right]$ e non tutti i campioni per $n \in \left[ - \infty, + \infty\right]$). \newline 
 
-Una buona stima di $P \left(\omega\right)$, cioè $\hat{P} \left(\omega\right)$ deve essere tale che: 
+Una buona stima di $P \left(\omega\right)$, cioè $\hat{P} \left(\omega\right)$, deve essere tale che: 
 
 \begin{itemize}
     \item la stima non deve essere "polarizzata", cioè: 
@@ -667,7 +671,7 @@ Una buona stima di $P \left(\omega\right)$, cioè $\hat{P} \left(\omega\right)$ 
             0
         \end{equation}
     } 
-    cioè, che la variabile aleatoria $x \left[ n\right]$ sia il più possibile deterministica, cioè che abbia poca varianza, che a sua volta implica chei valori di $x \left[ n\right]$ siano più vicini alla media; se il fenomeno è gaussiano, avremo una campana più stretta 
+    cioè, che la variabile aleatoria $x \left[ n\right]$ sia il più possibile deterministica, cioè che abbia poca varianza, che a sua volta implica che i valori di $x \left[ n\right]$ siano più vicini alla media; se il fenomeno è gaussiano, avremo una campana più stretta 
 \end{itemize}
 
 Queste relazioni dovrebbero valere per ogni pulsazione $\omega$ di $x \left[ n\right]$. \newline 
@@ -705,7 +709,7 @@ Piuttosto che calcolarci la potenza $P_{xx} \left(\omega\right)$ attraverso l'au
 
 l'idea è quella di stimare $P_{xx} \left(\omega\right)$ senza calcolarsi l'autocorrelazione $\phi_{xx} \left[ n\right]$. \newline 
 
-Grazie all'economista Shuster nel 1809 (quindi molto prima che esistesse il DSP come materia di studio), si è riusciti a calcolare, da $x \left[ n\right]$ la sua potenza, 
+Grazie all'economista Shuster nel 1809 (quindi molto prima che esistesse il DSP come materia di studio), si è riusciti a calcolare, da $x \left[ n\right]$, la sua potenza, 
 quindi $P_{xx} \left(\omega\right)$, ma con il modulo al quadrato. \newline 
 
 Prima di calcolarsi $\abs{P_{xx} \left(\omega\right)}^{2}$, bisogna calcolarsi la DTFT di $x \left[ n\right]$, che in questo caso non è una sequenza deterministica, bensì casuale. \newline 
@@ -774,9 +778,11 @@ Allora, possiamo scrivere che la DTFT di $\hat{x} \left[ n\right]$ è uguale a:
     \end{equation}
 }
 
+\begin{comment}
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black]
 TO-DO: Inserire delle immagini dei segnali che rappresentano una finestratura 
 \end{tcolorbox} 
+\end{comment}
 
 \newpage 
 
@@ -908,7 +914,7 @@ una qualsiasi stima ha una polarizzazione, che, nel caso di $\hat{P}_{PE} \left(
 }
 
 \begin{tcolorbox}
-    I passaggi sono scritti nella slide del prof, ma io l'ho saltata perchè la dimostrazione è facoltativa. 
+    I passaggi sono scritti nella slide del prof, ma io li ho saltati perchè la dimostrazione è facoltativa. 
 \end{tcolorbox} 
 
 dove: 
@@ -1001,12 +1007,12 @@ Grazie a questa dimostrazione, vale sempre questa proprietà:
     \Large 
     \begin{equation}
         \begin{cases}
-        P_{xx} \left(\omega\right) \geq 0 \text{ sempre }
+        P_{xx} \left(\omega\right) \geq 0 \quad &\text{sempre }
         \\
-        \abs{W \left(e^{\jmath \omega}\right)}^{2} \geq 0 \text{ sempre }    
+        \abs{W \left(e^{\jmath \omega}\right)}^{2} \geq 0 \quad &\text{sempre }    
         \end{cases}
         \to 
-        \hat{P}_{PE} \left(\omega\right) \geq 0 \text{ sempre } 
+        \hat{P}_{PE} \left(\omega\right) \geq 0 \quad \text{sempre } 
     \end{equation}
 }
 
@@ -1221,7 +1227,7 @@ ad esempio, per il parlato umano si può considerare un segnale stazionario per 
 
 Grazie a questa momentanea stazionarietà, si possono utilizzare gli strumenti stazionari ai segnali non stazionari. \newline 
 
-Quindi, in parole povere, è quello di campionare lo spettro nel tempo. \newline 
+Quindi, in parole povere, bisogna campionare lo spettro nel tempo. \newline 
 
 Come studiato per i segnali stazionari con il periodogramma in \ref{subsec: Sommario Periodogramma} \nameref{subsec: Sommario Periodogramma} a pag \pageref{subsec: Sommario Periodogramma}, 
 applichiamo l'algoritmo di Weltch ma ai segnali non stazionari. \newline 
@@ -1229,7 +1235,7 @@ applichiamo l'algoritmo di Weltch ma ai segnali non stazionari. \newline
 \newpage 
 
 Come prima, considerando $x \left[ n\right]$ una sequenza molto lunga (idealmente lunga infinita), 
-prendiamo una porzione, che a sua volta sarà diviso in M porzioni tale che: 
+prendiamo una porzione, che a sua volta sarà divisa in M porzioni tale che: 
 
 {
     \Large 
@@ -1604,6 +1610,18 @@ dove:
 quindi, nel grafico a blocchi, consideriamolo come se non ci fosse. \newline 
 
 \newpage 
+. 
+
+\newpage 
+
+FINE PROGRAMMA A.A. 2025/2026 \newline 
+
+BUON ESAME !!!
 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{meme.jpg}
+\end{figure}
 
+\newpage 
