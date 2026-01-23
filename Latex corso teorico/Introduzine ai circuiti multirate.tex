@@ -182,6 +182,8 @@ Il filtro passa-basso, prima del decimatore, è preventivo ma non necessario, ut
     \includegraphics[scale = 0.4]{filtro passa-basso nel decimatore.png}
 \end{figure} 
 
+dove $H_d \left(e^{\jmath \omega}\right)$ è lo spettro del filtro anti-aliasing, che viene moltiplicato per $X \left(e^{\jmath \omega}\right)$, per ottenere $\tilde{X} \left(e^{\jmath \omega}\right)$. \newline
+
 \newpage 
 
 \subsection{Interpolazione e sovracampionamento} \label{subsec: Interpolazione e sovracampionamento}
@@ -406,6 +408,7 @@ perchè:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             f_{i} 
             &= f_{c} \cdot L 
@@ -440,6 +443,7 @@ avremo che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             f_{l} 
             &= \dfrac{f_{i}}{M} 
@@ -552,14 +556,14 @@ Invece, per quanto riguarda le repliche, avremo che da $X \left(e^{\jmath \omega
 }
 
 \begin{tcolorbox}
-    Tecnicamente dovremmo dire che gli spetti da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ gli spettri non si spostato, bensì danno un contributo, ma noi diremo che si spostano per semplicità. \newline 
+    Tecnicamente dovremmo dire che gli spetti da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ non si spostato, bensì danno un contributo, ma noi diremo che si spostano per semplicità. \newline 
 
     Il motivo per cui noi vediamo il sotto-campionanmento di una sequenza è dovuto allo studio, nei capitoli successivi, dei banchi filtri. 
 \end{tcolorbox}
 
 $X_{d} \left(e^{\jmath \omega}\right)$ ora non ha buchi in frequenza rispetto a $X \left(e^{\jmath \omega}\right)$. \newline
 
-In questo caso l'aliasing da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$ non distorce lo spettro, bensì lo va a completare. \newline 
+In questo caso l'aliasing, da $X \left(e^{\jmath \omega}\right)$ a $X_{d} \left(e^{\jmath \omega}\right)$, non distorce lo spettro, bensì lo va a completare. \newline 
 
 Inoltre, in $X_{d} \left(e^{\jmath \omega}\right)$, lo spettro si è invertito: per evitare questo effetto basta utilizzare la sequenza: 
 
@@ -602,7 +606,7 @@ Poichè, in generale, il segnale non è a banda strettamente limitata, la strutt
     \includegraphics[scale = 0.25]{decimatore tipico per segnali passa banda.png}
 \end{figure} 
 
-Il problema che si intercorre con questo tipo di sistema è la non idealità del filtro passa-banda (cioè che non un filtro reale non è ripido nello spettro, sarà più smussato quindi ci saranno dei componenti non indesiderati che creeranno aliasing) 
+Il problema che si intercorre con questo tipo di sistema è la non idealità del filtro passa-banda (cioè che un filtro reale non è ripido nello spettro, sarà più smussato quindi ci saranno dei componenti non indesiderati che creeranno aliasing) 
 e le limitazioni del segnale nello spettro, cioè che deve essere $\abs{X \left(e^{\jmath \omega}\right)} \neq 0$ solo per $k \cdot \dfrac{\pi}{M} < \abs{\omega} < \left(k + 1\right) \cdot \dfrac{\pi}{M} $. \newline 
 
 \newpage 
@@ -763,7 +767,7 @@ Il sottocampionatore, come in figura:
     \includegraphics[scale = 0.4]{sottocampionatore schema.png}
 \end{figure} 
 
-e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+è quel componente che, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
 
 {
     \Large 
@@ -792,7 +796,7 @@ Il sovracampionatore, come in figura:
     \includegraphics[scale = 0.4]{sovracampionatore schema.png}
 \end{figure} 
 
-e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+è quel componente che, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
 
 {
     \Large 
@@ -824,7 +828,7 @@ Il filtro lineare, come in figura:
     \includegraphics[scale = 0.4]{sovracampionatore schema.png}
 \end{figure} 
 
-e che quindi, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
+è quel compnente che, data una sequenza di ingresso $x \left[ n\right]$, ha in uscita (sia nel dominio n che in Fourier): 
 
 {
     \Large 
@@ -892,6 +896,7 @@ Ipotizzando $H \left(z\right)$ un filtro IIR, allora avremo in uscita $y \left[ 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             y \left[ m\right]
             &= 
@@ -919,12 +924,13 @@ Tralasciando la dimostrazione (che potete vedere nelle slide ma è facoltativa) 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
-            i = < m >_{L}
+            i &= < m >_{L}
             \\
-            P_{i} \left[ n\right] = h \left[ n \cdot L + i \right]
+            P_{i} \left[ n\right] &= h \left[ n \cdot L + i \right]
             \quad 
-            \text{ per }
+            \text{per }
             i = 0, 1, \dots, L-1
         \end{cases}
     \end{equation}
@@ -936,6 +942,7 @@ possiamo riscrivere $y \left[ m\right]$ come:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             y \left[ m\right]
             &= 
@@ -971,8 +978,8 @@ Non avremo più un filtro, bensì più filtri come si vede nel seguente schema:
     \includegraphics[scale = 0.8]{decomposizione polofase.png}
 \end{figure} 
 
-cioè un banco filtri che dipendono non più dall'indice n della sequenza di ingresso $x \left[ n\right]$, 
-bensì dall'indice i, che è modulo tra l'indice m L del sovra-campionatore. \newline 
+cioè un banco filtri in cui ogni filtro non dipende più dall'indice n della sequenza di ingresso $x \left[ n\right]$, 
+bensì dall'i-esimo indice, che è modulo tra l'indice m L del sovra-campionatore. \newline 
 
 
 Ogni i-esimo filtro lavorerà ad un rate più basso rispetto ad L ed avrà una risposta in frequenza più bassa. \newline 
@@ -1113,6 +1120,7 @@ Se consideriamo il convertitore analogico-digitale a $B + 1$ bit e che l'interva
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
         1 \text{ LSB } = \Delta = \dfrac{2 \cdot}{2^{B + 1}} 
         \\    
@@ -1150,6 +1158,7 @@ avremo che la varianza di $e \left[ n\right]$, cioè $\sigma_{e}^{2}$ sarà ugua
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         \sigma_{e}^{2}
         &= 
@@ -1293,8 +1302,10 @@ Grazie a tutte queste osservazione, possiamo trarre le seguenti informazioni:
         \centering
         \includegraphics[scale = 0.8]{sovra campionamento nello spettro e confronto.png}
     \end{figure} 
-    il sovra-campionamento crea dei buchi in frequenza, che permettono di realizzare dei filtri con banda di transizione più morbida (perchè nella realtà, la banda di transizione non sarà così ripida come nella figura a destra) 
-    \item solo dopo la conversione analogico-digitale, è possibile decimare perchè la decimazione è un'operazione in cui si perde delle informazioni rispetto alla sequenza originale, quindi è necessario decimare per bene
+    
+    Il sovra-campionamento crea dei buchi in frequenza, che permettono di realizzare dei filtri con banda di transizione più morbida (perchè nella realtà, la banda di transizione non sarà così ripida come nella figura a destra) 
+    
+    \item solo dopo la conversione analogico-digitale, è possibile decimare perchè la decimazione è un'operazione in cui si perdono delle informazioni rispetto alla sequenza originale, quindi è necessario decimare per bene
 \end{itemize}
 
 

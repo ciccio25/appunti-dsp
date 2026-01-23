@@ -185,7 +185,7 @@ Invece per tecniche dirette, significa che si progetta il filtro direttamente ne
 
 In altre parole, è possibile gestire i coefficienti della funzione $H \left(z\right)$. \newline 
 
-I vantaggi delle tecniche dirette sono che si ha un buon controllo delle prestazioni e si ha hanno delle prestazioni. \newline 
+I vantaggi delle tecniche dirette sono che si ha un buon controllo delle prestazioni. \newline 
 
 Gli svantaggi delle tecniche dirette sono che necessitano di calcolatori e ci sono dei problemi di convergenza degli algoritmi. \newline 
 
@@ -624,7 +624,7 @@ Cioè, si dovrà stabilire un opportuno mapping tra il piano s e il piano z, cio
 
 Per svolgere questo mapping ci sono diversi metodi disponibili. \newline 
 
-I principali (o almeno quelli che analizzeremo in questo corso) sono le seguenti: 
+I principali (o almeno quelli che analizzeremo in questo corso) sono i seguenti: 
 
 \begin{itemize}
     \item invarianza all'impulso, cioè si campiona la soluzione dell'equazione (prende il nome di risposta impulsiva)
@@ -727,6 +727,7 @@ allora:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         H \left(e^{\jmath \omega}\right)
         &=
@@ -764,6 +765,7 @@ avremo che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         H \left(e^{\jmath \omega}\right)
         &=
@@ -796,7 +798,7 @@ dove l'asse $\jmath \Omega$ del piano S viene "wrappato" come circonferenza del 
 \newpage 
 
 \begin{tcolorbox}
-    Quindi questa "semplice" sostituzione è dovuto dal Jacobiano tra i due domini. \newline 
+    Quindi questa "semplice" sostituzione è dovuta dal Jacobiano tra i due domini. \newline 
 
     Il Jacobiano, come avevamo studiato ad Analisi Matematica 2, fa un mapping tra due domini diversi. \newline 
 
@@ -874,6 +876,7 @@ avremo che $H_c \left(s\right)$ nel tempo t sarà uguale a:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         H_c \left(s\right)
         &= 
@@ -899,6 +902,7 @@ avremo che (facendo i passaggi step by step):
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             h \left[ n\right]
             &= 
@@ -1022,6 +1026,7 @@ Allora, con questa considerazione, possiamo trasformare questo integrale come:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             y_c \left(t\right)
             &= 
@@ -1060,6 +1065,7 @@ Quindi avremo questo sistema di risoluzione:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
             y_c \left(nT\right) 
             &= 
@@ -1090,6 +1096,7 @@ Ponendo:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
             y \left[ n\right] 
             &= 
@@ -1203,12 +1210,13 @@ In particolare se facciamo questa sostituzione:
 }
 
 cioè consideriamo solo il cerchio unitario nel dominio z, 
-avremo che la variabile la variabile s, con il mapping scritto precedentemente, 
+avremo che la variabile s, con il mapping scritto precedentemente, 
 sarà uguale a (considerando la parte reale nel dominio s, cioè $\sigma$, e la parte immaginaria, cioè $\Omega$), utilizzando le formule di Eulero: 
 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             s 
             &= \sigma + \jmath \Omega 
@@ -1264,7 +1272,7 @@ Dalla seguente figura, si possono svolgere le seguenti considerazioni riguardo l
 \begin{itemize}
     \item tra $\omega$ e $\Omega$ non esiste una relazione lineare (in altri termini non è presente una retta nel grafico) 
     \item si avrà una bassa distorsione per $\Omega$ basse, cioè quelle vicino a $\Omega = 0 $ perchè avremo un $\omega$ che sarà più vicino a $\abs{0}$
-    \item si avarà un'alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
+    \item si avrà un'alta distorsione per $\Omega$ alte, cioè quelle lontane da $\Omega = 0$, perchè avremo un $\omega$ che sarà più vicino a $\abs{\pi}$  
 \end{itemize} 
 
 Questo tipo di distorsione non lineare nelle frequenze prende il nome di compressione. \newline 
@@ -1321,6 +1329,7 @@ Eseguendo questo tipo di mapping, possiamo trarre le seguenti considerazioni:
     {
         \Large 
         \begin{equation}
+            \setlength{\jot}{10pt} % affecting the line spacing in the environment
             \begin{split}
             \Omega &= \pm \infty 
             \\
@@ -1412,7 +1421,7 @@ quindi:
 \end{figure}  
 
 \begin{tcolorbox}
-    Tanto a noi tutti questi passaggi non ci interessano perchè la progettazione dei filtri, almeno per questo esame, verrà fatto con il package "filterDesigner" su Matlab. \newline 
+    Tanto a noi tutti questi passaggi non ci interessano perchè la progettazione dei filtri, almeno per questo esame, verrà fatta con il package "filterDesigner" su Matlab. \newline 
 
     A noi interessa sapere che Matlab, in background, fa tutti questi calcoli. 
 \end{tcolorbox}

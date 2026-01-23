@@ -76,7 +76,7 @@ dovuto alle proprietà di Fourier tra tempo e frequenza. \newline
     Senza sapere le proprietà tra tempo e frequenza, l'esame di TdS è meglio non farlo. 
 \end{tcolorbox} 
 
-Grazie a questa ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali calcolandoli analiticamente (in forma chiusa). \newline 
+Grazie a quest'ultima osservazione, l'idea è quella di ottenere un filtro FIR troncando la risposta impulsiva IIR dei filtri ideali calcolandoli analiticamente (in forma chiusa). \newline 
 
 \begin{tcolorbox}
 Calcolarsi i filtri in forma chiusa si intende che si calcoleranno analiticamente dei filtri, che saranno poi ottimizzati attraverso delle tecniche di ottimizzazione      
@@ -87,6 +87,7 @@ Ad esempio, considerando un filtro passa-basso ideale $H_d \left(e^{\jmath \omeg
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         H_d \left(e^{\jmath \omega}\right) 
         = 
         \begin{cases}
@@ -423,9 +424,9 @@ ciò è possibile azzerando dolcemente gli estremi della finestra. \newline
 A questo punto, siccome l'area sotto alla finestra è costante in tutti i lobi, il lobo principale è più largo. \newline 
 
 Grazie a questo principio, negli anni, diversi studiosi hanno proposto diverse finestre, 
-che sono nulla fuori dalla lunghezza della finestra stessa. \newline 
+mantenendo la lunghezza della finestra ideale. \newline 
 
-Di seguito le finestre $w \left[ n\right]$ più utilizzati nell'ambito DSP. \newline 
+Di seguito le finestre $w \left[ n\right]$ più utilizzate nell'ambito DSP. \newline 
 
 \textbf{Rettangolare} \newline 
 
@@ -651,7 +652,7 @@ dove:
     \item $W \left(e^{\jmath \omega}\right)$ è la finestra troncata 
 \end{itemize} 
 
-Quando si utilizza la tecnica Windowing per la progettazione di un filtro FIR bisogna ricordarsi delle seguente caratteristiche di questa tecnica: 
+Quando si utilizza la tecnica Windowing per la progettazione di un filtro FIR bisogna ricordarsi delle seguenti caratteristiche di questa tecnica: 
 
 \begin{itemize}
     \item la largezza della banda di transione è inversamente proporzionale ad M e dipende dal tipo di finestra (cioè se si usa una finestra rettangolare, è una di Bartlett, o una Hanning, ecc..) 
@@ -790,7 +791,7 @@ Il metodo di Kaiser comprende le due seguenti formule empiriche:
 dove: 
 
 \begin{itemize}
-    \item il valore di M è calcolato con una incertezza di $\pm 2$ 
+    \item il valore di M è calcolato con un'incertezza di $\pm 2$ 
     \item A è il ripple al quadrato in dB e vale: 
     {
         \Large 
@@ -816,7 +817,7 @@ dove:
 Dopo tutta questa spiegazione dettagliata sul metodo Windowing per la progettazione dei filtri FIR, 
 possiamo trarre le seguenti considerazioni. \newline 
 
-Dato una qualsiasi finestra, possiamo dire che: 
+Data una qualsiasi finestra, possiamo dire che: 
 
 \begin{itemize}
     \item il ripple $\delta$ nella banda passante e nella banda oscura è lo stesso e dipende dal tipo di finestra 
@@ -841,7 +842,7 @@ Se volessimo progettare un filtro FIR di tipo I o di tipo II potremmo utilizzare
 
 Consideriamo solo filtri FIR di tipo I o di tipo II perchè i filtri di tipo III e di tipo IV, come studiato in 
 \ref{subsec: Sistemi causali con fase generalizzata lineare} \nameref{subsec: Sistemi causali con fase generalizzata lineare} a pag \pageref{subsec: Sistemi causali con fase generalizzata lineare}, 
-questi due ultimi non sono simmetrici, quindi perdono la simmetria del sinc. \newline 
+non sono simmetrici, quindi perdono la simmetria del sinc. \newline 
 
 Confrontando la precedente tabella con la seguente figura (con note): 
 
@@ -1267,7 +1268,7 @@ Fissati i seguenti valori:
     \item $\dfrac{\delta_1}{\delta_2}$
 \end{itemize}
 
-si ottiene: 
+si ottengono: 
 
 \begin{itemize}
     \item la funzione $h \left[ n\right]$ per i valori di $n = 0, \dots, L$ 

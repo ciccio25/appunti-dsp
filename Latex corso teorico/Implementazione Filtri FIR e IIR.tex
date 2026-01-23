@@ -467,7 +467,7 @@ Ad esempio, per un filtro FIR I, che avrà questa formulazione matematica:
     \end{equation}
 }
 
-con un esempio di strutta: 
+con un esempio di struttura: 
 
 \begin{figure}[h]
     \centering
@@ -486,7 +486,7 @@ Invece, per un filtro FIR II, che avrà questa formulazione matematica:
     \end{equation}
 }
 
-con un esempio di strutta: 
+con un esempio di struttura: 
 
 \begin{figure}[h]
     \centering
@@ -504,7 +504,7 @@ con un esempio di strutta:
 } 
 
 \begin{tcolorbox}
-Oltre agli appunti, per questi appunti ho rivisto anche le videolezioni. \newline 
+Oltre agli appunti presi a lezione, per questi appunti ho rivisto anche le videolezioni. \newline 
 
 Le videolezioni sono disponibili sul Learn del corso. 
 \end{tcolorbox}
@@ -1014,7 +1014,7 @@ Come negli IIR, anche per i FIR sceglieremo le strutture a cascata come il segue
     \includegraphics[scale = 0.4]{forma in cascata per filtri FIR.png}
 \end{figure} 
 
-grazie alla struttura in cascata, è assai robusta alla quantizzazione perchè ogni sezione è indipendente dalle oltre;  
+La struttura in cascata è assai robusta alla quantizzazione perchè ogni sezione è indipendente dalle altre;  
 ma il problema è (come al solito) garantire la fase lineare al filtro. \newline 
 
 Avendoci a che fare con poli e zeri complessi e coniugati, non avremo a che fare con strutture del secondo ordine come visto negli IIR, bensì con una funzione di rete del quarto ordine. \newline 
@@ -1152,7 +1152,7 @@ Oltre al modello semplificato, dobbiamo svolgere le seguenti ipotesi (che sono f
 \begin{itemize}
     \item le somme sono senza overflow 
     \item se B è il numero di bit, allora i prodotti quantizzati saranno da $2B + 1$ a $B+1$ 
-    \item i k-esimi contributi di errori dovuti alla quantizzazione, chiamati anche errori di quantizzazioni, le ipotizziamo come bianchi, quindi stazionati, con distribuzione uniforme nell'intervallo di quantizzazione, e incorrelati fra loro e con gli ingressi 
+    \item i k-esimi contributi di errori dovuti alla quantizzazione, chiamati anche errori di quantizzazioni, le ipotizziamo come bianchi, quindi stazionari, con distribuzione uniforme nell'intervallo di quantizzazione, e incorrelati fra loro e con gli ingressi 
 \end{itemize}
 
 Per incorrelati, si intende che gli errori sono indipendenti. \newline 
@@ -1167,7 +1167,7 @@ Se si utilizza una funzione di quantizzazione di arrotondamento, e che quindi ap
     \includegraphics[scale = 0.2]{arrotondamento a complemento a 2.png}
 \end{figure} 
 
-abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le seguenti caratteristiche: 
+Abbiamo che il rumore di quantizzazione $e \left[ n\right]$, date le ipotesi precedenti e dato un numero di bit B, ha le seguenti caratteristiche: 
 
 {
     \Large 
@@ -1273,7 +1273,7 @@ di conseguenza le altre caratteristiche del rumore $e \left[ n\right]$ sono le s
 dove $m_e$ è la media dell'errore $e \left[ n\right]$, $\sigma_{e}^{2}$ è la varianza e $\phi_{cc} \left[ m\right]$ è l'autocorrelazione. \newline 
 
 Confrontando l'arrotondamento e il troncamento, visto che gli intervalli sono differenti, nonostante la varianza sia uguale, 
-hanno una media diversa: di conseguenza l'autocorrelazione sarà diversa anche essa, perchè l'autocorrelazione dipende la media. \newline 
+hanno una media diversa: di conseguenza l'autocorrelazione sarà diversa anche essa, perchè l'autocorrelazione dipende dalla media. \newline 
 
 Inoltre, ricordando dal Teorema di Parseval la relazione tra varianza e potenza  \ref{teo: Teorema di Parseval} \nameref{teo: Teorema di Parseval} a pag \pageref{teo: Teorema di Parseval}, 
 più è bassa la varianza e più sarà la potenza emessa dal circuito progettato. \newline 
@@ -1473,7 +1473,7 @@ come mostrato nel seguente schema di sostituzione:
     \includegraphics[scale = 0.35]{rumore di quantizzazione filtri IIR forma diretta II.png}
 \end{figure} 
 
-dove però, rispetto al caso dei filtri FIR IIR in forma diretta I, in questo caso abbiamo due contributi di errori totali: 
+dove però, rispetto al caso dei filtri IIR in forma diretta I, in questo caso abbiamo due contributi di errori totali: 
 
 {
     \Large 
@@ -1878,7 +1878,7 @@ deve valere:
     \end{equation}
 }
 
-Riguardo a questa soluzione di Scaling si possono svolgere le seguenti considerazioni: 
+Riguardo a questa soluzione di Scaling, si possono svolgere le seguenti considerazioni: 
 
 \begin{itemize}
     \item la scalatura è quadratica perchè compare un $S^{2}$

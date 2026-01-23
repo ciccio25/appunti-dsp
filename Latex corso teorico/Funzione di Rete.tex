@@ -50,6 +50,7 @@ Applicando la trasformata-z al sistema, avremo che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         \sum_{k = 0}^{N}
         a_k \cdot y \left[ n - k\right]
@@ -83,6 +84,7 @@ possiamo svolgere queste sostituzioni (step-by-step):
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         \sum_{k = 0}^{N}
         a_k \cdot z^{-k} \cdot Y \left( z\right)
@@ -90,12 +92,16 @@ possiamo svolgere queste sostituzioni (step-by-step):
         \sum_{k = 0}^{M}
         b_k \cdot z^{-k} \cdot X \left( z\right)
         \\
+        &\downarrow
+        \\
         Y \left( z\right) \cdot
         \sum_{k = 0}^{N}
         a_k \cdot z^{-k} 
         &= 
         \sum_{k = 0}^{M}
         b_k \cdot z^{-k} \cdot X \left( z\right)
+        \\
+        &\downarrow
         \\
         Y \left( z\right)
         &=
@@ -377,6 +383,7 @@ Generalmente di $\abs{H \left( e^{\jmath \omega}\right)}^{2}$ si calcola il suo 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             \left. 
                 \abs{H \left( e^{\jmath \omega}\right)}^{2}
@@ -723,14 +730,13 @@ consideriamo la risposta in Fourier del sistema LTI $H \left( e^{\jmath \omega}\
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
             H \left( e^{\jmath \omega}\right) 
-            = 
+            &= 
             A \left(\omega\right) \cdot e^{\jmath \beta \left(\omega\right)}
             \\
-            \quad 
-            \\
-            x \left[ n \right] = 2 \cdot \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
+            x \left[ n \right] &= 2 \cdot \cos(\Delta \omega \cdot n) \cdot \cos(\omega_0 \cdot n)
         \end{cases}
     \end{equation}
 }
@@ -883,10 +889,11 @@ $y \left[ n\right]$ sarà uguale a:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         y \left[ n\right] 
-        = 
-        &A \left(\omega_0 + \Delta \omega\right) 
+        &= 
+        A \left(\omega_0 + \Delta \omega\right) 
         \cdot 
         \cos 
         \left[
@@ -903,8 +910,8 @@ $y \left[ n\right]$ sarà uguale a:
             \right)
         \right]
         \\
-        &+
-        A \left(\omega_0 - \Delta \omega\right) 
+        &\quad
+        +A \left(\omega_0 - \Delta \omega\right) 
         \cdot 
         \cos 
         \left[
@@ -921,10 +928,10 @@ $y \left[ n\right]$ sarà uguale a:
             \right)
         \right]
         \\
-        \downarrow&
+        &\downarrow
         \\
-        y \left[ n\right]&  
-        =  
+        y \left[ n\right]  
+        &=  
         A_0
         \cos 
         \left[ 
@@ -939,7 +946,8 @@ $y \left[ n\right]$ sarà uguale a:
         \Delta \omega
         \right] 
         \\
-        &+ 
+        &\quad
+        + 
         A_0
         \cos 
         \left[ 
@@ -1109,7 +1117,7 @@ Si definisce ritardo di gruppo $\tau_{gr}$ (detto anche in inglese Group Delay) 
     \end{equation}
 }
 
-dove $grd \left[ H \left( e^{\jmath \omega}\right)\right]$ indicare il group delay di $H \left( e^{\jmath \omega}\right)$. \newline 
+dove $grd \left[ H \left( e^{\jmath \omega}\right)\right]$ indica il group delay di $H \left( e^{\jmath \omega}\right)$. \newline 
 
 Il ritardo di gruppo rappresenta il tempo necessario al segnale per passare attraverso il sistema LTI discreto. \newline 
 
@@ -1972,7 +1980,7 @@ avremo che $H \left( e^{\jmath \omega }\right)$ sarà uguale a:
 dove, rispetto al caso dei sistemi con risposta di fase lineare, il valore $\beta$ è diverso da zero. \newline 
 
 \begin{tcolorbox}
-    Nel corso di DSP, consideriamo quasi sempre un $\beta$ nulla. \newline 
+    Nel corso di DSP, consideriamo quasi sempre un $\beta$ nullo. \newline 
 
     Questo sotto-capitolo serve per capire il caso generalizzato. 
 \end{tcolorbox}
@@ -3104,7 +3112,7 @@ Di seguito le proprietà dei sistemi a fase minima. \newline
         \end{equation}
     }
     dove, se $\arg \left[ H_{min} \left(z\right)\right]$ è sempre minore di zero, il suo opposto sarà sempre maggiore di zero, 
-    allora, deve $-\arg \left[ H_{min} \left(z\right)\right]$ deve essere per forza minore di zero. 
+    allora, $-\arg \left[ H_{min} \left(z\right)\right]$ deve essere per forza minore di zero. 
     
     \begin{tcolorbox}
     È molto importante capire cosa è la fase di un sistema e cosa è la "phase-leg": sono uno l'opposto dell'altro.     

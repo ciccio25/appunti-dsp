@@ -39,9 +39,9 @@ Da un punto di vista del sistema, nel campionamento avremo questo processo:
 dove, visualizzando la figura da sinistra verso destra, avremo: 
 
 \begin{itemize}
-    \item $x_c \left(t\right)$ è il segnale analogico da campionare (e che quindi ha valori continui sia nell'asse delle ampiezze che nel tempo) 
-    \item $s \left(t\right)$ è una sequenza di impulsi di Dirac continuo 
-    \item $x_s \left(t\right)$ è il segnale campionato
+    \item $x_c \left(t\right)$, che è il segnale analogico da campionare (e che quindi ha valori continui sia nell'asse delle ampiezze che nel tempo) 
+    \item $s \left(t\right)$, che è una sequenza di impulsi di Dirac continuo 
+    \item $x_s \left(t\right)$, che è il segnale campionato
 \end{itemize}
 
 \begin{tcolorbox}
@@ -189,6 +189,7 @@ Allora possiamo scrivere che, facendo tutti i passaggi e le dovute sostituzioni:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
         F \left[ x_c \left(t\right) \cdot s \left(t\right)\right] 
         &= 
@@ -283,12 +284,12 @@ avrà il seguente spettro:
 
 dove in blu è indicato l'andamento di $X_s \left(\jmath \Omega\right)$. \newline 
 
-Una osservazione che possiamo svolgere sullo spettro del segnale campionato $X_s \left(\jmath \Omega\right)$ 
+Un'osservazione che possiamo svolgere sullo spettro del segnale campionato $X_s \left(\jmath \Omega\right)$ 
 è che lo spettro del segnale si ripete. \newline  
 
 \newpage 
 
-Questo avviene perchè la discretizzazione nel tempo del segnale, come si può notare nella seguente figura: 
+Questo avviene perchè la discretizzazione nel tempo del segnale, come si può notare dalla seguente figura: 
 
 \begin{figure}[h]
     \centering
@@ -320,7 +321,7 @@ Ritornando alla figura dello spettro di $X_s \left( \jmath \Omega \right)$:
 
 Considerando una finestra rettangolare (indicata in figura in colore rosso) nell'intervallo 
 $\left[ - \Omega_N, + \Omega_N\right]$, 
-possiamo riottenere lo spettro del segnale originale, proprio come si vede nella seguente figura:   
+allora possiamo riottenere lo spettro del segnale originale, proprio come si vede nella seguente figura:   
 
 \begin{figure}[h]
     \centering
@@ -425,7 +426,7 @@ Consideriamo dal punto di vista matematico la relazione tra
 un segnale a spettro continuo $x_s \left(t\right)$ 
 e il segnale a spettro discreto $x \left[ n\right]$. \newline 
 
-Sapendo che nel dominio del tempo t, il segnale campionato $x_s \left(t\right)$ la possiamo scrivere come: 
+Sapendo che nel dominio del tempo t, il segnale campionato $x_s \left(t\right)$ lo possiamo scrivere come: 
 
 {
     \Large 
@@ -708,7 +709,7 @@ se viene campionato ogni periodo T, cioè a n multipli di T. \newline
 
 Allora, 
 se consideriamo $X \left(e^{\jmath \omega}\right)$ la trasformata di Fourier del segnale campionato $x \left[n\right]$ 
-e e $X \left(\jmath \Omega\right)$ la trasformata di Fourier del segnale analogico da campionare $x_c (t)$, 
+e $X \left(\jmath \Omega\right)$ la trasformata di Fourier del segnale analogico da campionare $x_c (t)$, 
 avremo che la loro relazione è la seguente: 
 
 {
@@ -727,12 +728,15 @@ Se non c'è aliasing, possiamo scrivere che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         X_c \left(\jmath \Omega\right) = 0 
         \quad
-        \text{ per }
-        \abs{\Omega} > \Omega_N 
-        \text{ e }
-        \Omega_N < \dfrac{\Omega_s}{2}
+        \text{per }
+        \begin{cases}
+        \abs{\Omega} &> \Omega_N 
+        \\
+        \Omega_N &< \dfrac{\Omega_s}{2}
+        \end{cases}
     \end{equation}
 }
 
@@ -815,15 +819,16 @@ che in frequenza sarà:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         X_r \left(\jmath \Omega\right)
         = 
         \begin{cases}
             T \cdot X \left(e^{\jmath \Omega T}\right)
             \quad
-            \text{ per }
+            &\text{per }
             \abs{\Omega} < \dfrac{\Omega_s}{2}
             \\
-            0 \quad \text{ altrove}
+            0 \quad &\text{altrove}
         \end{cases}
     \end{equation}
 }
@@ -913,15 +918,16 @@ Invece il ricostruttore (indicato in figura come Interpolatore T) ha il seguente
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         Y_r \left(\jmath \Omega\right) 
         = 
         \begin{cases}
             T \cdot Y \left(e^{\jmath \Omega T}\right)
             \quad
-            \text{ per }
+            &\text{per }
             \abs{\Omega} < \dfrac{\Omega_s}{2} 
             \\
-            0 \text{ altrove}
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -932,15 +938,16 @@ possiamo scrivere che in frequenza l'uscita del blocco avrà il seguente andamen
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         Y_r \left(\jmath \Omega\right) 
         = 
         \begin{cases}
             H \left(e^{\jmath \Omega T}\right) \cdot X_c \left(\jmath \Omega\right)
             \quad
-            \text{ per }
+            &\text{per }
             \abs{\Omega} < \dfrac{\Omega_s}{2} 
             \\
-            0 \quad \text{ altrove}
+            0 \quad &\text{altrove }
         \end{cases}
     \end{equation}
 }
@@ -997,7 +1004,7 @@ Di seguito la pipeline della conversione A/D reale (con delle note nei vari stad
 
 La limitatezza in banda è un requisito fondamentale per l'elaborazione del segnale $x_a (t)$. \newline 
 
-Partendo da sinistra, 
+Dalla figura a blocchi, partendo da sinistra, 
 il segnale da campionare $x_c \left( t\right)$ passa al filtro anti-aliasing (in figura ed in inglese "Antialiasing filter"). \newline 
 
 \newpage 
@@ -1081,7 +1088,7 @@ Dal punto di vista "circuitale" avremo il seguente schema:
     \includegraphics[scale = 0.4]{Sample and Hold circuito.png}
 \end{figure}   
 
-dove, dal punto di vista analitico, nel tempo avremo che il segnale dopo il S\&H è il seguente: 
+dove, dal punto di vista analitico, nel tempo, avremo che il segnale dopo il S\&H è il seguente: 
 
 {
     \Large 
@@ -1106,7 +1113,7 @@ La risposta impulsiva del zero-order hold nel tempo è la seguente (considerando
     \includegraphics[scale = 0.5]{Risposta impulsiva zero order hold.png}
 \end{figure}   
 
-cioè una finestra rettangolare nel tempo. \newline 
+cioè, il zero-order hold è una finestra rettangolare nel tempo. \newline 
 
 Come sappiamo bene, la trasformata di Fourier di una finestra rettangolare è un sinc. \newline 
 
@@ -1129,7 +1136,7 @@ Se consideriamo sia lo spettro dei moduli e delle fasi di $H_o \left(\jmath \Ome
     \includegraphics[scale = 0.5]{Zero order hold in frequenza.png}
 \end{figure}   
 
-questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione di cut-off $\dfrac{\Omega_s}{2}$, 
+Questo tipo di filtro è un "blando" filtro passa basso perchè alla pulsazione di cut-off $\dfrac{\Omega_s}{2}$, 
 il filtro zero-oder hold diminuisce il segnale di ingresso di 4 dB, che è circa la metà del segnale iniziale. \newline 
 
 \begin{tcolorbox}
@@ -1156,7 +1163,7 @@ Come studiato nel corso di Telecomunicazioni digitali,
 esistono diversi tipi di conversione analogico-digitale: adesso consideriamo la conversione analogico-digitale più semplice.      
 \end{tcolorbox} 
 
-Considerando in uscita dal convertitore A/D un codice digitale complemento a 2 sing-magnitude offset binary, allora avremo il seguente grafico: 
+Considerando in uscita dal convertitore A/D un codice digitale complemento a 2 sign-magnitude offset binary, allora avremo il seguente grafico: 
 
 \begin{figure}[h]
     \centering
@@ -1166,7 +1173,7 @@ Considerando in uscita dal convertitore A/D un codice digitale complemento a 2 s
 Se il periodo di campionamento $\Delta$ tende a zero ed i valori dei codici sono infiniti, 
 avremo la linea tratteggiata blu in figura. \newline 
 
-Questa osservazione è importante perchè, nella conversione reale analogico-digitale, il periodo di campionamento è diverso da zero ed i valori dei codici sono finiti. \newline 
+Quest'osservazione è importante perchè, nella conversione reale analogico-digitale, il periodo di campionamento è diverso da zero ed i valori dei codici sono finiti. \newline 
 
 Nel dettaglio, in realtà la conversione analogico-digitale associa un'insieme di valori analogici compresi nell'intervallo del convertitore e lo associa al valore dell'intervallo stesso. \newline 
 
@@ -1328,7 +1335,7 @@ dove:
 
 \begin{itemize}
     \item $x \left[n \right]$ è il segnale quantizzato idealmente 
-    \item $e \left[ n\right]$ è l'errore che lo calcoliamo statisticamente
+    \item $e \left[ n\right]$ è l'errore che calcoliamo statisticamente
 \end{itemize}
 
 \newpage 

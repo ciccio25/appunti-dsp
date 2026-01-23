@@ -231,7 +231,9 @@ Affinchè la formula di $\hat{X} \left[ k\right]$ sia valida, occorre che:
     \end{equation}
 }
 
-oppure si fa zero padding su $x \left[ n\right]$ se N è minore di L, in modo da arrivare a $N \geq L$. \newline 
+dove N sono i punti della FFT e L sono i punti presi di $x \left[ n\right]$ finestrata. \newline 
+
+Se N è minore di L, si fa zero padding su $x \left[ n\right]$, in modo da arrivare a $N \geq L$. \newline 
 
 Aumentare N non aggiunge ulteriore informazione alla stima, non migliora l'informazione, non migliora la stima: permette di distinguere meglio le frequenze l'una dall'altra. \newline 
 
@@ -350,7 +352,7 @@ Ovviamente, nella realtà $x \left[ n\right]$ non sarà deterministica.
 
 \begin{tcolorbox}
     Come abbiamo scritto precedentemente, nella realtà non avremo a che fare con sequenze $x \left[ n\right]$ deterministiche, o di lunghezza finita o infinita, 
-    bensì avremo a che fare con sequenze $x \left[ n\right]$ casuali: per questo, non prevedendo il futuro, l'unica cosa che possiamo fare a posteriori della sequenza casuale $x \left[ n\right]$ è studiarla con gli strumenti della statistica, 
+    bensì avremo a che fare con sequenze $x \left[ n\right]$ casuali: per questo, non prevedendo il futuro, l'unica cosa che possiamo fare a priori della sequenza casuale $x \left[ n\right]$ è studiarla con gli strumenti della statistica, 
     che abbiamo già studiato al corso di Teoria dei Segnali con il mitico prof. Franco Chiaraluce. \newline 
 
     Questa sezione è un ripasso di tutto quello che abbiamo studiato nei corsi precedenti. 
@@ -447,7 +449,7 @@ Allora, siccome nella realtà non conosciamo la PDF, non useremo i parametri app
     \begin{tcolorbox}
         Il fatto di tendere L ad infinito è un'astrazione matematica: nella realtà noi non avremo una finestra infinita. 
     \end{tcolorbox}
-    \item vaianza: 
+    \item varianza: 
     {
         \Large 
         \begin{equation}
@@ -716,7 +718,7 @@ Prima di calcolarsi $\abs{P_{xx} \left(\omega\right)}^{2}$, bisogna calcolarsi l
 
 \textbf{Calcolo della DTFT} \newline 
 
-Dato un segnale causale (in inglese random) $x \left[ n\right]$, che si estende per $n \in \left[ - \infty, + \infty\right]$, consideriamo $\hat{x} \left[ n\right]$ un intervallo ristretto noto di $x \left[ n\right]$, tale che: 
+Dato un segnale casuale (in inglese random) $x \left[ n\right]$, che si estende per $n \in \left[ - \infty, + \infty\right]$, consideriamo $\hat{x} \left[ n\right]$ un intervallo ristretto noto di $x \left[ n\right]$, tale che: 
 
 {
     \Large 
@@ -803,7 +805,7 @@ $\hat{P}_{PE}$ prende il nome di periodogramma, che è la stima dell'autocorrela
 
 \textbf{Considerazioni sulla stima dello spettro} \newline 
 
-La formula di $ \hat{P}_{PE}$ non è priorio la DTFT di $x \left[ n\right]$, ma, 
+La formula di $ \hat{P}_{PE}$ non è proprio la DTFT di $x \left[ n\right]$, ma, 
 sotto-ipotesi che $x \left[ n\right]$ è stazionaria e reale, allora, grazie alle proprietà tra tempo e Fourier, sicuramente la trasformata di Fourier di $x \left[ n\right]$, cioè $X \left(e^{\jmath \omega}\right)$, 
 è positiva e pari, quindi di conseguenza anche il suo spettro di potenza lo è. \newline 
 
@@ -1051,7 +1053,7 @@ Pertanto la stima tramite Periodogramma è, in generale, non consistente. \newli
 
 Si può ottenere una stima consistente mediante una tecnica. \newline 
 
-Non si parlerà più di periodogramma, bensì di periogram averaging (cioè dall'inglese periodogramma pesato dalla media). \newline 
+Non si parlerà più di periodogramma, bensì di periodogram averaging (cioè dall'inglese periodogramma pesato dalla media). \newline 
 
 Data una sequenza $\hat{x} \left[ n\right]$ lunga Q, la si vuole suddividere in diversi segmenti parzialmente sovrapposti, in modo da stimare lo spettro di questi segmenti e mediarli. \newline 
 
@@ -1076,7 +1078,7 @@ La r-esima sotto-sequenza di $\hat{x} \left[ n\right]$, cioè $\hat{x}_{e} \left
     \end{equation}
 }
 
-dove R indica gli indici di overlap, che generalmente, è uguale: 
+dove R indica quanti sono gli indici di overlap, che generalmente, è uguale: 
 
 {
     \Large 
@@ -1122,7 +1124,7 @@ Dalla formula di $\hat{P}_{PE}^{\left(A\right)} \left(\omega\right)$, possiamo n
 La correlazione è legata alla sovrapposizione delle finestre.     
 \end{tcolorbox}
 
-Grazie al metodo di Bartlett, possiamo scegliere riguardo alla finestra la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
+Grazie al metodo di Bartlett, possiamo scegliere, riguardo alla finestra, la loro lunghezza (quindi se farla lunga o corta) e decidere l'overlap tra le finestre. \newline 
 
 Più overlap esiste tra le finestre, minore sarà la risoluzione perchè le finestre sono più corte, ma avranno più varianza: è un trade-off. \newline 
 
@@ -1151,7 +1153,7 @@ Di seguito l'algoritmo di Weltch, utilizzato per il periodogramma pesato:
     \item si suddivide $\hat{x} \left[ n\right]$ in K segmenti lunghi M punti e sovrapposti di $M - R$ punti dove: 
     \begin{itemize}
         \item se si vuole avere una bassa varianza, allora dovremo scegliere un M piccolo 
-        \item se si vuole avere un'alta varianza varianza, allora dovremo scegliere un M grande 
+        \item se si vuole avere un'alta varianza, allora dovremo scegliere un M grande 
     \end{itemize}
     \item si moltiplica la sotto-sequenza r-esima $\hat{x}_{r} \left[ n\right]$ per la finestra scelta $w \left[ n\right]$ (il tipo di finestra dipende dalle specifiche del progetto, quindi rettangolare, Bartlett, ecc...) e si calcola la DFT (quindi si svolge la FFT) ad N punti dove $N \geq M$ (quindi si fa zero padding ove necessario) 
     \item si calcola la stima di $P_{xx} \left(\omega\right)$, cioè lo spettro di $x \left[ n\right]$ che si estende per $n \in \left[ - \infty, + \infty\right]$, come media, cioè:
@@ -1211,7 +1213,7 @@ Nel tempo ha il seguente andamento:
     \includegraphics[scale = 0.2]{linear chirp nel tempo.png}
 \end{figure} 
 
-ma nello spettro avremo in impulso che varierà ad un multiplo di $\omega_0$: 
+ma nello spettro avremo un impulso che varierà ad un multiplo di $\omega_0$: 
 
 \begin{figure}[h]
     \centering
@@ -1251,14 +1253,14 @@ prendiamo una porzione, che a sua volta sarà divisa in M porzioni tale che:
     \end{equation}
 }
 
-come si può vedere in figura: 
+Come si può vedere in figura: 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.3]{periodogram averaging in pratica.png}
 \end{figure}  
 
-I vari segmenti $x_{r} \left[ n\right]$ si sovrappongono di $M - R$ punti. \newline 
+i vari segmenti $x_{r} \left[ n\right]$ si sovrappongono di $M - R$ punti. \newline 
 
 Se $\hat{P}_{x_{r} x_{r}} \left(\omega\right)$ di $P_{xx} \left(\omega, n\right)$ allora: 
 
@@ -1271,7 +1273,7 @@ Se $\hat{P}_{x_{r} x_{r}} \left(\omega\right)$ di $P_{xx} \left(\omega, n\right)
 
 Tutto questo processo, prende il nome di "Short time spectrum analysis", cioè svolgere una DTFT direttamente sulla porzione di $x \left[ n\right]$. \newline 
 
-Se viene utilizzata la DTFT, si chiama Short Time Fourier Transform (o STFM). \newline 
+Se viene utilizzata la DTFT, si chiama Short Time Fourier Transform (o STFT). \newline 
 
 Da un punto di vista grafico, non useremo più il periodogramma, ma lo spettrogramma, come i seguenti esempi: 
 
@@ -1304,7 +1306,7 @@ Un esempio di finestra rettangolare $w \left[ n\right]$:
     \includegraphics[scale = 0.35]{finestra rettangolare per STFT.png}
 \end{figure}  
 
-allora si può definire la Short-Time Fourier Transform (o STFT) come: 
+Allora si può definire la Short-Time Fourier Transform (o STFT) come: 
 
 {
     \Large 
