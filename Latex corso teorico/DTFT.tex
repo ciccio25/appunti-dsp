@@ -61,11 +61,14 @@ Dal punto di vista visuale avremo il seguente schema:
     La frequenza f, nel piano dei complessi, indica quanti "giri" fa il vettore intorno al cerchio unitario al secondo. 
 \end{tcolorbox}
 
+\newpage 
+
 Di seguito la dimostrazione formale dell'uscita: 
 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             y \left[ n\right] 
             &= 
@@ -144,7 +147,7 @@ si può dividere in:
 } 
 
 Come studiato nel corso di Teoria dei segnali, 
-un segnale analogico è continuo sia nelle ampiezze f(t) che nel tempo t, 
+un segnale analogico, che è continuo sia nelle ampiezze f(t) che nel tempo t, 
 è possibile rappresentarlo anche nel dominio di Fourier con la seguente formula: 
 
 {
@@ -192,7 +195,7 @@ Invece, nel dominio dei discreti, non useremo la trasformata di Fourier, bensì 
 
 che prende il nome di DTFT (cioè Discrete-Time Fourier Transform). \newline 
 
-Invece la formula inversa della DTFT (la anti-DTFT) è la seguente: 
+Invece la formula inversa della DTFT (l'anti-DTFT) è la seguente: 
 
 {
     \Large 
@@ -219,8 +222,8 @@ Come la risposta in frequenza dei sistemi LTI,
 possiamo rappresentare $X \left(e^{\jmath \omega}\right)$ come: 
 
 \begin{itemize}
-    \item $\abs{X \left(e^{\jmath \omega}\right)}$ che è lo spettro di ampiezza di $x \left[ n\right]$ 
-    \item $\sphericalangle X \left(e^{\jmath \omega}\right)$ che è lo spettro di fase di $x \left[ n\right]$
+    \item $\abs{X \left(e^{\jmath \omega}\right)}$, che è lo spettro di ampiezza di $x \left[ n\right]$ 
+    \item $\sphericalangle X \left(e^{\jmath \omega}\right)$, che è lo spettro di fase di $x \left[ n\right]$
 \end{itemize}
 
 \newpage 
@@ -569,6 +572,7 @@ Come nel caso continuo, anche nella trasformata di Fourier nel tempo discreto va
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{split}
             x^{*} \left[ n \right]
             &\leftrightarrow 
@@ -586,13 +590,14 @@ con le quali si dimostra che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
         \mathbb{R} \left\{ x \left[ n\right]\right\} 
-        \leftrightarrow 
+        &\leftrightarrow 
         X_e \left( e^{\jmath \omega}\right)
         \\
         x_e \left[ n\right] 
-        \leftrightarrow 
+        &\leftrightarrow 
         \mathbb{R} \left\{ X \left( e^{\jmath \omega}\right)\right\}
         \end{cases}
     \end{equation}
@@ -603,13 +608,14 @@ e:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
         \jmath \mathcal{J} \left\{ x \left[ n\right]\right\} 
-        \leftrightarrow 
+        &\leftrightarrow 
         X_o \left( e^{\jmath \omega}\right)
         \\
         x_o \left[ n\right] 
-        \leftrightarrow 
+        &\leftrightarrow 
         \jmath \mathcal{J} \left\{ X \left( e^{\jmath \omega}\right)\right\}
         \end{cases}
     \end{equation}
@@ -628,18 +634,19 @@ dove:
     \end{equation}
 }
 
-che a sua volte, grazie alle formule di Eulero, possiamo scrivere le componenti: 
+che a sua volta, grazie alle formule di Eulero, possiamo scrivere le componenti: 
 
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
         X_e \left(e^{\jmath \omega}\right)
-        =
+        &=
         \dfrac{X \left(e^{\jmath \omega}\right) + X^{*} \left(e^{-\jmath \omega}\right)}{2}  
         \\
         X_o \left(e^{\jmath \omega}\right)
-        =
+        &=
         \dfrac{X \left(e^{\jmath \omega}\right) - X^{*} \left(e^{-\jmath \omega}\right)}{2}    
         \end{cases}
     \end{equation}
@@ -773,9 +780,10 @@ una sommatoria di Delta di Dirac $\delta$ ogni $\omega -\omega_0 + 2 \pi k$: in 
         \dfrac{\sin \left[ \omega_c n\right]}{\pi n}
         \leftrightarrow 
         \begin{cases}
-            1 \text{ per } \abs{\omega} < \omega_c 
+            \setlength{\jot}{10pt} % affecting the line spacing in the environment
+            1 \quad &\text{per } \abs{\omega} < \omega_c 
             \\
-            0 \text{ per } \omega_c < \abs{\omega} \leq \pi 
+            0 \quad &\text{per } \omega_c < \abs{\omega} \leq \pi 
         \end{cases}
     \end{equation}
 }
@@ -789,10 +797,11 @@ cioè, la trasformata del sinc discreto nel dominio n è una finestra nel domini
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
         \begin{cases}
-            1 \text{ per } 0 \leq n \leq M 
+            1 \quad \text{per } 0 \leq n \leq M 
             \\
-            0 \text{ altrove}
+            0 \quad \text{altrove }
         \end{cases} 
         \leftrightarrow
         \dfrac{\sin \left[ \dfrac{\omega \left(M + 1\right)}{2}\right]}{\sin \left[ \dfrac{\omega}{2}\right]}
@@ -819,7 +828,7 @@ cioè un esponenziale $a^n$ moltiplicato per un gradino $u \left[ n\right]$ nel 
 è uguale a una funzione razionale reale. \newline 
 
 \begin{tcolorbox}
-    Le funioni razionali reali le abbiamo viste ad Elettrotecnica quando si discuteva della trasformata di Laplace. \newline 
+    Le funzioni razionali reali le abbiamo viste ad Elettrotecnica quando si discuteva della trasformata di Laplace. \newline 
 
     Per un breve ripasso della trasformata di Laplace: \newline 
 
@@ -1003,7 +1012,7 @@ TO-DO: Spiegazione codice Esempio 3.1, 3.2
 } 
 
 Come abbiamo visto dallo spettro dei filtri passa alto, passa banda ed elimina banda, 
-tutti questi filtri possono essere ottenuti da un filtro passa-bassa (opportunamente shiftato nello spettro). \newline 
+tutti questi filtri possono essere ottenuti da un filtro passa-basso (opportunamente shiftato nello spettro). \newline 
 
 Ricordando l'equazione \ref{eq: trasformata del sinc discreto nel dominio n} a pag \pageref{eq: trasformata del sinc discreto nel dominio n},  
 di seguito scriviamo la trasformata di una finestra nel dominio di $\omega$ è:  
@@ -1075,7 +1084,7 @@ Da un punto di vista grafico vedremo il seguente caso:
     \includegraphics[scale = 0.5]{Fenomeno di Gibbs rispetto ad un filtro passa basso ideale.png}
 \end{figure}  
 
-dove in blu è tratteggiato l'andamento dello spettro in $\omega$ di una filtro passa basso ideale ed in rosso lo spettro di un filtro passa basso non ideale con M molto grande. \newline 
+dove in blu è tratteggiato l'andamento dello spettro in $\omega$ di un filtro passa basso ideale ed in rosso lo spettro di un filtro passa basso non ideale con M molto grande. \newline 
 
 \begin{tcolorbox}
     Per visualizzare meglio cosa avviene realmente per un M sufficiente alto, 

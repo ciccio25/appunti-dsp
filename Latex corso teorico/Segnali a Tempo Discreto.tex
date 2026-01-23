@@ -39,7 +39,7 @@ bensì come sequenza, perchè, se si intende una sequenza come un segnale,
 significa che associamo quella sequenza a un segnale fisico. \newline 
 
 \begin{tcolorbox}
-    È una sottigliezza quella ultima elencata, 
+    Quella ultima elencata è una sottigliezza , 
     ma è quel particolare che permette di dividere il "mondo fisico" dal "mondo matematico", 
     cioè quello del DSP.  
 \end{tcolorbox} 
@@ -98,7 +98,7 @@ La sequenza $\delta [n]$ impulso unitario gode della sequenza proprietà:
     \end{equation}
 }
 
-cioè, scritta a parole, vale 1 per n (che generalmente è $n = 0$) e vale 0 per tutti gli altri valori di n. \newline 
+cioè, scritta a parole, vale 1 per $n = n_0$ (che generalmente è $n_0 = 0$) e vale 0 per tutti gli altri valori di n. \newline 
 
 \begin{tcolorbox}
     Se avete svolto e/o seguito l'esame di Teoria dei Segnali (o Segnali Determinati e Aleatori) con Franco Chiaraluce, 
@@ -110,9 +110,9 @@ cioè, scritta a parole, vale 1 per n (che generalmente è $n = 0$) e vale 0 per
             \delta (t)
             = 
             \begin{cases}
-                0 \text{ per } t \neq 0
+                0 \quad &\text{per } t \neq 0
                 \\
-                + \infty \text{ per } t_0 = 0
+                + \infty \quad &\text{per } t_0 = 0
             \end{cases}
         \end{equation}
     }
@@ -356,7 +356,7 @@ dove $\delta \left[ n \right]$ è l'impulso unitario. \newline
 
 Da un punto di vista grafico, 
 se ci poniamo nell'indice $n = 0$, 
-l'equazione precedente possiamo visualizzarla graficamente: 
+l'equazione precedente possiamo visualizzarla graficamente come: 
 
 \begin{figure}[h]
     \centering
@@ -516,6 +516,7 @@ grazie alla formula di Eulero, come:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{split}
         x \left[ n \right]
         &=
@@ -588,7 +589,10 @@ in cui:
 \begin{tcolorbox}
     Essendo nel mondo del DSP, quindi delle sequenze e non dei segnali, le sequenze stesse non hanno una grandezza fisica. \newline 
 
-    Qui sono solo riportate le relazioni dei coefficienti astratti con il mondo reale.
+    Qui sono solo riportate le relazioni dei coefficienti astratti con il mondo reale. \newline 
+
+    Queste relazioni tra sequenze astratte, quindi "nel mondo DSP", ed il "mondo reale" saranno molto importanti per capire gli esercizi su Matlab, 
+    in particolare con il package filterDesigner, package che useremo per realizzare i filtri. 
 \end{tcolorbox}
 
 \newpage 
@@ -623,20 +627,23 @@ Si considerano equivalentemente:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment
+        \begin{split}
         0 \leq \omega \leq 2 \pi 
-        \text{ oppure }
-        - \pi \leq \omega \leq + \pi
+        \quad
+        &\text{oppure}
+        \quad
+        - \pi \leq \omega \leq + \pi 
+        \\    
+        0 \leq f \leq 1 
+        \quad
+        &\text{oppure}
+        \quad 
+        -0.5 \leq f \leq +0.5    
+    \end{split}
     \end{equation}
 }
 
-{
-    \Large 
-    \begin{equation}
-        0 \leq f \leq 1 
-        \text{ oppure }
-        -0.5 \leq f \leq +0.5
-    \end{equation}
-}
 
 perchè, grazie alla simmetricità dovuta alla periodicità, 
 si può studiare mezzo periodo della sequenza. \newline 
@@ -803,13 +810,14 @@ In formule:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{cases}
         y_1 \left[ n \right]
-        = 
+        &= 
         T \{ x_1 \left[ n\right]\}
         \\
         y_2 \left[ n \right]
-        = 
+        &= 
         T \{ x_2 \left[ n\right]\}
         \end{cases}        
         \to 
@@ -917,13 +925,14 @@ In formule, se:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{cases}
             y_1 \left[ n\right]
-            = 
+            &= 
             T \{ x_1 \left[ n\right]\}
             \\
             y_2 \left[ n\right]
-            = 
+            &= 
             T \{ x_2 \left[ n\right]\}
         \end{cases}
     \end{equation}
@@ -1082,6 +1091,7 @@ allora possiamo scrivere che:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{split}
             y \left[ n\right]
             &= 
@@ -1105,6 +1115,7 @@ posso portare l'operatore $T \{ \}$ dentro alla sommatoria, quindi:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{split}
             y \left[ n\right]
             &= 
@@ -1148,6 +1159,7 @@ con questa formula:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{split}
         y \left[ n\right]
         &= 
@@ -1382,7 +1394,7 @@ ciascuno con posizione k, cioè:
 dove $T \left\{ \delta \left[ n - k\right]\right\}$ è la risposta del sistema discreto LTI all'impulso unitario ritardato dell'indice k. \newline 
 
 \begin{tcolorbox}
-    Il problema più grosso di questa equazione è la sommatoria con indice k che va da $- \infty$ a $+ \infty$, 
+    Il problema più grosso di quest'equazione è la sommatoria con indice k che va da $- \infty$ a $+ \infty$, 
     cioè infinite sommatorie. \newline 
 
     Inoltre, per lo stesso problema, si dovrebbero fare infiniti ritardi del gradino unitario $\delta \left[ n\right]$. 
@@ -1536,6 +1548,7 @@ in cui:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{cases}
             \abs{x \left[ n\right]} 
             \leq
@@ -1628,7 +1641,8 @@ Possiamo affermare che, un sistema LTI è FIR se:
         h \left[ n\right]
         \neq  
         0 
-        \text{ solo per }
+        \quad 
+        \text{solo per }
         n_1 \leq n \leq n_2
     \end{equation}
 }
@@ -1651,7 +1665,7 @@ Il sistemi LTI FIR saranno sempre stabili se:
 
 Invece i sistemi IIR sono sistemi in cui la risposta impulsiva ha durata illimitata (e quest'ultimo dettaglio può essere un pro ed un contro: lo vedremo meglio nei prossimi capitoli). \newline 
 
-Quindi, rispetto al caso precedente dei FIR, la finestra non sarà limitata, cioè compresa tra due indici $n_1$ e $n_2$, 
+Quindi, rispetto al caso precedente dei FIR, la finestra non sarà limitata, cioè non sarà compresa tra due indici $n_1$ e $n_2$, 
 bensì la finestra sarà tra $- \infty$ e $+ \infty$. \newline 
 
 Un esempio di risposta impulsiva IIR: 
@@ -1704,6 +1718,7 @@ possiamo affermare che, se:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{cases}
         h \left[ n\right]
         = 
@@ -1728,6 +1743,7 @@ Invece se:
 {
     \Large 
     \begin{equation}
+        \setlength{\jot}{10pt} % affecting the line spacing in the environment 
         \begin{cases}
         h \left[ n\right]
         = 
@@ -1756,7 +1772,7 @@ Un esempio grafico di $h \left[ n\right]$ con $a = 1.5$:
     Appunti | 2025-09-30 | pag 2
 }
 
-Di seguito un elenco di sistemi discreti LTI, come si distinguono per la loro risposta impulsiva $h \left[ n\right]$e se sono FIR o IIR. \newline 
+Di seguito un elenco di sistemi discreti LTI, come si distinguono per la loro risposta impulsiva $h \left[ n\right]$ e se sono FIR o IIR. \newline 
 
 \textbf{Sistema identità} \newline 
 
@@ -1889,7 +1905,7 @@ Il sistema è IIR, non stabile, ma la causalità dipende dal ritardo M:
 
 \begin{itemize}
     \item se $M > 0$, il sistema è causale (cioè è in ritardo)
-    \item se $M < 0$, il sistema è non causala (cioè è in anticipo)  
+    \item se $M < 0$, il sistema è non causale (cioè è in anticipo)  
 \end{itemize}
 
 \newpage 
