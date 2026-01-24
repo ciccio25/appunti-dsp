@@ -1,5 +1,8 @@
 %% Gennaio 2025 - Possibile risoluzione del compito della prova pratica di Digital Signal Processing 
 
+% Versione di Matlab utilizzata: R2023a 
+% Sistema operativo utilizzato: Windows 11  
+
 %% Procedure iniziali 
 clc; 
 clear all; 

@@ -1,3 +1,6 @@
+% Versione di Matlab utilizzata: R2023a 
+% Sistema operativo utilizzato: Windows 11  
+
 clc; 
 clear all; 
 close all; 
