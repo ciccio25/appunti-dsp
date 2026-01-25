@@ -56,7 +56,7 @@ spectrogram(campioni_audio_file, 512, 256, 512, Fs);
 
 %% Quindi, progettiamo un filtro elimina-banda per abbassarlo, in base alle specifiche date 
 
-% Apriamo il package filterDesigner e progettiamo il filtro 
+% Apriamo il package filterDesigner dalla Command Window e progettiamo il filtro 
 
 % La regola generale per la progettazione dei filtri è che se non viene
 % richiesta quella determinata specifica, abbiamo libertà progettuale 
@@ -108,8 +108,7 @@ spectrogram(campioni_audio_file, 512, 256, 512, Fs);
 % Ora che abbiamo progettato il filtro, possiamo salvare la sessione di
 % filterDesigner 
 
-% Ritardo di gruppo massimo e costante di 220 campioni con il filtro
-% progettato andando in alto a sinistra, cliccare su "File" e poi "Save Session As..." 
+% Cliccare su "File" e poi "Save Session As..." 
 % e poi dare un nome al file .fda (io l'ho chiamato filtro_progettato.fda) 
 
 % Ricordati di salvare il file .fda nella stessa cartella dello script 
@@ -127,6 +126,7 @@ spectrogram(campioni_audio_file, 512, 256, 512, Fs);
 
 % - Variable Names: 
 %  - Discrete Filter = filtro_progettato 
+%    (che è lo stesso nome del filtro che troveremo sul Workspace successivamente) 
 
 % E poi cliccare in basso a sinistra sul bottone "Export" 
 
@@ -141,7 +141,7 @@ load filtro_progettato_file.mat;
 
 %% Ora che il filtro progettato è importato sul Workspace, 
 % possiamo filtrare il segnale iniziale campioni_audio_file con il filtro
-% filtro_progettao usando il comando filter 
+% filtro_progettato usando il comando filter 
 
 audio_filtrato = filter(filtro_progettato, campioni_audio_file); 
 
