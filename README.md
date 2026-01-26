@@ -1,14 +1,80 @@
-# Appunti di circuiti ed algoritmi per il Digital Signal Processing 
-Work in progress
+# 🎵 Appunti di Digital Signal Processing (DSP)
 
-Appunti scritti nell'A.A. 2025/2026 su Latex sul corso di circuiti ed algoritmi per il Digital Signal Processing (ora "Digital Signal Processing" nel corso di Ingegneria elettronica e delle tecnologie digitali) nel corso di laurea triennale di ingegneria elettronica presso l'UNIVPM.
+<p align="center">
+  <img src="https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg" alt="Maintained">
+  <img src="https://img.shields.io/badge/Subject-Engineering-red.svg" alt="Subject">
+  <img src="https://img.shields.io/badge/Language-Italiano-green.svg" alt="Language">
+  <img src="https://img.shields.io/github/stars/ciccio25/appunti-dsp?style=social" alt="Stars">
+</p>
 
-Come ogni appunto che trovate su internet, vi chiedo di non fidarvi ciecamente del materiale che trovate su questa dispensa e mandatemi un'email se trovate qualche errore grammaticale e/o c'è qualche argomento che ha bisogno di essere corretto/aggiornato. 
+Benvenuto nel repository dedicato all'**Elaborazione Numerica dei Segnali**. 
 
-Il file finale in pdf è disponibile nella repository, ma vi chiedo cortesemente anche di analizzarla e, se notate qualcosa che non vi porta, di fare domande su "Issues" e/o svolgere delle "Pull requests" in modo da aggiornare gli appunti e renderli migliori con il tempo.
+Questo spazio raccoglie materiale teorico, formule ed esercizi, pensato specificamente per gli studenti dell'**Università Politecnica delle Marche**.
 
-La mia idea è quella di creare una "sbobina" (come dicono quelli a medicina) del corso, rendendola collaborativa e fruibile a tutti. 
+> [!IMPORTANT]
+> Gli appunti sono strutturati per seguire i programmi dei corsi:
+> * **Vecchio Ordinamento:** [Circuiti ed Algoritmi per il DSP](https://guide.univpm.it/af.php?lang=lang-ita&af=100238) (Ing. Elettronica)
+> * **Nuovo Ordinamento:** [Digital Signal Processing](https://guide.univpm.it/af.php?lang=lang-ita&af=248288) (Ing. Elettronica e Tecnologie Digitali)
 
-Nelle cartelle sono disponibili i file in Latex, in modo da modificarli a vostro piacimento su Overleaf o in self-hosting sul vostro pc. 
+---
 
-Buona lettura e buon esame a tutti 
+## 📖 Indice dei Contenuti
+
+| Modulo | Argomenti Trattati |
+| :--- | :--- |
+| **🚀 Fondamenti** | Segnali tempo-discreti, campionamento e ricostruzione. |
+| **📉 Analisi Frequenziale** | Trasformate di Fourier: DTFT, DFT e l'algoritmo FFT. |
+| **⚙️ Sistemi LTI** | Risposta impulsiva, convoluzione e funzioni di trasferimento. |
+| **🌀 Trasformata Z** | Piano complesso, stabilità, analisi poli-zeri. |
+| **⚡ Filtri Digitali** | Progettazione filtri FIR (windowing) e IIR (Butterworth, Chebyshev). |
+
+---
+
+## 🔬 Un assaggio di Teoria
+
+Dalle comunicazioni digitali all'elaborazione audio, il cuore pulsante del DSP è la **Trasformata Discreta di Fourier (DFT)**:
+
+$$X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-j \frac{2\pi}{N} kn}$$
+
+---
+
+## 🤝 Contribuire (Errori e Miglioramenti)
+
+Questo progetto è un **work in progress** e la tua collaborazione è fondamentale per mantenerlo aggiornato e privo di errori. Se noti un refuso, un errore nei calcoli o vuoi aggiungere materiale:
+
+1.  **GitHub Way**: Apri una [Issue](https://github.com/ciccio25/appunti-dsp/issues) o invia una **Pull Request**.
+2.  **Direct Contact**: 
+    * 📧 Email: [rossini.stefano.appunti@gmail.com](mailto:rossini.stefano.appunti@gmail.com)
+    * 💬 WhatsApp 
+
+---
+
+## 🛠️ Strumenti Consigliati
+
+Per studiare e modificare il materiale, ti suggerisco questi strumenti:
+
+* **LaTeX Editing**: 
+    * [VS Code](https://code.visualstudio.com/) + [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) (Consigliato per local editing)
+    * [TeXstudio](https://www.texstudio.org/) (Ottima alternativa dedicata)
+    * [Overleaf](https://it.overleaf.com/) (Per lavorare direttamente nel browser/cloud)
+* **Esercitazioni Matlab**: [MATLAB R2023a](https://www.mathworks.com/products/new_products/release2023a.html).
+
+---
+
+## 👤 Autore & Filosofia
+
+Creato e mantenuto da **[ciccio25](https://github.com/ciccio25)**.
+
+> "Non sono un professore, sono uno studente come voi. Ho passato questo esame e il mio obiettivo è solo rendere la strada un po' meno in salita per chi viene dopo di me. Credo in voi, ce la farete!" 🚀
+
+Tutti i diritti sono riservati agli autori dei materiali indicati nelle note delle dispense. 
+
+Il fine di questa repository è esclusivamente collaborativo e didattico, senza scopo di lucro.
+
+**Se questi appunti ti sono stati utili, lascia una ⭐ per supportare il progetto!**
+
+---
+
+<p align="center">
+  <i>"Il campionamento è l'arte di rendere il continuo discreto senza perdere l'anima del segnale."</i>
+</p>
