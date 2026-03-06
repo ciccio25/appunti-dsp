@@ -150,8 +150,13 @@ max_ritardo_gruppo_filtro = max_ritoardo_gruppo_filtro_Fs_audio*M; % 4800 campio
 
 % Cliccando sul pulsante in alto "Group Delay Response", 
 % notiamo che il filtro appena progettato ha un ritardo di gruppo costante 
-% di 296.5 campioni, e che quindi rispecchia la specifica di 
-% "ritardo di gruppo massimo inferiore a 300 campioni." 
+% di 1349.5 campioni, e che quindi rispecchia la specifica di 
+% "ritardo di gruppo massimo inferiore a 300 campioni." perchè,  
+% 1349.5 / M =  1394.5 / 16 = 84.39 
+
+% Dalle specifiche, si sotto-intende, implicitamente, 
+% "un ritardo di gruppo massimo inferiore a 300 campioni" alla frequenza finale dell'audio finale, 
+% cioè dopo il down-sampling M. 
 
 % Ora che abbiamo progettato il filtro, 
 % possiamo salvare la sessione di filterDesigner 
